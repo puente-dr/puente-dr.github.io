@@ -1,7 +1,7 @@
 # How to create and manage organizations in Puente
 
-A plain-English guide for coordinators and administrators, published at
-**<https://puente-dr.github.io/how-to-create-and-manage-orgs/>**
+A guide for coordinators and administrators, in English and Spanish, published at
+**<https://puente-dr.github.io/guides/how-to-create-and-manage-orgs/>**
 
 An *organization* in Puente is the name on the folder that holds a group's
 survey records and their team's accounts. It decides which records each person
@@ -9,12 +9,16 @@ can see. This guide covers how a new one is created — from the phone app or by
 Puente staff — and how to look after one: nicknames, approvals, deactivating
 someone who has left, and retiring or merging.
 
+The page has an English / Español toggle in the header. Spanish is Latin
+American (*ustedes*). The choice is kept in `localStorage` and can be shared
+with `?lang=es`.
+
 ## What is in here
 
 | File | Purpose |
 |---|---|
-| `index.html` | The guide. Self-contained: no build step, no dependencies, no JavaScript. |
-| `assets/img/` | Screenshots. |
+| `index.html` | The guide. Self-contained: no build step, no dependencies. A few lines of JavaScript run the language toggle. |
+| `assets/img/` | Screenshots. The product UI in these images is not translated. |
 | `.nojekyll` | Serves the files as-is instead of running them through Jekyll. |
 
 ## Publishing

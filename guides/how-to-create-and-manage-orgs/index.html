@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Organizations in Puente — how they are created and managed</title>
+<meta name="description" content="A plain-English guide to how an organization is created in Puente, and how to look after one: nicknames, approvals, retiring and merging.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/how-to-create-and-manage-orgs/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="brand"><div class="mark" aria-hidden="true">P</div><span>Puente</span></div>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Organizations in Puente</span>
+      <span lang="es">Las organizaciones en Puente</span>
+    </h1>
+    <p class="lede" lang="en">How a new organization comes into being, and how to look after one. Written for
+      coordinators and administrators — no technical background needed.</p>
+    <p class="lede" lang="es">Cómo nace una organización nueva y cómo cuidarla. Escrita para
+      coordinadores y administradores — no hace falta saber de técnica.</p>
+    <p class="meta" lang="en">Last reviewed 8 September 2026</p>
+    <p class="meta" lang="es">Última revisión: 8 de septiembre de 2026</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#hard"><span lang="en">Why it is hard</span><span lang="es">Por qué es difícil</span></a></li>
+      <li><a href="#created"><span lang="en">How one is created</span><span lang="es">Cómo se crea</span></a></li>
+      <li><a href="#joining"><span lang="en">Who becomes an administrator</span><span lang="es">Quién queda como administrador</span></a></li>
+      <li><a href="#managing"><span lang="en">Managing one</span><span lang="es">Cómo se administra</span></a></li>
+      <li><a href="#nicknames"><span lang="en">Nicknames</span><span lang="es">Los apodos</span></a></li>
+      <li><a href="#retiring"><span lang="en">Retiring and merging</span><span lang="es">Dar de baja y fusionar</span></a></li>
+      <li><a href="#answers"><span lang="en">Quick answers</span><span lang="es">Respuestas rápidas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <div class="keystone">
+      <p lang="en">An <strong>organization</strong> is the name on the folder that holds a group's survey
+      records and their team's accounts. Your organization decides <strong>which records you can
+      see</strong>.</p>
+      <p lang="es">Una <strong>organización</strong> es el nombre en la carpeta que guarda las encuestas
+      de un grupo y las cuentas de su equipo. Tu organización decide <strong>qué registros puedes
+      ver</strong>.</p>
+    </div>
+    <p lang="en">That is the whole concept. Everything on this page follows from it.</p>
+    <p lang="es">Eso es todo el concepto. Todo lo que sigue en esta página parte de ahí.</p>
+    <p lang="en">If your account belongs to a clinic, you see that clinic's records. If it belongs to a
+      water project, you see theirs. One group's data is never visible to another.</p>
+    <p lang="es">Si tu cuenta pertenece a una clínica, ves los registros de esa clínica. Si pertenece a un
+      proyecto de agua, ves los de ellos. Los datos de un grupo nunca son visibles para otro.</p>
+    <p lang="en">Puente has two apps and the organization means the same thing in both:
+      <strong>Collect</strong>, the phone app field teams use to record surveys, and
+      <strong>Manage</strong>, the web app where that work is reviewed and exported.</p>
+    <p lang="es">Puente tiene dos aplicaciones y la organización significa lo mismo en las dos:
+      <strong>Collect</strong>, la aplicación del teléfono que usan los equipos de campo para registrar
+      encuestas, y <strong>Manage</strong>, la aplicación web donde se revisa y se exporta ese trabajo.</p>
+  </section>
+
+  <section id="hard">
+    <h2><span class="num">2</span><span lang="en">Why this is harder than it looks</span><span lang="es">Por qué esto es más difícil de lo que parece</span></h2>
+    <p lang="en">Here is the entire problem. Picture several people typing the name of the same
+      organization:</p>
+    <p lang="es">Este es todo el problema. Imaginen a varias personas escribiendo el nombre de la misma
+      organización:</p>
+    <div class="spellings">
+      <div><span>"Example Health Trust"</span><em lang="en">what the office calls it</em><em lang="es">como lo llama la oficina</em></div>
+      <div><span>"EHT"</span><em lang="en">what the field team actually types</em><em lang="es">lo que realmente escribe el equipo de campo</em></div>
+      <div><span>"example health trust"</span><em lang="en">someone in a hurry</em><em lang="es">alguien con prisa</em></div>
+      <div><span>"Example Health Trust&nbsp;"</span><em lang="en">with a stray space</em><em lang="es">con un espacio de más</em></div>
+      <div><span>"Clínica Ejemplo"</span><em lang="en">with the accent</em><em lang="es">con el acento</em></div>
+      <div><span>"Clinica Ejemplo"</span><em lang="en">without the accent</em><em lang="es">sin el acento</em></div>
+    </div>
+    <p lang="en">To a person these are obviously the same group. To a computer they are six different
+      groups — and that is exactly how a partner ends up appearing to have done almost no work,
+      while hundreds of their records sit filed under an abbreviation nobody thought to look for.</p>
+    <p lang="es">Para una persona, obviamente es el mismo grupo. Para una computadora son seis grupos
+      distintos — y así es como un socio parece no haber hecho casi nada, mientras cientos de sus
+      registros están archivados bajo una abreviatura que a nadie se le ocurrió buscar.</p>
+    <p lang="en">So Puente keeps <strong>one official record per organization</strong>, plus a list of
+      <strong>nicknames</strong> it also answers to. Capital letters, accents and stray spaces are
+      ignored when matching. Nicknames are covered in
+      <a href="#nicknames">section&nbsp;6</a>, and they are the most useful thing on this page.</p>
+    <p lang="es">Por eso Puente guarda <strong>un registro oficial por organización</strong>, más una lista
+      de <strong>apodos</strong> que también reconoce. Al comparar, ignora mayúsculas, acentos y espacios
+      de más. Los apodos se explican en la
+      <a href="#nicknames">sección&nbsp;6</a>, y son lo más útil de esta página.</p>
+  </section>
+
+  <section id="created">
+    <h2><span class="num">3</span><span lang="en">How an organization is created</span><span lang="es">Cómo se crea una organización</span></h2>
+    <p lang="en">There are two doors in, and which one you use depends on which app you are in.</p>
+    <p lang="es">Hay dos puertas de entrada, y cuál usas depende de en qué aplicación estás.</p>
+
+    <h3 lang="en">Door 1 — someone signs up on the phone (Collect)</h3>
+    <h3 lang="es">Puerta 1 — alguien se registra en el teléfono (Collect)</h3>
+    <p lang="en">This is the self-service door. On the phone, the organization field is a
+      <strong>type-and-suggest box</strong>: you start typing and it offers matches.</p>
+    <p lang="es">Esta es la puerta de autoservicio. En el teléfono, el campo de organización es un
+      <strong>recuadro de escribir y sugerir</strong>: empiezas a escribir y te ofrece coincidencias.</p>
+    <div class="phones">
+      <figure>
+        <img src="assets/img/collect-01-signup-organization-empty.png"
+             data-alt-en="The Collect sign-up form on a phone, with the organization field empty."
+             data-alt-es="El formulario de registro de Collect en un teléfono, con el campo de organización vacío."
+             alt="The Collect sign-up form on a phone, with the organization field empty.">
+        <figcaption><span lang="en">The field, empty.</span><span lang="es">El campo, vacío.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/collect-02-signup-organization-suggestions.png"
+             data-alt-en="Typing two letters into the organization field brings up a matching suggestion below it."
+             data-alt-es="Al escribir dos letras en el campo de organización aparece una sugerencia debajo."
+             alt="Typing two letters into the organization field brings up a matching suggestion below it.">
+        <figcaption><span lang="en">Typing suggests matches.</span><span lang="es">Al escribir, sugiere coincidencias.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/collect-03-signup-organization-selected.png"
+             data-alt-en="An organization has been chosen and now fills the field."
+             data-alt-es="Se eligió una organización y ahora llena el campo."
+             alt="An organization has been chosen and now fills the field.">
+        <figcaption><span lang="en">Chosen.</span><span lang="es">Elegida.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">Two things can happen from here:</p>
+    <p lang="es">A partir de aquí pueden pasar dos cosas:</p>
+    <ul class="plain" lang="en">
+      <li><strong>You pick a suggestion.</strong> You join that existing organization.</li>
+      <li><strong>You type a name that does not exist yet.</strong> Puente creates a new
+        organization and you become its administrator.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>Eliges una sugerencia.</strong> Entras a esa organización que ya existe.</li>
+      <li><strong>Escribes un nombre que todavía no existe.</strong> Puente crea una organización
+        nueva y tú quedas como su administrador.</li>
+    </ul>
+    <p lang="en">That second case is what lets a new partner start working without waiting for anyone. It
+      also means a typo could create a duplicate of a group that already exists — which is what
+      the check below is for.</p>
+    <p lang="es">Ese segundo caso es lo que permite que un socio nuevo empiece a trabajar sin esperar a
+      nadie. También significa que un error de tipeo podría crear un duplicado de un grupo que ya
+      existe — para eso está la revisión de abajo.</p>
+
+    <h3 lang="en">The check that prevents duplicates</h3>
+    <h3 lang="es">La revisión que evita duplicados</h3>
+    <p lang="en">Before creating anything, Puente asks whether the name you typed is suspiciously close to
+      one that already exists.</p>
+    <p lang="es">Antes de crear nada, Puente pregunta si el nombre que escribiste está sospechosamente cerca
+      de uno que ya existe.</p>
+    <div class="tablewrap" lang="en">
+      <table>
+        <thead>
+          <tr><th scope="col">You type</th><th scope="col">Already on file</th>
+              <th scope="col">Result</th><th scope="col">Why</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Example Health Trust</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict yes">Joins it</td><td>Exact match. Nothing new is created.</td></tr>
+          <tr><td><code>Exampel Health Trust</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict no">Refused</td><td>One letter out. Almost certainly a typo.</td></tr>
+          <tr><td><code>Example Health Trust North</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict no">Refused</td><td>One name contains the other.</td></tr>
+          <tr><td><code>Clínica San Rafael</code></td><td>nothing similar</td>
+              <td class="verdict yes">Created</td><td>Clearly a different organization.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tablewrap" lang="es">
+      <table>
+        <thead>
+          <tr><th scope="col">Tú escribes</th><th scope="col">Ya está registrado</th>
+              <th scope="col">Resultado</th><th scope="col">Por qué</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>Example Health Trust</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict yes">Se une</td><td>Coincidencia exacta. No se crea nada nuevo.</td></tr>
+          <tr><td><code>Exampel Health Trust</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict no">Rechazado</td><td>Una letra de diferencia. Casi seguro es un error de tipeo.</td></tr>
+          <tr><td><code>Example Health Trust North</code></td><td><code>Example Health Trust</code></td>
+              <td class="verdict no">Rechazado</td><td>Un nombre contiene al otro.</td></tr>
+          <tr><td><code>Clínica San Rafael</code></td><td>nada parecido</td>
+              <td class="verdict yes">Creada</td><td>Es claramente otra organización.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">When a name is refused, <strong>the person still gets their account.</strong> They are
+      placed in a waiting list and Puente staff are asked to sort it out. This is deliberate:</p>
+    <p lang="es">Cuando un nombre se rechaza, <strong>la persona igual recibe su cuenta.</strong> Queda en
+      una lista de espera y se pide al personal de Puente que lo resuelva. Esto es a propósito:</p>
+    <div class="keystone">
+      <p lang="en">A field worker who cannot register is a problem today, in the field. An organization name
+        that needs tidying up is a problem for the office, later.</p>
+      <p lang="es">Un trabajador de campo que no puede registrarse es un problema hoy, en el terreno. Un
+        nombre de organización que hay que ordenar es un problema de oficina, después.</p>
+    </div>
+
+    <h3 lang="en">Door 2 — Puente staff create it in Manage</h3>
+    <h3 lang="es">Puerta 2 — el personal de Puente la crea en Manage</h3>
+    <p lang="en">On the web the organization field is a <strong>fixed list</strong>. You choose from it; you
+      cannot invent a new name here.</p>
+    <p lang="es">En la web, el campo de organización es una <strong>lista fija</strong>. Eliges de ahí; aquí
+      no puedes inventar un nombre nuevo.</p>
+    <figure>
+      <img src="assets/img/register-02-picker-synthetic.png"
+           data-alt-en="The web registration form with the organization dropdown open, showing a list of organizations to choose from."
+           data-alt-es="El formulario de registro en la web con la lista de organizaciones abierta, para elegir una."
+           alt="The web registration form with the organization dropdown open, showing a list of organizations to choose from.">
+      <figcaption>
+        <span lang="en">The web sign-up form, with the organization list open. Typing narrows it down.</span>
+        <span lang="es">El formulario de registro en la web, con la lista de organizaciones abierta. Al escribir se acorta.</span>
+      </figcaption>
+    </figure>
+    <p lang="en">If your organization genuinely is not there, a link tells you what to do rather than
+      letting you guess:</p>
+    <p lang="es">Si tu organización de verdad no está, un enlace te dice qué hacer en vez de dejarte
+      adivinar:</p>
+    <figure>
+      <img src="assets/img/register-03-not-listed-synthetic.png"
+           data-alt-en="The expanded help text shown after selecting the link reading My organization isn't listed."
+           data-alt-es="El texto de ayuda que aparece al elegir el enlace My organization isn't listed."
+           alt="The expanded help text shown after selecting the link reading My organization isn't listed.">
+      <figcaption>
+        <span lang="en">Use this rather than picking something close. A close-enough choice puts your
+        work in another group's folder.</span>
+        <span lang="es">Usa esto en vez de elegir algo parecido. Una elección «casi» correcta pone tu
+        trabajo en la carpeta de otro grupo.</span>
+      </figcaption>
+    </figure>
+    <div class="note">
+      <p lang="en"><strong>never pick an organization that is nearly right.</strong> It is
+      not a label on your account; it decides whose records you can see and where your team's work
+      is filed.</p>
+      <p lang="es"><strong>nunca elijan una organización que está casi bien.</strong> No es
+      una etiqueta en tu cuenta; decide de quiénes son los registros que puedes ver y dónde se
+      archiva el trabajo de tu equipo.</p>
+    </div>
+  </section>
+
+  <section id="joining">
+    <h2><span class="num">4</span><span lang="en">Who becomes an administrator</span><span lang="es">Quién queda como administrador</span></h2>
+    <p lang="en">Whoever registers gets one of two starting positions.</p>
+    <p lang="es">Quien se registra empieza en una de dos posiciones.</p>
+    <div class="tablewrap" lang="en">
+      <table>
+        <thead><tr><th scope="col">Situation</th><th scope="col">They become</th>
+                   <th scope="col">Can they work straight away?</th></tr></thead>
+        <tbody>
+          <tr><td>First person in a brand-new organization</td><td><strong>Administrator</strong></td><td>Yes</td></tr>
+          <tr><td>First person in an organization staff had already created</td><td><strong>Administrator</strong></td><td>Yes</td></tr>
+          <tr><td>Anyone joining an organization that already has members</td><td><strong>Contributor</strong>, pending approval</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tablewrap" lang="es">
+      <table>
+        <thead><tr><th scope="col">Situación</th><th scope="col">Queda como</th>
+                   <th scope="col">¿Puede trabajar de inmediato?</th></tr></thead>
+        <tbody>
+          <tr><td>Primera persona en una organización recién creada</td><td><strong>Administrador</strong></td><td>Sí</td></tr>
+          <tr><td>Primera persona en una organización que el personal ya había creado</td><td><strong>Administrador</strong></td><td>Sí</td></tr>
+          <tr><td>Cualquiera que se une a una organización que ya tiene miembros</td><td><strong>Colaborador</strong>, pendiente de aprobación</td><td>Sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">Nobody is locked out while waiting. Approval governs what someone can
+      <em>administer</em>, not whether they can do their job.</p>
+    <p lang="es">Nadie queda bloqueado mientras espera. La aprobación decide qué puede
+      <em>administrar</em> alguien, no si puede hacer su trabajo.</p>
+  </section>
+
+  <section id="managing">
+    <h2><span class="num">5</span><span lang="en">Managing an organization</span><span lang="es">Cómo se administra una organización</span></h2>
+    <p lang="en">Manage has a dedicated Organizations screen. You can reach it if you are either
+      <strong>Puente staff</strong>, who can see every organization, or an
+      <strong>administrator of your own organization</strong>, who sees only theirs. Anyone else is
+      sent back to the dashboard.</p>
+    <p lang="es">Manage tiene una pantalla dedicada de Organizaciones. Puedes entrar si eres
+      <strong>personal de Puente</strong>, que ve todas las organizaciones, o
+      <strong>administrador de tu propia organización</strong>, que ve solo la suya. A cualquier otra
+      persona se le regresa al tablero.</p>
+    <figure class="wide">
+      <img src="assets/img/admin-01-organizations-screen.png"
+           data-alt-en="The Organizations screen in Manage, listing organizations with their nicknames, the people in each, a list of accounts that did not match, and a form for creating an organization."
+           data-alt-es="La pantalla de Organizaciones en Manage, con las organizaciones y sus apodos, las personas de cada una, una lista de cuentas que no coincidieron y un formulario para crear una organización."
+           alt="The Organizations screen in Manage, listing organizations with their nicknames, the people in each, a list of accounts that did not match, and a form for creating an organization.">
+      <figcaption>
+        <span lang="en">The Organizations screen. Every organization and person shown here is invented
+        for this guide.</span>
+        <span lang="es">La pantalla de Organizaciones. Todas las organizaciones y personas que aparecen
+        aquí son inventadas para esta guía.</span>
+      </figcaption>
+    </figure>
+
+    <h3 lang="en">Each organization, and its people</h3>
+    <h3 lang="es">Cada organización y su gente</h3>
+    <figure class="wide">
+      <img src="assets/img/admin-03-one-organization.png"
+           data-alt-en="One organization's row, showing its official name, its short code, its nicknames, a box for editing spellings, and its members each with buttons to make administrator or deactivate."
+           data-alt-es="La fila de una organización, con su nombre oficial, su código corto, sus apodos, un recuadro para editar las formas de escribirlo y sus miembros, cada uno con botones para hacer administrador o desactivar."
+           alt="One organization's row, showing its official name, its short code, its nicknames, a box for editing spellings, and its members each with buttons to make administrator or deactivate.">
+      <figcaption>
+        <span lang="en">One organization. The official name always matches, so you never need to add it
+        as a nickname.</span>
+        <span lang="es">Una organización. El nombre oficial siempre coincide, así que nunca hace falta
+        agregarlo como apodo.</span>
+      </figcaption>
+    </figure>
+    <p lang="en">From a person's row you can:</p>
+    <p lang="es">Desde la fila de una persona puedes:</p>
+    <ul class="plain" lang="en">
+      <li><strong>Make administrator</strong> — or remove that.</li>
+      <li><strong>Deactivate</strong> — for someone who has left. This also signs them out of the
+        phone app, rather than leaving them able to keep syncing.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>Hacer administrador</strong> — o quitarlo.</li>
+      <li><strong>Desactivar</strong> — para alguien que se fue. Esto también cierra su sesión en la
+        aplicación del teléfono, en vez de dejarle seguir sincronizando.</li>
+    </ul>
+    <p lang="en">Two guard rails you will meet, both on purpose:</p>
+    <p lang="es">Dos reglas que van a encontrar, las dos a propósito:</p>
+    <ul class="plain" lang="en">
+      <li>You <strong>cannot remove the last administrator</strong> of an organization. That would
+        lock the group out of its own data. Appoint a replacement first.</li>
+      <li>You can only manage <strong>your own</strong> organization's people. An administrator at
+        one partner cannot reach into another's.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li>No se <strong>puede quitar al último administrador</strong> de una organización. Eso dejaría
+        al grupo sin acceso a sus propios datos. Primero nombren a un reemplazo.</li>
+      <li>Solo puedes administrar a la gente de <strong>tu propia</strong> organización. Un administrador
+        de un socio no puede meterse en la de otro.</li>
+    </ul>
+
+    <h3 lang="en">The accounts that did not match</h3>
+    <h3 lang="es">Las cuentas que no coincidieron</h3>
+    <p lang="en">This is the working list. Each row is a real person who signed up with a name Puente could
+      not match to any organization.</p>
+    <p lang="es">Esta es la lista de trabajo. Cada fila es una persona real que se registró con un nombre
+      que Puente no pudo emparejar con ninguna organización.</p>
+    <figure class="wide">
+      <img src="assets/img/admin-04-waiting-room.png"
+           data-alt-en="Two rows listing the organization name each person typed alongside their email address."
+           data-alt-es="Dos filas con el nombre de organización que escribió cada persona, junto a su correo."
+           alt="Two rows listing the organization name each person typed alongside their email address.">
+      <figcaption>
+        <span lang="en">What they typed, and who they are. The usual fix is to add their spelling as a
+        nickname on the right organization.</span>
+        <span lang="es">Lo que escribieron, y quiénes son. Lo habitual es agregar esa forma de escribir
+        como apodo en la organización correcta.</span>
+      </figcaption>
+    </figure>
+    <p lang="en">The list always shows a total beside it — "2 of 5" rather than a bare "2" — so a short list
+      can never be mistaken for a clean one.</p>
+    <p lang="es">La lista siempre muestra un total al lado — «2 de 5» en vez de un «2» suelto — para que
+      una lista corta nunca se confunda con una lista limpia.</p>
+
+    <h3 lang="en">Creating an organization</h3>
+    <h3 lang="es">Crear una organización</h3>
+    <figure class="wide">
+      <img src="assets/img/admin-05-create-organization.png"
+           data-alt-en="A form with fields for organization name, short code and nicknames, and a create button."
+           data-alt-es="Un formulario con campos para el nombre de la organización, el código corto y los apodos, y un botón de crear."
+           alt="A form with fields for organization name, short code and nicknames, and a create button.">
+      <figcaption>
+        <span lang="en">Puente staff only. The short code is permanent and is used in exported files, so
+        it is worth getting right first time.</span>
+        <span lang="es">Solo personal de Puente. El código corto es permanente y se usa en los archivos
+        exportados, así que conviene acertarlo a la primera.</span>
+      </figcaption>
+    </figure>
+    <p lang="en">Puente refuses a name or nickname that is already taken by another organization, and names
+      the one that has it, so two groups can never end up claiming the same spelling.</p>
+    <p lang="es">Puente rechaza un nombre o apodo que ya tiene otra organización, y nombra a la que lo
+      tiene, para que dos grupos nunca terminen reclamando la misma escritura.</p>
+  </section>
+
+  <section id="nicknames">
+    <h2><span class="num">6</span><span lang="en">Nicknames</span><span lang="es">Apodos</span></h2>
+    <p lang="en">Every organization has one official name and a list of <strong>nicknames</strong> — other
+      spellings it also answers to. If the official name is <code>Example Health Trust</code> and
+      you add <code>EHT</code> as a nickname, every record and account filed under
+      <code>EHT</code> stops being lost.</p>
+    <p lang="es">Cada organización tiene un nombre oficial y una lista de <strong>apodos</strong> — otras
+      formas de escribirlo que también reconoce. Si el nombre oficial es <code>Example Health Trust</code>
+      y agregas <code>EHT</code> como apodo, cada registro y cada cuenta archivados bajo
+      <code>EHT</code> dejan de estar perdidos.</p>
+    <p lang="en">Worth knowing:</p>
+    <p lang="es">Conviene saber:</p>
+    <ul class="plain" lang="en">
+      <li><strong>The official name is always a nickname too.</strong> You never need to add it.</li>
+      <li><strong>Capitals, accents and stray spaces do not matter.</strong>
+        <code>Clínica</code>, <code>clinica</code> and <code>Clinica&nbsp;</code> are treated as
+        the same word.</li>
+      <li><strong>A nickname belongs to only one organization.</strong> If you try to claim one
+        another group already uses, Puente refuses and tells you which group has it. Two groups
+        claiming one name would make it impossible to say whose records are whose.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>El nombre oficial también es siempre un apodo.</strong> Nunca hace falta agregarlo.</li>
+      <li><strong>Las mayúsculas, los acentos y los espacios de más no importan.</strong>
+        <code>Clínica</code>, <code>clinica</code> y <code>Clinica&nbsp;</code> se tratan como
+        la misma palabra.</li>
+      <li><strong>Un apodo pertenece a una sola organización.</strong> Si intentas reclamar uno
+        que ya usa otro grupo, Puente lo rechaza y te dice cuál grupo lo tiene. Si dos grupos
+        reclamaran el mismo nombre, sería imposible saber de quiénes son los registros.</li>
+    </ul>
+    <div class="keystone">
+      <p lang="en">Adding a nickname is the single most useful repair available. It can return hundreds of
+        apparently missing records to their rightful owner in one edit, and it changes nothing
+        about the records themselves.</p>
+      <p lang="es">Agregar un apodo es la reparación más útil que hay. Puede devolverle a su dueño cientos
+        de registros que parecían perdidos, en una sola edición, y no cambia nada de los registros
+        en sí.</p>
+    </div>
+  </section>
+
+  <section id="retiring">
+    <h2><span class="num">7</span><span lang="en">Retiring and merging</span><span lang="es">Dar de baja y fusionar</span></h2>
+    <p lang="en">Organizations are <strong>not deleted</strong>. Deleting one would destroy the record of who
+      collected what. Instead there is an active-or-retired setting.</p>
+    <p lang="es">Las organizaciones <strong>no se eliminan</strong>. Borrar una destruiría el registro de quién
+      recolectó qué. En su lugar hay un ajuste de activa o dada de baja.</p>
+    <p lang="en"><strong>Retiring</strong> an organization means "stop offering this when people sign up." It
+      does not mean the organization never existed: its past records still belong to it and still
+      appear correctly. Retiring also releases its names, so another organization can take them
+      over — which is how a merge works:</p>
+    <p lang="es"><strong>Dar de baja</strong> una organización significa «dejar de ofrecerla cuando la gente
+      se registra». No significa que la organización nunca existió: sus registros anteriores siguen
+      siéndole y siguen apareciendo bien. Dar de baja también libera sus nombres, para que otra
+      organización pueda tomarlos — así es como funciona una fusión:</p>
+    <div class="keystone">
+      <p lang="en">To merge B into A: retire B, then add B's name as a nickname of A. B's records now find
+        their way to A, and B's own entry stays on file so you can still see where they came
+        from.</p>
+      <p lang="es">Para fusionar B en A: den de baja a B, luego agreguen el nombre de B como apodo de A. Los
+        registros de B ahora llegan a A, y la entrada de B se queda en el archivo para que puedan
+        ver de dónde vinieron.</p>
+    </div>
+    <div class="note">
+      <p lang="en"><strong>retire, do not delete.</strong> Retiring is reversible and keeps
+      the history. Deleting an entry throws away the provenance of every record collected under
+      it, and cannot be undone.</p>
+      <p lang="es"><strong>den de baja, no eliminen.</strong> Dar de baja se puede revertir y
+      conserva el historial. Eliminar una entrada tira la procedencia de cada registro recolectado
+      bajo ella, y no se puede deshacer.</p>
+    </div>
+  </section>
+
+  <section id="answers">
+    <h2><span class="num">8</span><span lang="en">Quick answers</span><span lang="es">Respuestas rápidas</span></h2>
+    <div class="tablewrap" lang="en">
+      <table>
+        <thead><tr><th scope="col">Question</th><th scope="col">Answer</th></tr></thead>
+        <tbody>
+          <tr><td>I signed up and the app looks empty.</td>
+              <td>Your organization name probably did not match anything, so you are on the
+                  waiting list. Ask an administrator to check it.</td></tr>
+          <tr><td>Can I move myself to another organization?</td>
+              <td>No. It decides which records you can see, so it is a staff action. Ask Puente.</td></tr>
+          <tr><td>My organization is not in the list on the web.</td>
+              <td>Use the "My organization isn't listed" link. Do not pick a close match.</td></tr>
+          <tr><td>Someone has left the team.</td>
+              <td>Deactivate them on the Organizations screen. That also signs them out of the
+                  phone app.</td></tr>
+          <tr><td>We are two organizations that should be one.</td>
+              <td>Retire one and add its name as a nickname of the other. Ask Puente staff.</td></tr>
+          <tr><td>Why was my new organization name refused?</td>
+              <td>It was too close to one already on file. Staff will confirm whether you are a
+                  genuinely separate group.</td></tr>
+          <tr><td>Our team writes the name three different ways.</td>
+              <td>Add all three as nicknames. That is what they are for.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tablewrap" lang="es">
+      <table>
+        <thead><tr><th scope="col">Pregunta</th><th scope="col">Respuesta</th></tr></thead>
+        <tbody>
+          <tr><td>Me registré y la aplicación se ve vacía.</td>
+              <td>El nombre de tu organización probablemente no coincidió con nada, así que estás en
+                  la lista de espera. Pídele a un administrador que lo revise.</td></tr>
+          <tr><td>¿Puedo pasarme a otra organización?</td>
+              <td>No. Decide qué registros puedes ver, así que es una acción del personal. Pregunta a Puente.</td></tr>
+          <tr><td>Mi organización no está en la lista de la web.</td>
+              <td>Usa el enlace «My organization isn't listed». No elijas una que se parezca.</td></tr>
+          <tr><td>Alguien se fue del equipo.</td>
+              <td>Desactívenlo en la pantalla de Organizaciones. Eso también cierra su sesión en la
+                  aplicación del teléfono.</td></tr>
+          <tr><td>Somos dos organizaciones que deberían ser una.</td>
+              <td>Den de baja una y agreguen su nombre como apodo de la otra. Pregunten al personal de Puente.</td></tr>
+          <tr><td>¿Por qué rechazaron el nombre de mi organización nueva?</td>
+              <td>Estaba demasiado cerca de una que ya está registrada. El personal confirmará si son
+                  de verdad un grupo aparte.</td></tr>
+          <tr><td>Nuestro equipo escribe el nombre de tres maneras distintas.</td>
+              <td>Agreguen las tres como apodos. Para eso sirven.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en"><strong>About the pictures on this page.</strong> Every organization, name and email address
+      shown is invented for this guide. Puente's screenshots never contain real survey records or
+      the details of the households who took part.</p>
+    <p lang="es"><strong>Sobre las imágenes de esta página.</strong> Todas las organizaciones, nombres y
+      correos que aparecen son inventados para esta guía. Las capturas de Puente nunca contienen
+      registros reales de encuestas ni los datos de los hogares que participaron.</p>
+    <p lang="en">Puente Manage is source-available under the Business Source License 1.1. It converts to the
+      Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Manage es de código disponible bajo la Business Source License 1.1. Pasa a la
+      Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions about your organization: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas sobre tu organización: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Organizations in Puente — how they are created and managed',
+    es: 'Organizaciones en Puente — cómo se crean y se administran'
+  };
+  var DESC = {
+    en: 'A plain-English guide to how an organization is created in Puente, and how to look after one: nicknames, approvals, retiring and merging.',
+    es: 'Una guía en lenguaje sencillo sobre cómo se crea una organización en Puente y cómo cuidarla: apodos, aprobaciones, dar de baja y fusionar.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>
