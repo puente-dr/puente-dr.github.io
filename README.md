@@ -9,6 +9,7 @@ There is nothing to build. Edit the HTML and push to `main`.
 |---|---|
 | [`guides/`](guides/) | [Guide index](https://puente-dr.github.io/guides/) |
 | [`guides/how-to-create-and-manage-orgs/`](guides/how-to-create-and-manage-orgs/) | [How to create and manage organizations](https://puente-dr.github.io/guides/how-to-create-and-manage-orgs/) |
+| [`guides/collecting-without-a-signal/`](guides/collecting-without-a-signal/) | [Collecting without a signal](https://puente-dr.github.io/guides/collecting-without-a-signal/) |
 
 The old path `/how-to-create-and-manage-orgs/` redirects to the guide above.
 

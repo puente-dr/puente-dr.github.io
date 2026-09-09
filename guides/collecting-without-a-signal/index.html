@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collecting without a signal — Puente</title>
+<meta name="description" content="What Puente does with a survey when there is no connection, how to send the saved ones later, and what to do when one will not go.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/collecting-without-a-signal/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="brand"><div class="mark">P</div><span>Puente</span></div>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Collecting without a signal</span>
+      <span lang="es">Recolectar sin señal</span>
+    </h1>
+    <p class="lede" lang="en">What the app does with a survey when there is no connection, how to send
+      the saved ones later, and what to do when one will not go. Written for surveyors and for the
+      coordinators who support them.</p>
+    <p class="lede" lang="es">Qué hace la aplicación con una encuesta cuando no hay conexión, cómo enviar
+      después las que quedaron guardadas y qué hacer cuando una no sale. Escrita para encuestadores y
+      para los coordinadores que los apoyan.</p>
+    <p class="meta" lang="en">Last reviewed 8 September 2026 · Collect 15.7.1</p>
+    <p class="meta" lang="es">Última revisión: 8 de septiembre de 2026 · Collect 15.7.1</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#knowing"><span lang="en">Knowing you are offline</span><span lang="es">Saber que estás sin conexión</span></a></li>
+      <li><a href="#saving"><span lang="en">Saving a survey</span><span lang="es">Guardar una encuesta</span></a></li>
+      <li><a href="#queue"><span lang="en">Where they wait</span><span lang="es">Dónde esperan</span></a></li>
+      <li><a href="#sending"><span lang="en">Sending them</span><span lang="es">Enviarlas</span></a></li>
+      <li><a href="#partial"><span lang="en">When some go and some do not</span><span lang="es">Cuando unas salen y otras no</span></a></li>
+      <li><a href="#stuck"><span lang="en">When none go</span><span lang="es">Cuando no sale ninguna</span></a></li>
+      <li><a href="#discard"><span lang="en">Discarding</span><span lang="es">Descartar</span></a></li>
+      <li><a href="#logout"><span lang="en">Before you log out</span><span lang="es">Antes de cerrar sesión</span></a></li>
+      <li><a href="#rules"><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <p lang="en">Puente is built to be used where there is no signal. You can open a form in a community
+      with no coverage, fill it in, and save it. Nothing is lost by being offline.</p>
+    <p lang="es">Puente está hecho para usarse donde no hay señal. Puedes abrir un formulario en una
+      comunidad sin cobertura, llenarlo y guardarlo. No se pierde nada por estar sin conexión.</p>
+    <p lang="en">There is one thing worth understanding, and everything else in this guide follows from
+      it: <strong>until a survey reaches the server, the phone is the only copy.</strong> Not the
+      only recent copy — the only copy anywhere. A survey saved on a phone that is lost, wiped or
+      reset is gone.</p>
+    <p lang="es">Hay una sola cosa que conviene entender, y todo lo demás en esta guía viene de ahí:
+      <strong>hasta que una encuesta llega al servidor, el teléfono es la única copia.</strong> No la
+      copia más reciente — la única copia que existe. Una encuesta guardada en un teléfono que se
+      pierde, se borra o se restablece, se perdió.</p>
+    <p lang="en">So the job is not "fill in surveys". The job is "fill in surveys <em>and get them to
+      the server</em>". This guide is about the second half.</p>
+    <p lang="es">Entonces la tarea no es "llenar encuestas". La tarea es "llenar encuestas <em>y hacerlas
+      llegar al servidor</em>". Esta guía trata de la segunda mitad.</p>
+  </section>
+
+  <section id="knowing">
+    <h2><span class="num">2</span><span lang="en">Knowing you are offline</span><span lang="es">Saber que estás sin conexión</span></h2>
+    <p lang="en">The app tells you in two places, and it does not wait for you to ask.</p>
+    <p lang="es">La aplicación te avisa en dos lugares, y no espera a que preguntes.</p>
+    <ul class="plain" lang="en">
+      <li>A banner appears on the form: <strong>"You're offline. Records will save and sync
+        automatically."</strong></li>
+      <li>The tab at the bottom of the screen reads <strong>Offline</strong>.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li>Aparece un aviso en el formulario: <strong>«Estás sin conexión. Los registros se guardarán y
+        sincronizarán automáticamente.»</strong></li>
+      <li>La pestaña de abajo dice <strong>Sin conexión</strong>.</li>
+    </ul>
+    <div class="note">
+      <p lang="en"><strong></strong>Being offline does not stop you collecting. It only changes
+        <em>when</em> the survey leaves the phone. Carry on working.</p>
+      <p lang="es"><strong></strong>Estar sin conexión no te impide recolectar. Solo cambia
+        <em>cuándo</em> sale la encuesta del teléfono. Sigue trabajando.</p>
+    </div>
+  </section>
+
+  <section id="saving">
+    <h2><span class="num">3</span><span lang="en">Saving a survey with no signal</span><span lang="es">Guardar una encuesta sin señal</span></h2>
+    <p lang="en">Fill the form in and submit it exactly as you would with a connection. The app decides
+      what to do; you do not have to choose a different button.</p>
+    <p lang="es">Llena el formulario y envíalo igual que lo harías con conexión. La aplicación decide qué
+      hacer; no tienes que elegir un botón distinto.</p>
+    <p lang="en">The confirmation tells you which happened:</p>
+    <p lang="es">La confirmación te dice cuál de las dos pasó:</p>
+    <ul class="plain" lang="en">
+      <li><strong>"Form successfully submitted"</strong> — it reached the server. Done.</li>
+      <li><strong>"Saved offline — will sync when you reconnect"</strong> — it is on the phone,
+        waiting. Not done yet.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>«Formulario entregado satisfactoriamente»</strong> — llegó al servidor. Listo.</li>
+      <li><strong>«Guardado sin conexión — se sincronizará cuando te reconectes»</strong> — está en el
+        teléfono, esperando. Todavía no está listo.</li>
+    </ul>
+    <p lang="en">Those two messages look similar in a hurry and they mean very different things. The
+      second one is a promise about the future, not a receipt.</p>
+    <p lang="es">Esos dos mensajes se parecen cuando uno va con prisa y significan cosas muy distintas.
+      El segundo es una promesa sobre el futuro, no un comprobante.</p>
+  </section>
+
+  <section id="queue">
+    <h2><span class="num">4</span><span lang="en">Where the saved surveys wait</span><span lang="es">Dónde esperan las encuestas guardadas</span></h2>
+    <p lang="en">Open <strong>Offline Sync</strong>. It lists everything sitting on this phone that has
+      not reached the server, under the heading <strong>Waiting to sync</strong>, and shows when the
+      phone last managed to send anything: <strong>Last synced:</strong></p>
+    <p lang="es">Abre <strong>Sincronización sin conexión</strong>. Ahí aparece todo lo que está en este
+      teléfono y no ha llegado al servidor, bajo el título <strong>Esperando sincronización</strong>, y
+      te muestra cuándo fue la última vez que el teléfono logró enviar algo:
+      <strong>Última sincronización:</strong></p>
+    <p lang="en">The count is worded plainly on purpose — <strong>"3 forms are saved on this device and
+      have not reached the server yet."</strong> When there is nothing left it says <strong>"No forms
+      queued. You are all caught up!"</strong></p>
+    <p lang="es">El conteo está escrito claro a propósito — <strong>«3 formularios están guardados en este
+      dispositivo y todavía no han llegado al servidor.»</strong> Cuando no queda nada, dice <strong>«No
+      hay formularios en cola. ¡Estás al día!»</strong></p>
+    <div class="note">
+      <p lang="en"><strong></strong>"All caught up" is the only state in which the phone no longer
+        matters. Until then, look after the phone.</p>
+      <p lang="es"><strong></strong>«Estás al día» es el único estado en el que el teléfono ya no importa.
+        Hasta entonces, cuida el teléfono.</p>
+    </div>
+  </section>
+
+  <section id="sending">
+    <h2><span class="num">5</span><span lang="en">Sending them</span><span lang="es">Enviarlas</span></h2>
+    <p lang="en">When the phone has a connection again, use <strong>Submit Offline Forms</strong>. If a
+      previous attempt did not work, the same action appears as <strong>Retry</strong>.</p>
+    <p lang="es">Cuando el teléfono vuelve a tener conexión, usa <strong>Enviar formularios sin
+      conexión</strong>. Si un intento anterior no funcionó, la misma acción aparece como
+      <strong>Reintentar</strong>.</p>
+    <p lang="en">When it works you see <strong>"You have just submitted"</strong> with the number that
+      went, and the waiting list empties.</p>
+    <p lang="es">Cuando funciona, ves <strong>«Usted acaba de enviar»</strong> con el número que salió, y
+      la lista de espera se vacía.</p>
+    <p lang="en">Send from a connection you trust, and stay on it until the count reaches zero. A sync
+      that starts on a weak signal and drops halfway is the situation the next section is about.</p>
+    <p lang="es">Envía desde una conexión confiable y quédate en ella hasta que el conteo llegue a cero.
+      Una sincronización que empieza con señal débil y se corta a la mitad es justo la situación de la
+      sección siguiente.</p>
+  </section>
+
+  <section id="partial">
+    <h2><span class="num">6</span><span lang="en">When some go and some do not</span><span lang="es">Cuando unas salen y otras no</span></h2>
+    <p lang="en">A batch does not have to succeed or fail as a whole. Sometimes most of the surveys reach
+      the server and one or two do not.</p>
+    <p lang="es">Un lote no tiene que salir bien o mal completo. A veces la mayoría de las encuestas
+      llegan al servidor y una o dos no.</p>
+    <p lang="en">What you will see is the count going <strong>down but not to zero</strong>. The app tells
+      you how many were sent, and the ones that did not make it stay in the waiting list.</p>
+    <p lang="es">Lo que vas a ver es que el conteo <strong>baja pero no llega a cero</strong>. La
+      aplicación te dice cuántas se enviaron, y las que no lograron salir se quedan en la lista de
+      espera.</p>
+    <p lang="en">That is the app working correctly. Two things are guaranteed here, and they are the
+      whole point:</p>
+    <p lang="es">Eso es la aplicación funcionando bien. Aquí hay dos cosas garantizadas, y son lo más
+      importante:</p>
+    <ul class="plain" lang="en">
+      <li><strong>Nothing that failed is deleted.</strong> A survey that did not reach the server stays
+        on the phone.</li>
+      <li><strong>Nothing that succeeded is sent twice.</strong> Pressing Retry re-sends only what is
+        still waiting, so you do not end up with two copies of the same visit.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>No se borra nada de lo que falló.</strong> Una encuesta que no llegó al servidor se
+        queda en el teléfono.</li>
+      <li><strong>No se envía dos veces lo que sí salió.</strong> Al presionar Reintentar solo se
+        reenvía lo que sigue esperando, así no terminas con dos copias de la misma visita.</li>
+    </ul>
+    <p lang="en">So the right response to a count that stops above zero is simply: get a better
+      connection and press <strong>Retry</strong> again.</p>
+    <p lang="es">Entonces la respuesta correcta a un conteo que se queda arriba de cero es sencilla:
+      consigue mejor conexión y presiona <strong>Reintentar</strong> otra vez.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>The app does not yet show a separate message saying "some did not
+        send". The signal is the count: if it did not reach zero, something is still waiting. Check
+        <strong>Offline Sync</strong> to see what.</p>
+      <p lang="es"><strong></strong>La aplicación todavía no muestra un mensaje aparte que diga «algunas no
+        se enviaron». La señal es el conteo: si no llegó a cero, algo sigue esperando. Revisa
+        <strong>Sincronización sin conexión</strong> para ver qué.</p>
+    </div>
+  </section>
+
+  <section id="stuck">
+    <h2><span class="num">7</span><span lang="en">When none of them go</span><span lang="es">Cuando no sale ninguna</span></h2>
+    <p lang="en">There are two different failures and the app words them differently, because the fix is
+      different.</p>
+    <p lang="es">Hay dos fallas distintas y la aplicación las escribe distinto, porque la solución es
+      distinta.</p>
+    <ul class="plain" lang="en">
+      <li><strong>"You are offline. Reconnect to the internet and try again."</strong><br>
+        The phone never reached the server. Find a connection. Nothing is wrong with the surveys.</li>
+      <li><strong>"The server did not accept these forms. Try again in a few minutes, and contact
+        support if it keeps happening."</strong><br>
+        The phone reached the server and the server refused. Waiting often fixes it. If the same
+        surveys will not go after several tries on a good connection, that is worth reporting — it
+        will not resolve itself.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>«Estás sin conexión. Conéctate a internet e inténtalo de nuevo.»</strong><br>
+        El teléfono nunca llegó al servidor. Busca conexión. Las encuestas no tienen ningún problema.</li>
+      <li><strong>«El servidor no aceptó estos formularios. Inténtalo de nuevo en unos minutos y contacta
+        con soporte si sigue ocurriendo.»</strong><br>
+        El teléfono llegó al servidor y el servidor lo rechazó. Muchas veces se arregla esperando. Si
+        las mismas encuestas no salen después de varios intentos con buena conexión, vale la pena
+        reportarlo — eso no se va a arreglar solo.</li>
+    </ul>
+    <p lang="en">In both cases the app repeats the thing that matters: <strong>"Your forms are still
+      saved on this device. Nothing has been lost."</strong></p>
+    <p lang="es">En los dos casos la aplicación repite lo importante: <strong>«Tus formularios siguen
+      guardados en este dispositivo. No se ha perdido nada.»</strong></p>
+  </section>
+
+  <section id="discard">
+    <h2><span class="num">8</span><span lang="en">Discarding a survey that will not send</span><span lang="es">Descartar una encuesta que no se envía</span></h2>
+    <p lang="en">A survey the server keeps refusing can block the ones behind it. <strong>Discard</strong>
+      removes it so the rest can go.</p>
+    <p lang="es">Una encuesta que el servidor sigue rechazando puede bloquear a las que vienen atrás.
+      <strong>Descartar</strong> la quita para que las demás puedan salir.</p>
+    <p lang="en">The app asks before it does anything — <strong>"Discard this form?"</strong> — and it
+      says plainly what will happen: the form <strong>"has not reached the server. Discarding deletes
+      it from this device permanently and it cannot be recovered."</strong> You confirm with
+      <strong>Discard permanently</strong>.</p>
+    <p lang="es">La aplicación pregunta antes de hacer nada — <strong>«¿Descartar este formulario?»</strong>
+      — y dice claramente qué va a pasar: el formulario <strong>«no ha llegado al servidor. Descartarlo
+      lo elimina de este dispositivo de forma permanente y no se puede recuperar.»</strong> Confirmas con
+      <strong>Descartar permanentemente</strong>.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>Read that wording literally. The survey exists nowhere else. Discarding
+        it destroys a household's visit, and no one can restore it — not Puente, not support. Write the
+        answers down on paper first if you possibly can, and ask your coordinator before discarding
+        anything you are unsure about.</p>
+      <p lang="es"><strong></strong>Lee esa frase al pie de la letra. La encuesta no existe en ningún otro
+        lado. Descartarla destruye la visita a un hogar, y nadie puede recuperarla — ni Puente, ni
+        soporte. Si puedes, anota las respuestas en papel primero, y pregúntale a tu coordinador antes
+        de descartar algo de lo que no estés seguro.</p>
+    </div>
+  </section>
+
+  <section id="logout">
+    <h2><span class="num">9</span><span lang="en">Before you log out or hand over the phone</span><span lang="es">Antes de cerrar sesión o entregar el teléfono</span></h2>
+    <p lang="en">This is where surveys are most often lost, and it does not look dangerous at the time.</p>
+    <p lang="es">Aquí es donde más se pierden encuestas, y en el momento no parece peligroso.</p>
+    <p lang="en">If you try to log out with surveys still waiting, the app warns you: <strong>"3 records
+      are saved on this device and have not reached the server yet. They will stay on the device, but
+      you cannot sync them until you log back in."</strong></p>
+    <p lang="es">Si intentas cerrar sesión con encuestas todavía esperando, la aplicación te avisa:
+      <strong>«3 registros están guardados en este dispositivo y todavía no han llegado al servidor. Se
+      quedarán en el dispositivo, pero no podrás sincronizarlos hasta que vuelvas a iniciar sesión.»</strong></p>
+    <p lang="en">And if you are offline, the app will not let you log out at all —
+      <strong>"Can't log out right now"</strong> — because logging back in needs a connection. If you
+      log out offline and then cannot reconnect, you cannot get back to the surveys on that phone.</p>
+    <p lang="es">Y si estás sin conexión, la aplicación no te deja cerrar sesión —
+      <strong>«No se puede cerrar sesión ahora»</strong> — porque volver a entrar necesita conexión. Si
+      cierras sesión sin conexión y después no logras reconectarte, no puedes volver a las encuestas de
+      ese teléfono.</p>
+    <p lang="en">The rule is simple: <strong>sync to zero before logging out, and before giving the phone
+      to anyone else.</strong></p>
+    <p lang="es">La regla es sencilla: <strong>sincroniza hasta cero antes de cerrar sesión y antes de
+      entregarle el teléfono a otra persona.</strong></p>
+  </section>
+
+  <section id="rules">
+    <h2><span class="num">10</span><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <ul class="plain" lang="en">
+      <li><strong>Sync at the end of every day you had signal.</strong> Not at the end of the week.</li>
+      <li><strong>Zero is the only finished number.</strong> Any other count means the phone is still
+        carrying data that exists nowhere else.</li>
+      <li><strong>Retry is safe.</strong> It will not create duplicates of surveys that already went.</li>
+      <li><strong>Discard is not safe.</strong> It is permanent and there is no undo.</li>
+      <li><strong>A shared phone still needs syncing between people.</strong> Surveys sync under whoever
+        is signed in at the time, so syncing before handing over keeps the record straight.</li>
+      <li><strong>If the same survey refuses to send after several good-connection attempts, report it.</strong>
+        That is not something waiting will fix.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>Sincroniza al final de cada día en que tuviste señal.</strong> No al final de la semana.</li>
+      <li><strong>Cero es el único número que significa terminado.</strong> Cualquier otro conteo quiere
+        decir que el teléfono sigue cargando datos que no existen en ningún otro lado.</li>
+      <li><strong>Reintentar es seguro.</strong> No crea duplicados de encuestas que ya salieron.</li>
+      <li><strong>Descartar no es seguro.</strong> Es permanente y no se puede deshacer.</li>
+      <li><strong>Un teléfono compartido también hay que sincronizarlo entre personas.</strong> Las
+        encuestas se sincronizan con quien tenga la sesión abierta en ese momento, así que sincronizar
+        antes de entregarlo mantiene el registro claro.</li>
+      <li><strong>Si la misma encuesta se niega a salir después de varios intentos con buena conexión,
+        repórtalo.</strong> Eso no se arregla esperando.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect is source-available under the Business Source License 1.1. It converts to
+      the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect es de código disponible bajo la Business Source License 1.1. Pasa a la
+      Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Collecting without a signal — Puente',
+    es: 'Recolectar sin señal — Puente'
+  };
+  var DESC = {
+    en: 'What Puente does with a survey when there is no connection, how to send the saved ones later, and what to do when one will not go.',
+    es: 'Qué hace Puente con una encuesta cuando no hay conexión, cómo enviar después las guardadas y qué hacer cuando una no sale.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>
