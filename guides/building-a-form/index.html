@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building a form that exports cleanly — Puente</title>
+<meta name="description" content="The seven blocks Puente's form builder offers, what the phone can do that the builder does not, and how the question you type becomes the column heading in your spreadsheet.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/building-a-form/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <div class="brand"><div class="mark">P</div><span>Puente</span></div>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Building a form that exports cleanly</span>
+      <span lang="es">Crear un formulario que se exporte limpio</span>
+    </h1>
+    <p class="lede" lang="en">The seven blocks you can build with, what the phone can do that the
+      builder does not offer, and how the question you type becomes the column heading in your
+      spreadsheet.</p>
+    <p class="lede" lang="es">Los siete bloques con los que puedes construir, lo que el teléfono puede
+      hacer y el creador no ofrece, y cómo la pregunta que escribes se convierte en el encabezado de
+      columna de tu hoja de cálculo.</p>
+    <p class="meta" lang="en">Last reviewed 8 September 2026</p>
+    <p class="meta" lang="es">Última revisión: 8 de septiembre de 2026</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#blocks"><span lang="en">The seven blocks</span><span lang="es">Los siete bloques</span></a></li>
+      <li><a href="#limits"><span lang="en">What you cannot build</span><span lang="es">Lo que no puedes construir</span></a></li>
+      <li><a href="#columns"><span lang="en">Questions become columns</span><span lang="es">Las preguntas se vuelven columnas</span></a></li>
+      <li><a href="#accents"><span lang="en">Accents and question marks</span><span lang="es">Acentos y signos de interrogación</span></a></li>
+      <li><a href="#renaming"><span lang="en">Renaming a question later</span><span lang="es">Cambiar una pregunta después</span></a></li>
+      <li><a href="#checklist"><span lang="en">Before you publish</span><span lang="es">Antes de publicar</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <p lang="en">A custom form is one you design yourself, in Puente Manage, without anyone writing
+      code. You drag blocks into an order, write the questions, and it appears on the surveyors'
+      phones alongside the built-in forms.</p>
+    <p lang="es">Un formulario personalizado es uno que diseñas tú misma, en Puente Manage, sin que nadie
+      escriba código. Arrastras bloques en un orden, escribes las preguntas, y aparece en los teléfonos
+      de los encuestadores junto a los formularios que ya vienen incluidos.</p>
+    <p lang="en">The answers come back as a spreadsheet, one row per submission and one column per
+      question. Most of the surprises people meet are about that last step, so this guide spends most
+      of its time there.</p>
+    <p lang="es">Las respuestas regresan como una hoja de cálculo, una fila por envío y una columna por
+      pregunta. Casi todas las sorpresas que se encuentra la gente son de ese último paso, así que esta
+      guía dedica ahí la mayor parte del tiempo.</p>
+  </section>
+
+  <section id="blocks">
+    <h2><span class="num">2</span><span lang="en">The seven blocks</span><span lang="es">Los siete bloques</span></h2>
+    <p lang="en">The builder offers seven. That is the whole palette — this is the complete list, not a
+      selection of the popular ones.</p>
+    <p lang="es">El creador ofrece siete. Esa es toda la paleta — esta es la lista completa, no una
+      selección de los más usados.</p>
+    <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th><span lang="en">Block</span><span lang="es">Bloque</span></th>
+          <th><span lang="en">Use it for</span><span lang="es">Úsalo para</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong><span lang="en">Question — Text response</span><span lang="es">Pregunta: respuesta de texto</span></strong></td>
+            <td><span lang="en">An answer written in words.</span><span lang="es">Una respuesta escrita en palabras.</span></td></tr>
+        <tr><td><strong><span lang="en">Question — Number response</span><span lang="es">Pregunta: respuesta numérica</span></strong></td>
+            <td><span lang="en">An answer that is a number. Use this rather than a text box whenever you plan to add the answers up.</span><span lang="es">Una respuesta que es un número. Usa este y no un campo de texto siempre que pienses sumar las respuestas.</span></td></tr>
+        <tr><td><strong><span lang="en">Question (Side label) — Text or Number</span><span lang="es">Pregunta (etiqueta lateral): texto o número</span></strong></td>
+            <td><span lang="en">A short answer with its label beside it instead of above. Good for measurements.</span><span lang="es">Una respuesta corta con su etiqueta al lado en vez de arriba. Buena para medidas.</span></td></tr>
+        <tr><td><strong><span lang="en">Question — Single select</span><span lang="es">Pregunta: selección única</span></strong></td>
+            <td><span lang="en">The person answering picks one option.</span><span lang="es">Quien responde elige una sola opción.</span></td></tr>
+        <tr><td><strong><span lang="en">Question — Multi-select</span><span lang="es">Pregunta: selección múltiple</span></strong></td>
+            <td><span lang="en">The person answering can pick several.</span><span lang="es">Quien responde puede elegir varias.</span></td></tr>
+        <tr><td><strong><span lang="en">Input — Header</span><span lang="es">Campo: encabezado</span></strong></td>
+            <td><span lang="en">A title row that breaks a long form into sections. It asks nothing and produces no column.</span><span lang="es">Una fila de título que divide un formulario largo en secciones. No pregunta nada y no produce ninguna columna.</span></td></tr>
+        <tr><td><strong><span lang="en">Geolocation</span><span lang="es">Geolocalización</span></strong></td>
+            <td><span lang="en">Records where the survey was taken.</span><span lang="es">Registra dónde se hizo la encuesta.</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note">
+      <p lang="en"><strong></strong>Choosing <em>Number response</em> over <em>Text response</em> is the
+        single most useful decision in the builder. A number typed into a text box arrives in the
+        spreadsheet as text, and a column of text will not add up or average, however numeric it
+        looks.</p>
+      <p lang="es"><strong></strong>Elegir <em>respuesta numérica</em> en vez de <em>respuesta de
+        texto</em> es la decisión más útil de todo el creador. Un número escrito en un campo de texto
+        llega a la hoja de cálculo como texto, y una columna de texto no se suma ni se promedia, por
+        más numérica que se vea.</p>
+    </div>
+  </section>
+
+  <section id="limits">
+    <h2><span class="num">3</span><span lang="en">What you cannot build — and why that is deliberate</span><span lang="es">Lo que no puedes construir — y por qué es a propósito</span></h2>
+    <p lang="en">The phone can display more kinds of question than the builder lets you create. Puente's
+      own built-in forms — vitals, environmental health, medical evaluation — use several of them.</p>
+    <p lang="es">El teléfono puede mostrar más tipos de pregunta de los que el creador te deja crear. Los
+      formularios que Puente trae incluidos — signos vitales, salud ambiental, evaluación médica — usan
+      varios de ellos.</p>
+    <p lang="en">Among the things the phone can do but the builder does not offer: taking a
+      <strong>photo</strong>, linking an answer to a <strong>household</strong>, filling a field
+      <strong>automatically from records already on the device</strong>, repeating a block of questions
+      as a <strong>loop</strong> (once per child, say), and laying several
+      <strong>numbers out in a row</strong>.</p>
+    <p lang="es">Entre las cosas que el teléfono puede hacer y el creador no ofrece: tomar una
+      <strong>foto</strong>, vincular una respuesta a un <strong>hogar</strong>, llenar un campo
+      <strong>automáticamente con registros que ya están en el dispositivo</strong>, repetir un bloque de
+      preguntas como un <strong>ciclo</strong> (una vez por cada niño, por ejemplo), y poner varios
+      <strong>números en una misma fila</strong>.</p>
+    <p lang="en"><strong>This is on purpose, not an oversight.</strong> Those question types carry rules
+      that only make sense inside a form someone designed end to end — a loop has to know what it is
+      looping over, an autofilled field has to know which record to read, a household link has to know
+      which household. Exposing them as drag-and-drop blocks would let anyone build a form that looks
+      right in the builder and behaves unpredictably in a village with no signal, where nobody can ask
+      you what you meant.</p>
+    <p lang="es"><strong>Esto es a propósito, no un descuido.</strong> Esos tipos de pregunta traen reglas
+      que solo tienen sentido dentro de un formulario que alguien diseñó de principio a fin — un ciclo
+      tiene que saber sobre qué está iterando, un campo autocompletado tiene que saber qué registro
+      leer, un vínculo a un hogar tiene que saber cuál hogar. Ofrecerlos como bloques para arrastrar
+      permitiría armar un formulario que se ve bien en el creador y se comporta de forma impredecible en
+      una comunidad sin señal, donde nadie te puede preguntar qué querías decir.</p>
+    <p lang="en">So the rule is: <strong>if you need one of those, it is a conversation, not a
+      drag.</strong> Write to us describing what you are trying to collect and we will tell you whether
+      it can be added to a built-in form or built for you.</p>
+    <p lang="es">Entonces la regla es: <strong>si necesitas alguno de esos, es una conversación, no un
+      arrastre.</strong> Escríbenos describiendo qué quieres recolectar y te decimos si se puede agregar
+      a un formulario incluido o construir para ti.</p>
+  </section>
+
+  <section id="columns">
+    <h2><span class="num">4</span><span lang="en">Your question becomes the column heading</span><span lang="es">Tu pregunta se vuelve el encabezado de columna</span></h2>
+    <p lang="en">When you export the answers, each question becomes one column, and the heading is
+      <strong>the question text you typed</strong>. Write the question the way you want to read it in a
+      spreadsheet six months from now.</p>
+    <p lang="es">Cuando exportas las respuestas, cada pregunta se vuelve una columna, y el encabezado es
+      <strong>el texto de la pregunta que escribiste</strong>. Escribe la pregunta como quieras leerla en
+      una hoja de cálculo dentro de seis meses.</p>
+    <p lang="en">That has two practical consequences.</p>
+    <p lang="es">Eso tiene dos consecuencias prácticas.</p>
+    <ul class="plain" lang="en">
+      <li><strong>Long questions make unreadable headings.</strong> "Approximately how many children
+        under the age of five currently live in this household?" is a fine thing to ask out loud and a
+        miserable column to work with. Keep the wording short, or accept that you will rename columns
+        after every export.</li>
+      <li><strong>Two questions with the same text collide.</strong> If a form asks "Notes" twice, the
+        two sets of answers compete for one column heading. Make each question text distinct — "Notes
+        — water" and "Notes — housing".</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>Las preguntas largas hacen encabezados ilegibles.</strong> «¿Aproximadamente cuántos
+        niños menores de cinco años viven actualmente en este hogar?» es algo perfectamente razonable de
+        preguntar en voz alta y una columna espantosa para trabajar. Deja la redacción corta, o acepta
+        que vas a renombrar columnas después de cada exportación.</li>
+      <li><strong>Dos preguntas con el mismo texto chocan.</strong> Si un formulario pregunta «Notas» dos
+        veces, los dos conjuntos de respuestas compiten por un mismo encabezado. Haz que cada texto de
+        pregunta sea distinto — «Notas: agua» y «Notas: vivienda».</li>
+    </ul>
+  </section>
+
+  <section id="accents">
+    <h2><span class="num">5</span><span lang="en">Accents and question marks</span><span lang="es">Acentos y signos de interrogación</span></h2>
+    <p lang="en">The export strips Spanish accents from column headings, and removes the opening
+      <code>¿</code> and <code>¡</code>. The closing question mark stays.</p>
+    <p lang="es">La exportación quita los acentos del español en los encabezados de columna, y elimina la
+      <code>¿</code> y la <code>¡</code> de apertura. El signo de cierre se queda.</p>
+    <p lang="en">So a question written as <code>¿Cuántos niños?</code> arrives in the
+      spreadsheet as the column <code>Cuantos ninos?</code></p>
+    <p lang="es">Entonces una pregunta escrita como <code>¿Cuántos niños?</code> llega a la hoja
+      de cálculo como la columna <code>Cuantos ninos?</code></p>
+    <p lang="en">This is not a mistake and it is not something you did wrong. It keeps the file readable
+      by older spreadsheet software that mangles accented characters. <strong>Write your questions with
+      correct Spanish</strong> — surveyors read the question on the phone, where the accents are
+      intact. Only the column heading is flattened.</p>
+    <p lang="es">Esto no es un error ni algo que hiciste mal. Mantiene el archivo legible para programas
+      de hoja de cálculo viejos que dañan los caracteres acentuados. <strong>Escribe tus preguntas con
+      español correcto</strong> — los encuestadores leen la pregunta en el teléfono, donde los acentos
+      están completos. Solo se aplana el encabezado de la columna.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>If a heading ever comes out as the question <em>without</em> its
+        punctuation — <code>Cuantos ninos</code> with no question mark — the export could not
+        load the form's definition and fell back to an internal name. The answers are unaffected. Export
+        again, and tell us if it keeps happening.</p>
+      <p lang="es"><strong></strong>Si alguna vez un encabezado sale como la pregunta <em>sin</em> su
+        puntuación — <code>Cuantos ninos</code> sin signo de interrogación — la exportación no
+        pudo cargar la definición del formulario y usó un nombre interno. Las respuestas no se ven
+        afectadas. Exporta de nuevo y avísanos si sigue pasando.</p>
+    </div>
+  </section>
+
+  <section id="renaming">
+    <h2><span class="num">6</span><span lang="en">Renaming a question after people have answered it</span><span lang="es">Cambiar una pregunta después de que ya la respondieron</span></h2>
+    <p lang="en">You can fix a typo or reword a question on a form that is already collecting answers.
+      Old answers stay attached to it, and the export brings them together under the new wording.</p>
+    <p lang="es">Puedes corregir un error de tipeo o reformular una pregunta en un formulario que ya está
+      recibiendo respuestas. Las respuestas viejas siguen conectadas a ella, y la exportación las junta
+      bajo la nueva redacción.</p>
+    <p lang="en">This is worth stating plainly because it used to be the opposite. Renaming a question
+      once split a form's history in two — the old answers kept the old internal name, the column looked
+      empty, and a month of fieldwork appeared to vanish. That is fixed on both sides now: the internal
+      name is frozen when the form is first saved, and the export deliberately gathers the old and new
+      names into one column.</p>
+    <p lang="es">Vale la pena decirlo claro porque antes era al revés. Cambiar el nombre de una pregunta
+      partía en dos la historia de un formulario — las respuestas viejas conservaban el nombre interno
+      viejo, la columna se veía vacía, y un mes de trabajo de campo parecía desaparecer. Eso ya está
+      arreglado por los dos lados: el nombre interno se congela cuando el formulario se guarda por
+      primera vez, y la exportación junta a propósito el nombre viejo y el nuevo en una sola columna.</p>
+    <p lang="en">What renaming does <em>not</em> do is change answers already given. If you change
+      "Do you have a latrine?" to "What kind of latrine?", the answers collected under the first wording
+      are still yes and no. Reword for clarity; make a new question when you change what you are
+      asking.</p>
+    <p lang="es">Lo que cambiar el nombre <em>no</em> hace es cambiar las respuestas que ya se dieron. Si
+      cambias «¿Tiene letrina?» por «¿Qué tipo de letrina?», las respuestas recogidas con la primera
+      redacción siguen siendo sí y no. Reformula para dar claridad; crea una pregunta nueva cuando
+      cambies lo que estás preguntando.</p>
+  </section>
+
+  <section id="checklist">
+    <h2><span class="num">7</span><span lang="en">Before you publish</span><span lang="es">Antes de publicar</span></h2>
+    <ul class="plain" lang="en">
+      <li><strong>Every number question is a Number response block</strong>, not a text box.</li>
+      <li><strong>No two questions share the same text.</strong></li>
+      <li><strong>Question wording is short enough to live as a column heading.</strong></li>
+      <li><strong>Headers break up anything longer than about a screen.</strong> Surveyors work standing
+        up, often in the sun.</li>
+      <li><strong>Someone has filled the form in on a real phone</strong> before it goes to the field.
+        The builder shows you a preview; the phone shows you the truth.</li>
+      <li><strong>You have exported one test submission</strong> and looked at the columns. Two minutes
+        here saves renaming a form after a hundred households have answered it.</li>
+    </ul>
+    <ul class="plain" lang="es">
+      <li><strong>Cada pregunta numérica es un bloque de respuesta numérica</strong>, no un campo de texto.</li>
+      <li><strong>No hay dos preguntas con el mismo texto.</strong></li>
+      <li><strong>La redacción de las preguntas es lo bastante corta para vivir como encabezado.</strong></li>
+      <li><strong>Los encabezados dividen todo lo que pase de una pantalla.</strong> Los encuestadores
+        trabajan de pie, muchas veces bajo el sol.</li>
+      <li><strong>Alguien llenó el formulario en un teléfono real</strong> antes de que salga al campo. El
+        creador te muestra una vista previa; el teléfono te muestra la verdad.</li>
+      <li><strong>Exportaste un envío de prueba</strong> y miraste las columnas. Dos minutos aquí te
+        ahorran renombrar un formulario después de que cien hogares ya lo respondieron.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Manage is source-available under the Business Source License 1.1. It converts to
+      the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Manage es de código disponible bajo la Business Source License 1.1. Pasa a la
+      Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions about forms: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas sobre formularios: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Building a form that exports cleanly — Puente',
+    es: 'Crear un formulario que se exporte limpio — Puente'
+  };
+  var DESC = {
+    en: "The seven blocks Puente's form builder offers, what the phone can do that the builder does not, and how the question you type becomes the column heading in your spreadsheet.",
+    es: 'Los siete bloques que ofrece el creador de formularios de Puente, lo que el teléfono puede hacer y el creador no, y cómo la pregunta que escribes se vuelve el encabezado de columna.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>
