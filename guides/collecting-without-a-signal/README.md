@@ -41,28 +41,36 @@ Section 6, "When some go and some do not", describes behaviour introduced in
 and kept the whole queue, so a retry could create duplicate health records.
 Do not backport this section's wording to describe an older build.
 
-## What is missing
+## The screenshots
 
-**Screenshots.** This guide ships text-only. The organizations guide is
-illustrated and this one should be too — the offline states are visual and hard
-to describe. The images needed:
+Captured from the real app by `.maestro/capture-offline-docs.yaml` in
+`puente-reactnative-collect`, against a booted simulator. Re-run it rather than
+staging shots by hand:
 
-| Wanted | Where it comes from |
-|---|---|
-| The offline banner on a form | `.maestro/offline-resident-id.yaml` |
-| The Offline Sync screen with a queue | `.maestro/offline-multiple-forms.yaml` |
-| "All caught up" empty state | `.maestro/offline-sync.yaml` |
-| The discard confirmation | `.maestro/offline-discard-queued-form.yaml` |
+```
+yarn start:staging-clear            # Metro FIRST
+yarn maestro .maestro/capture-offline-docs.yaml
+```
 
-Those Maestro flows already walk through exactly these states, so capturing them
-is a matter of adding `takeScreenshot` steps rather than staging anything by
-hand.
+| Image | State | Section |
+|---|---|---|
+| `collect-01-offline-banner` | the offline banner on a form being filled in | §2 |
+| `collect-03-queue` | one form waiting, named, with Discard and Retry | §4 |
+| `collect-04-all-caught-up` | the empty queue | §4 |
+| `collect-05-discard-confirm` | the permanent-deletion confirmation | §8 |
 
-**The screenshot rule applies.** Every organization, person and email in a
-published image must be invented. Note that staging was seeded with real
-production organization names on 2026-09-08, so a screenshot taken against
-staging can now capture real partner names — it could not before. Point capture
-runs at synthetic data, or use an obviously fake organization.
+The flow asserts the state before each capture — a screenshot of the wrong
+screen is worse than none, because nobody re-checks a picture.
+
+**Every person in these images is invented.** The resident is "Ejemplo Ramirez",
+who does not exist. Note that staging was seeded with real production
+organization names on 2026-09-08, so do not capture any screen that lists
+organizations from it.
+
+One thing visible in `collect-03` and worth leaving in: a green "Success! You
+have just submitted 1 form!" sits above a form that is still waiting. That is
+the partial-sync state §6 describes, so the caption names it rather than
+pretending the screen is tidier than it is.
 
 ## Publishing
 

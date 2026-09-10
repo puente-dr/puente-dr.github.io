@@ -51,11 +51,38 @@ but there is no palette entry to create one.
 §3 presents that gap as deliberate rather than hiding it. If the product decision
 changes and any of those become creatable, §3 is the section to rewrite.
 
-## What is missing
+## The screenshots
 
-**Screenshots.** Text-only for now. The builder palette, a placed block and a
-resulting CSV would all help. The screenshot rule applies: every organization,
-person and email in a published image must be invented.
+Captured from the real Form Creator by `e2e/capture-form-docs.mjs` in
+`puente-react-nextjs-platform`, with every backend answer stubbed. Sibling of
+`capture-org-docs.mjs`, same reasoning and same rules:
+
+```
+yarn dev                            # in another shell
+node e2e/capture-form-docs.mjs
+```
+
+| Image | Shows | Section |
+|---|---|---|
+| `manage-01-form-creator` | the whole builder | §1 |
+| `manage-02-blocks-palette` | all seven blocks | §2 |
+| `manage-04-blocks-on-canvas` | a question typed into a Number block | §4 |
+
+Blocks are placed with the **keyboard** (`Space` to lift, arrows, `Space` to
+drop) rather than synthetic mouse drags — far more reliable to automate, and it
+exercises the accessible path. If a lift stops working, that is a real finding.
+
+**Everything on screen is invented**: the form is "Water access — Example
+Community", the user is `ada@example.org`, and no real partner appears.
+
+### One shot deliberately not published
+
+`manage-05-inspector` is captured but **not used**. It shows a Number-response
+block labelled "How many people live in this house?" whose **Formik key reads
+`geolocation_…`**. Either the key is seeded from the wrong block or the Inspector
+renders the wrong one; it was not diagnosed. Publishing it would teach the reader
+something untrue about how keys relate to questions. **Worth investigating** —
+and if it turns out to be a display bug, this image is the reproduction.
 
 ## Publishing
 
