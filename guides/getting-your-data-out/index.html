@@ -184,7 +184,7 @@
 <main class="wrap">
 
   <section id="idea">
-    <h2><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
     <p lang="en">Everything your surveyors collect lives in Puente. <strong>Export</strong> makes a copy of
       it as a spreadsheet file — a CSV — that you can open in Excel, Google Sheets or anything else, and
       send to a funder, a ministry or an analyst.</p>
@@ -208,7 +208,7 @@
   </section>
 
   <section id="where">
-    <h2><span lang="en">Where the button is</span><span lang="es">Dónde está el botón</span></h2>
+    <h2><span class="num">2</span><span lang="en">Where the button is</span><span lang="es">Dónde está el botón</span></h2>
     <p lang="en">In Manage, open <strong>Form Manager</strong>. Every form has its own
       <strong>Export</strong> button — the four Puente forms at the top, and each of your own forms
       below.</p>
@@ -241,7 +241,7 @@
   </section>
 
   <section id="files">
-    <h2><span lang="en">One file per form, joined by one column</span><span lang="es">Un archivo por formulario, unidos por una columna</span></h2>
+    <h2><span class="num">3</span><span lang="en">One file per form, joined by one column</span><span lang="es">Un archivo por formulario, unidos por una columna</span></h2>
     <p lang="en">There is no single file containing everything, because the data is not shaped that way.
       A person is one thing; a blood-pressure reading taken during a visit is another. Each export is one
       of these:</p>
@@ -280,7 +280,7 @@
   </section>
 
   <section id="rows">
-    <h2><span lang="en">One row per record, not per person</span><span lang="es">Una fila por registro, no por persona</span></h2>
+    <h2><span class="num">4</span><span lang="en">One row per record, not per person</span><span lang="es">Una fila por registro, no por persona</span></h2>
     <p lang="en">If you take vitals from the same person three times, the Vitals export has three rows for
       them. Their name, community and organization repeat on all three. That is correct — the repetition
       is what lets you filter or pivot on any of those columns.</p>
@@ -297,14 +297,14 @@
     </div>
     <p lang="en">A record whose person is missing still exports. It arrives with the person columns blank
       rather than being left out of the file — collected work is never silently dropped from a download.
-      A handful of these exist, mostly from an old syncing fault.</p>
+      Records like this exist, mostly from an old syncing fault.</p>
     <p lang="es">Un registro sin persona también se exporta. Llega con las columnas de la persona en blanco
       en vez de quedar fuera del archivo — el trabajo recogido nunca desaparece en silencio de una
-      descarga. Existen unos pocos así, casi todos por una falla antigua de sincronización.</p>
+      descarga. Existen registros así, casi todos por una falla antigua de sincronización.</p>
   </section>
 
   <section id="people">
-    <h2><span lang="en">Identical people collapse into one row</span><span lang="es">Las personas idénticas se juntan en una fila</span></h2>
+    <h2><span class="num">5</span><span lang="en">Identical people collapse into one row</span><span lang="es">Las personas idénticas se juntan en una fila</span></h2>
     <p lang="en">The people export removes rows that are identical to each other. If two records agree on
       every human fact — name, nickname, sex, date of birth, phone, education, occupation, community,
       city, province, cédula, surveyor, organization, coordinates, photo — they leave as
@@ -336,7 +336,7 @@
   </section>
 
   <section id="age">
-    <h2><span lang="en">Age is a subtraction, not an age</span><span lang="es">La edad es una resta, no una edad</span></h2>
+    <h2><span class="num">6</span><span lang="en">Age is a subtraction, not an age</span><span lang="es">La edad es una resta, no una edad</span></h2>
     <p lang="en">The people export has an <code>age</code> column. It is calculated as
       <strong>this year minus the birth year</strong> — nothing more.</p>
     <p lang="es">La exportación de personas tiene una columna <code>age</code>. Se calcula como
@@ -362,7 +362,7 @@
   </section>
 
   <section id="accents">
-    <h2><span lang="en">Accents survive in some files and not in others</span><span lang="es">Los acentos sobreviven en unos archivos y en otros no</span></h2>
+    <h2><span class="num">7</span><span lang="en">Accents survive in some files and not in others</span><span lang="es">Los acentos sobreviven en unos archivos y en otros no</span></h2>
     <p lang="en">This is the one that quietly breaks spreadsheets, so it is worth a minute.</p>
     <p lang="es">Este es el que rompe hojas de cálculo en silencio, así que vale un minuto.</p>
     <p lang="en">In the four Puente exports, text comes out exactly as it was collected —
@@ -394,7 +394,7 @@
   </section>
 
   <section id="questions">
-    <h2><span lang="en">Your questions become the column headings</span><span lang="es">Tus preguntas se vuelven los títulos de columna</span></h2>
+    <h2><span class="num">8</span><span lang="en">Your questions become the column headings</span><span lang="es">Tus preguntas se vuelven los títulos de columna</span></h2>
     <p lang="en">When you export one of your own forms, each question becomes one column, headed by the
       question's label. This is the single strongest reason to write a clear question in the Form
       Creator: whatever you type there is what an analyst reads at the top of a column, months later,
@@ -422,7 +422,7 @@
   </section>
 
   <section id="missing">
-    <h2><span lang="en">What is not in the file</span><span lang="es">Qué no está en el archivo</span></h2>
+    <h2><span class="num">9</span><span lang="en">What is not in the file</span><span lang="es">Qué no está en el archivo</span></h2>
     <ul class="plain">
       <li><span lang="en"><strong>Photos and signatures.</strong> The people export carries a
         <code>pictureURL</code> column — a link, not the image. Custom-form exports carry neither.</span>
@@ -443,7 +443,7 @@
   </section>
 
   <section id="empty">
-    <h2><span lang="en">Empty is not the same as failed</span><span lang="es">Vacío no es lo mismo que fallido</span></h2>
+    <h2><span class="num">10</span><span lang="en">Empty is not the same as failed</span><span lang="es">Vacío no es lo mismo que fallido</span></h2>
     <p lang="en">Two different messages, two different meanings. They used to say the same thing, and a
       coordinator whose download had crashed spent a morning looking for records that were never
       missing.</p>
@@ -476,7 +476,7 @@
   </section>
 
   <section id="scope">
-    <h2><span lang="en">What one export covers</span><span lang="es">Qué cubre una exportación</span></h2>
+    <h2><span class="num">11</span><span lang="en">What one export covers</span><span lang="es">Qué cubre una exportación</span></h2>
     <p lang="en">Organizations get written down inconsistently in the field. The same organization might
       appear on its records as <code>DR Missions</code>, <code>DRMT</code>, or a spelling somebody typed
       once on a phone. Your export follows <strong>every spelling your organization uses</strong>, not
@@ -494,7 +494,7 @@
   </section>
 
   <section id="rules">
-    <h2><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <h2><span class="num">12</span><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
     <ul class="plain">
       <li><span lang="en">Count people in the people file; count events in the event files.</span><span lang="es">Cuenta personas en el archivo de personas; cuenta eventos en los archivos de eventos.</span></li>
       <li><span lang="en">Join on <code>objectId</code>, never on a name or a community.</span><span lang="es">Une por <code>objectId</code>, nunca por un nombre o una comunidad.</span></li>
