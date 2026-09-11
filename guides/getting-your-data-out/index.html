@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting your data out — Puente</title>
+<meta name="description" content="What the Export button in Puente Manage gives you: one file per form, one row per record, and the four places the spreadsheet means something slightly different from the app.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/getting-your-data-out/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+</style></head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Getting your data out</span>
+      <span lang="es">Sacar tus datos</span>
+    </h1>
+    <p class="lede" lang="en">What the Export button actually gives you: one file per form, one row per
+      record, and the handful of places where the spreadsheet means something slightly different from
+      what you saw in the app. Written for coordinators, and for whoever opens the file next.</p>
+    <p class="lede" lang="es">Qué te da realmente el botón Exportar: un archivo por formulario, una fila
+      por registro, y los pocos lugares donde la hoja de cálculo significa algo un poco distinto de lo
+      que viste en la app. Escrita para coordinadores y para quien abra el archivo después.</p>
+    <p class="meta" lang="en">Last reviewed 11 September 2026 · Manage, and the export service behind it</p>
+    <p class="meta" lang="es">Última revisión: 11 de septiembre de 2026 · Manage y el servicio de exportación detrás</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#where"><span lang="en">Where the button is</span><span lang="es">Dónde está el botón</span></a></li>
+      <li><a href="#files"><span lang="en">One file per form</span><span lang="es">Un archivo por formulario</span></a></li>
+      <li><a href="#rows"><span lang="en">One row per record</span><span lang="es">Una fila por registro</span></a></li>
+      <li><a href="#people"><span lang="en">Identical people collapse</span><span lang="es">Las personas idénticas se juntan</span></a></li>
+      <li><a href="#age"><span lang="en">Age is a subtraction</span><span lang="es">La edad es una resta</span></a></li>
+      <li><a href="#accents"><span lang="en">Accents</span><span lang="es">Los acentos</span></a></li>
+      <li><a href="#questions"><span lang="en">Your questions become columns</span><span lang="es">Tus preguntas se vuelven columnas</span></a></li>
+      <li><a href="#missing"><span lang="en">What is not in the file</span><span lang="es">Qué no está en el archivo</span></a></li>
+      <li><a href="#empty"><span lang="en">Empty is not failed</span><span lang="es">Vacío no es fallido</span></a></li>
+      <li><a href="#scope"><span lang="en">What one export covers</span><span lang="es">Qué cubre una exportación</span></a></li>
+      <li><a href="#rules"><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <p lang="en">Everything your surveyors collect lives in Puente. <strong>Export</strong> makes a copy of
+      it as a spreadsheet file — a CSV — that you can open in Excel, Google Sheets or anything else, and
+      send to a funder, a ministry or an analyst.</p>
+    <p lang="es">Todo lo que recogen tus encuestadores vive en Puente. <strong>Exportar</strong> hace una
+      copia en forma de hoja de cálculo — un CSV — que puedes abrir en Excel, Google Sheets o cualquier
+      otro programa, y enviar a un donante, a un ministerio o a un analista.</p>
+    <div class="keystone">
+      <p lang="en">The export is a <strong>copy</strong>, not a window. Editing the spreadsheet changes
+        nothing in Puente, and nothing you do in Puente afterwards changes the spreadsheet. It is a
+        photograph of the moment you pressed the button.</p>
+      <p lang="es">La exportación es una <strong>copia</strong>, no una ventana. Editar la hoja de cálculo
+        no cambia nada en Puente, y nada de lo que hagas después en Puente cambia la hoja. Es una
+        fotografía del momento en que pulsaste el botón.</p>
+    </div>
+    <p lang="en">Most of this guide is about the small number of places where the copy is shaped
+      differently from what you saw on the phone. None of them are mistakes. All of them will confuse
+      somebody who is not expecting them, which is why they are written down.</p>
+    <p lang="es">La mayor parte de esta guía trata sobre los pocos lugares donde la copia tiene una forma
+      distinta de lo que viste en el teléfono. Ninguno es un error. Todos van a confundir a alguien que no
+      los espera, y por eso están escritos aquí.</p>
+  </section>
+
+  <section id="where">
+    <h2><span lang="en">Where the button is</span><span lang="es">Dónde está el botón</span></h2>
+    <p lang="en">In Manage, open <strong>Form Manager</strong>. Every form has its own
+      <strong>Export</strong> button — the four Puente forms at the top, and each of your own forms
+      below.</p>
+    <p lang="es">En Manage, abre <strong>Gestor de formularios</strong>. Cada formulario tiene su propio
+      botón <strong>Exportar</strong> — los cuatro formularios de Puente arriba, y cada uno de tus
+      formularios debajo.</p>
+    <figure>
+      <img src="assets/img/export-01-form-manager.png"
+           data-src-en="assets/img/export-01-form-manager.png"
+           data-src-es="assets/img/es/export-01-form-manager.png"
+           data-alt-en="The Form Manager screen. Four Puente forms — SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical — each with an Export button, and below them two custom forms with Edit, Duplicate, Delete and Export."
+           data-alt-es="La pantalla Gestor de formularios. Cuatro formularios de Puente — SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical — cada uno con un botón Exportar, y debajo dos formularios personalizados con Editar, Duplicar, Eliminar y Exportar."
+           alt="The Form Manager screen. Four Puente forms — SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical — each with an Export button, and below them two custom forms with Edit, Duplicate, Delete and Export.">
+      <figcaption><span lang="en">One Export button per form. There is no button that exports everything at once — see §3 for why that is the honest shape.</span><span lang="es">Un botón Exportar por formulario. No hay un botón que exporte todo de una vez — mira §3 para saber por qué esa es la forma honesta.</span></figcaption>
+    </figure>
+    <p lang="en">The file lands in your Downloads folder, named after the form and the moment you pressed
+      the button — <code>SurveyData-Fri Sep 11 2026 14:40:39 GMT-0700 (Pacific Daylight Time).csv</code>.
+      Long, but it means two exports of the same form never overwrite each other.</p>
+    <p lang="es">El archivo llega a tu carpeta de Descargas, con el nombre del formulario y el momento en
+      que pulsaste el botón — <code>SurveyData-Fri Sep 11 2026 14:40:39 GMT-0700 (Pacific Daylight
+      Time).csv</code>. Es largo, pero así dos exportaciones del mismo formulario nunca se sobrescriben.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>A big organization's export can take a minute. The button says
+        <em>Loading…</em> while it works. Pressing it again starts a second download rather than hurrying
+        the first.</p>
+      <p lang="es"><strong></strong>La exportación de una organización grande puede tardar un minuto. El
+        botón dice <em>Cargando…</em> mientras trabaja. Pulsarlo otra vez inicia una segunda descarga en
+        vez de apurar la primera.</p>
+    </div>
+  </section>
+
+  <section id="files">
+    <h2><span lang="en">One file per form, joined by one column</span><span lang="es">Un archivo por formulario, unidos por una columna</span></h2>
+    <p lang="en">There is no single file containing everything, because the data is not shaped that way.
+      A person is one thing; a blood-pressure reading taken during a visit is another. Each export is one
+      of these:</p>
+    <p lang="es">No hay un archivo único con todo, porque los datos no tienen esa forma. Una persona es una
+      cosa; una toma de presión durante una visita es otra. Cada exportación es una de estas:</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th><span lang="en">Export</span><span lang="es">Exportación</span></th>
+            <th><span lang="en">One row is…</span><span lang="es">Una fila es…</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>SurveyData</code></td><td><span lang="en">a person</span><span lang="es">una persona</span></td></tr>
+          <tr><td><code>HistoryEnvironmentalHealth</code></td><td><span lang="en">one household survey</span><span lang="es">una encuesta de vivienda</span></td></tr>
+          <tr><td><code>Vitals</code></td><td><span lang="en">one set of vitals, taken once</span><span lang="es">un conjunto de signos vitales, tomado una vez</span></td></tr>
+          <tr><td><code>EvaluationMedical</code></td><td><span lang="en">one medical evaluation</span><span lang="es">una evaluación médica</span></td></tr>
+          <tr><td><span lang="en">each of your own forms</span><span lang="es">cada formulario tuyo</span></td><td><span lang="en">one submission of that form</span><span lang="es">un envío de ese formulario</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">Every file except the people file already carries the person's details on each row — name,
+      community, organization — copied in for you. So most of the time you do not need to join anything.</p>
+    <p lang="es">Todos los archivos menos el de personas ya traen los datos de la persona en cada fila —
+      nombre, comunidad, organización — copiados para ti. Así que la mayoría de las veces no necesitas
+      unir nada.</p>
+    <p lang="en">When you do need to join two files, the column to join on is <code>objectId</code>. It
+      means the same thing in every file: <strong>which person this row is about</strong>. The
+      supplementary file's own id is in a separate column called <code>idSupplementary</code>, so the two
+      can never be mistaken for each other.</p>
+    <p lang="es">Cuando sí necesites unir dos archivos, la columna para unirlos es <code>objectId</code>.
+      Significa lo mismo en todos los archivos: <strong>de qué persona trata esta fila</strong>. El id
+      propio del archivo suplementario está en otra columna, <code>idSupplementary</code>, para que nunca
+      se confundan.</p>
+  </section>
+
+  <section id="rows">
+    <h2><span lang="en">One row per record, not per person</span><span lang="es">Una fila por registro, no por persona</span></h2>
+    <p lang="en">If you take vitals from the same person three times, the Vitals export has three rows for
+      them. Their name, community and organization repeat on all three. That is correct — the repetition
+      is what lets you filter or pivot on any of those columns.</p>
+    <p lang="es">Si le tomas los signos vitales a la misma persona tres veces, la exportación de Vitals
+      tiene tres filas para ella. Su nombre, comunidad y organización se repiten en las tres. Eso es
+      correcto — esa repetición es la que te permite filtrar o hacer tablas dinámicas con esas columnas.</p>
+    <div class="keystone">
+      <p lang="en">Counting the rows of a Vitals export tells you <strong>how many readings</strong> were
+        taken, not how many people were seen. For people, count the distinct <code>objectId</code> values,
+        or count the rows of the people export.</p>
+      <p lang="es">Contar las filas de una exportación de Vitals te dice <strong>cuántas tomas</strong> se
+        hicieron, no a cuántas personas se atendió. Para personas, cuenta los valores distintos de
+        <code>objectId</code>, o cuenta las filas de la exportación de personas.</p>
+    </div>
+    <p lang="en">A record whose person is missing still exports. It arrives with the person columns blank
+      rather than being left out of the file — collected work is never silently dropped from a download.
+      A handful of these exist, mostly from an old syncing fault.</p>
+    <p lang="es">Un registro sin persona también se exporta. Llega con las columnas de la persona en blanco
+      en vez de quedar fuera del archivo — el trabajo recogido nunca desaparece en silencio de una
+      descarga. Existen unos pocos así, casi todos por una falla antigua de sincronización.</p>
+  </section>
+
+  <section id="people">
+    <h2><span lang="en">Identical people collapse into one row</span><span lang="es">Las personas idénticas se juntan en una fila</span></h2>
+    <p lang="en">The people export removes rows that are identical to each other. If two records agree on
+      every human fact — name, nickname, sex, date of birth, phone, education, occupation, community,
+      city, province, cédula, surveyor, organization, coordinates, photo — they leave as
+      <strong>one</strong> row.</p>
+    <p lang="es">La exportación de personas elimina las filas idénticas entre sí. Si dos registros
+      coinciden en todos los datos humanos — nombre, apodo, sexo, fecha de nacimiento, teléfono,
+      educación, ocupación, comunidad, ciudad, provincia, cédula, encuestador, organización, coordenadas,
+      foto — salen como <strong>una sola</strong> fila.</p>
+    <p lang="en">This is usually what you want: it hides the exact duplicates that come from a form being
+      submitted twice. But it has a consequence worth knowing.</p>
+    <p lang="es">Normalmente eso es lo que quieres: esconde los duplicados exactos que salen cuando un
+      formulario se envía dos veces. Pero tiene una consecuencia que conviene saber.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>The row count of the people export is <em>not</em> the number of
+        records in Puente. Two duplicate residents become one row here while remaining two separate
+        people in the app — each with their own history, each findable in search. The export tidies the
+        symptom; only merging the records in Puente fixes the cause.</p>
+      <p lang="es"><strong></strong>El número de filas de la exportación de personas <em>no</em> es el
+        número de registros en Puente. Dos residentes duplicados se vuelven una fila aquí, pero siguen
+        siendo dos personas distintas en la app — cada una con su historial, cada una encontrable en la
+        búsqueda. La exportación arregla el síntoma; solo unir los registros en Puente arregla la causa.</p>
+    </div>
+    <p lang="en">Duplicates that differ in any detail — a nickname on one and not the other — are two rows,
+      because the export cannot know they are the same person. <a href="/guides/finding-someone-you-already-surveyed/">Finding
+      someone you already surveyed</a> is about not creating them in the first place.</p>
+    <p lang="es">Los duplicados que difieren en cualquier detalle — un apodo en uno y no en el otro — son
+      dos filas, porque la exportación no puede saber que son la misma persona. <a href="/guides/finding-someone-you-already-surveyed/">Encontrar
+      a alguien que ya encuestaste</a> trata de no crearlos desde el principio.</p>
+  </section>
+
+  <section id="age">
+    <h2><span lang="en">Age is a subtraction, not an age</span><span lang="es">La edad es una resta, no una edad</span></h2>
+    <p lang="en">The people export has an <code>age</code> column. It is calculated as
+      <strong>this year minus the birth year</strong> — nothing more.</p>
+    <p lang="es">La exportación de personas tiene una columna <code>age</code>. Se calcula como
+      <strong>este año menos el año de nacimiento</strong> — nada más.</p>
+    <div class="spellings">
+      <div><span>dob 1983-12-26 → age 43</span><em lang="en">on 11 Sep 2026, when she is still 42</em><em lang="es">el 11 sep 2026, cuando todavía tiene 42</em></div>
+      <div><span>dob 1983-01-04 → age 43</span><em lang="en">correct — the birthday has passed</em><em lang="es">correcto — el cumpleaños ya pasó</em></div>
+    </div>
+    <p lang="en">So roughly anyone whose birthday falls later in the year reads one year too old. For
+      counting a community into age bands this is usually fine. For anything where a single year matters —
+      a paediatric cut-off, an eligibility threshold — use <code>dob</code> and calculate it yourself.</p>
+    <p lang="es">Entonces, más o menos cualquier persona cuyo cumpleaños cae más adelante en el año aparece
+      un año mayor. Para contar una comunidad por rangos de edad eso suele estar bien. Para algo donde un
+      año importa — un corte pediátrico, un umbral de elegibilidad — usa <code>dob</code> y calcúlalo tú.</p>
+    <p lang="en">Two more things about that column. If a surveyor typed an age directly, that number is kept
+      and the date of birth is ignored. And if a date of birth cannot be read at all, the age comes out
+      <strong>blank</strong> rather than guessed — a wrong age in a spreadsheet has nothing marking it as
+      a guess.</p>
+    <p lang="es">Dos cosas más sobre esa columna. Si un encuestador escribió una edad directamente, ese
+      número se conserva y la fecha de nacimiento se ignora. Y si una fecha de nacimiento no se puede
+      leer, la edad sale <strong>en blanco</strong> en vez de adivinada — una edad equivocada en una hoja
+      de cálculo no lleva nada que la marque como suposición.</p>
+  </section>
+
+  <section id="accents">
+    <h2><span lang="en">Accents survive in some files and not in others</span><span lang="es">Los acentos sobreviven en unos archivos y en otros no</span></h2>
+    <p lang="en">This is the one that quietly breaks spreadsheets, so it is worth a minute.</p>
+    <p lang="es">Este es el que rompe hojas de cálculo en silencio, así que vale un minuto.</p>
+    <p lang="en">In the four Puente exports, text comes out exactly as it was collected —
+      <code>Comunidad Peña</code>, <code>Baní</code>. In an export of <strong>your own</strong> form,
+      accents are stripped from both the answers and the column headings:</p>
+    <p lang="es">En las cuatro exportaciones de Puente, el texto sale tal como se recogió —
+      <code>Comunidad Peña</code>, <code>Baní</code>. En la exportación de un formulario
+      <strong>tuyo</strong>, los acentos se quitan tanto de las respuestas como de los títulos de
+      columna:</p>
+    <div class="spellings">
+      <div><span>Comunidad Peña → Comunidad Pena</span><em lang="en">answer</em><em lang="es">respuesta</em></div>
+      <div><span>Sí, compartido → Si, compartido</span><em lang="en">answer</em><em lang="es">respuesta</em></div>
+      <div><span>¿Tiene baño? → Tiene bano?</span><em lang="en">column heading</em><em lang="es">título de columna</em></div>
+    </div>
+    <div class="note">
+      <p lang="en"><strong></strong>The same community is therefore spelled two ways across two files —
+        <code>Peña</code> in the Vitals export and <code>Pena</code> in your custom-form export. A
+        <code>VLOOKUP</code> or a pivot that joins on community name will silently match nothing. Join on
+        <code>objectId</code> instead; it is unaffected.</p>
+      <p lang="es"><strong></strong>Por eso la misma comunidad se escribe de dos maneras en dos archivos —
+        <code>Peña</code> en la exportación de Vitals y <code>Pena</code> en la de tu formulario. Un
+        <code>BUSCARV</code> o una tabla dinámica que una por nombre de comunidad no va a coincidir con
+        nada, sin avisar. Une por <code>objectId</code>, que no se ve afectado.</p>
+    </div>
+    <p lang="en">The stripping exists because some of the tools these files are opened in mangle accented
+      characters in headings. It is applied to custom forms only.</p>
+    <p lang="es">Ese cambio existe porque algunas de las herramientas donde se abren estos archivos dañan
+      los caracteres acentuados en los títulos. Solo se aplica a los formularios personalizados.</p>
+  </section>
+
+  <section id="questions">
+    <h2><span lang="en">Your questions become the column headings</span><span lang="es">Tus preguntas se vuelven los títulos de columna</span></h2>
+    <p lang="en">When you export one of your own forms, each question becomes one column, headed by the
+      question's label. This is the single strongest reason to write a clear question in the Form
+      Creator: whatever you type there is what an analyst reads at the top of a column, months later,
+      with no other context.</p>
+    <p lang="es">Cuando exportas un formulario tuyo, cada pregunta se vuelve una columna, con el título de
+      la pregunta como encabezado. Esta es la razón más fuerte para escribir una pregunta clara en el
+      Creador de formularios: lo que escribas ahí es lo que un analista va a leer arriba de una columna,
+      meses después, sin ningún otro contexto.</p>
+    <p lang="en">If you <strong>rename</strong> a question after people have already answered it, older
+      submissions still carry the old wording. The export puts them all in one column under the current
+      label — you do not get one half-empty column per wording.</p>
+    <p lang="es">Si <strong>cambias el nombre</strong> de una pregunta después de que ya la respondieron,
+      los envíos anteriores todavía llevan el texto viejo. La exportación los pone todos en una sola
+      columna con el título actual — no te quedan dos columnas medio vacías.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>If one of your questions has the same name as a built-in column —
+        <code>communityname</code>, say — your version is renamed
+        <code>communityname_from_custom_form</code> so the two never overwrite each other. Both columns
+        are in the file.</p>
+      <p lang="es"><strong></strong>Si una de tus preguntas tiene el mismo nombre que una columna
+        integrada — <code>communityname</code>, por ejemplo — la tuya se renombra
+        <code>communityname_from_custom_form</code> para que no se sobrescriban. Las dos columnas están en
+        el archivo.</p>
+    </div>
+  </section>
+
+  <section id="missing">
+    <h2><span lang="en">What is not in the file</span><span lang="es">Qué no está en el archivo</span></h2>
+    <ul class="plain">
+      <li><span lang="en"><strong>Photos and signatures.</strong> The people export carries a
+        <code>pictureURL</code> column — a link, not the image. Custom-form exports carry neither.</span>
+        <span lang="es"><strong>Fotos y firmas.</strong> La exportación de personas trae una columna
+        <code>pictureURL</code> — un enlace, no la imagen. Las exportaciones de formularios propios no
+        traen ninguna de las dos.</span></li>
+      <li><span lang="en"><strong>The app's internal ids.</strong> The ids a phone mints while offline are
+        how a re-sent record is recognised instead of duplicated. They are load-bearing in the app and
+        meaningless in a spreadsheet, so they are left out.</span>
+        <span lang="es"><strong>Los ids internos de la app.</strong> Los ids que crea un teléfono sin señal
+        son la forma de reconocer un registro reenviado en vez de duplicarlo. Son esenciales en la app y
+        no significan nada en una hoja de cálculo, así que no se incluyen.</span></li>
+      <li><span lang="en"><strong>Anything from another organization.</strong> An export contains your
+        organization's records and nothing else.</span>
+        <span lang="es"><strong>Nada de otra organización.</strong> Una exportación contiene los registros
+        de tu organización y nada más.</span></li>
+    </ul>
+  </section>
+
+  <section id="empty">
+    <h2><span lang="en">Empty is not the same as failed</span><span lang="es">Vacío no es lo mismo que fallido</span></h2>
+    <p lang="en">Two different messages, two different meanings. They used to say the same thing, and a
+      coordinator whose download had crashed spent a morning looking for records that were never
+      missing.</p>
+    <p lang="es">Dos mensajes distintos, dos significados distintos. Antes decían lo mismo, y una
+      coordinadora cuya descarga había fallado pasó una mañana buscando registros que nunca faltaron.</p>
+    <div class="figures">
+      <figure>
+        <img src="assets/img/export-03-no-records-yet.png"
+             data-src-en="assets/img/export-03-no-records-yet.png"
+             data-src-es="assets/img/es/export-03-no-records-yet.png"
+             data-alt-en="A message reading: This form has no records to export yet."
+             data-alt-es="Un mensaje que dice: Este formulario todavía no tiene registros para exportar."
+             alt="A message reading: This form has no records to export yet.">
+        <figcaption><span lang="en">Nothing has been collected on this form yet. Nothing is wrong; there is simply nothing to download. No file is saved.</span><span lang="es">Todavía no se ha recogido nada en este formulario. No hay ningún problema; simplemente no hay nada que descargar. No se guarda ningún archivo.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/export-04-export-failed.png"
+             data-src-en="assets/img/export-04-export-failed.png"
+             data-src-es="assets/img/es/export-04-export-failed.png"
+             data-alt-en="A message reading: The export could not be completed. Please try again."
+             data-alt-es="Un mensaje que dice: No se pudo completar la descarga. Por favor, inténtelo de nuevo."
+             alt="A message reading: The export could not be completed. Please try again.">
+        <figcaption><span lang="en">The download itself broke. Your data is fine — try again, and tell us if it keeps happening.</span><span lang="es">La descarga misma falló. Tus datos están bien — intenta de nuevo, y avísanos si sigue pasando.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">A file that opens with only a heading row is a third, different thing: a real answer
+      meaning <strong>zero rows matched</strong>. That is a file, and it saves.</p>
+    <p lang="es">Un archivo que abre solo con la fila de títulos es una tercera cosa distinta: una respuesta
+      real que significa <strong>cero filas coincidieron</strong>. Eso sí es un archivo, y se guarda.</p>
+  </section>
+
+  <section id="scope">
+    <h2><span lang="en">What one export covers</span><span lang="es">Qué cubre una exportación</span></h2>
+    <p lang="en">Organizations get written down inconsistently in the field. The same organization might
+      appear on its records as <code>DR Missions</code>, <code>DRMT</code>, or a spelling somebody typed
+      once on a phone. Your export follows <strong>every spelling your organization uses</strong>, not
+      just the one on your account.</p>
+    <p lang="es">Las organizaciones se escriben de forma inconsistente en el campo. La misma organización
+      puede aparecer en sus registros como <code>DR Missions</code>, <code>DRMT</code>, o una escritura que
+      alguien tecleó una vez en un teléfono. Tu exportación sigue <strong>todas las escrituras que usa tu
+      organización</strong>, no solo la de tu cuenta.</p>
+    <p lang="en">This is not a small detail. One real organization exported 12 rows by name where 623
+      existed, because 611 of its records carried an abbreviation instead. If a partner tells you their
+      export looks too small, that is the first thing to check with us.</p>
+    <p lang="es">No es un detalle menor. Una organización real exportó 12 filas por nombre cuando existían
+      623, porque 611 de sus registros llevaban una abreviatura. Si un socio te dice que su exportación se
+      ve muy pequeña, eso es lo primero que hay que revisar con nosotros.</p>
+  </section>
+
+  <section id="rules">
+    <h2><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <ul class="plain">
+      <li><span lang="en">Count people in the people file; count events in the event files.</span><span lang="es">Cuenta personas en el archivo de personas; cuenta eventos en los archivos de eventos.</span></li>
+      <li><span lang="en">Join on <code>objectId</code>, never on a name or a community.</span><span lang="es">Une por <code>objectId</code>, nunca por un nombre o una comunidad.</span></li>
+      <li><span lang="en">Use <code>dob</code> when a single year matters; <code>age</code> is a subtraction.</span><span lang="es">Usa <code>dob</code> cuando un año importe; <code>age</code> es una resta.</span></li>
+      <li><span lang="en">Write the question you want to read as a column heading a year from now.</span><span lang="es">Escribe la pregunta que quieras leer como título de columna dentro de un año.</span></li>
+      <li><span lang="en">"No records yet" and "could not be completed" mean different things. Only the second one is worth worrying about.</span><span lang="es">«Todavía no tiene registros» y «no se pudo completar» significan cosas distintas. Solo la segunda merece preocupación.</span></li>
+      <li><span lang="en">The export is a copy. Fix data in Puente, then export again.</span><span lang="es">La exportación es una copia. Arregla los datos en Puente y vuelve a exportar.</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect is source-available under the Business Source License 1.1. It converts to
+      the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect es de código disponible bajo la Business Source License 1.1. Pasa a la
+      Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Getting your data out — Puente',
+    es: 'Sacar tus datos — Puente'
+  };
+  var DESC = {
+    en: 'What the Export button in Puente Manage gives you: one file per form, one row per record, and the four places the spreadsheet means something slightly different from the app.',
+    es: 'Qué te da el botón Exportar en Puente Manage: un archivo por formulario, una fila por registro, y los cuatro lugares donde la hoja de cálculo significa algo distinto de la app.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific: the app was driven twice, once per
+    // language. A reader on the Spanish page is the reader least able to map an
+    // English button onto the one in front of them. Guarded on the attribute so
+    // a figure with only one capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>

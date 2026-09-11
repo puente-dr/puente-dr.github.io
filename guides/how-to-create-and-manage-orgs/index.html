@@ -701,6 +701,14 @@
     document.querySelectorAll('[data-alt-en]').forEach(function(img){
       img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
     });
+    // The screenshots are language-specific once a Spanish capture set exists:
+    // a reader on the Spanish page is the reader least able to map an English
+    // button onto the one in front of them. Guarded on the attribute, so a
+    // figure with only an English capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
   }
 
   function set(lang){
