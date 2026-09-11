@@ -73,9 +73,8 @@ swaps them along with the text. The capture script drives the app twice, once
 per locale, in a single run.
 
 This was new as of 2026-09-11, when the four earlier guides all shipped English
-screenshots on their Spanish pages. Three of them have since been recaptured and
-are bilingual too; `how-to-create-and-manage-orgs` is the one still English-only,
-because its capture script was uncommitted work at the time.
+screenshots on their Spanish pages. All of them have since been recaptured, so
+every guide on the site is now bilingual in its pictures as well as its text.
 
 Photographing the Spanish page is also what found two buttons that had never
 been translated — the Spanish Form Manager rendered `Export` and `+ Create

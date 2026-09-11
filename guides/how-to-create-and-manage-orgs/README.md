@@ -55,14 +55,19 @@ Business Source License 1.1 and converts to the Apache License 2.0 on
 
 Questions: info@puente-dr.org
 
-## Known gap: the screenshots are in English
+## The screenshots are in both languages
 
-The other four guides now ship a Spanish image set alongside the English one,
-swapped by the language toggle (`assets/img/` and `assets/img/es/`). This guide
-does not yet: its captures come from `e2e/capture-org-docs.mjs`, which was still
-uncommitted work when the others were converted.
+`assets/img/` is English, `assets/img/es/` is Spanish, and the language toggle
+swaps them along with the text. All nine images, both languages.
 
-The page already carries the swapping code, so it becomes bilingual the moment
-`assets/img/es/` is populated and each `<img>` gains `data-src-en` /
-`data-src-es`. The pattern to copy is `e2e/capture-export-docs.mjs`, which walks
-the same capture twice — once at `/`, once at `/spa`.
+The web screens come from `e2e/capture-org-docs.mjs` in
+`puente-react-nextjs-platform`, which walks the same capture twice — once at
+`/`, once at `/spa` — with every backend answer stubbed. The three phone screens
+come from `.maestro/capture-org-signup-docs.yaml` in `puente-reactnative-collect`,
+run by `.maestro/capture-guide-docs.sh both`.
+
+**The only organization shown in the phone images is "Puente" — our own.** The
+search term is `Pu`, which on staging matches exactly one organization; verified
+against staging (59 organizations) before capturing. Do not broaden it: a
+shorter prefix returns real partner organizations, and these images are
+published. Every organization in the web images is invented.

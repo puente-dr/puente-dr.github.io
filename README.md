@@ -37,8 +37,8 @@ image referenced is actually present, and that the hand-edited HTML closes. All
 three failures are invisible in a browser until someone hits them — the first
 two only in Spanish.
 
-`how-to-create-and-manage-orgs` is the one guide whose screenshots are still
-English only; its own README says what is needed.
+Every guide is bilingual in its pictures as well as its text. Each guide's own
+README names the capture script that produces its images.
 
 ## Publishing
 
