@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding someone you already surveyed — Puente</title>
+<meta name="description" content="How to look a resident up in Puente Collect before creating them again: what the search reads, why a full name finds nothing, and how it works with no signal.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/finding-someone-you-already-surveyed/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Finding someone you already surveyed</span>
+      <span lang="es">Encontrar a alguien que ya encuestaste</span>
+    </h1>
+    <p class="lede" lang="en">How to look a resident up before you create them again — what the search
+      actually reads, why a full name finds nothing, and how it works with no signal. Written for
+      surveyors and for the coordinators who support them.</p>
+    <p class="lede" lang="es">Cómo buscar a un residente antes de volver a crearlo: qué lee realmente la
+      búsqueda, por qué un nombre completo no encuentra nada y cómo funciona sin señal. Escrita para
+      encuestadores y para los coordinadores que los apoyan.</p>
+    <p class="meta" lang="en">Last reviewed 11 September 2026 · Collect 15.7.2</p>
+    <p class="meta" lang="es">Última revisión: 11 de septiembre de 2026 · Collect 15.7.2</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#search"><span lang="en">What the search reads</span><span lang="es">Qué lee la búsqueda</span></a></li>
+      <li><a href="#start"><span lang="en">Type the start, not the middle</span><span lang="es">Escribe el principio, no el medio</span></a></li>
+      <li><a href="#id"><span lang="en">Searching by ID</span><span lang="es">Buscar por cédula</span></a></li>
+      <li><a href="#found"><span lang="en">When you find them</span><span lang="es">Cuando lo encuentras</span></a></li>
+      <li><a href="#offline"><span lang="en">Searching with no signal</span><span lang="es">Buscar sin señal</span></a></li>
+      <li><a href="#cost"><span lang="en">What a second record costs</span><span lang="es">Qué cuesta un segundo registro</span></a></li>
+      <li><a href="#rules"><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <p lang="en">Most people you visit are already in Puente. They were surveyed on an earlier round, by
+      you or by a colleague. When you find their existing record and add to it, everything about that
+      person stays in one place. When you cannot find them and create a new one, their history splits in
+      two, and nobody downstream can tell that the two records are the same human being.</p>
+    <p lang="es">La mayoría de las personas que visitas ya están en Puente. Fueron encuestadas en una ronda
+      anterior, por ti o por un colega. Cuando encuentras su registro existente y le agregas información,
+      todo sobre esa persona queda en un solo lugar. Cuando no la encuentras y creas una nueva, su
+      historial se divide en dos, y nadie más adelante puede saber que los dos registros son la misma
+      persona.</p>
+    <p lang="en">So the search is not a convenience. It is the step that decides whether this visit joins
+      the person's history or starts a second one beside it.</p>
+    <p lang="es">Por eso la búsqueda no es una comodidad. Es el paso que decide si esta visita se une al
+      historial de la persona o empieza un segundo historial al lado.</p>
+  </section>
+
+  <section id="search">
+    <h2><span lang="en">What the search reads</span><span lang="es">Qué lee la búsqueda</span></h2>
+    <p lang="en">The box on <strong>Search Individual</strong> looks at five things about each resident:</p>
+    <p lang="es">El cuadro en <strong>Buscar Individuo</strong> mira cinco datos de cada residente:</p>
+    <ul>
+      <li><span lang="en"><strong>First name</strong></span><span lang="es"><strong>Nombre</strong></span></li>
+      <li><span lang="en"><strong>Last name</strong></span><span lang="es"><strong>Apellido</strong></span></li>
+      <li><span lang="en"><strong>Nickname</strong> — the name people actually call them</span><span lang="es"><strong>Apodo</strong> — como la gente realmente le dice</span></li>
+      <li><span lang="en"><strong>Licence number</strong> — the cédula</span><span lang="es"><strong>Número de cédula</strong></span></li>
+      <li><span lang="en"><strong>Household ID</strong></span><span lang="es"><strong>ID del hogar</strong></span></li>
+    </ul>
+    <div class="figures">
+      <figure>
+        <img src="assets/img/find-01-search-by-name.png"
+             data-alt-en="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it."
+             data-alt-es="La pantalla Buscar Individuo con Ejemplo escrito en el cuadro y dos tarjetas de residentes coincidentes debajo."
+             alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it.">
+        <figcaption><span lang="en">A surname finds everyone who shares it. Each card shows the nickname in quotes, plus city, community, sex and education — enough to tell two people apart before you tap.</span><span lang="es">Un apellido encuentra a todos los que lo comparten. Cada tarjeta muestra el apodo entre comillas, además de ciudad, comunidad, sexo y educación — suficiente para distinguir a dos personas antes de tocar.</span></figcaption>
+      </figure>
+    </div>
+    <div class="note">
+      <p lang="en">Capital letters do not matter. Typing <code>paciente</code>, <code>Paciente</code> or
+        <code>PACIENTE</code> all find the same person.</p>
+      <p lang="es">Las mayúsculas no importan. Escribir <code>paciente</code>, <code>Paciente</code> o
+        <code>PACIENTE</code> encuentra a la misma persona.</p>
+    </div>
+  </section>
+
+  <section id="start">
+    <h2><span lang="en">Type the start, not the middle</span><span lang="es">Escribe el principio, no el medio</span></h2>
+    <p lang="en">This is the one thing worth remembering. The search matches the <strong>beginning of one
+      field</strong> — so it finds a first name, or a last name, or a nickname. It does not search across
+      two fields at once, and it does not look inside a word.</p>
+    <p lang="es">Esto es lo único que vale la pena recordar. La búsqueda coincide con el <strong>principio de
+      un campo</strong> — encuentra un nombre, o un apellido, o un apodo. No busca en dos campos a la vez,
+      ni dentro de una palabra.</p>
+    <p lang="en">For a resident recorded as <strong>Paciente Ejemplo</strong>:</p>
+    <p lang="es">Para un residente registrado como <strong>Paciente Ejemplo</strong>:</p>
+    <table>
+      <thead>
+        <tr>
+          <th><span lang="en">You type</span><span lang="es">Escribes</span></th>
+          <th><span lang="en">Result</span><span lang="es">Resultado</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Paciente</code></td><td><span lang="en">Found — it is the first name</span><span lang="es">Encontrado — es el nombre</span></td></tr>
+        <tr><td><code>Ejemplo</code></td><td><span lang="en">Found — it is the last name</span><span lang="es">Encontrado — es el apellido</span></td></tr>
+        <tr><td><code>Paciente Ejemplo</code></td><td><span lang="en"><strong>Nothing.</strong> No single field starts with the whole name</span><span lang="es"><strong>Nada.</strong> Ningún campo empieza con el nombre completo</span></td></tr>
+        <tr><td><code>ciente</code></td><td><span lang="en"><strong>Nothing.</strong> It is the middle of a word, not the start</span><span lang="es"><strong>Nada.</strong> Es el medio de una palabra, no el principio</span></td></tr>
+      </tbody>
+    </table>
+    <div class="warn">
+      <p lang="en"><strong>An empty result is not proof the person is new.</strong> It is far more often a
+        full name typed into a box that reads one field at a time. Try the surname on its own, then the
+        first name on its own, then the nickname, before you decide to create anyone.</p>
+      <p lang="es"><strong>Un resultado vacío no prueba que la persona sea nueva.</strong> Casi siempre es un
+        nombre completo escrito en un cuadro que lee un campo a la vez. Prueba el apellido solo, luego el
+        nombre solo, luego el apodo, antes de decidir crear a alguien.</p>
+    </div>
+  </section>
+
+  <section id="id">
+    <h2><span lang="en">Searching by ID</span><span lang="es">Buscar por cédula</span></h2>
+    <p lang="en">If the person has their cédula with them, it is the surest way to find them — names get
+      spelled several ways, an ID does not. You can type just the first few digits.</p>
+    <p lang="es">Si la persona tiene su cédula a mano, es la forma más segura de encontrarla — los nombres se
+      escriben de varias maneras, una cédula no. Puedes escribir solo los primeros dígitos.</p>
+    <div class="figures">
+      <figure>
+        <img src="assets/img/find-02-search-by-id.png"
+             data-alt-en="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza."
+             data-alt-es="El cuadro de búsqueda con 00167 y una sola tarjeta de residente debajo para Paciente Ejemplo, apodo Fulano, en Constanza."
+             alt="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza.">
+        <figcaption><span lang="en">The first five digits of a cédula are usually enough to land on one person.</span><span lang="es">Los primeros cinco dígitos de una cédula suelen bastar para llegar a una sola persona.</span></figcaption>
+      </figure>
+    </div>
+    <div class="note">
+      <p lang="en"><strong>This needs Collect 15.7.2 or later.</strong> In earlier versions the box said
+        "Search by name or ID" but only ever read the two name fields, so a cédula returned nothing at all.
+        If typing an ID finds no one, check your app version before concluding the person is not in
+        Puente.</p>
+      <p lang="es"><strong>Esto requiere Collect 15.7.2 o posterior.</strong> En versiones anteriores el cuadro
+        decía "Buscar por nombre o ID" pero solo leía los dos campos de nombre, así que una cédula no
+        devolvía nada. Si al escribir una cédula no aparece nadie, revisa la versión de la aplicación antes
+        de concluir que la persona no está en Puente.</p>
+    </div>
+  </section>
+
+  <section id="found">
+    <h2><span lang="en">When you find them</span><span lang="es">Cuando lo encuentras</span></h2>
+    <p lang="en">Tap the card to open the person. From there you can start a new form for them — and it
+      attaches to the record they already have, instead of starting a new one.</p>
+    <p lang="es">Toca la tarjeta para abrir a la persona. Desde ahí puedes empezar un formulario nuevo para
+      ella — y se adjunta al registro que ya tiene, en vez de empezar uno nuevo.</p>
+    <div class="figures">
+      <figure>
+        <img src="assets/img/find-03-resident.png"
+             data-alt-en="A resident's page showing their name, demographic details and a View Record History button."
+             data-alt-es="La página de un residente con su nombre, datos demográficos y un botón Ver historial de registros."
+             alt="A resident's page showing their name, demographic details and a View Record History button.">
+        <figcaption><span lang="en">The resident's page. Check the details here against the person in front of you before you add anything.</span><span lang="es">La página del residente. Compara estos datos con la persona que tienes delante antes de agregar algo.</span></figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/find-04-record-history.png"
+             data-alt-en="A Record History screen headed with the resident's name, listing one Identification record dated October 2020."
+             data-alt-es="Una pantalla de Historial de registros encabezada con el nombre del residente, con un registro de Identificación de octubre de 2020."
+             alt="A Record History screen headed with the resident's name, listing one Identification record dated October 2020.">
+        <figcaption><span lang="en"><strong>View Record History</strong> shows everything already collected about them, and when. This is how you confirm you have the right person — and see what has already been asked.</span><span lang="es"><strong>Ver historial de registros</strong> muestra todo lo ya recolectado sobre la persona, y cuándo. Así confirmas que es la persona correcta — y ves qué ya se preguntó.</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="offline">
+    <h2><span lang="en">Searching with no signal</span><span lang="es">Buscar sin señal</span></h2>
+    <p lang="en">Search works without a connection, but it can only look at the residents already saved on
+      the phone. The app fills that store whenever you open Find Records with a connection, so the habit
+      that matters is simple: <strong>open Find Records once while you still have signal</strong>, before
+      you head out.</p>
+    <p lang="es">La búsqueda funciona sin conexión, pero solo puede mirar a los residentes ya guardados en el
+      teléfono. La aplicación llena ese almacén cada vez que abres Buscar Registros con conexión, así que
+      el hábito importante es simple: <strong>abre Buscar Registros una vez mientras aún tienes
+      señal</strong>, antes de salir.</p>
+    <div class="figures">
+      <figure>
+        <img src="assets/img/find-05-storage-limit.png"
+             data-alt-en="A settings screen headed Find Records, showing Current records stored 210 and Record storage limit 2000 with an Edit link."
+             data-alt-es="Una pantalla de ajustes titulada Buscar Registros, con Registros actuales almacenados 210 y Límite de almacenamiento 2000 con un enlace Editar."
+             alt="A settings screen headed Find Records, showing Current records stored 210 and Record storage limit 2000 with an Edit link.">
+        <figcaption><span lang="en">Settings → Find Records. <strong>Current records stored</strong> is how many people you can search offline right now; the limit is the most the phone will keep.</span><span lang="es">Ajustes → Buscar Registros. <strong>Registros actuales almacenados</strong> es a cuántas personas puedes buscar sin conexión ahora mismo; el límite es el máximo que guardará el teléfono.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">If you work in a community with more residents than the limit, raise it before you travel.
+      A bigger store takes longer to download and uses more space on the phone, so raise it to fit the
+      community rather than as high as it will go.</p>
+    <p lang="es">Si trabajas en una comunidad con más residentes que el límite, súbelo antes de viajar. Un
+      almacén más grande tarda más en descargarse y ocupa más espacio en el teléfono, así que súbelo para
+      que quepa la comunidad, no al máximo posible.</p>
+    <div class="note">
+      <p lang="en">Offline, the search also reads the nickname of anyone still waiting in your sync queue,
+        so someone you surveyed an hour ago and have not sent yet still turns up.</p>
+      <p lang="es">Sin conexión, la búsqueda también lee el apodo de quien siga esperando en tu cola de
+        sincronización, así que alguien que encuestaste hace una hora y aún no has enviado también
+        aparece.</p>
+    </div>
+  </section>
+
+  <section id="cost">
+    <h2><span lang="en">What a second record costs</span><span lang="es">Qué cuesta un segundo registro</span></h2>
+    <p lang="en">Nothing breaks when a person gets entered twice. That is exactly why it is worth care —
+      the app will not warn you, and the cost lands somewhere else, later:</p>
+    <p lang="es">Nada se rompe cuando una persona se registra dos veces. Precisamente por eso vale la pena
+      tener cuidado — la aplicación no te avisará, y el costo aparece en otro lugar, después:</p>
+    <ul>
+      <li><span lang="en">The person's history is split. A nurse reading one record cannot see what was collected into the other.</span><span lang="es">El historial de la persona queda dividido. Una enfermera que lee un registro no puede ver lo que se recolectó en el otro.</span></li>
+      <li><span lang="en">Counts go up without anyone being reached. Two records look like two people in every total, including the ones that go to funders.</span><span lang="es">Los conteos suben sin que se haya llegado a nadie más. Dos registros parecen dos personas en todos los totales, incluidos los que van a los financiadores.</span></li>
+      <li><span lang="en">Someone has to untangle it by hand, months later, usually by asking the surveyor what happened.</span><span lang="es">Alguien tiene que desenredarlo a mano, meses después, normalmente preguntándole al encuestador qué pasó.</span></li>
+    </ul>
+    <p lang="en">If you realise afterwards that you created a second record for someone, tell your
+      coordinator with both names and the date. It is far easier to merge two records you know about than
+      to find them later.</p>
+    <p lang="es">Si después te das cuenta de que creaste un segundo registro para alguien, avísale a tu
+      coordinador con ambos nombres y la fecha. Es mucho más fácil unir dos registros que conoces que
+      encontrarlos después.</p>
+  </section>
+
+  <section id="rules">
+    <h2><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <ul>
+      <li><span lang="en"><strong>Search before you create.</strong> Every time, even when you are fairly sure they are new.</span><span lang="es"><strong>Busca antes de crear.</strong> Siempre, incluso cuando estés bastante seguro de que es alguien nuevo.</span></li>
+      <li><span lang="en"><strong>One field at a time.</strong> Surname alone, then first name alone, then nickname. Never the full name.</span><span lang="es"><strong>Un campo a la vez.</strong> Apellido solo, luego nombre solo, luego apodo. Nunca el nombre completo.</span></li>
+      <li><span lang="en"><strong>Ask for the cédula</strong> when a name search comes up empty. It is the one identifier that does not get spelled two ways.</span><span lang="es"><strong>Pide la cédula</strong> cuando la búsqueda por nombre no dé resultados. Es el único identificador que no se escribe de dos maneras.</span></li>
+      <li><span lang="en"><strong>Open Find Records while you still have signal</strong>, so the phone has people to search when you lose it.</span><span lang="es"><strong>Abre Buscar Registros mientras aún tienes señal</strong>, para que el teléfono tenga a quién buscar cuando la pierdas.</span></li>
+      <li><span lang="en"><strong>Check the record history</strong> before adding to someone. It is how you know it is the same person and not a namesake.</span><span lang="es"><strong>Revisa el historial de registros</strong> antes de agregarle algo a alguien. Así sabes que es la misma persona y no un homónimo.</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect is source-available under the Business Source License 1.1. It converts to
+      the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect es de código disponible bajo la Business Source License 1.1. Pasa a la
+      Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Finding someone you already surveyed — Puente',
+    es: 'Encontrar a alguien que ya encuestaste — Puente'
+  };
+  var DESC = {
+    en: 'How to look a resident up in Puente Collect before creating them again: what the search reads, why a full name finds nothing, and how it works with no signal.',
+    es: 'Cómo buscar a un residente en Puente Collect antes de volver a crearlo: qué lee la búsqueda, por qué un nombre completo no encuentra nada y cómo funciona sin señal.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>
