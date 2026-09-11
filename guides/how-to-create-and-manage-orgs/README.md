@@ -54,3 +54,15 @@ Business Source License 1.1 and converts to the Apache License 2.0 on
 5 June 2029.
 
 Questions: info@puente-dr.org
+
+## Known gap: the screenshots are in English
+
+The other four guides now ship a Spanish image set alongside the English one,
+swapped by the language toggle (`assets/img/` and `assets/img/es/`). This guide
+does not yet: its captures come from `e2e/capture-org-docs.mjs`, which was still
+uncommitted work when the others were converted.
+
+The page already carries the swapping code, so it becomes bilingual the moment
+`assets/img/es/` is populated and each `<img>` gains `data-src-en` /
+`data-src-es`. The pattern to copy is `e2e/capture-export-docs.mjs`, which walks
+the same capture twice — once at `/`, once at `/spa`.
