@@ -78,12 +78,22 @@ The two search shots tap a result card once before capturing. That first tap is
 consumed dismissing the keyboard and leaves the list in place, which is the only
 reason the images show results instead of half a keyboard.
 
-### Known gap: the screenshots are in English
+### The screenshots are in both languages
 
-The app was driven in English, so the Spanish page shows English screenshots.
-The same is true of the other guides. Fixing it means running the capture flow a
-second time with the app's language set to Spanish and keeping two image sets —
-worth doing, not done.
+`assets/img/` is English, `assets/img/es/` is Spanish, and the language toggle
+swaps them along with the text. Fixed 2026-09-11; it was a known gap before
+that, and the Spanish page showed an English app.
+
+`.maestro/capture-guide-docs.sh both` in `puente-reactnative-collect` does the
+whole thing: it sets the simulator's language, restarts it (Collect reads the
+locale once at launch, so relaunching the app is not enough), and runs both
+capture flows per language.
+
+The flow selectors match **English or Spanish** — Maestro matches text as a
+regex, so `"Search Individual|Buscar individuo"` covers both. That is
+deliberately not a variable: a flow-file `env:` default *overrides* `-e` on the
+command line in this version of Maestro, which silently kept the English
+selectors through an entire Spanish run before it was found.
 
 ## Publishing
 

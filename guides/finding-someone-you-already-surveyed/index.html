@@ -211,6 +211,8 @@
     <div class="figures">
       <figure>
         <img src="assets/img/find-01-search-by-name.png"
+             data-src-en="assets/img/find-01-search-by-name.png"
+             data-src-es="assets/img/es/find-01-search-by-name.png"
              data-alt-en="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it."
              data-alt-es="La pantalla Buscar Individuo con Ejemplo escrito en el cuadro y dos tarjetas de residentes coincidentes debajo."
              alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it.">
@@ -268,6 +270,8 @@
     <div class="figures">
       <figure>
         <img src="assets/img/find-02-search-by-id.png"
+             data-src-en="assets/img/find-02-search-by-id.png"
+             data-src-es="assets/img/es/find-02-search-by-id.png"
              data-alt-en="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza."
              data-alt-es="El cuadro de búsqueda con 00167 y una sola tarjeta de residente debajo para Paciente Ejemplo, apodo Fulano, en Constanza."
              alt="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza.">
@@ -295,6 +299,8 @@
     <div class="figures">
       <figure>
         <img src="assets/img/find-03-resident.png"
+             data-src-en="assets/img/find-03-resident.png"
+             data-src-es="assets/img/es/find-03-resident.png"
              data-alt-en="A resident's page showing their name, demographic details and a View Record History button."
              data-alt-es="La página de un residente con su nombre, datos demográficos y un botón Ver historial de registros."
              alt="A resident's page showing their name, demographic details and a View Record History button.">
@@ -302,6 +308,8 @@
       </figure>
       <figure>
         <img src="assets/img/find-04-record-history.png"
+             data-src-en="assets/img/find-04-record-history.png"
+             data-src-es="assets/img/es/find-04-record-history.png"
              data-alt-en="A Record History screen headed with the resident's name, listing one Identification record dated October 2020."
              data-alt-es="Una pantalla de Historial de registros encabezada con el nombre del residente, con un registro de Identificación de octubre de 2020."
              alt="A Record History screen headed with the resident's name, listing one Identification record dated October 2020.">
@@ -323,6 +331,8 @@
     <div class="figures">
       <figure>
         <img src="assets/img/find-05-storage-limit.png"
+             data-src-en="assets/img/find-05-storage-limit.png"
+             data-src-es="assets/img/es/find-05-storage-limit.png"
              data-alt-en="A settings screen headed Find Records, showing Current records stored 210 and Record storage limit 2000 with an Edit link."
              data-alt-es="Una pantalla de ajustes titulada Buscar Registros, con Registros actuales almacenados 210 y Límite de almacenamiento 2000 con un enlace Editar."
              alt="A settings screen headed Find Records, showing Current records stored 210 and Record storage limit 2000 with an Edit link.">
@@ -426,6 +436,14 @@
     });
     document.querySelectorAll('[data-alt-en]').forEach(function(img){
       img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific once a Spanish capture set exists:
+    // a reader on the Spanish page is the reader least able to map an English
+    // button onto the one in front of them. Guarded on the attribute, so a
+    // figure with only an English capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
     });
   }
 

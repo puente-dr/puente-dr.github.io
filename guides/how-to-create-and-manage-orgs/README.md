@@ -54,3 +54,20 @@ Business Source License 1.1 and converts to the Apache License 2.0 on
 5 June 2029.
 
 Questions: info@puente-dr.org
+
+## The screenshots are in both languages
+
+`assets/img/` is English, `assets/img/es/` is Spanish, and the language toggle
+swaps them along with the text. All nine images, both languages.
+
+The web screens come from `e2e/capture-org-docs.mjs` in
+`puente-react-nextjs-platform`, which walks the same capture twice — once at
+`/`, once at `/spa` — with every backend answer stubbed. The three phone screens
+come from `.maestro/capture-org-signup-docs.yaml` in `puente-reactnative-collect`,
+run by `.maestro/capture-guide-docs.sh both`.
+
+**The only organization shown in the phone images is "Puente" — our own.** The
+search term is `Pu`, which on staging matches exactly one organization; verified
+against staging (59 organizations) before capturing. Do not broaden it: a
+shorter prefix returns real partner organizations, and these images are
+published. Every organization in the web images is invented.
