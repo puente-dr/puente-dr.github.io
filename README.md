@@ -52,3 +52,7 @@ contains an `index.html`. `.nojekyll` at the repo root serves the files as-is
 instead of running them through Jekyll.
 
 Questions: info@puente-dr.org
+
+The canonical public privacy policy is maintained at
+<https://www.puente-dr.org/privacy-policy/>. Link to that policy rather than
+copying its text into the guides, so legal copy has one published source.
