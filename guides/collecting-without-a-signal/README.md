@@ -24,7 +24,7 @@ If a string changes in the app, change it here too. The keys used are:
 | Knowing you are offline | `forms.offlineBanner`, `bottomTab.offline` |
 | Saving a survey | `forms.successfullySubmitted`, `forms.savedOffline` |
 | Where they wait | `offlineSync.title`, `.queuedTitle`, `.queuedMany`, `.noForms`, `.lastSync` |
-| Sending them | `header.submitOffline`, `header.retry`, `header.justSubmitted` |
+| Sending them | `offlineSync.title`, `header.retry`, `header.justSubmitted` |
 | When none go | `offlineSync.failedOffline`, `.failedOnline`, `.stillOnDevice` |
 | Discarding | `offlineSync.discardTitle`, `.discardWarning`, `.discardConfirm` |
 | Before you log out | `accountSettings.logoutUnsyncedWarning`, `.logoutBlockedOfflineTitle` |
@@ -40,6 +40,11 @@ Section 6, "When some go and some do not", describes behaviour introduced in
 **15.7.1**. Before that release a partially-failed sync reported total failure
 and kept the whole queue, so a retry could create duplicate health records.
 Do not backport this section's wording to describe an older build.
+
+The restart note in section 9 is specifically for **Android 15.7.5, build
+490150709 or later**. It distinguishes restoring a cached session after reopening
+from logging out, and tells users to retain local app storage until syncing is
+complete. It does not claim the Android fix is already in the iOS release.
 
 ## The screenshots
 
