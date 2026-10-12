@@ -13,6 +13,7 @@ There is nothing to build. Edit the HTML and push to `main`.
 | [`guides/building-a-form/`](guides/building-a-form/) | [Building a form that exports cleanly](https://puente-dr.github.io/guides/building-a-form/) |
 | [`guides/finding-someone-you-already-surveyed/`](guides/finding-someone-you-already-surveyed/) | [Finding someone you already surveyed](https://puente-dr.github.io/guides/finding-someone-you-already-surveyed/) |
 | [`guides/getting-your-data-out/`](guides/getting-your-data-out/) | [Getting your data out](https://puente-dr.github.io/guides/getting-your-data-out/) |
+| [`guides/delete-your-account/`](guides/delete-your-account/) | [Request account or data deletion](https://puente-dr.github.io/guides/delete-your-account/) (English and Spanish shown together; no sign-in required) |
 
 The old path `/how-to-create-and-manage-orgs/` redirects to the guide above.
 
