@@ -7,6 +7,15 @@
 <meta name="description" content="Public guides for Puente coordinators and administrators.">
 <link rel="canonical" href="https://puente-dr.github.io/guides/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
 <style>
   :root{
     --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
@@ -18,11 +27,18 @@
   body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
   .wrap{max-width:40rem;margin:0 auto;padding:0 1.25rem}
   header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
-  .brand{display:flex;align-items:center;gap:.6rem;margin-bottom:2rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
   .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
         display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
   header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
   header.top p{margin:0;color:#c9c9c9;font-size:1.075rem}
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
   main{padding:2.5rem 0 4rem}
   ul.guides{margin:0;padding-left:1.3rem}
   ul.guides li{margin:0 0 .75rem}
@@ -30,6 +46,9 @@
   .launch-links{margin:2.5rem 0 0;padding-top:1.25rem;border-top:1px solid var(--line);color:var(--muted)}
   .launch-links a{color:var(--action-deep)}
   a:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
 
   /* The brand is the way back to the guide index. `color:inherit` keeps it white
      on the dark masthead instead of picking up the blue link colour, and the
@@ -42,26 +61,86 @@
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
-    <h1>Guides</h1>
-    <p>Public documentation for coordinators and administrators.</p>
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <h1>
+      <span lang="en">Guides</span>
+      <span lang="es">Guías</span>
+    </h1>
+    <p lang="en">Public documentation for coordinators and administrators.</p>
+    <p lang="es">Documentación pública para coordinadores y administradores.</p>
   </div>
 </header>
 <main>
   <div class="wrap">
     <ul class="guides">
-      <li><a href="how-to-create-and-manage-orgs/">How to create and manage organizations</a></li>
-      <li><a href="collecting-without-a-signal/">Collecting without a signal</a></li>
-      <li><a href="building-a-form/">Building a form that exports cleanly</a></li>
-      <li><a href="finding-someone-you-already-surveyed/">Finding someone you already surveyed</a></li>
-      <li><a href="getting-your-data-out/">Getting your data out</a></li>
-      <li><a href="delete-your-account/">Request account or data deletion / Solicitar la eliminación de cuenta o datos</a></li>
+      <li><a href="how-to-create-and-manage-orgs/"><span lang="en">How to create and manage organizations</span><span lang="es">Cómo crear y administrar organizaciones</span></a></li>
+      <li><a href="collecting-without-a-signal/"><span lang="en">Collecting without a signal</span><span lang="es">Recolectar sin señal</span></a></li>
+      <li><a href="building-a-form/"><span lang="en">Building a form that exports cleanly</span><span lang="es">Crear un formulario que se exporte limpio</span></a></li>
+      <li><a href="finding-someone-you-already-surveyed/"><span lang="en">Finding someone you already surveyed</span><span lang="es">Encontrar a alguien que ya encuestaste</span></a></li>
+      <li><a href="getting-your-data-out/"><span lang="en">Getting your data out</span><span lang="es">Sacar tus datos</span></a></li>
+      <li><a href="delete-your-account/"><span lang="en">Request account or data deletion</span><span lang="es">Solicitar la eliminación de tu cuenta o tus datos</span></a></li>
     </ul>
     <p class="launch-links">
-      <a href="https://www.puente-dr.org/privacy-policy/">Privacy Policy</a>
-      · <a href="mailto:info@puente-dr.org">Support</a>
+      <a href="https://www.puente-dr.org/privacy-policy/"><span lang="en">Privacy Policy</span><span lang="es">Política de privacidad</span></a>
+      · <a href="mailto:info@puente-dr.org"><span lang="en">Support</span><span lang="es">Soporte</span></a>
     </p>
   </div>
 </main>
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Puente guides',
+    es: 'Guías de Puente'
+  };
+  var DESC = {
+    en: 'Public guides for Puente coordinators and administrators.',
+    es: 'Guías públicas para coordinadores y administradores de Puente.'
+  };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
 </body>
 </html>
