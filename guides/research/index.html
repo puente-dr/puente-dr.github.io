@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research with Puente — Puente</title>
+<meta name="description" content="How to run a clinic whose data feeds a research study: build the form, run the clinic, and share the data without sharing who the patients are.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/research/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+  /* ── research guides ── */
+  .learn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin:0 0 1.5rem}
+  .learn-title{font-weight:600;margin:0 0 .4rem}
+  .learn ul{margin:0;padding-left:1.2rem}
+  .learn li{margin-bottom:.25rem}
+  figcaption .kind{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                   color:var(--action-deep);background:#e8f0ff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem}
+  ol.journey{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.75rem}
+  ol.journey li{display:grid;grid-template-columns:2.25rem 1fr;gap:.9rem;align-items:start;background:var(--surface);
+                border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+  ol.journey li p{margin:.2rem 0 0;font-size:.95rem}
+  .step-n{width:2.25rem;height:2.25rem;border-radius:50%;background:var(--ink);color:var(--mark);display:grid;place-items:center;font-weight:700}
+  details.check{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.7rem 1rem;margin:.5rem 0}
+  details.check summary{cursor:pointer;font-weight:600}
+  details.check[open] summary{margin-bottom:.5rem}
+  details.check p{margin:0}
+</style></head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <p class="meta" style="margin:0 0 1rem"><a href="/guides/research/" style="color:#c9c9c9"><span lang="en">Research guides</span><span lang="es">Guías de investigación</span></a></p>
+    <h1>
+      <span lang="en">Research with Puente</span>
+      <span lang="es">Investigación con Puente</span>
+    </h1>
+    <p class="lede" lang="en">For coordinators running a clinic whose data will be used in a research study. Start here, then read the three guides in order.</p>
+    <p class="lede" lang="es">Para coordinadores que organizan una clínica cuyos datos se usarán en un estudio de investigación. Empieza aquí y luego lee las tres guías en orden.</p>
+    <p class="meta" lang="en">Last reviewed 23 October 2026 · Collect 15.7.5 and Manage</p>
+    <p class="meta" lang="es">Última revisión: 23 de octubre de 2026 · Collect 15.7.5 y Manage</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#journey"><span lang="en">The whole journey</span><span lang="es">El recorrido completo</span></a></li>
+      <li><a href="#rule"><span lang="en">The one rule</span><span lang="es">La única regla</span></a></li>
+      <li><a href="#words"><span lang="en">Words used in these guides</span><span lang="es">Palabras que usan estas guías</span></a></li>
+      <li><a href="#before"><span lang="en">Before any study starts</span><span lang="es">Antes de que empiece cualquier estudio</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <p lang="en">Sometimes the people who run a clinic and the people who study it are different teams. A clinic gives glasses; a university wants to know how much those glasses helped. Puente can serve both, but only if one thing is true: <strong>the researchers learn what happened to patients, without learning who the patients are.</strong></p>
+    <p lang="es">A veces quienes hacen una clínica y quienes la estudian son equipos distintos. Una clínica entrega lentes; una universidad quiere saber cuánto ayudaron esos lentes. Puente puede servir a los dos, pero solo si se cumple una cosa: <strong>los investigadores saben qué les pasó a los pacientes, sin saber quiénes son.</strong></p>
+    <p lang="en">These guides show how to do that with the tools you already use: Collect on the phones, and Manage on a computer.</p>
+    <p lang="es">Estas guías muestran cómo hacerlo con las herramientas que ya usas: Collect en los teléfonos y Manage en una computadora.</p>
+  </section>
+  <section id="journey">
+    <h2><span class="num">2</span><span lang="en">The whole journey</span><span lang="es">El recorrido completo</span></h2>
+    <p lang="en">Every research clinic follows the same five steps. Each guide covers one part of it.</p>
+    <p lang="es">Toda clínica de investigación sigue los mismos cinco pasos. Cada guía cubre una parte.</p>
+    <ol class="journey">
+      <li><span class="step-n">1</span><div><strong><span lang="en">Agree</span><span lang="es">Acordar</span></strong><p lang="en">The research team gets ethics approval and tells you which columns they need.</p><p lang="es">El equipo de investigación obtiene la aprobación ética y te dice qué columnas necesita.</p></div></li>
+      <li><span class="step-n">2</span><div><strong><span lang="en">Build</span><span lang="es">Crear</span></strong><p lang="en">You build the form in Manage and test it. <a href="/guides/research/designing-a-form-for-research/">Designing a form for research</a></p><p lang="es">Creas el formulario en Manage y lo pruebas. <a href="/guides/research/designing-a-form-for-research/">Diseñar un formulario para investigación</a></p></div></li>
+      <li><span class="step-n">3</span><div><strong><span lang="en">Collect</span><span lang="es">Recoger</span></strong><p lang="en">Surveyors fill it in on phones at the clinic, with or without signal. <a href="/guides/research/running-a-clinic-day/">Running a clinic day</a></p><p lang="es">Los encuestadores lo llenan en los teléfonos en la clínica, con o sin señal. <a href="/guides/research/running-a-clinic-day/">Un día de clínica</a></p></div></li>
+      <li><span class="step-n">4</span><div><strong><span lang="en">Sync</span><span lang="es">Sincronizar</span></strong><p lang="en">Each evening, every phone sends its forms to Puente.</p><p lang="es">Cada noche, cada teléfono envía sus formularios a Puente.</p></div></li>
+      <li><span class="step-n">5</span><div><strong><span lang="en">Share</span><span lang="es">Compartir</span></strong><p lang="en">You download the research file and send it. <a href="/guides/research/sharing-data-with-researchers/">Sharing data with researchers</a></p><p lang="es">Descargas el archivo de investigación y lo envías. <a href="/guides/research/sharing-data-with-researchers/">Compartir datos con investigadores</a></p></div></li>
+    </ol>
+  </section>
+  <section id="rule">
+    <h2><span class="num">3</span><span lang="en">The one rule</span><span lang="es">La única regla</span></h2>
+    <div class="keystone">
+      <p lang="en">Only a file made with <strong>Export research file</strong> leaves Puente. A file made with <strong>Export</strong> or <strong>Export full records</strong> contains names, ID numbers, phone numbers, birth dates and locations. It stays inside Puente.</p>
+      <p lang="es">Solo un archivo hecho con <strong>Exportar archivo de investigación</strong> sale de Puente. Un archivo hecho con <strong>Exportar</strong> o <strong>Exportar registros completos</strong> contiene nombres, números de cédula, teléfonos, fechas de nacimiento y ubicaciones. Se queda dentro de Puente.</p>
+    </div>
+    <p lang="en">Everything else in these guides exists to make that rule easy to follow on a busy day.</p>
+    <p lang="es">Todo lo demás en estas guías existe para que esa regla sea fácil de cumplir en un día con mucho trabajo.</p>
+  </section>
+  <section id="words">
+    <h2><span class="num">4</span><span lang="en">Words used in these guides</span><span lang="es">Palabras que usan estas guías</span></h2>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Word</span><span lang="es">Palabra</span></th><th><span lang="en">What it means here</span><span lang="es">Qué significa aquí</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en"><strong>Identified</strong></span><span lang="es"><strong>Identificado</strong></span></td><td><span lang="en">Contains something that points to a real person: a name, a cédula, a phone number, a birth date, a home location.</span><span lang="es">Contiene algo que señala a una persona real: un nombre, una cédula, un teléfono, una fecha de nacimiento, el lugar donde vive.</span></td></tr>
+          <tr><td><span lang="en"><strong>De-identified</strong></span><span lang="es"><strong>Sin datos personales</strong></span></td><td><span lang="en">The same information with those things removed, so the rows describe visits, not people anyone could name.</span><span lang="es">La misma información sin esos datos, así que las filas describen visitas, no personas que alguien pueda nombrar.</span></td></tr>
+          <tr><td><span lang="en"><strong>Study ID</strong></span><span lang="es"><strong>ID de estudio</strong></span></td><td><span lang="en">A code that stands in for a patient, like <code>P-3fa9c01b2e</code>. Puente can turn it back into a person; the researchers cannot.</span><span lang="es">Un código que reemplaza al paciente, como <code>P-3fa9c01b2e</code>. Puente puede saber de quién es; los investigadores no.</span></td></tr>
+          <tr><td><span lang="en"><strong>Consent</strong></span><span lang="es"><strong>Consentimiento</strong></span></td><td><span lang="en">The patient's yes to their data being used for the study. A no means their row is not shared.</span><span lang="es">El sí del paciente a que sus datos se usen en el estudio. Un no significa que su fila no se comparte.</span></td></tr>
+          <tr><td><span lang="en"><strong>Sync</strong></span><span lang="es"><strong>Sincronizar</strong></span></td><td><span lang="en">A phone sending the forms it saved to Puente. Until then they exist only on that phone.</span><span lang="es">Un teléfono enviando a Puente los formularios que guardó. Hasta entonces solo existen en ese teléfono.</span></td></tr>
+          <tr><td><span lang="en"><strong>Ethics approval</strong></span><span lang="es"><strong>Aprobación ética</strong></span></td><td><span lang="en">Permission from the researchers' institution to run the study, with rules about consent and data.</span><span lang="es">El permiso de la institución de los investigadores para hacer el estudio, con reglas sobre consentimiento y datos.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section id="before">
+    <h2><span class="num">5</span><span lang="en">Before any study starts</span><span lang="es">Antes de que empiece cualquier estudio</span></h2>
+    <p lang="en">Have these three things in writing from the research team before the first patient is seen.</p>
+    <p lang="es">Ten estas tres cosas por escrito del equipo de investigación antes de atender al primer paciente.</p>
+    <ol class="steps">
+      <li><span lang="en"><strong>Ethics approval</strong> from their institution, and the exact consent wording it approved.</span><span lang="es"><strong>La aprobación ética</strong> de su institución, y el texto exacto de consentimiento que aprobó.</span></li>
+      <li><span lang="en"><strong>A data-sharing agreement</strong> that says what they receive, who receives it, how long they keep it, and that they will not try to find out who anyone is.</span><span lang="es"><strong>Un acuerdo para compartir datos</strong> que diga qué reciben, quién lo recibe, cuánto tiempo lo guardan, y que no intentarán averiguar quién es nadie.</span></li>
+      <li><span lang="en"><strong>The list of columns they need</strong>, agreed before you build the form.</span><span lang="es"><strong>La lista de columnas que necesitan</strong>, acordada antes de crear el formulario.</span></li>
+    </ol>
+    <p lang="en">Questions about any of this: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a>.</p>
+    <p lang="es">Preguntas sobre cualquiera de estos puntos: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect and Puente Manage are source-available under the Business Source License 1.1.
+      They convert to the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect y Puente Manage son de código disponible bajo la Business Source License 1.1.
+      Pasan a la Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Research with Puente — Puente',
+    es: 'Investigación con Puente — Puente'
+  };
+  var DESC = {
+    en: 'How to run a clinic whose data feeds a research study: build the form, run the clinic, and share the data without sharing who the patients are.',
+    es: 'Cómo hacer una clínica cuyos datos alimentan un estudio: crear el formulario, hacer la clínica y compartir los datos sin compartir quiénes son los pacientes.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific: the app was driven twice, once per
+    // language. A reader on the Spanish page is the reader least able to map an
+    // English button onto the one in front of them. Guarded on the attribute so
+    // a figure with only one capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>

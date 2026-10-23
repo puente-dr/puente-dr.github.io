@@ -88,14 +88,15 @@ def check(path):
 
 
 def main():
-    guides = sorted(glob.glob('guides/*/index.html'))
+    # Recursive: research guides live a level down, under guides/research/.
+    guides = sorted(glob.glob('guides/*/**/index.html', recursive=True))
     if not guides:
         print('no guides found — run this from the repository root', file=sys.stderr)
         return 2
 
     failed = 0
     for path in guides:
-        name = os.path.basename(os.path.dirname(path))
+        name = os.path.relpath(os.path.dirname(path), 'guides')
         problems = check(path)
         if problems:
             failed += 1
