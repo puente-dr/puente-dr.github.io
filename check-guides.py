@@ -6,7 +6,7 @@ Run it before pushing:
     python3 check-guides.py
 
 There is no build step here — edit index.html and push — so nothing else stands
-between a typo and a live page. These are the three faults that do not announce
+between a typo and a live page. These are the four faults that do not announce
 themselves:
 
 1. A MISSING TRANSLATION IS INVISIBLE, NOT OBVIOUS.
@@ -22,6 +22,11 @@ themselves:
 3. AN UNCLOSED TAG SWALLOWS THE REST OF THE PAGE.
    These files are hand-edited HTML, and a dropped `</section>` can hide
    everything after it in some browsers.
+
+4. HIDE-CSS WITHOUT A TOGGLE TRAPS A SPANISH READER.
+   `html[lang="es"] [lang="en"]` hides English once `?lang=es` or localStorage
+   has set the page language. Without the masthead control there is no way back.
+   The deletion guide is bilingual without hiding, so it is exempt.
 """
 import glob
 import os
@@ -78,6 +83,13 @@ def check(path):
         if not os.path.exists(os.path.join(base, ref)):
             problems.append(f'missing image: {ref}')
 
+    # Pages that hide the other language must have the masthead toggle.
+    # Without it, a reader who arrived via ?lang=es or localStorage has
+    # no control to switch back. The deletion guide is bilingual *without*
+    # hiding, so it is exempt.
+    if 'html[lang="en"] [lang="es"]' in src and 'data-set-lang' not in src:
+        problems.append('language-hiding CSS is present but there is no language toggle')
+
     # 3. the markup closes
     parser = Balance()
     parser.feed(src)
@@ -88,14 +100,18 @@ def check(path):
 
 
 def main():
-    guides = sorted(glob.glob('guides/*/index.html'))
+    # The hub at guides/index.html is bilingual too — same silent-gap
+    # failure as the individual guides if a Spanish node is missing.
+    guides = ['guides/index.html'] + sorted(glob.glob('guides/*/index.html'))
+    guides = [path for path in guides if os.path.exists(path)]
     if not guides:
         print('no guides found — run this from the repository root', file=sys.stderr)
         return 2
 
     failed = 0
     for path in guides:
-        name = os.path.basename(os.path.dirname(path))
+        name = ('index' if path == 'guides/index.html'
+                else os.path.basename(os.path.dirname(path)))
         problems = check(path)
         if problems:
             failed += 1

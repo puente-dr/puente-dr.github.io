@@ -7,7 +7,7 @@ There is nothing to build. Edit the HTML and push to `main`.
 
 | Path | Guide |
 |---|---|
-| [`guides/`](guides/) | [Guide index](https://puente-dr.github.io/guides/) |
+| [`guides/`](guides/) | [Guide index](https://puente-dr.github.io/guides/) (English / Español toggle, same as the product guides) |
 | [`guides/how-to-create-and-manage-orgs/`](guides/how-to-create-and-manage-orgs/) | [How to create and manage organizations](https://puente-dr.github.io/guides/how-to-create-and-manage-orgs/) |
 | [`guides/collecting-without-a-signal/`](guides/collecting-without-a-signal/) | [Collecting without a signal](https://puente-dr.github.io/guides/collecting-without-a-signal/) |
 | [`guides/building-a-form/`](guides/building-a-form/) | [Building a form that exports cleanly](https://puente-dr.github.io/guides/building-a-form/) |
@@ -19,8 +19,9 @@ The old path `/how-to-create-and-manage-orgs/` redirects to the guide above.
 
 ## Every guide is bilingual
 
-English and Spanish live in the same `index.html`, as sibling nodes marked
-`lang="en"` / `lang="es"`, and the toggle in the masthead switches between them.
+That includes the hub at `guides/index.html`. English and Spanish live in the
+same `index.html`, as sibling nodes marked `lang="en"` / `lang="es"`, and the
+toggle in the masthead switches between them.
 The screenshots switch too: `assets/img/` is English and `assets/img/es/` is
 Spanish, paired on each `<img>` by `data-src-en` / `data-src-es`.
 
@@ -34,9 +35,10 @@ python3 check-guides.py
 ```
 
 It verifies that every translatable node exists in both languages, that every
-image referenced is actually present, and that the hand-edited HTML closes. All
-three failures are invisible in a browser until someone hits them — the first
-two only in Spanish.
+image referenced is actually present, that the hand-edited HTML closes, and that
+a page which hides the other language also has the masthead toggle. All four
+failures are invisible in a browser until someone hits them — the first two
+only in Spanish.
 
 Every guide is bilingual in its pictures as well as its text. Each guide's own
 README names the capture script that produces its images.
