@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sharing data with researchers — Puente</title>
+<meta name="description" content="What the Export research file button gives you, what it leaves out, and what to check before a file leaves Puente.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/research/sharing-data-with-researchers/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+  /* ── research guides ── */
+  .learn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin:0 0 1.5rem}
+  .learn-title{font-weight:600;margin:0 0 .4rem}
+  .learn ul{margin:0;padding-left:1.2rem}
+  .learn li{margin-bottom:.25rem}
+  figcaption .kind{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                   color:var(--action-deep);background:#e8f0ff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem}
+  ol.journey{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.75rem}
+  ol.journey li{display:grid;grid-template-columns:2.25rem 1fr;gap:.9rem;align-items:start;background:var(--surface);
+                border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+  ol.journey li p{margin:.2rem 0 0;font-size:.95rem}
+  .step-n{width:2.25rem;height:2.25rem;border-radius:50%;background:var(--ink);color:var(--mark);display:grid;place-items:center;font-weight:700}
+  details.check{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.7rem 1rem;margin:.5rem 0}
+  details.check summary{cursor:pointer;font-weight:600}
+  details.check[open] summary{margin-bottom:.5rem}
+  details.check p{margin:0}
+</style></head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <p class="meta" style="margin:0 0 1rem"><a href="/guides/research/" style="color:#c9c9c9"><span lang="en">Research guides</span><span lang="es">Guías de investigación</span></a></p>
+    <h1>
+      <span lang="en">Sharing data with researchers</span>
+      <span lang="es">Compartir datos con investigadores</span>
+    </h1>
+    <p class="lede" lang="en">The research file is the copy of a clinic that leaves Puente. This guide explains what is in it, what is kept out, and what to do before you send it.</p>
+    <p class="lede" lang="es">El archivo de investigación es la copia de una clínica que sale de Puente. Esta guía explica qué contiene, qué se deja fuera, y qué hacer antes de enviarlo.</p>
+    <p class="meta" lang="en">Last reviewed 23 October 2026 · Manage, and the export service behind it</p>
+    <p class="meta" lang="es">Última revisión: 23 de octubre de 2026 · Manage y el servicio de exportación detrás</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#where"><span lang="en">Where the buttons are</span><span lang="es">Dónde están los botones</span></a></li>
+      <li><a href="#contents"><span lang="en">What is in the file</span><span lang="es">Qué hay en el archivo</span></a></li>
+      <li><a href="#ages"><span lang="en">Two kinds of age</span><span lang="es">Dos tipos de edad</span></a></li>
+      <li><a href="#not"><span lang="en">What is kept out</span><span lang="es">Qué se deja fuera</span></a></li>
+      <li><a href="#study-id"><span lang="en">Study IDs, and looking someone up</span><span lang="es">IDs de estudio, y buscar a alguien</span></a></li>
+      <li><a href="#before"><span lang="en">Before you send it</span><span lang="es">Antes de enviarlo</span></a></li>
+      <li><a href="#wrong"><span lang="en">If something goes wrong</span><span lang="es">Si algo sale mal</span></a></li>
+      <li><a href="#rules"><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <div class="learn">
+      <p class="learn-title"><span lang="en">By the end of this guide you can</span><span lang="es">Al terminar esta guía podrás</span></p>
+      <ul>
+        <li><span lang="en">tell the research file and the full-records file apart at a glance;</span><span lang="es">distinguir de un vistazo el archivo de investigación y el de registros completos;</span></li>
+        <li><span lang="en">explain to anyone what the research file contains and what it leaves out;</span><span lang="es">explicar a cualquiera qué contiene el archivo de investigación y qué deja fuera;</span></li>
+        <li><span lang="en">prepare the file for sending, including removing patients who said no;</span><span lang="es">preparar el archivo para enviarlo, incluido quitar a los pacientes que dijeron que no;</span></li>
+        <li><span lang="en">answer a researcher's question about one row without revealing who it is.</span><span lang="es">responder la pregunta de un investigador sobre una fila sin revelar quién es.</span></li>
+      </ul>
+    </div>
+    <p lang="en">A form that has the research file turned on has <strong>two</strong> download buttons. They hold the same visits but describe them very differently. Here is the same invented visit in each:</p>
+    <p lang="es">Un formulario con el archivo de investigación activado tiene <strong>dos</strong> botones de descarga. Contienen las mismas visitas pero las describen de forma muy distinta. Esta es la misma visita inventada en cada uno:</p>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th></th><th><span lang="en">Full records</span><span lang="es">Registros completos</span></th><th><span lang="en">Research file</span><span lang="es">Archivo de investigación</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en"><strong>Who</strong></span><span lang="es"><strong>Quién</strong></span></td><td>Paciente Ejemplo, 001-0000000-1</td><td><code>P-3fa9c01b2e</code></td></tr>
+          <tr><td><span lang="en"><strong>Born / age</strong></span><span lang="es"><strong>Nacimiento / edad</strong></span></td><td>12/26/1983</td><td>42</td></tr>
+          <tr><td><span lang="en"><strong>Phone</strong></span><span lang="es"><strong>Teléfono</strong></span></td><td>809-000-0000</td><td><span lang="en">—</span><span lang="es">—</span></td></tr>
+          <tr><td><span lang="en"><strong>Where</strong></span><span lang="es"><strong>Dónde</strong></span></td><td>18.92, −70.61</td><td>Comunidad Ejemplo, Constanza</td></tr>
+          <tr><td><span lang="en"><strong>Vision before / after</strong></span><span lang="es"><strong>Visión antes / después</strong></span></td><td>20/200 → 20/40</td><td>20/200 → 20/40</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="keystone">
+      <p lang="en">The research file keeps <strong>what happened</strong> and removes <strong>who it happened to</strong>. That is the whole difference, and the reason only the research file may leave Puente.</p>
+      <p lang="es">El archivo de investigación conserva <strong>qué pasó</strong> y quita <strong>a quién le pasó</strong>. Esa es toda la diferencia, y la razón por la que solo el archivo de investigación puede salir de Puente.</p>
+    </div>
+  </section>
+  <section id="where">
+    <h2><span class="num">2</span><span lang="en">Where the buttons are</span><span lang="es">Dónde están los botones</span></h2>
+    <p lang="en">In Manage, open <strong>Form Manager</strong>. A form with the research file turned on is marked <strong>Research export on</strong> under its name. Instead of one export button, it has two:</p>
+    <p lang="es">En Manage, abre el <strong>Gestor de formularios</strong>. Un formulario con el archivo de investigación activado lleva la marca <strong>Investigación activada</strong> debajo de su nombre. En vez de un botón de exportar, tiene dos:</p>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Button</span><span lang="es">Botón</span></th><th><span lang="en">Gives you</span><span lang="es">Te da</span></th><th><span lang="en">Leaves Puente?</span><span lang="es">¿Sale de Puente?</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en"><strong>Export research file</strong> (blue)</span><span lang="es"><strong>Exportar archivo de investigación</strong> (azul)</span></td><td><span lang="en">the de-identified file</span><span lang="es">el archivo sin datos personales</span></td><td class="verdict yes"><span lang="en">Yes, after the checks in §7</span><span lang="es">Sí, después de las revisiones del §7</span></td></tr>
+          <tr><td><span lang="en"><strong>Export full records</strong> (white)</span><span lang="es"><strong>Exportar registros completos</strong> (blanco)</span></td><td><span lang="en">every answer, with names and ID numbers</span><span lang="es">cada respuesta, con nombres y cédulas</span></td><td class="verdict no"><span lang="en">Never</span><span lang="es">Nunca</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figure class="wide">
+      <img src="assets/img/research-00-form-manager.png"
+           data-src-en="assets/img/research-00-form-manager.png"
+           data-src-es="assets/img/es/research-00-form-manager.png"
+           data-alt-en="Form Manager. Under Custom forms, the Vision exam form is marked Research export on and has Export research file and Export full records buttons; the Clinic sign-in form has a single Export button."
+           data-alt-es="Gestor de formularios. En Formularios personalizados, el formulario Vision exam lleva la marca Investigación activada y tiene los botones Exportar archivo de investigación y Exportar registros completos; el formulario de registro tiene un solo botón Exportar."
+           alt="Form Manager. Under Custom forms, the Vision exam form is marked Research export on and has Export research file and Export full records buttons; the Clinic sign-in form has a single Export button.">
+      <figcaption><span lang="en">Every other form keeps its single Export button. Only forms with the research file turned on get two.</span><span lang="es">Los demás formularios conservan su único botón Exportar. Solo los formularios con el archivo de investigación activado tienen dos.</span></figcaption>
+    </figure>
+    <p lang="en">Expand the row with the arrow to see what each file contains, in plain words, right on the screen:</p>
+    <p lang="es">Expande la fila con la flecha para ver qué contiene cada archivo, en palabras simples, en la misma pantalla:</p>
+    <figure class="wide">
+      <img src="assets/img/research-gif-02-export.gif" loading="lazy"
+           data-src-en="assets/img/research-gif-02-export.gif"
+           data-src-es="assets/img/es/research-gif-02-export.gif"
+           data-alt-en="Expanding the vision exam row to read what each file contains, pressing Refresh to see 37 forms collected, and pressing Export research file."
+           data-alt-es="Expandiendo la fila del examen de la vista para leer qué contiene cada archivo, pulsando Actualizar para ver 37 formularios recolectados, y pulsando Exportar archivo de investigación."
+           alt="Expanding the vision exam row to read what each file contains, pressing Refresh to see 37 forms collected, and pressing Export research file.">
+      <figcaption><span class="kind" lang="en">Animation</span><span class="kind" lang="es">Animación</span> <span lang="en">Expand, read, check the count, download. The file lands in your Downloads folder.</span><span lang="es">Expandir, leer, revisar el total, descargar. El archivo llega a tu carpeta de Descargas.</span></figcaption>
+    </figure>
+    <p lang="en">The file is named after the form, the word <code>research</code>, and the date, for example <code>Vision exam - research - 2026-11-10.csv</code>, so it can't be confused with the full-records file.</p>
+    <p lang="es">El archivo lleva el nombre del formulario, la palabra <code>research</code> y la fecha, por ejemplo <code>Vision exam - research - 2026-11-10.csv</code>, para que no se confunda con el de registros completos.</p>
+  </section>
+  <section id="contents">
+    <h2><span class="num">3</span><span lang="en">What is in the file</span><span lang="es">Qué hay en el archivo</span></h2>
+    <p lang="en">One row for each time the form was filled in. These columns come first, then one column for each question in the form:</p>
+    <p lang="es">Una fila por cada vez que se llenó el formulario. Primero vienen estas columnas, y luego una por cada pregunta del formulario:</p>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Column</span><span lang="es">Columna</span></th><th><span lang="en">Means</span><span lang="es">Significa</span></th></tr></thead>
+        <tbody>
+          <tr><td><code>study_id</code></td><td><span lang="en">A code for the patient. The same patient has the same code in every row and every download.</span><span lang="es">Un código para el paciente. El mismo paciente tiene el mismo código en cada fila y cada descarga.</span></td></tr>
+          <tr><td><code>submission_id</code></td><td><span lang="en">A code for this one visit.</span><span lang="es">Un código para esta visita.</span></td></tr>
+          <tr><td><code>visit_date</code></td><td><span lang="en">The day the form reached Puente.</span><span lang="es">El día en que el formulario llegó a Puente.</span></td></tr>
+          <tr><td><code>age_at_visit</code></td><td><span lang="en">Age in whole years on the visit date, worked out from the birth date.</span><span lang="es">Edad en años cumplidos en la fecha de la visita, calculada con la fecha de nacimiento.</span></td></tr>
+          <tr><td><code>age_as_reported</code></td><td><span lang="en">The age a surveyor typed when the birth date was unknown.</span><span lang="es">La edad que escribió un encuestador cuando no se sabía la fecha de nacimiento.</span></td></tr>
+          <tr><td><code>age_reported_date</code></td><td><span lang="en">When that typed age was recorded.</span><span lang="es">Cuándo se registró esa edad escrita.</span></td></tr>
+          <tr><td><code>sex</code>, <code>communityname</code>, <code>city</code>, <code>province</code></td><td><span lang="en">From the patient's record.</span><span lang="es">Del registro del paciente.</span></td></tr>
+          <tr><td><code>surveyingOrganization</code></td><td><span lang="en">Which clinic team collected it.</span><span lang="es">Qué equipo de la clínica lo recogió.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">As in every custom-form export, accents are removed from answers and headings: <code>El Río</code> becomes <code>El Rio</code>.</p>
+    <p lang="es">Como en toda exportación de formularios propios, se quitan los acentos de respuestas y títulos: <code>El Río</code> se vuelve <code>El Rio</code>.</p>
+  </section>
+  <section id="ages">
+    <h2><span class="num">4</span><span lang="en">Two kinds of age</span><span lang="es">Dos tipos de edad</span></h2>
+    <p lang="en">Some patients know their birth date. Some don't, and the surveyor types an age instead. The file keeps these apart, so nobody has to guess which is which:</p>
+    <p lang="es">Algunos pacientes saben su fecha de nacimiento. Otros no, y el encuestador escribe una edad. El archivo las mantiene separadas, para que nadie tenga que adivinar cuál es cuál:</p>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Patient</span><span lang="es">Paciente</span></th><th><code>age_at_visit</code></th><th><code>age_as_reported</code></th><th><code>age_reported_date</code></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en">born 26 Dec 1983, seen 10 Nov 2026</span><span lang="es">nació el 26 dic 1983, atendido el 10 nov 2026</span></td><td>42</td><td><span lang="en">blank</span><span lang="es">vacío</span></td><td>2026-11-10</td></tr>
+          <tr><td><span lang="en">birth date unknown, said “about 67”</span><span lang="es">fecha de nacimiento desconocida, dijo «unos 67»</span></td><td><span lang="en">blank</span><span lang="es">vacío</span></td><td>67</td><td>2026-11-10</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">The first patient is 42, not 43: their birthday hadn't come yet that year. The age is worked out exactly, from the date of the visit.</p>
+    <p lang="es">El primer paciente tiene 42, no 43: su cumpleaños todavía no había llegado ese año. La edad se calcula exactamente, con la fecha de la visita.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>Usually one of the two ages is filled. If neither is, the age was never recorded, and it is left blank rather than guessed. A wrong age in a study is worse than a missing one, because nothing marks it as wrong.</p>
+      <p lang="es"><strong></strong>Normalmente una de las dos edades está llena. Si ninguna lo está, la edad nunca se registró, y queda en blanco en vez de adivinarse. Una edad equivocada en un estudio es peor que una que falta, porque nada la marca como equivocada.</p>
+    </div>
+  </section>
+  <section id="not">
+    <h2><span class="num">5</span><span lang="en">What is kept out</span><span lang="es">Qué se deja fuera</span></h2>
+    <ul class="plain">
+      <li><span lang="en">Names, nicknames, cédula numbers, phone numbers and insurance details.</span><span lang="es">Nombres, apodos, números de cédula, teléfonos y datos de seguro.</span></li>
+      <li><span lang="en">Birth dates (only the age is given).</span><span lang="es">Fechas de nacimiento (solo se da la edad).</span></li>
+      <li><span lang="en">GPS coordinates, the household, the photo, and any location question in the form.</span><span lang="es">Coordenadas GPS, el hogar, la foto, y cualquier pregunta de ubicación del formulario.</span></li>
+      <li><span lang="en">Who collected it: the surveyor's account is left out.</span><span lang="es">Quién lo recogió: la cuenta del encuestador se deja fuera.</span></li>
+      <li><span lang="en">Puente's own record numbers.</span><span lang="es">Los números de registro propios de Puente.</span></li>
+    </ul>
+    <p lang="en">The file is built from a short list of <strong>allowed</strong> columns, not by deleting the dangerous ones. That way, if someday a new kind of personal detail is added to patient records, it stays out of the research file until someone decides it belongs.</p>
+    <p lang="es">El archivo se construye con una lista corta de columnas <strong>permitidas</strong>, no borrando las peligrosas. Así, si algún día se agrega un nuevo dato personal a los registros, se queda fuera del archivo de investigación hasta que alguien decida que debe estar.</p>
+  </section>
+  <section id="study-id">
+    <h2><span class="num">6</span><span lang="en">Study IDs, and looking someone up</span><span lang="es">IDs de estudio, y buscar a alguien</span></h2>
+    <p lang="en">A study ID like <code>P-3fa9c01b2e</code> is made from the patient's record with a secret key that only Puente holds. Two things follow:</p>
+    <p lang="es">Un ID de estudio como <code>P-3fa9c01b2e</code> se crea a partir del registro del paciente con una clave secreta que solo tiene Puente. De ahí salen dos cosas:</p>
+    <ul class="plain">
+      <li><span lang="en"><strong>It is stable.</strong> A patient seen in Constanza and again in Sosúa has the same code both times, so the researchers can follow them.</span><span lang="es"><strong>Es estable.</strong> Un paciente atendido en Constanza y otra vez en Sosúa tiene el mismo código las dos veces, así que los investigadores pueden seguirlo.</span></li>
+      <li><span lang="en"><strong>Only Puente can reverse it.</strong> If a researcher asks “what happened with <code>P-3fa9c01b2e</code>?”, Puente can find that patient. The researcher cannot.</span><span lang="es"><strong>Solo Puente puede revertirlo.</strong> Si un investigador pregunta «¿qué pasó con <code>P-3fa9c01b2e</code>?», Puente puede encontrar a ese paciente. El investigador no.</span></li>
+    </ul>
+    <p lang="en">To look someone up, send the code to <a href="mailto:info@puente-dr.org">info@puente-dr.org</a>. Never send the answer back with a name in it.</p>
+    <p lang="es">Para buscar a alguien, envía el código a <a href="mailto:info@puente-dr.org">info@puente-dr.org</a>. Nunca devuelvas la respuesta con un nombre.</p>
+  </section>
+  <section id="before">
+    <h2><span class="num">7</span><span lang="en">Before you send it</span><span lang="es">Antes de enviarlo</span></h2>
+    <ol class="steps">
+      <li><span lang="en"><strong>Check the paperwork.</strong> You have the ethics approval and the data-sharing agreement in writing.</span><span lang="es"><strong>Revisa los papeles.</strong> Tienes por escrito la aprobación ética y el acuerdo para compartir datos.</span></li>
+      <li><span lang="en"><strong>Open the file</strong> in Excel or Google Sheets.</span><span lang="es"><strong>Abre el archivo</strong> en Excel o Google Sheets.</span></li>
+      <li><span lang="en"><strong>Remove everyone who said no.</strong> Select the consent column, sort it, and delete every row where the answer is “No”. Save.</span><span lang="es"><strong>Quita a todos los que dijeron que no.</strong> Selecciona la columna de consentimiento, ordénala, y elimina cada fila donde la respuesta sea «No». Guarda.</span></li>
+      <li><span lang="en"><strong>Look for names.</strong> Read the column headings. If any column holds a name, a phone or a cédula, stop: it's the wrong file, or the form asked for one.</span><span lang="es"><strong>Busca nombres.</strong> Lee los títulos de las columnas. Si alguna columna tiene un nombre, un teléfono o una cédula, detente: es el archivo equivocado, o el formulario lo pidió.</span></li>
+      <li><span lang="en"><strong>Count.</strong> The number of rows should match the clinic's sign-in sheet, minus the patients who said no.</span><span lang="es"><strong>Cuenta.</strong> El número de filas debe coincidir con la hoja de registro de la clínica, menos los pacientes que dijeron que no.</span></li>
+      <li><span lang="en"><strong>Share it</strong> through a shared folder with named people, not as an email attachment.</span><span lang="es"><strong>Compártelo</strong> en una carpeta compartida con personas con nombre, no como adjunto de correo.</span></li>
+      <li><span lang="en"><strong>Write down</strong> what you sent, to whom, and when.</span><span lang="es"><strong>Anota</strong> qué enviaste, a quién y cuándo.</span></li>
+    </ol>
+    <div class="note">
+      <p lang="en"><strong></strong>Removing the “No” rows is your job every time you send a new file, not only the first time. The export includes everyone who was examined.</p>
+      <p lang="es"><strong></strong>Quitar las filas con «No» es tu tarea cada vez que envías un archivo nuevo, no solo la primera. La exportación incluye a todos los que fueron examinados.</p>
+    </div>
+  </section>
+  <section id="wrong">
+    <h2><span class="num">8</span><span lang="en">If something goes wrong</span><span lang="es">Si algo sale mal</span></h2>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">What you see</span><span lang="es">Qué ves</span></th><th><span lang="en">Why, and what to do</span><span lang="es">Por qué, y qué hacer</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en">There is only one Export button.</span><span lang="es">Hay un solo botón Exportar.</span></td><td><span lang="en">The research file isn't turned on for this form. Turn it on in Form Creator.</span><span lang="es">El archivo de investigación no está activado para este formulario. Actívalo en el Creador de formularios.</span></td></tr>
+          <tr><td><span lang="en">“The export could not be completed. Please try again.”</span><span lang="es">«No se pudo completar la descarga. Por favor, inténtelo de nuevo.»</span></td><td><span lang="en">Try once more. If it keeps happening, write to info@puente-dr.org with the form's name.</span><span lang="es">Inténtalo otra vez. Si sigue pasando, escribe a info@puente-dr.org con el nombre del formulario.</span></td></tr>
+          <tr><td><span lang="en">The file has fewer rows than the sign-in sheet.</span><span lang="es">El archivo tiene menos filas que la hoja de registro.</span></td><td><span lang="en">A phone still has forms waiting. See <a href="/guides/research/running-a-clinic-day/#evening">Each evening</a>.</span><span lang="es">A un teléfono le quedan formularios. Mira <a href="/guides/research/running-a-clinic-day/#evening">Cada noche</a>.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section id="rules">
+    <h2><span class="num">9</span><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <ul class="plain">
+      <li><span lang="en">The blue button goes out; the white button stays in.</span><span lang="es">El botón azul sale; el botón blanco se queda.</span></li>
+      <li><span lang="en">If a file has a name in it, it is the wrong file.</span><span lang="es">Si un archivo tiene un nombre, es el archivo equivocado.</span></li>
+      <li><span lang="en">Remove the “No” rows every time.</span><span lang="es">Quita las filas con «No» cada vez.</span></li>
+      <li><span lang="en">Researchers ask about codes; Puente answers about people.</span><span lang="es">Los investigadores preguntan por códigos; Puente responde por personas.</span></li>
+    </ul>
+    <h3><span lang="en">Check yourself</span><span lang="es">Comprueba lo que aprendiste</span></h3>
+    <details class="check">
+      <summary><span lang="en">A researcher asks for the full records “to double-check”. What do you send?</span><span lang="es">Un investigador pide los registros completos «para verificar». ¿Qué envías?</span></summary>
+      <p lang="en">Nothing from Export full records. Send the research file, and offer to look up any study ID they have a question about.</p>
+      <p lang="es">Nada de Exportar registros completos. Envía el archivo de investigación, y ofrece buscar cualquier ID de estudio por el que tengan una pregunta.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">Why might a row have no age at all?</span><span lang="es">¿Por qué una fila podría no tener ninguna edad?</span></summary>
+      <p lang="en">Because no birth date and no age were ever recorded for that patient. The file leaves it blank rather than guessing.</p>
+      <p lang="es">Porque nunca se registró ni fecha de nacimiento ni edad para ese paciente. El archivo lo deja en blanco en vez de adivinar.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">You download a new file a week later. Do the study IDs change?</span><span lang="es">Descargas un archivo nuevo una semana después. ¿Cambian los IDs de estudio?</span></summary>
+      <p lang="en">No. The same patient keeps the same code in every download.</p>
+      <p lang="es">No. El mismo paciente conserva el mismo código en cada descarga.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect and Puente Manage are source-available under the Business Source License 1.1.
+      They convert to the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect y Puente Manage son de código disponible bajo la Business Source License 1.1.
+      Pasan a la Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Sharing data with researchers — Puente',
+    es: 'Compartir datos con investigadores — Puente'
+  };
+  var DESC = {
+    en: 'What the Export research file button gives you, what it leaves out, and what to check before a file leaves Puente.',
+    es: 'Qué te da el botón Exportar archivo de investigación, qué deja fuera, y qué revisar antes de que un archivo salga de Puente.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific: the app was driven twice, once per
+    // language. A reader on the Spanish page is the reader least able to map an
+    // English button onto the one in front of them. Guarded on the attribute so
+    // a figure with only one capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>

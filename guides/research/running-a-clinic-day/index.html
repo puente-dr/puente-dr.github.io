@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running a clinic day — Puente</title>
+<meta name="description" content="A checklist for a clinic collecting research data in Puente Collect: before, during, each evening, and what to do when something breaks.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/research/running-a-clinic-day/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+  /* ── research guides ── */
+  .learn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin:0 0 1.5rem}
+  .learn-title{font-weight:600;margin:0 0 .4rem}
+  .learn ul{margin:0;padding-left:1.2rem}
+  .learn li{margin-bottom:.25rem}
+  figcaption .kind{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                   color:var(--action-deep);background:#e8f0ff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem}
+  ol.journey{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.75rem}
+  ol.journey li{display:grid;grid-template-columns:2.25rem 1fr;gap:.9rem;align-items:start;background:var(--surface);
+                border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+  ol.journey li p{margin:.2rem 0 0;font-size:.95rem}
+  .step-n{width:2.25rem;height:2.25rem;border-radius:50%;background:var(--ink);color:var(--mark);display:grid;place-items:center;font-weight:700}
+  details.check{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.7rem 1rem;margin:.5rem 0}
+  details.check summary{cursor:pointer;font-weight:600}
+  details.check[open] summary{margin-bottom:.5rem}
+  details.check p{margin:0}
+</style></head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <p class="meta" style="margin:0 0 1rem"><a href="/guides/research/" style="color:#c9c9c9"><span lang="en">Research guides</span><span lang="es">Guías de investigación</span></a></p>
+    <h1>
+      <span lang="en">Running a clinic day</span>
+      <span lang="es">Un día de clínica</span>
+    </h1>
+    <p class="lede" lang="en">The checklist for the coordinator and the on-site tech lead. Most of it is about one thing: keeping every phone's forms safe until they reach Puente.</p>
+    <p class="lede" lang="es">La lista para el coordinador y el responsable técnico en el lugar. Casi toda trata de una cosa: mantener seguros los formularios de cada teléfono hasta que lleguen a Puente.</p>
+    <p class="meta" lang="en">Last reviewed 23 October 2026 · Collect 15.7.5 and later</p>
+    <p class="meta" lang="es">Última revisión: 23 de octubre de 2026 · Collect 15.7.5 y posteriores</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The idea</span><span lang="es">La idea</span></a></li>
+      <li><a href="#who"><span lang="en">Who does what</span><span lang="es">Quién hace qué</span></a></li>
+      <li><a href="#before"><span lang="en">Two days before</span><span lang="es">Dos días antes</span></a></li>
+      <li><a href="#search"><span lang="en">Search before you register</span><span lang="es">Busca antes de registrar</span></a></li>
+      <li><a href="#during"><span lang="en">During the clinic</span><span lang="es">Durante la clínica</span></a></li>
+      <li><a href="#evening"><span lang="en">Each evening</span><span lang="es">Cada noche</span></a></li>
+      <li><a href="#breaks"><span lang="en">When something breaks</span><span lang="es">Cuando algo falla</span></a></li>
+      <li><a href="#contact"><span lang="en">When to contact the Puente tech team</span><span lang="es">Cuándo contactar al equipo técnico de Puente</span></a></li>
+      <li><a href="#after"><span lang="en">After the clinic</span><span lang="es">Después de la clínica</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The idea</span><span lang="es">La idea</span></h2>
+    <div class="learn">
+      <p class="learn-title"><span lang="en">By the end of this guide you can</span><span lang="es">Al terminar esta guía podrás</span></p>
+      <ul>
+        <li><span lang="en">prepare every phone so it works without signal;</span><span lang="es">preparar cada teléfono para que funcione sin señal;</span></li>
+        <li><span lang="en">avoid the two mistakes that lose or double patients;</span><span lang="es">evitar los dos errores que pierden o duplican pacientes;</span></li>
+        <li><span lang="en">make sure every form reaches Puente each evening;</span><span lang="es">asegurarte de que cada formulario llegue a Puente cada noche;</span></li>
+        <li><span lang="en">fix the common problems yourself, and know which ones to report.</span><span lang="es">arreglar los problemas comunes tú mismo, y saber cuáles reportar.</span></li>
+      </ul>
+    </div>
+    <p lang="en">A clinic often has no signal. That's fine: Collect saves every form on the phone and sends it later. But between saving and sending, <strong>the form exists in only one place</strong>, that phone. Almost everything on this page protects that gap.</p>
+    <p lang="es">Una clínica muchas veces no tiene señal. Está bien: Collect guarda cada formulario en el teléfono y lo envía después. Pero entre guardar y enviar, <strong>el formulario existe en un solo lugar</strong>, ese teléfono. Casi todo en esta página protege ese intervalo.</p>
+  </section>
+  <section id="who">
+    <h2><span class="num">2</span><span lang="en">Who does what</span><span lang="es">Quién hace qué</span></h2>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Person</span><span lang="es">Persona</span></th><th><span lang="en">Job</span><span lang="es">Tarea</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en"><strong>Coordinator</strong></span><span lang="es"><strong>Coordinador</strong></span></td><td><span lang="en">Owns the form, the paper sign-in sheet and the final count. Talks to the research team.</span><span lang="es">Es dueño del formulario, la hoja de registro en papel y el conteo final. Habla con el equipo de investigación.</span></td></tr>
+          <tr><td><span lang="en"><strong>Tech lead</strong></span><span lang="es"><strong>Responsable técnico</strong></span></td><td><span lang="en">Prepares every phone, runs the evening sync, and is the first person anyone asks about the app.</span><span lang="es">Prepara cada teléfono, hace la sincronización de la noche, y es la primera persona a quien se pregunta por la app.</span></td></tr>
+          <tr><td><span lang="en"><strong>Surveyors</strong></span><span lang="es"><strong>Encuestadores</strong></span></td><td><span lang="en">Search, register, fill in the exam form. Never log out.</span><span lang="es">Buscan, registran, llenan el formulario del examen. Nunca cierran sesión.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">The tech lead reads this page and <a href="/guides/collecting-without-a-signal/">Collecting without a signal</a> before the clinic, not during it.</p>
+    <p lang="es">El responsable técnico lee esta página y <a href="/guides/collecting-without-a-signal/">Recoger datos sin señal</a> antes de la clínica, no durante.</p>
+  </section>
+  <section id="before">
+    <h2><span class="num">3</span><span lang="en">Two days before</span><span lang="es">Dos días antes</span></h2>
+    <p lang="en">Do this on every phone that will collect, somewhere with a working internet connection.</p>
+    <p lang="es">Haz esto en cada teléfono que va a recoger datos, en un lugar con internet.</p>
+    <ol class="steps">
+      <li><span lang="en"><strong>Update Puente Collect</strong> from the App Store or Google Play. It must be version 15.7.5 or later.</span><span lang="es"><strong>Actualiza Puente Collect</strong> desde la App Store o Google Play. Debe ser la versión 15.7.5 o posterior.</span></li>
+      <li><span lang="en"><strong>Sign in</strong> with the clinic organization's account. Signing in needs internet, so do it now, not at the clinic.</span><span lang="es"><strong>Inicia sesión</strong> con la cuenta de la organización de la clínica. Iniciar sesión necesita internet, así que hazlo ahora, no en la clínica.</span></li>
+      <li><span lang="en"><strong>Open the exam form once</strong>, so the phone keeps a copy of it.</span><span lang="es"><strong>Abre el formulario del examen una vez</strong>, para que el teléfono guarde una copia.</span></li>
+      <li><span lang="en"><strong>Test without signal.</strong> Turn on airplane mode, fill in the form for an invented patient, and save. You should see the offline banner, then “Saved offline — will sync when you reconnect”.</span><span lang="es"><strong>Prueba sin señal.</strong> Activa el modo avión, llena el formulario de un paciente inventado y guarda. Debes ver el aviso sin conexión, y luego «Guardado sin conexión — se sincronizará cuando te reconectes».</span></li>
+      <li><span lang="en">Open “Offline Sync”. The form is waiting there. <strong>Discard it</strong>, so the invented patient never reaches the research data.</span><span lang="es">Abre «Sincronización sin conexión». El formulario está esperando ahí. <strong>Descártalo</strong>, para que el paciente inventado nunca llegue a los datos de investigación.</span></li>
+      <li><span lang="en">Write the phone on a list: who carries it, and whether it passed the test.</span><span lang="es">Anota el teléfono en una lista: quién lo lleva y si pasó la prueba.</span></li>
+    </ol>
+    <div class="phones">
+      <figure>
+      <img src="assets/img/collect-01-offline-banner.png"
+           data-src-en="assets/img/collect-01-offline-banner.png"
+           data-src-es="assets/img/es/collect-01-offline-banner.png"
+           data-alt-en="A survey form on a phone with an amber banner across the top reading: You're offline. Records will save and sync automatically."
+           data-alt-es="Un formulario de encuesta en un teléfono con un aviso ámbar arriba que dice: Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente."
+           alt="A survey form on a phone with an amber banner across the top reading: You're offline. Records will save and sync automatically.">
+      <figcaption><span lang="en">Step 4: the offline banner. This is what working without signal looks like.</span><span lang="es">Paso 4: el aviso sin conexión. Así se ve trabajar sin señal.</span></figcaption>
+      </figure>
+      <figure>
+      <img src="assets/img/collect-03-queue.png"
+           data-src-en="assets/img/collect-03-queue.png"
+           data-src-es="assets/img/es/collect-03-queue.png"
+           data-alt-en="The Offline Sync screen listing one queued form, named Resident ID with the surveyed person, next to a Discard link and a Retry button."
+           data-alt-es="La pantalla de Sincronización sin conexión con un formulario en cola, llamado Resident ID junto a la persona encuestada, al lado de un enlace Descartar y un botón Reintentar."
+           alt="The Offline Sync screen listing one queued form, named Resident ID with the surveyed person, next to a Discard link and a Retry button.">
+      <figcaption><span lang="en">Step 5: the test form waiting in Offline Sync, with Discard beside it.</span><span lang="es">Paso 5: el formulario de prueba esperando en Sincronización sin conexión, con Descartar al lado.</span></figcaption>
+      </figure>
+      <figure>
+      <img src="assets/img/collect-05-discard-confirm.png"
+           data-src-en="assets/img/collect-05-discard-confirm.png"
+           data-src-es="assets/img/es/collect-05-discard-confirm.png"
+           data-alt-en="A confirmation dialog titled Discard this form? explaining that the form has not reached the server and that discarding deletes it from the device permanently, with the options Discard permanently and Cancel."
+           data-alt-es="Un cuadro de confirmación titulado ¿Descartar este formulario? que explica que el formulario no ha llegado al servidor y que descartarlo lo elimina del dispositivo de forma permanente, con las opciones Descartar permanentemente y Cancelar."
+           alt="A confirmation dialog titled Discard this form? explaining that the form has not reached the server and that discarding deletes it from the device permanently, with the options Discard permanently and Cancel.">
+      <figcaption><span lang="en">Discarding is permanent. That is right for the test patient, and wrong for any real one.</span><span lang="es">Descartar es permanente. Está bien para el paciente de prueba, y mal para cualquier paciente real.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">Bring chargers, and one power bank for every two phones. A phone with a dead battery keeps its forms, but it can't collect new ones.</p>
+    <p lang="es">Lleva cargadores y una batería externa por cada dos teléfonos. Un teléfono sin batería guarda sus formularios, pero no puede recoger nuevos.</p>
+  </section>
+  <section id="search">
+    <h2><span class="num">4</span><span lang="en">Search before you register</span><span lang="es">Busca antes de registrar</span></h2>
+    <p lang="en">The most common mistake at a clinic is registering someone who is already in Puente. The app does not warn you. The patient just ends up as two people, and their visits split between them.</p>
+    <p lang="es">El error más común en una clínica es registrar a alguien que ya está en Puente. La app no avisa. El paciente simplemente termina siendo dos personas, y sus visitas quedan divididas entre las dos.</p>
+    <div class="keystone">
+      <p lang="en">Search by <strong>surname</strong>, or by the <strong>start of the cédula number</strong>. A full name, first and last together, finds nobody.</p>
+      <p lang="es">Busca por <strong>apellido</strong>, o por el <strong>inicio del número de cédula</strong>. Un nombre completo, nombre y apellido juntos, no encuentra a nadie.</p>
+    </div>
+    <div class="phones">
+      <figure>
+      <img src="assets/img/find-01-search-by-name.png"
+           data-src-en="assets/img/find-01-search-by-name.png"
+           data-src-es="assets/img/es/find-01-search-by-name.png"
+           data-alt-en="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it."
+           data-alt-es="La pantalla Buscar Individuo con Ejemplo escrito en el cuadro y dos tarjetas de residentes coincidentes debajo."
+           alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it.">
+      <figcaption><span lang="en">A surname finds everyone with that surname.</span><span lang="es">Un apellido encuentra a todos los que lo tienen.</span></figcaption>
+      </figure>
+      <figure>
+      <img src="assets/img/find-02-search-by-id.png"
+           data-src-en="assets/img/find-02-search-by-id.png"
+           data-src-es="assets/img/es/find-02-search-by-id.png"
+           data-alt-en="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza."
+           data-alt-es="El cuadro de búsqueda con 00167 y una sola tarjeta de residente debajo para Paciente Ejemplo, apodo Fulano, en Constanza."
+           alt="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza.">
+      <figcaption><span lang="en">The first digits of a cédula find one person.</span><span lang="es">Los primeros dígitos de una cédula encuentran a una persona.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">Why a full name fails, and more ways to search: <a href="/guides/finding-someone-you-already-surveyed/">Finding someone you already surveyed</a>.</p>
+    <p lang="es">Por qué falla un nombre completo, y más formas de buscar: <a href="/guides/finding-someone-you-already-surveyed/">Encontrar a alguien que ya encuestaste</a>.</p>
+  </section>
+  <section id="during">
+    <h2><span class="num">5</span><span lang="en">During the clinic</span><span lang="es">Durante la clínica</span></h2>
+    <ul class="plain">
+      <li><span lang="en"><strong>One exam form per patient visit.</strong> Everything measured at that visit goes in the same form.</span><span lang="es"><strong>Un formulario de examen por visita.</strong> Todo lo que se mide en esa visita va en el mismo formulario.</span></li>
+      <li><span lang="en"><strong>The offline banner is normal.</strong> “You're offline. Records will save and sync automatically.” Keep working.</span><span lang="es"><strong>El aviso sin conexión es normal.</strong> «Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente.» Sigue trabajando.</span></li>
+      <li><span lang="en"><strong>Never log out, never clear the app's data, never uninstall.</strong> Forms that haven't been sent live inside the app.</span><span lang="es"><strong>Nunca cierres sesión, nunca borres los datos de la app, nunca la desinstales.</strong> Los formularios que no se han enviado viven dentro de la app.</span></li>
+      <li><span lang="en"><strong>If a patient does not consent,</strong> answer “No” to the consent question, and follow the clinic's paper process for their care.</span><span lang="es"><strong>Si un paciente no da su consentimiento,</strong> responde «No» a la pregunta de consentimiento, y sigue el proceso en papel de la clínica para su atención.</span></li>
+      <li><span lang="en"><strong>Write every patient on the paper sign-in sheet.</strong> It is how the coordinator checks, later, that nobody was lost.</span><span lang="es"><strong>Anota a cada paciente en la hoja de registro en papel.</strong> Así el coordinador comprueba después que no se perdió nadie.</span></li>
+    </ul>
+  </section>
+  <section id="evening">
+    <h2><span class="num">6</span><span lang="en">Each evening</span><span lang="es">Cada noche</span></h2>
+    <ol class="steps">
+      <li><span lang="en">Connect every phone to a reliable wifi network.</span><span lang="es">Conecta cada teléfono a una red wifi confiable.</span></li>
+      <li><span lang="en">Open “Offline Sync” and tap “Retry”.</span><span lang="es">Abre «Sincronización sin conexión» y toca «Reintentar».</span></li>
+      <li><span lang="en">Wait until the screen says “No forms queued. You are all caught up!”</span><span lang="es">Espera hasta que la pantalla diga «No hay formularios en cola. ¡Estás al día!»</span></li>
+      <li><span lang="en">The tech lead marks the phone as done on the list. A phone that isn't marked isn't finished for the day.</span><span lang="es">El responsable técnico marca el teléfono como listo en la lista. Un teléfono sin marcar no ha terminado el día.</span></li>
+    </ol>
+    <div class="phones">
+      <figure>
+      <img src="assets/img/collect-04-all-caught-up.png"
+           data-src-en="assets/img/collect-04-all-caught-up.png"
+           data-src-es="assets/img/es/collect-04-all-caught-up.png"
+           data-alt-en="The same screen with an empty queue, reading: No forms queued. You are all caught up!"
+           data-alt-es="La misma pantalla con la cola vacía: No hay formularios en cola. ¡Estás al día!"
+           alt="The same screen with an empty queue, reading: No forms queued. You are all caught up!">
+      <figcaption><span lang="en">Done for the day: nothing is left on this phone.</span><span lang="es">Listo por hoy: no queda nada en este teléfono.</span></figcaption>
+      </figure>
+    </div>
+    <p lang="en">Then, on a computer, check the total. In Manage, open <strong>Form Manager</strong>, expand the exam form's row with the arrow, and press <strong>Refresh</strong>. Compare the number with the sign-in sheet.</p>
+    <p lang="es">Luego, en una computadora, revisa el total. En Manage, abre el <strong>Gestor de formularios</strong>, expande la fila del formulario del examen con la flecha, y pulsa <strong>Actualizar</strong>. Compara el número con la hoja de registro.</p>
+    <figure>
+      <img src="assets/img/research-04-forms-collected.png"
+           data-src-en="assets/img/research-04-forms-collected.png"
+           data-src-es="assets/img/es/research-04-forms-collected.png"
+           data-alt-en="Form Manager with the vision exam row expanded, showing Forms collected: 37."
+           data-alt-es="El Gestor de formularios con la fila del examen de la vista expandida, mostrando Formularios recolectados: 37."
+           alt="Form Manager with the vision exam row expanded, showing Forms collected: 37.">
+      <figcaption><span lang="en">How many exam forms have reached Puente. If it is lower than the sign-in sheet, a phone still has some.</span><span lang="es">Cuántos formularios del examen han llegado a Puente. Si es menor que la hoja de registro, a algún teléfono todavía le quedan.</span></figcaption>
+    </figure>
+  </section>
+  <section id="breaks">
+    <h2><span class="num">7</span><span lang="en">When something breaks</span><span lang="es">Cuando algo falla</span></h2>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">What happened</span><span lang="es">Qué pasó</span></th><th><span lang="en">What to do</span><span lang="es">Qué hacer</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en">A form stays in the queue after “Retry”.</span><span lang="es">Un formulario sigue en la cola después de «Reintentar».</span></td><td><span lang="en">It is still on the phone; the app says “Your forms are still saved on this device. Nothing has been lost.” Try again on a better connection. <strong>Don't discard it.</strong></span><span lang="es">Sigue en el teléfono; la app dice «Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.» Inténtalo de nuevo con mejor conexión. <strong>No lo descartes.</strong></span></td></tr>
+          <tr><td><span lang="en">Some forms sent, some didn't.</span><span lang="es">Algunos formularios se enviaron y otros no.</span></td><td><span lang="en">Normal on a weak connection. The ones that went are safe. Retry the rest.</span><span lang="es">Es normal con una conexión débil. Los que se enviaron están a salvo. Reintenta los demás.</span></td></tr>
+          <tr><td><span lang="en">A phone's battery died.</span><span lang="es">Un teléfono se quedó sin batería.</span></td><td><span lang="en">Charge it and open the app again. Its forms are still there. Don't reinstall.</span><span lang="es">Cárgalo y abre la app otra vez. Sus formularios siguen ahí. No la reinstales.</span></td></tr>
+          <tr><td><span lang="en">Someone wants to log out with forms waiting.</span><span lang="es">Alguien quiere cerrar sesión con formularios pendientes.</span></td><td><span lang="en">The app warns them. They shouldn't. Sync first, on wifi.</span><span lang="es">La app le avisa. No debe hacerlo. Primero sincroniza, con wifi.</span></td></tr>
+          <tr><td><span lang="en">The app won't open.</span><span lang="es">La app no abre.</span></td><td><span lang="en">Restart the phone. Don't clear storage or reinstall; that deletes forms that haven't been sent.</span><span lang="es">Reinicia el teléfono. No borres el almacenamiento ni la reinstales; eso elimina los formularios que no se han enviado.</span></td></tr>
+          <tr><td><span lang="en">A patient was registered twice.</span><span lang="es">Un paciente se registró dos veces.</span></td><td><span lang="en">Write both names on the sign-in sheet and carry on. The coordinator fixes it after the clinic. Don't delete either.</span><span lang="es">Escribe los dos nombres en la hoja de registro y sigue. El coordinador lo corrige después de la clínica. No elimines ninguno.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">More detail on each of these: <a href="/guides/collecting-without-a-signal/">Collecting without a signal</a>.</p>
+    <p lang="es">Más detalle sobre cada uno: <a href="/guides/collecting-without-a-signal/">Recoger datos sin señal</a>.</p>
+  </section>
+  <section id="contact">
+    <h2><span class="num">8</span><span lang="en">When to contact the Puente tech team</span><span lang="es">Cuándo contactar al equipo técnico de Puente</span></h2>
+    <div class="keystone">
+      <p lang="en">Only if <strong>no phone can save forms at all</strong>, or a sync seems to have <strong>lost forms</strong>. Everything else on this page can wait until after the clinic.</p>
+      <p lang="es">Solo si <strong>ningún teléfono puede guardar formularios</strong>, o una sincronización parece haber <strong>perdido formularios</strong>. Todo lo demás en esta página puede esperar hasta después de la clínica.</p>
+    </div>
+    <p lang="en">Write to <a href="mailto:info@puente-dr.org">info@puente-dr.org</a> with which phone, what time, and a photo of the screen.</p>
+    <p lang="es">Escribe a <a href="mailto:info@puente-dr.org">info@puente-dr.org</a> con qué teléfono, a qué hora, y una foto de la pantalla.</p>
+  </section>
+  <section id="after">
+    <h2><span class="num">9</span><span lang="en">After the clinic</span><span lang="es">Después de la clínica</span></h2>
+    <ol class="steps">
+      <li><span lang="en">Do the evening sync one last time on every phone.</span><span lang="es">Haz la sincronización de la noche una última vez en cada teléfono.</span></li>
+      <li><span lang="en">Check the total in Form Manager against the sign-in sheet. If they differ, find out why before sending anything.</span><span lang="es">Compara el total del Gestor de formularios con la hoja de registro. Si no coinciden, averigua por qué antes de enviar nada.</span></li>
+      <li><span lang="en">Then follow <a href="/guides/research/sharing-data-with-researchers/">Sharing data with researchers</a>.</span><span lang="es">Luego sigue <a href="/guides/research/sharing-data-with-researchers/">Compartir datos con investigadores</a>.</span></li>
+    </ol>
+    <h3><span lang="en">Check yourself</span><span lang="es">Comprueba lo que aprendiste</span></h3>
+    <details class="check">
+      <summary><span lang="en">A phone shows the offline banner. What do you do?</span><span lang="es">Un teléfono muestra el aviso sin conexión. ¿Qué haces?</span></summary>
+      <p lang="en">Keep working. Forms save on the phone and are sent at the evening sync.</p>
+      <p lang="es">Sigue trabajando. Los formularios se guardan en el teléfono y se envían en la sincronización de la noche.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">A surveyor types “Ana Pérez” and finds nobody. Is Ana new?</span><span lang="es">Un encuestador escribe «Ana Pérez» y no encuentra a nadie. ¿Ana es nueva?</span></summary>
+      <p lang="en">Not necessarily. A full name never matches. Search “Pérez”, or the start of her cédula.</p>
+      <p lang="es">No necesariamente. Un nombre completo nunca coincide. Busca «Pérez», o el inicio de su cédula.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">When is a phone finished for the day?</span><span lang="es">¿Cuándo termina el día un teléfono?</span></summary>
+      <p lang="en">When Offline Sync says “No forms queued. You are all caught up!” and the tech lead has marked it on the list.</p>
+      <p lang="es">Cuando Sincronización sin conexión dice «No hay formularios en cola. ¡Estás al día!» y el responsable técnico lo marcó en la lista.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect and Puente Manage are source-available under the Business Source License 1.1.
+      They convert to the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect y Puente Manage son de código disponible bajo la Business Source License 1.1.
+      Pasan a la Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Running a clinic day — Puente',
+    es: 'Un día de clínica — Puente'
+  };
+  var DESC = {
+    en: 'A checklist for a clinic collecting research data in Puente Collect: before, during, each evening, and what to do when something breaks.',
+    es: 'Una lista para una clínica que recoge datos de investigación en Puente Collect: antes, durante, cada noche, y qué hacer cuando algo falla.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific: the app was driven twice, once per
+    // language. A reader on the Spanish page is the reader least able to map an
+    // English button onto the one in front of them. Guarded on the attribute so
+    // a figure with only one capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>

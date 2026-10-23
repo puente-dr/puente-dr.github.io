@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designing a form for research — Puente</title>
+<meta name="description" content="How to build a Puente form whose answers a research team can analyse: agreed columns, pick lists, consent, and a test before the clinic.">
+<link rel="canonical" href="https://puente-dr.github.io/guides/research/designing-a-form-for-research/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23161616'/><text x='16' y='23' font-family='system-ui' font-size='19' font-weight='700' fill='%23ffe680' text-anchor='middle'>P</text></svg>">
+<script>
+(function(){
+  var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+  var stored = null;
+  try { stored = localStorage.getItem('puente-guide-lang'); } catch (e) {}
+  var lang = (q && q[1]) || ((stored === 'es' || stored === 'en') ? stored : 'en');
+  document.documentElement.lang = lang;
+})();
+</script>
+<style>
+  /* Brand tokens, taken from the app's own dlite light theme so this page and
+     the product do not look like two different products. */
+  :root{
+    --ink:#161616; --paper:#f7f7f7; --surface:#ffffff;
+    --muted:#6e6e6e; --line:#d4d4d4;
+    --action:#3d80fc; --action-deep:#0a46b6; --mark:#ffe680;
+    --warn-bg:#fff8e1; --warn-line:#e6c65c;
+    --measure:44rem;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 var(--sans);}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 1.25rem}
+
+  /* ── masthead ── */
+  header.top{background:var(--ink);color:#fff;padding:3.5rem 0 3rem}
+  .brand-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem}
+  .brand{display:flex;align-items:center;gap:.6rem}
+  .mark{width:34px;height:34px;border-radius:9px;background:var(--mark);color:var(--ink);
+        display:grid;place-items:center;font-weight:700;font-size:1.05rem}
+  .brand span{font-weight:600;letter-spacing:.01em}
+  header.top h1{margin:0 0 .6rem;font-size:clamp(1.9rem,5vw,2.7rem);line-height:1.12;letter-spacing:-.02em}
+  header.top p.lede{margin:0;color:#c9c9c9;font-size:1.075rem;max-width:34rem}
+  .meta{margin-top:1.75rem;font-size:.8rem;color:#9a9a9a;text-transform:uppercase;letter-spacing:.07em}
+
+  .lang{display:flex;border:1px solid rgba(255,255,255,.28);border-radius:999px;overflow:hidden;flex-shrink:0}
+  .lang button{appearance:none;border:0;background:transparent;color:#c9c9c9;font:inherit;
+               font-size:.8rem;font-weight:600;letter-spacing:.04em;padding:.4rem .85rem;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+  .lang button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+
+  /* ── table of contents ── */
+  nav.toc{background:var(--surface);border-bottom:1px solid var(--line);padding:1rem 0;
+          position:sticky;top:0;z-index:10}
+  nav.toc ol{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.25rem;margin:0;padding:0;
+             font-size:.875rem}
+  nav.toc a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px}
+  nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);border-bottom-color:var(--action)}
+
+  main{padding:3rem 0 1rem}
+  section{margin:0 0 3.5rem}
+  h2{font-size:1.5rem;letter-spacing:-.01em;margin:0 0 .35rem;scroll-margin-top:5rem}
+  h2 .num{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:400;margin-right:.5rem}
+  h3{font-size:1.075rem;margin:2rem 0 .5rem}
+  p{margin:0 0 1rem}
+  a{color:var(--action-deep)}
+  strong{font-weight:600}
+  code{font-family:var(--mono);font-size:.9em;background:#ececec;padding:.1em .35em;border-radius:4px}
+
+  .keystone{background:var(--surface);border-left:3px solid var(--action);
+            padding:1.25rem 1.4rem;margin:0 0 1.5rem;font-size:1.1rem;border-radius:0 6px 6px 0}
+  .keystone p{margin:0}
+
+  .note{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:6px;
+        padding:1rem 1.15rem;margin:1.5rem 0;font-size:.95rem}
+  .note p{margin:0}
+  html[lang="en"] .note strong::before{content:"Note — ";font-weight:600}
+  html[lang="es"] .note strong::before{content:"Nota — ";font-weight:600}
+
+  /* ── spelling illustration ── */
+  .spellings{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+             padding:1.25rem 1.4rem;margin:1.5rem 0;font-family:var(--mono);font-size:.9rem}
+  .spellings div{display:flex;justify-content:space-between;gap:1rem;padding:.3rem 0;
+                 border-bottom:1px dashed #e6e6e6}
+  .spellings div:last-child{border-bottom:0}
+  .spellings em{font-family:var(--sans);font-style:normal;color:var(--muted);font-size:.82rem;text-align:right}
+
+  /* ── tables ── */
+  .tablewrap{overflow-x:auto;margin:1.5rem 0;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:.925rem}
+  th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #ededed;vertical-align:top}
+  th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;
+     background:#fafafa}
+  tr:last-child td{border-bottom:0}
+  td code{white-space:nowrap}
+  .verdict{font-weight:600;white-space:nowrap}
+  .yes{color:#136c3a}
+  .no{color:#9e2b16}
+
+  /* ── figures ── */
+  figure{margin:1.75rem 0;background:var(--surface);border:1px solid var(--line);border-radius:8px;
+         overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:.85rem;color:var(--muted);padding:.7rem .9rem;border-top:1px solid #ededed;
+             background:#fafafa}
+  .phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.75rem 0}
+  .phones figure{margin:0;display:flex;flex-direction:column}
+  /* These are tall portrait captures; uncapped they tower over the text they
+     illustrate. Crop from the top, where the field being described is. */
+  .phones figure img{max-height:22rem;object-fit:cover;object-position:top}
+  .wide{max-width:min(64rem,100%);margin-left:calc((var(--measure) - min(64rem,100%))/2)}
+  @media (max-width:1100px){.wide{max-width:100%;margin-left:0}}
+
+  ol.steps{padding-left:1.3rem}
+  ol.steps li{margin-bottom:.6rem}
+  ul.plain{padding-left:1.3rem}
+  ul.plain li{margin-bottom:.5rem}
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:2.5rem 0;
+         font-size:.875rem;color:var(--muted)}
+  footer p{margin:0 0 .6rem}
+  footer a{color:var(--action-deep)}
+
+  html[lang="en"] [lang="es"],
+  html[lang="es"] [lang="en"]{display:none!important}
+
+  /* Focus visibility is not optional. */
+  a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--action-deep);outline-offset:2px;border-radius:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* The brand is the way back to the guide index. `color:inherit` keeps it white
+     on the dark masthead instead of picking up the blue link colour, and the
+     focus ring uses --mark because --action-deep is almost invisible on --ink. */
+  a.brand{color:inherit;text-decoration:none}
+  a.brand:hover span{text-decoration:underline}
+  a.brand:focus-visible{outline:2px solid var(--mark);outline-offset:3px;border-radius:10px}
+  /* ── research guides ── */
+  .learn{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1rem 1.25rem;margin:0 0 1.5rem}
+  .learn-title{font-weight:600;margin:0 0 .4rem}
+  .learn ul{margin:0;padding-left:1.2rem}
+  .learn li{margin-bottom:.25rem}
+  figcaption .kind{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+                   color:var(--action-deep);background:#e8f0ff;border-radius:4px;padding:.05rem .4rem;margin-right:.4rem}
+  ol.journey{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.75rem}
+  ol.journey li{display:grid;grid-template-columns:2.25rem 1fr;gap:.9rem;align-items:start;background:var(--surface);
+                border:1px solid var(--line);border-radius:8px;padding:.9rem 1rem}
+  ol.journey li p{margin:.2rem 0 0;font-size:.95rem}
+  .step-n{width:2.25rem;height:2.25rem;border-radius:50%;background:var(--ink);color:var(--mark);display:grid;place-items:center;font-weight:700}
+  details.check{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:.7rem 1rem;margin:.5rem 0}
+  details.check summary{cursor:pointer;font-weight:600}
+  details.check[open] summary{margin-bottom:.5rem}
+  details.check p{margin:0}
+</style></head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/guides/"><div class="mark" aria-hidden="true">P</div><span>Puente</span></a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-set-lang="es" aria-pressed="false">Español</button>
+      </div>
+    </div>
+    <p class="meta" style="margin:0 0 1rem"><a href="/guides/research/" style="color:#c9c9c9"><span lang="en">Research guides</span><span lang="es">Guías de investigación</span></a></p>
+    <h1>
+      <span lang="en">Designing a form for research</span>
+      <span lang="es">Diseñar un formulario para investigación</span>
+    </h1>
+    <p class="lede" lang="en">A research file is only as good as the form behind it. Every choice in this guide is cheap before the clinic and impossible to fix after it.</p>
+    <p class="lede" lang="es">Un archivo de investigación solo es tan bueno como el formulario detrás. Cada decisión de esta guía es barata antes de la clínica e imposible de arreglar después.</p>
+    <p class="meta" lang="en">Last reviewed 23 October 2026 · Manage, Form Creator</p>
+    <p class="meta" lang="es">Última revisión: 23 de octubre de 2026 · Manage, Creador de formularios</p>
+  </div>
+</header>
+
+<nav class="toc" aria-label="On this page">
+  <div class="wrap">
+    <ol>
+      <li><a href="#idea"><span lang="en">The form is the spreadsheet</span><span lang="es">El formulario es la hoja de cálculo</span></a></li>
+      <li><a href="#columns"><span lang="en">Start from the columns</span><span lang="es">Empieza por las columnas</span></a></li>
+      <li><a href="#one-visit"><span lang="en">One form per visit</span><span lang="es">Un formulario por visita</span></a></li>
+      <li><a href="#pick-lists"><span lang="en">Pick from a list; don't type</span><span lang="es">Elige de una lista; no escribas</span></a></li>
+      <li><a href="#community"><span lang="en">Community from a list</span><span lang="es">La comunidad, de una lista</span></a></li>
+      <li><a href="#consent"><span lang="en">Ask for consent first</span><span lang="es">Pide primero el consentimiento</span></a></li>
+      <li><a href="#no-names"><span lang="en">Nothing that identifies anyone</span><span lang="es">Nada que identifique a nadie</span></a></li>
+      <li><a href="#turn-on"><span lang="en">Turn on the research file</span><span lang="es">Activa el archivo de investigación</span></a></li>
+      <li><a href="#test"><span lang="en">Test it with a copy</span><span lang="es">Pruébalo con una copia</span></a></li>
+      <li><a href="#rules"><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="idea">
+    <h2><span class="num">1</span><span lang="en">The form is the spreadsheet</span><span lang="es">El formulario es la hoja de cálculo</span></h2>
+    <div class="learn">
+      <p class="learn-title"><span lang="en">By the end of this guide you can</span><span lang="es">Al terminar esta guía podrás</span></p>
+      <ul>
+        <li><span lang="en">turn a list of columns from the researchers into a form;</span><span lang="es">convertir la lista de columnas de los investigadores en un formulario;</span></li>
+        <li><span lang="en">choose the right kind of question for each answer;</span><span lang="es">elegir el tipo de pregunta correcto para cada respuesta;</span></li>
+        <li><span lang="en">turn on the research file for the form;</span><span lang="es">activar el archivo de investigación para el formulario;</span></li>
+        <li><span lang="en">test the whole thing before a single real patient is seen.</span><span lang="es">probarlo todo antes de atender a un solo paciente real.</span></li>
+      </ul>
+    </div>
+    <p lang="en">When you build a form in Manage, you are really designing a spreadsheet. Each question becomes one column. Each time someone fills in the form, that becomes one row. The words you type as the question become the column heading (<a href="/guides/building-a-form/#columns">Building a form that exports cleanly</a>).</p>
+    <p lang="es">Cuando creas un formulario en Manage, en realidad estás diseñando una hoja de cálculo. Cada pregunta se vuelve una columna. Cada vez que alguien llena el formulario, eso se vuelve una fila. Las palabras que escribes como pregunta se vuelven el título de la columna (<a href="/guides/building-a-form/#columns">Crear un formulario que se exporte bien</a>).</p>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">In the form</span><span lang="es">En el formulario</span></th><th><span lang="en">In the research file</span><span lang="es">En el archivo de investigación</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en">a question: <em>Acuity, right eye, without glasses</em></span><span lang="es">una pregunta: <em>Agudeza, ojo derecho, sin lentes</em></span></td><td><span lang="en">a column with that heading</span><span lang="es">una columna con ese título</span></td></tr>
+          <tr><td><span lang="en">one patient's visit, filled in</span><span lang="es">la visita de un paciente, llenada</span></td><td><span lang="en">one row</span><span lang="es">una fila</span></td></tr>
+          <tr><td><span lang="en">the answer they chose: <em>20/200</em></span><span lang="es">la respuesta elegida: <em>20/200</em></span></td><td><span lang="en">the value in that cell</span><span lang="es">el valor en esa celda</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="keystone">
+      <p lang="en">So build the form <em>from</em> the spreadsheet the researchers need, not the other way round.</p>
+      <p lang="es">Así que crea el formulario <em>a partir de</em> la hoja de cálculo que necesitan los investigadores, no al revés.</p>
+    </div>
+  </section>
+  <section id="columns">
+    <h2><span class="num">2</span><span lang="en">Start from the columns</span><span lang="es">Empieza por las columnas</span></h2>
+    <p lang="en">Ask the research team for the list of columns they need, in writing. For a vision study it might look like this:</p>
+    <p lang="es">Pide por escrito al equipo de investigación la lista de columnas que necesitan. Para un estudio de la vista podría ser así:</p>
+    <ul class="plain">
+      <li><span lang="en">consent;</span><span lang="es">consentimiento;</span></li>
+      <li><span lang="en">vision in each eye before glasses;</span><span lang="es">visión de cada ojo antes de los lentes;</span></li>
+      <li><span lang="en">the prescription that was measured;</span><span lang="es">la graduación que se midió;</span></li>
+      <li><span lang="en">the prescription of the glasses given;</span><span lang="es">la graduación de los lentes entregados;</span></li>
+      <li><span lang="en">vision in each eye with the glasses.</span><span lang="es">visión de cada ojo con los lentes.</span></li>
+    </ul>
+    <p lang="en">Some things you do <strong>not</strong> need to ask. Age, sex and community already live on the patient's record, and the research file brings them in for you.</p>
+    <p lang="es">Algunas cosas <strong>no</strong> hace falta preguntarlas. La edad, el sexo y la comunidad ya están en el registro del paciente, y el archivo de investigación las incluye por ti.</p>
+  </section>
+  <section id="one-visit">
+    <h2><span class="num">3</span><span lang="en">One form per visit</span><span lang="es">Un formulario por visita</span></h2>
+    <p lang="en">Put everything measured at one visit into one form: the test before, what was given, the test after. Then each row of the file is one complete visit.</p>
+    <p lang="es">Pon todo lo que se mide en una visita en un solo formulario: la prueba antes, lo que se entregó, la prueba después. Así cada fila del archivo es una visita completa.</p>
+    <p lang="en">If you split a visit across two forms, someone later has to match a row in one file to a row in another, and every mismatch is a patient lost from the study.</p>
+    <p lang="es">Si divides una visita en dos formularios, alguien después tiene que emparejar una fila de un archivo con una de otro, y cada error es un paciente perdido para el estudio.</p>
+  </section>
+  <section id="pick-lists">
+    <h2><span class="num">4</span><span lang="en">Pick from a list; don't type</span><span lang="es">Elige de una lista; no escribas</span></h2>
+    <p lang="en">Manage offers seven kinds of question. Two matter most for research:</p>
+    <p lang="es">Manage ofrece siete tipos de pregunta. Para investigación importan sobre todo dos:</p>
+    <figure>
+      <img src="assets/img/manage-02-blocks-palette.png"
+           data-src-en="assets/img/manage-02-blocks-palette.png"
+           data-src-es="assets/img/es/manage-02-blocks-palette.png"
+           data-alt-en="The Blocks panel in Form Creator listing the seven kinds of question."
+           data-alt-es="El panel Bloques del Creador de formularios con los siete tipos de pregunta."
+           alt="The Blocks panel in Form Creator listing the seven kinds of question.">
+      <figcaption><span lang="en">The seven blocks. For research, use Single select wherever the answers come from a known list.</span><span lang="es">Los siete bloques. Para investigación, usa Selección única siempre que las respuestas vengan de una lista conocida.</span></figcaption>
+    </figure>
+    <div class="tablewrap ">
+      <table>
+        <thead><tr><th><span lang="en">Use</span><span lang="es">Usa</span></th><th><span lang="en">For</span><span lang="es">Para</span></th><th><span lang="en">Example</span><span lang="es">Ejemplo</span></th></tr></thead>
+        <tbody>
+          <tr><td><span lang="en"><strong>Question - Single select</strong></span><span lang="es"><strong>Pregunta: selección única</strong></span></td><td><span lang="en">anything with standard values</span><span lang="es">todo lo que tenga valores estándar</span></td><td><span lang="en">a vision line (20/40), a lens power (−2.25), yes or no</span><span lang="es">una línea de visión (20/40), una graduación (−2.25), sí o no</span></td></tr>
+          <tr><td><span lang="en"><strong>Question - Number response</strong></span><span lang="es"><strong>Pregunta: respuesta numérica</strong></span></td><td><span lang="en">true measurements with no fixed list</span><span lang="es">medidas reales sin lista fija</span></td><td><span lang="en">a lens axis between 0 and 180</span><span lang="es">el eje de un lente entre 0 y 180</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p lang="en">Why it matters: on a busy day, a typed number can lose its minus sign or its decimal point, and nothing in the file shows that it happened.</p>
+    <p lang="es">Por qué importa: en un día con mucho trabajo, un número escrito puede perder el signo menos o el punto decimal, y nada en el archivo muestra que pasó.</p>
+    <div class="spellings">
+      <div><span>−2.25 → 2.25</span><em lang="en">a short-sighted patient becomes long-sighted</em><em lang="es">un paciente miope se vuelve hipermétrope</em></div>
+      <div><span>−2.25 → −225</span><em lang="en">an impossible value that someone has to guess about</em><em lang="es">un valor imposible que alguien tiene que adivinar</em></div>
+      <div><span>−2.25 ✓</span><em lang="en">picked from a list: always one of the real values</em><em lang="es">elegido de una lista: siempre uno de los valores reales</em></div>
+    </div>
+  </section>
+  <section id="community">
+    <h2><span class="num">5</span><span lang="en">Community from a list</span><span lang="es">La comunidad, de una lista</span></h2>
+    <p lang="en">The community on a patient's record is typed by hand, so the same place ends up spelled many ways: <code>El Río</code>, <code>El Rio</code>, <code>el rio </code>. To a spreadsheet those are three different places.</p>
+    <p lang="es">La comunidad en el registro del paciente se escribe a mano, así que el mismo lugar termina escrito de muchas maneras: <code>El Río</code>, <code>El Rio</code>, <code>el rio </code>. Para una hoja de cálculo son tres lugares distintos.</p>
+    <p lang="en">If the study groups patients by community, add a single-select question listing the communities the clinic serves, spelled once, the way you want them, plus “Other”.</p>
+    <p lang="es">Si el estudio agrupa a los pacientes por comunidad, agrega una pregunta de selección única con las comunidades que atiende la clínica, escritas una vez como quieres, más «Otra».</p>
+  </section>
+  <section id="consent">
+    <h2><span class="num">6</span><span lang="en">Ask for consent first</span><span lang="es">Pide primero el consentimiento</span></h2>
+    <p lang="en">Make the first question a single select: has the patient agreed to their data being used for this study? Copy the wording from the ethics approval word for word. Don't shorten it or improve it.</p>
+    <p lang="es">Haz que la primera pregunta sea de selección única: ¿el paciente aceptó que sus datos se usen en este estudio? Copia el texto de la aprobación ética palabra por palabra. No lo acortes ni lo mejores.</p>
+    <div class="note">
+      <p lang="en"><strong></strong>The research file contains every time the form was filled in, including patients who said no. Those rows are removed before the file is sent; <a href="/guides/research/sharing-data-with-researchers/#before">Sharing data with researchers</a> shows how.</p>
+      <p lang="es"><strong></strong>El archivo de investigación contiene todas las veces que se llenó el formulario, incluidos los pacientes que dijeron que no. Esas filas se quitan antes de enviar el archivo; <a href="/guides/research/sharing-data-with-researchers/#before">Compartir datos con investigadores</a> explica cómo.</p>
+    </div>
+  </section>
+  <section id="no-names">
+    <h2><span class="num">7</span><span lang="en">Nothing that identifies anyone</span><span lang="es">Nada que identifique a nadie</span></h2>
+    <p lang="en">Don't ask for names, phone numbers or ID numbers inside the form. They are already on the patient's record, and the research file is built to leave the record's copies out. A question that asks for one would put it straight back in.</p>
+    <p lang="es">No pidas nombres, teléfonos ni números de cédula dentro del formulario. Ya están en el registro del paciente, y el archivo de investigación está hecho para dejar fuera esas copias. Una pregunta que los pida los volvería a meter.</p>
+    <p lang="en">A <strong>Geolocation</strong> question is the one exception: the research file leaves it out on its own, because a location is a home.</p>
+    <p lang="es">Una pregunta de <strong>Geolocalización</strong> es la única excepción: el archivo de investigación la deja fuera por sí solo, porque una ubicación es una casa.</p>
+  </section>
+  <section id="turn-on">
+    <h2><span class="num">8</span><span lang="en">Turn on the research file</span><span lang="es">Activa el archivo de investigación</span></h2>
+    <p lang="en">Every form starts with the research file turned off. Someone has to decide, on purpose, that this form's answers may leave Puente.</p>
+    <p lang="es">Todo formulario empieza con el archivo de investigación desactivado. Alguien tiene que decidir, a propósito, que las respuestas de este formulario pueden salir de Puente.</p>
+    <ol class="steps">
+      <li><span lang="en">In Manage, open <strong>Form Creator</strong>, or open your form with <strong>Edit</strong>.</span><span lang="es">En Manage, abre el <strong>Creador de formularios</strong>, o abre tu formulario con <strong>Editar</strong>.</span></li>
+      <li><span lang="en">Under the name and description, tick <strong>Allow research export</strong>. Read the sentence below it.</span><span lang="es">Debajo del nombre y la descripción, marca <strong>Permitir exportación para investigación</strong>. Lee la frase de abajo.</span></li>
+      <li><span lang="en">Press <strong>Publish</strong>.</span><span lang="es">Pulsa <strong>Publicar</strong>.</span></li>
+    </ol>
+    <figure class="wide">
+      <img src="assets/img/research-gif-01-turn-on.gif" loading="lazy"
+           data-src-en="assets/img/research-gif-01-turn-on.gif"
+           data-src-es="assets/img/es/research-gif-01-turn-on.gif"
+           data-alt-en="Typing a form name in Form Creator, ticking Allow research export, and pressing Publish."
+           data-alt-es="Escribiendo el nombre de un formulario en el Creador de formularios, marcando Permitir exportación para investigación y pulsando Publicar."
+           alt="Typing a form name in Form Creator, ticking Allow research export, and pressing Publish.">
+      <figcaption><span class="kind" lang="en">Animation</span><span class="kind" lang="es">Animación</span> <span lang="en">Name the form, tick the box, publish.</span><span lang="es">Pon nombre al formulario, marca la casilla, publica.</span></figcaption>
+    </figure>
+    <figure>
+      <img src="assets/img/research-03-allow-research-export.png"
+           data-src-en="assets/img/research-03-allow-research-export.png"
+           data-src-es="assets/img/es/research-03-allow-research-export.png"
+           data-alt-en="Form Creator with the Allow research export checkbox ticked and the explanation below it."
+           data-alt-es="El Creador de formularios con la casilla Permitir exportación para investigación marcada y la explicación debajo."
+           alt="Form Creator with the Allow research export checkbox ticked and the explanation below it.">
+      <figcaption><span lang="en">The sentence under the box says exactly what turning it on does.</span><span lang="es">La frase debajo de la casilla dice exactamente qué hace activarla.</span></figcaption>
+    </figure>
+  </section>
+  <section id="test">
+    <h2><span class="num">9</span><span lang="en">Test it with a copy</span><span lang="es">Pruébalo con una copia</span></h2>
+    <p lang="en">Test the form before the clinic, but not on the real form. Test patients sent to the real form would end up in the real research file. Use a copy instead.</p>
+    <p lang="es">Prueba el formulario antes de la clínica, pero no en el formulario real. Los pacientes de prueba enviados al formulario real terminarían en el archivo de investigación real. Usa una copia.</p>
+    <ol class="steps">
+      <li><span lang="en">In Form Manager, press <strong>Duplicate</strong> on the form.</span><span lang="es">En el Gestor de formularios, pulsa <strong>Duplicar</strong> en el formulario.</span></li>
+      <li><span lang="en">Start the name with <code>PRUEBA -</code> so nobody mistakes it for the real one, and publish.</span><span lang="es">Empieza el nombre con <code>PRUEBA -</code> para que nadie lo confunda con el real, y publica.</span></li>
+      <li><span lang="en">On a phone, fill in the copy for two or three invented patients, and sync.</span><span lang="es">En un teléfono, llena la copia para dos o tres pacientes inventados, y sincroniza.</span></li>
+      <li><span lang="en">Press <strong>Export research file</strong> on the copy. Open the file and read every column heading.</span><span lang="es">Pulsa <strong>Exportar archivo de investigación</strong> en la copia. Abre el archivo y lee cada título de columna.</span></li>
+      <li><span lang="en">Send that test file to the research team and ask them to confirm it has what they need.</span><span lang="es">Envía ese archivo de prueba al equipo de investigación y pídeles que confirmen que tiene lo que necesitan.</span></li>
+      <li><span lang="en">When they say yes, <strong>delete the copy</strong>.</span><span lang="es">Cuando digan que sí, <strong>elimina la copia</strong>.</span></li>
+    </ol>
+    <figure class="wide">
+      <img src="assets/img/research-gif-03-test-copy.gif" loading="lazy"
+           data-src-en="assets/img/research-gif-03-test-copy.gif"
+           data-src-es="assets/img/es/research-gif-03-test-copy.gif"
+           data-alt-en="Pressing Duplicate on the vision exam form, renaming the copy to start with PRUEBA, and publishing it."
+           data-alt-es="Pulsando Duplicar en el formulario del examen de la vista, cambiando el nombre de la copia para que empiece con PRUEBA, y publicándola."
+           alt="Pressing Duplicate on the vision exam form, renaming the copy to start with PRUEBA, and publishing it.">
+      <figcaption><span class="kind" lang="en">Animation</span><span class="kind" lang="es">Animación</span> <span lang="en">Duplicate, rename with PRUEBA, publish. The copy has its own research file, separate from the real one.</span><span lang="es">Duplicar, renombrar con PRUEBA, publicar. La copia tiene su propio archivo de investigación, separado del real.</span></figcaption>
+    </figure>
+  </section>
+  <section id="rules">
+    <h2><span class="num">10</span><span lang="en">Rules of thumb</span><span lang="es">Reglas prácticas</span></h2>
+    <ul class="plain">
+      <li><span lang="en">Build the form from the spreadsheet the researchers need.</span><span lang="es">Crea el formulario a partir de la hoja de cálculo que necesitan los investigadores.</span></li>
+      <li><span lang="en">If the answer comes from a list, make it a list.</span><span lang="es">Si la respuesta viene de una lista, hazla una lista.</span></li>
+      <li><span lang="en">Consent first, in the approved words.</span><span lang="es">Primero el consentimiento, con las palabras aprobadas.</span></li>
+      <li><span lang="en">Never ask for a name inside the form.</span><span lang="es">Nunca pidas un nombre dentro del formulario.</span></li>
+      <li><span lang="en">Test on a copy, never on the real form.</span><span lang="es">Prueba en una copia, nunca en el formulario real.</span></li>
+    </ul>
+    <h3><span lang="en">Check yourself</span><span lang="es">Comprueba lo que aprendiste</span></h3>
+    <details class="check">
+      <summary><span lang="en">A researcher asks for “age”. Do you add an age question?</span><span lang="es">Un investigador pide «edad». ¿Agregas una pregunta de edad?</span></summary>
+      <p lang="en">No. Age comes from the patient's record, and the research file includes it for you.</p>
+      <p lang="es">No. La edad viene del registro del paciente, y el archivo de investigación la incluye por ti.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">Should the lens power be a Number response?</span><span lang="es">¿La graduación debe ser una Respuesta numérica?</span></summary>
+      <p lang="en">No. Lens powers come in fixed steps, so a single-select list makes typos impossible.</p>
+      <p lang="es">No. Las graduaciones vienen en pasos fijos, así que una lista de selección única hace imposibles los errores al escribir.</p>
+    </details>
+    <details class="check">
+      <summary><span lang="en">Where do you try out the form before the clinic?</span><span lang="es">¿Dónde pruebas el formulario antes de la clínica?</span></summary>
+      <p lang="en">On a duplicate whose name starts with PRUEBA, which you delete afterwards.</p>
+      <p lang="es">En un duplicado cuyo nombre empieza con PRUEBA, que eliminas después.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p lang="en">Puente Collect and Puente Manage are source-available under the Business Source License 1.1.
+      They convert to the Apache License 2.0 on 5 June 2029.</p>
+    <p lang="es">Puente Collect y Puente Manage son de código disponible bajo la Business Source License 1.1.
+      Pasan a la Apache License 2.0 el 5 de junio de 2029.</p>
+    <p lang="en">Questions: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+    <p lang="es">Preguntas: <a href="mailto:info@puente-dr.org">info@puente-dr.org</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = 'puente-guide-lang';
+  var TITLE = {
+    en: 'Designing a form for research — Puente',
+    es: 'Diseñar un formulario para investigación — Puente'
+  };
+  var DESC = {
+    en: 'How to build a Puente form whose answers a research team can analyse: agreed columns, pick lists, consent, and a test before the clinic.',
+    es: 'Cómo crear un formulario de Puente cuyas respuestas un equipo de investigación pueda analizar: columnas acordadas, listas de opciones, consentimiento y una prueba antes de la clínica.'
+  };
+  var TOC = { en: 'On this page', es: 'En esta página' };
+  var LANG_GROUP = { en: 'Language', es: 'Idioma' };
+
+  function current(){
+    var q = /(?:\?|&)lang=(es|en)\b/.exec(location.search);
+    if (q) return q[1];
+    try {
+      var stored = localStorage.getItem(KEY);
+      if (stored === 'es' || stored === 'en') return stored;
+    } catch (e) {}
+    return 'en';
+  }
+
+  function apply(lang){
+    document.documentElement.lang = lang;
+    document.title = TITLE[lang];
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', DESC[lang]);
+    var toc = document.querySelector('nav.toc');
+    if (toc) toc.setAttribute('aria-label', TOC[lang]);
+    var group = document.querySelector('.lang');
+    if (group) group.setAttribute('aria-label', LANG_GROUP[lang]);
+    document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+      btn.setAttribute('aria-pressed', btn.getAttribute('data-set-lang') === lang ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-alt-en]').forEach(function(img){
+      img.alt = lang === 'es' ? img.getAttribute('data-alt-es') : img.getAttribute('data-alt-en');
+    });
+    // The screenshots are language-specific: the app was driven twice, once per
+    // language. A reader on the Spanish page is the reader least able to map an
+    // English button onto the one in front of them. Guarded on the attribute so
+    // a figure with only one capture keeps the src it was written with.
+    document.querySelectorAll('img[data-src-es]').forEach(function(img){
+      var next = img.getAttribute(lang === 'es' ? 'data-src-es' : 'data-src-en');
+      if (next && img.getAttribute('src') !== next) img.setAttribute('src', next);
+    });
+  }
+
+  function set(lang){
+    apply(lang);
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+    var url = new URL(location.href);
+    if (lang === 'es') url.searchParams.set('lang', 'es');
+    else url.searchParams.delete('lang');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+  }
+
+  apply(current());
+  document.querySelectorAll('[data-set-lang]').forEach(function(btn){
+    btn.addEventListener('click', function(){ set(btn.getAttribute('data-set-lang')); });
+  });
+})();
+</script>
+
+</body>
+</html>
