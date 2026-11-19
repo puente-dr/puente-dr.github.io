@@ -1,0 +1,89 @@
+---
+title: Eliminar tu cuenta
+description: Cómo pedirle a Puente que elimine tu cuenta de Puente Collect y sus datos personales, o solo datos específicos — sin iniciar sesión.
+related:
+  - privacy/protecting-data
+  - help/contact-support
+  - collect/settings
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/es/collect-settings.png';
+import account from '@shots/es/manage-account-settings.png';
+
+Puedes pedirle a Puente que elimine tu cuenta de Puente Collect y los datos personales asociados. También puedes pedir que se eliminen datos personales específicos sin eliminar tu cuenta.
+
+**No necesitas iniciar sesión.** La solicitud es un correo, así que funciona aunque ya no tengas la app, el teléfono ni tu contraseña.
+
+## Solicitar la eliminación por correo
+
+{/* claim: privacy-delete-email */}
+Escribe a [info@puente-dr.org](mailto:info@puente-dr.org) con uno de estos asuntos:
+
+- **Solicitud de eliminación de cuenta Puente Collect** — para eliminar tu cuenta y sus datos personales asociados.
+- **Solicitud de eliminación de datos Puente Collect** — para eliminar solo datos personales específicos y conservar tu cuenta.
+
+## Qué incluir
+
+En el correo, indícale a Puente:
+
+- el **nombre** de la cuenta;
+- el **correo electrónico o teléfono** con que inicias sesión;
+- si deseas eliminar la **cuenta y sus datos asociados** o **solamente datos específicos** — y en ese caso, describe esos datos;
+- si corresponde, la **organización** que recopiló la información.
+
+## Qué no enviar
+
+{/* claim: privacy-delete-include */}
+No envíes tu contraseña, documentos de identidad, registros médicos ni respuestas sensibles de encuestas en el primer correo. Puente puede necesitar verificar tu identidad y aclarar la solicitud antes de actuar, y te pedirá lo que necesite.
+
+<Aside type="caution" title="Nunca envíes una contraseña por correo">
+Nadie en Puente necesita tu contraseña para eliminar tu cuenta. Si alguien te la pide, no la envíes.
+</Aside>
+
+## Qué abarca la solicitud
+
+{/* claim: privacy-delete-scope */}
+Una solicitud de eliminación de cuenta se refiere a la cuenta y su información personal asociada, como el nombre de perfil, los datos de contacto y el identificador de cuenta. Una solicitud de eliminación de datos específicos debe describir la información que deseas eliminar, sin incluir los registros sensibles.
+
+Eliminar una cuenta de encuestador no equivale a eliminar todos los registros de residentes enviados para una organización. Los registros que ya enviaste pertenecen a tu organización y no se eliminan al eliminar tu cuenta. Si una organización controla la información de las encuestas, Puente puede necesitar coordinar tu solicitud con ella.
+
+Las obligaciones legales aplicables pueden limitar la eliminación o exigir que se conserve cierta información. La [política de privacidad de Puente](https://www.puente-dr.org/privacy-policy/) explica cómo se conserva la información. Puente no promete la eliminación automática ni un plazo fijo de conservación.
+
+## Desde Collect
+
+{/* claim: privacy-delete-in-collect */}
+Si todavía tienes la app, puedes empezar desde ahí. Toca el engranaje, luego <UI>Apoyo</UI> arriba en la pantalla y después <UI>¿Eliminar usuario?</UI> abajo. Collect pregunta <UI>¿Eliminar su cuenta?</UI> y explica que los registros que ya enviaste se quedan con tu organización. <UI>Continuar</UI> abre la página de tu cuenta en Puente Manage en el navegador.
+
+<div class="shots">
+<Shot phone src={settings} alt="La lista de configuración de Collect: nombre, teléfono y correo; cambiar la contraseña; buscar registros; idioma; registros sin conexión." caption="El engranaje abre la configuración de la cuenta. ¿Eliminar usuario? está del lado de Apoyo." />
+</div>
+
+{/* claim: privacy-delete-credentials */}
+En la pantalla de inicio de sesión hay otro botón que también dice <UI>Eliminar usuario</UI>. Ese solo borra el inicio de sesión guardado en ese teléfono. No elimina tu cuenta.
+
+## Eliminar usuario en Manage
+
+{/* claim: privacy-delete-user-manage */}
+En Manage, <UI>Configuración</UI> en el menú de la izquierda abre <UI>Configuración de la cuenta</UI>. El botón rojo <UI>Eliminar usuario</UI> de abajo marca tu cuenta como inactiva y te lleva a la página de inicio de sesión. No pide confirmación, así que púlsalo solo si de verdad quieres hacerlo.
+
+Hoy ese botón no te quita el acceso: una cuenta marcada como inactiva así todavía puede entrar a Collect y a Manage. Tampoco borra la cuenta ni tus datos personales. Para que se eliminen tu cuenta y tus datos, envía el correo descrito arriba.
+
+<Shot src={account} alt="La página de configuración de la cuenta en Manage con los campos de nombre, apellido, una organización que no se puede editar, teléfono, correo y contraseña, un botón azul para actualizar el usuario y un botón rojo Eliminar usuario." caption="Eliminar usuario marca la cuenta como inactiva. No te quita el acceso ni borra tus datos — para eso, escríbele a Puente." />
+
+## Política de privacidad
+
+Consulta la [política de privacidad de Puente](https://www.puente-dr.org/privacy-policy/) para obtener información sobre acceso, conservación y derechos de privacidad.
+
+## Preguntas frecuentes
+
+**Ya no tengo el teléfono ni mi contraseña. ¿Puedo pedirlo igual?**
+Sí. Envía el correo desde cualquier dirección y di qué correo o teléfono usaba la cuenta.
+
+**¿Eliminar mi cuenta elimina las encuestas que recogí?**
+No. Esos registros pertenecen a la organización que los recogió.
+
+{/* claim: privacy-delete-scope */}
+**Una persona encuestada por una organización que usa Puente quiere que se eliminen sus datos.**
+Puede escribir a info@puente-dr.org con el asunto de eliminación de datos e indicar la organización. Puente puede necesitar coordinar con esa organización.

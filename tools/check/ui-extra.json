@@ -1,0 +1,56 @@
+{
+ "en": [
+  {
+   "text": "This account has been deactivated. Contact your organization administrator.",
+   "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+   "line": 277
+  },
+  {
+   "text": "Your organization determines which records you can see. Email info@puente-dr.org to change it.",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 116
+  }
+ ],
+ "es": [
+  {
+   "text": "This account has been deactivated. Contact your organization administrator.",
+   "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+   "line": 277
+  },
+  {
+   "text": "Your organization determines which records you can see. Email info@puente-dr.org to change it.",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 116
+  },
+  {
+   "text": "First Name",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 187
+  },
+  {
+   "text": "Last Name",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 188
+  },
+  {
+   "text": "Phone Number",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 190
+  },
+  {
+   "text": "Email Address",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 191
+  },
+  {
+   "text": "Password",
+   "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+   "line": 192
+  },
+  {
+   "text": "Duplicate",
+   "file": "puente-react-nextjs-platform/app/epics/FormMarketplace/index.js",
+   "line": 58
+  }
+ ]
+}

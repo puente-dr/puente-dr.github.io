@@ -1,0 +1,89 @@
+---
+title: Contact support
+description: How to reach Puente, the changes only Puente staff can make, what to put in your message and what never to send.
+related:
+  - help/troubleshooting
+  - privacy/delete-your-account
+  - organizations/nicknames
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/en/collect-settings.png';
+import account from '@shots/en/manage-account-settings.png';
+import notListed from '@shots/en/manage-register-not-listed.png';
+
+Most day-to-day problems can be solved inside your own team: an administrator can add or remove people, and [Troubleshooting](/docs/help/troubleshooting/) covers the common errors. Some changes, though, only Puente staff can make. This page lists them and explains how to write to Puente so you get an answer quickly.
+
+## How to reach Puente
+
+Email [info@puente-dr.org](mailto:info@puente-dr.org).
+
+{/* claim: help-feedback-email */}
+From the phone: tap the gear, then <UI>Support</UI>, then <UI>Contact us / Feedback</UI>. Type your message and tap <UI>Send Mail</UI>; Collect opens your email app with a message to info@puente-dr.org, ready to send.
+
+<div class="shots">
+<Shot phone src={settings} alt="The Account Settings screen in Collect with Settings and Support buttons at the top and a list of settings below." caption="Contact us / Feedback is on the Support side of the gear screen." />
+</div>
+
+## What only Puente can do
+
+{/* claim: help-staff-add-org */}
+{/* claim: help-staff-aliases */}
+{/* claim: help-staff-org-change */}
+{/* claim: help-empty-app */}
+{/* claim: help-staff-last-admin */}
+{/* claim: help-staff-blocks */}
+{/* claim: data-research-study-id */}
+- **Add your organization to the Manage sign-up list.** The web sign-up only lists organizations already on file. Use <UI>My organization isn't listed</UI>, which opens an email to Puente, and do not pick a close match instead.
+- **Add a nickname for your organization** — another spelling your team uses. The Organizations screen shows a <UI>Save spellings</UI> box, but only Puente staff can save it. See [Nicknames](/docs/organizations/nicknames/).
+- **Move an account to another organization.** Your organization decides which records you can see, so you cannot change it yourself.
+- **Sort out a refused organization name.** If Collect refused the name you typed at sign-up, your account exists but is not linked to an organization.
+- **Replace the last administrator.** An organization's last administrator cannot be demoted or deactivated. If that person has left, Puente can appoint someone else.
+- **Ask for a new kind of question.** The Form Creator offers seven blocks. If your program needs something they cannot do, tell Puente what and why.
+- **Look up a study ID.** Only Puente can turn a research file's `P-…` code back into a person.
+- **Delete an account or personal data.** See [Delete your account](/docs/privacy/delete-your-account/).
+
+
+<Shot src={notListed} alt="The Manage registration form with the Organization picker reading Please Select, a My organization isn't listed link, and a note that Puente staff add organizations by hand with an Email us your organization's name link." caption="The Manage sign-up only lists organizations Puente has added. The link starts the email for you." />
+
+<Shot src={account} alt="Manage's Account Settings page. The Organization field is read-only, with a note: Your organization determines which records you can see. Email info@puente-dr.org to change it." caption="Organization is the one account field you cannot edit yourself." />
+
+## What to include
+
+A message Puente can act on right away usually has:
+
+- your **name** and your **organization**, spelled the way you signed up;
+- the **app** — Collect or Manage — and, for Collect, the phone type and app version;
+- **what you were doing**, step by step, and **what you expected**;
+- the **exact message** on screen, copied word for word;
+- the **form's name** and roughly **when** it happened;
+- for a nickname, the **exact spelling** your team uses.
+
+{/* claim: help-version-label */}
+The Collect version number is shown on the gear's settings screen, after the word Version.
+
+## What never to send
+
+<Aside type="caution" title="Keep patient data out of email">
+Never send passwords, patient names, cédula numbers, phone numbers, health details, exported files, or screenshots that show any of these. Describe the record instead: the form, the community and the date. If Puente needs more, it will ask.
+</Aside>
+
+For a study ID lookup, send the code only. Never send a code and a name together.
+
+## Urgent or can wait
+
+Write **"Urgent"** at the start of the subject when:
+
+{/* claim: help-sync-failures */}
+- forms will not leave a phone after several tries on a good connection and the app says the server did not accept them — the phone holds the only copy;
+- someone who left still has access (today <UI>Deactivate</UI> signs people out but does not stop them signing in again);
+- exports keep failing before a deadline.
+
+These **can wait** for a normal reply: new nicknames, adding an organization to the sign-up list, moving an account, and requests for new question types.
+
+## FAQ
+
+{/* claim: privacy-deactivate */}
+**Can my administrator do any of this instead?**
+An administrator can make someone an administrator, deactivate and reactivate members of your own organization. Everything listed above needs Puente.

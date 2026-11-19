@@ -1,0 +1,109 @@
+---
+title: Exportaciones para investigación
+description: El archivo de investigación sin datos personales — en qué se diferencia de los registros completos, cómo activarlo en un formulario, qué columnas tiene y cómo funcionan los ID de estudio.
+related:
+  - data/exporting-data
+  - guides/sharing-data-with-researchers
+  - guides/designing-a-form-for-research
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import allow from '@shots/es/research-03-allow-research-export.png';
+import manager from '@shots/es/research-00-form-manager.png';
+import rows from '@shots/es/research-04-forms-collected.png';
+
+A veces quienes organizan una clínica y quienes la estudian son equipos distintos. El **archivo de investigación** es una versión de la exportación de un formulario personalizado hecha para un socio de investigación: conserva lo que pasó en cada visita y deja fuera a quién le pasó.
+
+Es el único archivo que debe salir de Puente. Esta página describe el archivo. Para los pasos de revisarlo y enviarlo, mira [Compartir datos con investigadores](/docs/es/guides/sharing-data-with-researchers/).
+
+## Archivo de investigación o registros completos
+
+{/* claim: data-research-two-buttons */}
+Un formulario con el archivo de investigación activado lleva la marca <UI>Investigación activada</UI> en el Gestor de formularios, y tiene dos botones donde los demás formularios tienen uno:
+
+| Botón | Qué obtienes | A dónde va |
+|---|---|---|
+| <UI>Exportar archivo de investigación</UI> (azul) | Un ID de estudio, edad, sexo, comunidad y las respuestas del formulario. Sin nombres, cédulas, teléfonos, fechas de nacimiento ni ubicaciones. | A un socio de investigación, después de tus revisiones. |
+| <UI>Exportar registros completos</UI> (blanco) | Cada respuesta con el nombre, la cédula, el teléfono, la fecha de nacimiento y la ubicación de la persona. | Se queda dentro de tu organización. |
+
+Abre la fila con la flecha y Manage repite esto en palabras sencillas debajo de <UI>Formularios recolectados</UI>.
+
+<Shot src={rows} alt="La fila del formulario de examen de la vista abierta: la marca de investigación activada, los botones para exportar el archivo de investigación y los registros completos, el conteo de formularios recolectados con un botón Actualizar y dos notas que describen cada archivo." caption="Las notas debajo del conteo dicen qué contiene cada archivo. Léelas antes de escoger." />
+
+## Activar el archivo de investigación
+
+{/* claim: data-research-allow */}
+El archivo de investigación es un ajuste de cada formulario personalizado. En <UI>Crear</UI>, abre el formulario, marca <UI>Permitir exportación para investigación</UI> debajo de la descripción y luego pulsa <UI>Publicar</UI>. Está apagado hasta que alguien lo marca, y no está disponible para los cuatro formularios de Puente.
+
+<Shot src={allow} alt="La tarjeta de ajustes del Creador de formularios con los campos de tipo, nombre y descripción del formulario, y la casilla Permitir exportación para investigación marcada con una explicación debajo." caption="Una casilla por formulario. La nota de abajo dice que las preguntas de ubicación del formulario no entran en el archivo de investigación." />
+
+Si puedes, actívalo antes del día de clínica, para que el formulario que pruebas sea el mismo que vas a exportar.
+
+## Columnas del archivo
+
+{/* claim: data-research-columns */}
+Una fila por cada vez que se llenó el formulario. Primero vienen estas columnas y después una columna por cada pregunta del formulario:
+
+| Columna | Significa |
+|---|---|
+| `study_id` | Un código para el paciente. La misma persona tiene el mismo código en cada fila y en cada descarga. |
+| `submission_id` | Un código para esta visita. |
+| `visit_date` | El día en que el formulario llegó a Puente. |
+| `age_at_visit` | La edad en años cumplidos en la fecha de la visita, calculada desde la fecha de nacimiento. |
+| `age_as_reported` | Una edad escrita en el registro de la persona, por ejemplo cuando no se sabía la fecha de nacimiento. |
+| `age_reported_date` | El día en que se creó el registro de la persona — la fecha a la que se refiere esa edad escrita. |
+| `sex`, `communityname`, `city`, `province` | Del registro de la persona. |
+| `surveyingOrganization` | Qué organización lo recogió. |
+
+Como `visit_date` es el día en que el formulario llegó a Puente, un formulario que esperó una semana en un teléfono lleva el día en que se envió. Envía los formularios desde la sincronización sin conexión el mismo día.
+
+Como en toda exportación de formularios personalizados, se quitan los acentos de las respuestas y los títulos: `El Río` se vuelve `El Rio`.
+
+## Dos tipos de edad
+
+{/* claim: data-research-ages */}
+Algunos pacientes saben su fecha de nacimiento; otros no, y el encuestador escribe una edad. El archivo mantiene las dos separadas:
+
+- `age_at_visit` se calcula exacta: una persona nacida el 26 de diciembre de 1983 y atendida el 10 de noviembre de 2026 tiene 42, no 43. Queda en blanco cuando la fecha de nacimiento no es una fecha exacta.
+- `age_as_reported` es la edad escrita, nunca convertida, y `age_reported_date` dice cuándo se anotó.
+
+Si las dos están en blanco, la edad nunca se anotó. Se deja en blanco en vez de adivinarla.
+
+## Qué queda fuera
+
+{/* claim: data-research-allowlist */}
+El archivo se arma con una lista fija de columnas **permitidas**, no borrando las delicadas. Así deja fuera nombres, apodos, números de cédula, teléfonos, datos de seguro, fechas de nacimiento, coordenadas GPS, la foto, la cuenta del encuestador y los números de registro propios de Puente — y cualquier columna que se agregue a los registros de pacientes en el futuro queda fuera hasta que alguien decida que debe entrar.
+
+<Aside type="caution" title="Tus propias preguntas sí entran">
+Cada pregunta del formulario se vuelve una columna, menos las de ubicación. Si el formulario pide un nombre, un teléfono o una cédula, esa respuesta está en el archivo de investigación. No pongas esas preguntas en un formulario de investigación.
+</Aside>
+
+## ID de estudio
+
+{/* claim: data-research-study-id */}
+Un ID de estudio se ve así: `P-3fa9c01b2e`. Se hace a partir del registro de la persona con una clave secreta que solo tiene Puente, así que:
+
+- **Es estable.** Un paciente atendido en dos clínicas tiene el mismo código las dos veces, y los investigadores pueden seguirlo.
+- **Solo Puente puede revertirlo.** Si un investigador pregunta por `P-3fa9c01b2e`, envía el código a info@puente-dr.org y Puente puede encontrar a ese paciente. El investigador no.
+
+{/* claim: data-research-audit */}
+Puente también anota quién descargó cada archivo de investigación y cuántas filas tenía — nunca su contenido.
+
+<Shot src={manager} alt="El Gestor de formularios. En Formularios personalizados, el formulario de examen de la vista lleva la marca de investigación activada y tiene los botones para exportar el archivo de investigación y los registros completos; el formulario de registro de la clínica, debajo, tiene un solo botón de exportar." caption="Solo los formularios con el archivo de investigación activado tienen dos botones." />
+
+{/* claim: data-research-filename */}
+La descarga lleva el nombre del formulario, la palabra `research` y la fecha, por ejemplo `Vision exam - research - 2026-11-10.csv`, para que no se confunda con el archivo de registros completos.
+
+## Preguntas frecuentes
+
+**Mi formulario tiene un solo botón de exportar.**
+El archivo de investigación no está activado, o es uno de los cuatro formularios de Puente. Marca Permitir exportación para investigación en el Creador de formularios y publica.
+
+{/* claim: data-research-all-rows */}
+**¿El archivo de investigación deja fuera a las personas que dijeron que no al estudio?**
+No. Contiene todos los envíos. Quita a quien no dio su consentimiento antes de enviarlo.
+
+**¿Puede un investigador recibir los registros completos?**
+No debería. Solo el archivo de investigación sale de Puente.

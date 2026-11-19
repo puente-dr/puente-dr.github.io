@@ -1,0 +1,89 @@
+---
+title: Delete your account
+description: How to ask Puente to delete your Puente Collect account and its personal data, or only specific data — no sign-in needed.
+related:
+  - privacy/protecting-data
+  - help/contact-support
+  - collect/settings
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/en/collect-settings.png';
+import account from '@shots/en/manage-account-settings.png';
+
+You can ask Puente to delete your Puente Collect account and the personal data that goes with it. You can also ask for specific personal data to be deleted without deleting your account.
+
+**You do not need to sign in.** A request is an email, so it works even if you no longer have the app, the phone or your password.
+
+## Request deletion by email
+
+{/* claim: privacy-delete-email */}
+Write to [info@puente-dr.org](mailto:info@puente-dr.org) with one of these subjects:
+
+- **Puente Collect account deletion request** — to delete your account and its associated personal data.
+- **Puente Collect data deletion request** — to delete only specific personal data and keep your account.
+
+## What to include
+
+In the email, tell Puente:
+
+- the **name** on the account;
+- the **email address or phone number** you use to sign in;
+- whether you want the **account and its associated data** deleted, or **only specific data** — and if so, describe that data;
+- if relevant, the **organization** that collected the information.
+
+## What not to send
+
+{/* claim: privacy-delete-include */}
+Do not send your password, identity documents, health records or sensitive survey answers in your first email. Puente may need to verify your identity and clarify the request before acting, and will ask for what it needs.
+
+<Aside type="caution" title="Never email a password">
+Nobody at Puente needs your password to delete your account. If anyone asks for it, do not send it.
+</Aside>
+
+## What the request covers
+
+{/* claim: privacy-delete-scope */}
+An account deletion request covers the account and its associated personal information, such as your profile name, contact details and account identifier. A data-only request should describe the information you want deleted, without including the sensitive records themselves.
+
+Deleting a surveyor's account is not the same as deleting every resident record submitted for an organization. Records you have already submitted belong to your organization and are not removed by deleting your account. If an organization controls the survey information, Puente may need to coordinate your request with that organization.
+
+Applicable legal obligations may limit deletion or require some information to be kept. The [Puente Privacy Policy](https://www.puente-dr.org/privacy-policy/) explains how information is retained. Puente does not promise automatic deletion or a fixed retention period.
+
+## From inside Collect
+
+{/* claim: privacy-delete-in-collect */}
+If you still have the app, you can start from there. Tap the gear, then <UI>Support</UI> at the top of the screen, then <UI>Delete user?</UI> at the bottom. Collect asks <UI>Delete your account?</UI> and explains that records you have already submitted stay with your organization. <UI>Continue</UI> opens your account page in Puente Manage in your browser.
+
+<div class="shots">
+<Shot phone src={settings} alt="The Collect settings list: Name, Phone, Email; Change Password; Find Records; Language; Offline Records." caption="The gear opens Account Settings. Delete user? is on the Support side." />
+</div>
+
+{/* claim: privacy-delete-credentials */}
+<UI>Delete Credentials</UI> on the sign-in screen is something else: it only forgets the saved sign-in on that phone. It does not delete your account.
+
+## Delete user in Manage
+
+{/* claim: privacy-delete-user-manage */}
+In Manage, <UI>Settings</UI> in the left menu opens <UI>Account Settings</UI>. The red <UI>Delete user</UI> button at the bottom marks your account as inactive and returns you to the sign-in page. There is no confirmation step, so press it only when you mean it.
+
+Today that button does not remove your access: an account marked inactive this way can still sign in to Collect and Manage. It also does not erase the account or your personal data. To have your account and data deleted, send the email described above.
+
+<Shot src={account} alt="Manage's Account Settings page with First Name, Last Name, a read-only Organization, Phone Number, Email Address and Password fields, a blue Update user button and a red Delete user button." caption="Delete user marks the account inactive. It does not remove your access or your data — email Puente for that." />
+
+## Privacy Policy
+
+Read the [Puente Privacy Policy](https://www.puente-dr.org/privacy-policy/) for information about access, retention and your privacy rights.
+
+## FAQ
+
+**I no longer have the phone or my password. Can I still ask?**
+Yes. Send the email from any address and say which email or phone number the account used.
+
+**Will deleting my account delete the surveys I collected?**
+No. Those records belong to the organization that collected them.
+
+{/* claim: privacy-delete-scope */}
+**Someone was surveyed by an organization using Puente and wants their data deleted.**
+They can email info@puente-dr.org with the data deletion subject and name the organization. Puente may need to coordinate with that organization.

@@ -1,0 +1,126 @@
+---
+title: Creador de formularios
+description: Arma un formulario personalizado con siete bloques, revisa la vista previa, publícalo en los teléfonos de tu equipo y cámbialo después sin partir sus respuestas.
+related:
+  - manage/form-manager
+  - collect/custom-forms
+  - guides/designing-a-form-for-research
+  - data/reading-export-files
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import empty from '@shots/es/manage-form-creator.png';
+import edit from '@shots/es/manage-form-creator-edit.png';
+import palette from '@shots/es/manage-02-blocks-palette.png';
+import canvas from '@shots/es/manage-04-blocks-on-canvas.png';
+
+Un formulario personalizado es uno que tu organización diseña por su cuenta, en Manage, sin que nadie escriba código. Arrastras bloques de preguntas en orden, escribes las preguntas y publicas. Después, los encuestadores encuentran el formulario en el teléfono, en Formularios personalizados, junto a los formularios de Puente.
+
+## Abrir el Creador de formularios
+
+{/* claim: manage-fc-open */}
+Pulsa <UI>Crear</UI> en el menú de la izquierda, o <UI>+ Crear formulario</UI> en el [Gestor de formularios](/docs/es/manage/form-manager/). La página se llama <UI>Creador de formularios</UI> y tiene arriba a la derecha <UI>Restablecer el formulario</UI>, <UI>Vista previa del formulario</UI> y <UI>Publicar</UI>.
+
+<Shot src={empty} alt="Un Creador de formularios vacío: una tarjeta de ajustes con el tipo de formulario en Personalizado, nombre, descripción y una casilla para permitir la exportación para investigación; un área de construcción vacía; la lista de Bloques a la derecha; y un panel Inspector que pide seleccionar un bloque." caption="Los ajustes arriba, tus preguntas en el constructor, los bloques que puedes agregar a la derecha." />
+
+## Nombrar el formulario
+
+{/* claim: manage-fc-settings */}
+- <UI>Tipo de formulario</UI>: déjalo en <UI>Personalizado</UI>.
+- <UI>Nombre del formulario</UI>: lo que ven los encuestadores en el teléfono y el nombre del archivo exportado. Que sea específico: «Acceso al agua — Los Pinos», no «Encuesta».
+- <UI>Descripción</UI>: cómo se usará el formulario.
+
+{/* claim: manage-fc-type-collect */}
+Collect solo muestra en Formularios personalizados los formularios de tipo <UI>Personalizado</UI>. Los de tipo <UI>Bienes</UI> van a las pantallas de bienes de Collect.
+
+{/* claim: manage-fc-research */}
+<UI>Permitir exportación para investigación</UI> empieza sin marcar. Márcala solo si las respuestas de este formulario pueden salir de Puente como un archivo sin datos que identifiquen a las personas, para un socio de investigación con aprobación ética. Agrega al formulario el botón <UI>Exportar archivo de investigación</UI>, y las preguntas de ubicación quedan fuera de ese archivo. Mira [Exportaciones para investigación](/docs/es/data/research-exports/).
+
+## Los siete bloques
+
+{/* claim: manage-fc-blocks */}
+La lista <UI>Bloques</UI> tiene siete bloques. Esa es toda la paleta.
+
+| Bloque | Úsalo para |
+|---|---|
+| <UI>Pregunta: respuesta numérica</UI> | Una respuesta que es un número |
+| <UI>Pregunta: respuesta de texto</UI> | Una respuesta escrita en palabras |
+| <UI>Pregunta (etiqueta lateral): respuesta de texto o numérica</UI> | Una respuesta corta con la etiqueta al lado |
+| <UI>Pregunta: selección única</UI> | Elegir una opción |
+| <UI>Pregunta: selección múltiple</UI> | Elegir varias opciones |
+| <UI>Campo: encabezado</UI> | Un título que divide un formulario largo en secciones |
+| <UI>Geolocalización</UI> | La persona que encuesta toca un botón para registrar dónde está |
+
+<div class="shots">
+<Shot phone src={palette} alt="El panel Bloques con los siete bloques, cada uno con un ícono de información, encima de un panel Inspector vacío." caption="Los siete bloques. La (i) al lado de cada uno lo explica." />
+</div>
+
+{/* claim: manage-fc-number-keypad */}
+Usa el bloque numérico para todo lo que vayas a contar o sumar. En el teléfono abre un teclado de números.
+
+## Armar el formulario
+
+{/* claim: manage-fc-drag */}
+1. Arrastra un bloque desde <UI>Bloques</UI> hasta el <UI>Constructor de formularios</UI>.
+2. Haz clic en <UI>Escribe tu pregunta aquí</UI> y escribe la pregunta.
+3. En un bloque de selección, escribe cada opción y usa <UI>Agregar opción</UI> y <UI>Eliminar</UI>. <UI>Agregar pregunta de texto al seleccionar</UI> hace una pregunta más cuando se elige esa opción.
+4. Arrastra los bloques hacia arriba o abajo para cambiar el orden. El zafacón elimina uno.
+
+<Shot src={canvas} alt="Tres bloques en el constructor: una selección única con Opción 1, Agregar opción, Eliminar y Agregar pregunta de texto al seleccionar; una respuesta numérica que pregunta cuántas personas viven en la casa; y una respuesta de texto vacía. Cada uno tiene la casilla La respuesta es obligatoria." caption="El texto de la pregunta que escribes aquí es el encabezado de la columna en la exportación." />
+
+{/* claim: manage-fc-inspector */}
+Haz clic en un bloque para abrirlo en el <UI>Inspector</UI>: su <UI>Etiqueta</UI>, su <UI>Clave Formik</UI> (el nombre interno, que no se puede editar) y los interruptores <UI>Obligatorio</UI>, <UI>Permitir otro</UI> y <UI>Selección múltiple</UI>.
+
+## Vista previa y publicación
+
+{/* claim: manage-fc-preview */}
+<UI>Vista previa del formulario</UI> abre un panel que muestra el formulario como lo dibuja el teléfono. <UI>Cerrar</UI> vuelve al constructor.
+
+{/* claim: manage-fc-publish */}
+Pulsa <UI>Publicar</UI>. Si sale bien, aparece <UI>¡Listo!</UI> por unos segundos y el constructor se vacía para el siguiente formulario.
+
+{/* claim: manage-fc-reaches-phone */}
+Los teléfonos reciben el formulario cuando la persona actualiza Formularios personalizados en Collect, con conexión — iniciar sesión no basta para traerlo.
+
+{/* claim: manage-fc-publish-silent */}
+<Aside type="caution" title="Una publicación fallida no avisa">
+Si la publicación falla, Manage no muestra ningún error: el constructor simplemente no se vacía y no aparece <UI>¡Listo!</UI>. Después de cada publicación, busca el formulario en el Gestor de formularios y en un teléfono antes de que el equipo salga.
+</Aside>
+
+{/* claim: manage-fc-reset */}
+<UI>Restablecer el formulario</UI> vacía todo el constructor de una vez, sin preguntar. Lo que no publicaste se pierde.
+
+## Cambiar un formulario publicado
+
+{/* claim: manage-fc-edit */}
+En el Gestor de formularios, pulsa <UI>Editar</UI> en el formulario. Se abre aquí con sus ajustes y bloques; <UI>Publicar</UI> guarda los cambios en el mismo formulario.
+
+<Shot src={edit} alt="El Creador de formularios con Water access — Example Community cargado: nombre y descripción llenos, la exportación para investigación sin marcar y un bloque de selección única sobre la fuente de agua con las opciones tap y well." caption="Un formulario existente abierto para editar." />
+
+{/* claim: manage-fc-rename */}
+Puedes cambiar la redacción de una pregunta que ya tiene respuestas. Su nombre interno quedó fijo cuando se guardó el formulario por primera vez, así que las respuestas viejas y nuevas siguen juntas, y la exportación las pone en una sola columna con la redacción nueva. Cambiar la redacción no cambia las respuestas ya dadas: si cambias lo que la pregunta pregunta, agrega una pregunta nueva.
+
+## Tu pregunta es el encabezado de la columna
+
+{/* claim: manage-fc-column-heading */}
+En la exportación, cada pregunta es una columna, con el texto de la pregunta como encabezado. Escribe preguntas lo bastante cortas para leerse como encabezado, y nunca le pongas el mismo texto a dos preguntas.
+
+{/* claim: manage-fc-accents */}
+Los encabezados pierden los acentos y los signos de apertura ¿ y ¡: `¿Cuántos niños?` llega como `Cuantos ninos?`. Escribe en buen español de todos modos: los encuestadores leen la pregunta en el teléfono, con sus acentos.
+
+## Lo que el constructor no ofrece
+
+{/* claim: manage-fc-not-offered */}
+Collect puede mostrar más tipos de pregunta que estos siete: fotos, vínculos a un hogar, campos que se llenan con registros que ya están en el teléfono, grupos que se repiten (una vez por cada niño, por ejemplo) y varios números en una misma fila. Los formularios de Puente los usan. Quedaron fuera del constructor a propósito: cada uno necesita reglas que un bloque de arrastrar y soltar no puede llevar. Si necesitas uno, escribe a info@puente-dr.org contando lo que quieres recolectar.
+
+## Preguntas frecuentes
+
+**Publiqué y el formulario no está en el teléfono.**
+Actualiza Formularios personalizados en Collect. Si sigue sin aparecer, revisa el Gestor de formularios: si no está en la lista, la publicación falló.
+
+**¿Puedo editar los formularios de Puente?**
+No. En el Gestor de formularios, solo los formularios personalizados tienen Editar.
+
+**¿Puedo guardar un borrador y terminar después?**
+No. El constructor no tiene botón de guardar; un formulario se conserva solo cuando lo publicas.

@@ -1,0 +1,112 @@
+---
+title: Organizations
+description: What an organization is in Puente, the two ways one is created, why a name close to an existing one is refused, and how organizations are retired or merged.
+related:
+  - organizations/members-and-administrators
+  - organizations/nicknames
+  - manage/sign-in
+  - guides/set-up-your-organization
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import suggest from '@shots/en/collect-02-signup-organization-suggestions.png';
+import chosen from '@shots/en/collect-03-signup-organization-selected.png';
+import picker from '@shots/en/register-02-picker-synthetic.png';
+import create from '@shots/en/admin-05-create-organization.png';
+
+An organization is the group your account belongs to: a clinic, a water project, a mission team. It is the name on the folder that holds that group's records and its people's accounts.
+
+{/* claim: org-what */}
+Your organization decides which records you see. In Collect and Manage, each organization's apps show its own records. The privacy summary in Collect says records "may be available to authorized users of the organization collecting them."
+
+The organization means the same thing in both apps. This page explains how organizations come into being and how they are retired.
+
+## Why the name matters
+
+To a person, "Example Health Trust", "EHT" and "Exampel Health Trust" are obviously one group. To a computer they are three. Records are filed under the organization name that was used when they were collected, so a stray spelling can leave hundreds of records filed where nobody looks.
+
+{/* claim: org-nickname-what */}
+Puente therefore keeps one official name per organization, plus a list of other spellings it also answers to. Those are [nicknames](/docs/organizations/nicknames/).
+
+## Way in 1: sign up in Collect
+
+On the phone, the organization field suggests matching names as you type.
+
+<div class="shots">
+<Shot phone src={suggest} alt="The Collect sign-up form with Pu typed in the organization field and the suggestion Puente below it." caption="Typing suggests organizations that already exist." />
+<Shot phone src={chosen} alt="The Collect sign-up form with an organization chosen and filling the field." caption="A suggestion, chosen." />
+</div>
+
+{/* claim: org-collect-creates */}
+- **Pick a suggestion** and you join that organization.
+- **Type a name that is clearly new** and Puente creates the organization. You become its administrator.
+
+This lets a new partner start without waiting for anyone. It also means a typo could create a second copy of a group that already exists — which is why the check below exists.
+
+## The near-duplicate check
+
+{/* claim: org-too-close */}
+Before creating an organization, Puente compares the new name with every existing name and nickname, ignoring capitals and accents.
+
+| You type | Already in Puente | Result |
+|---|---|---|
+| `Example Health Trust` | `Example Health Trust` | You join it |
+| `example health trust` | `Example Health Trust` | You join it — capitals do not matter |
+| `Exampel Health Trust` | `Example Health Trust` | Refused: one or two letters different |
+| `Example Health Trust North` | `Example Health Trust` | Refused: one name contains the other |
+| `Clínica San Rafael` | nothing similar | Created |
+
+{/* claim: org-refused-effect */}
+A refused name does not stop you registering. You still get your account, but it is not linked to any organization: Manage shows you an empty dashboard, while Collect still lets you collect and sync. Email info@puente-dr.org with the name you typed, and Puente staff will link you to the right organization or create a new one.
+
+<Aside type="tip">
+A refusal costs one email. A wrongly created duplicate splits a group's records in two without anyone noticing, which is far harder to repair.
+</Aside>
+
+## Way in 2: register in Manage
+
+{/* claim: manage-register-org-list */}
+On the Manage sign-up page, <UI>Organization</UI> is a fixed list. You choose from it; you cannot type a new name there.
+
+<Shot src={picker} alt="The Manage Create an account form with Exam typed in the Organization field and Example Health Trust offered below." caption="Manage only offers organizations that already exist." />
+
+{/* claim: manage-register-not-listed */}
+If yours is missing, press <UI>My organization isn't listed</UI> and use the email link it shows. Puente staff add organizations by hand. Do not pick one that is nearly right. See [Sign in to Manage](/docs/manage/sign-in/).
+
+## How staff create an organization
+
+{/* claim: org-staff-create */}
+Puente staff add organizations on the Organizations screen in Manage, under <UI>Add a partner organization</UI>:
+
+- <UI>Organization name</UI> — the official name.
+- <UI>Short code</UI> — <UI>Short, lowercase, and permanent. Used in exports.</UI>
+- <UI>Other spellings, separated by commas</UI> — every spelling seen in the field.
+
+Puente refuses a short code or spelling that another organization already uses, and names the organization that has it.
+
+<Shot src={create} alt="A form with Organization name, Short code and Other spellings fields, hints under the last two, and an Add organization button." caption="Staff only. The short code cannot be changed later." />
+
+## Retire or merge an organization
+
+{/* claim: org-retire */}
+Organizations are not deleted, because that would lose the record of who collected what. Puente staff retire them instead. A retired organization is no longer offered when people sign up, but its past records still belong to it.
+
+Retiring also frees its names, which is how two organizations become one:
+
+1. Staff retire organization B.
+2. Staff add B's name as a nickname of organization A.
+3. B's records are now found with A's, and B's entry stays on file, so you can still see where they came from.
+
+To retire or merge, email info@puente-dr.org.
+
+## FAQ
+
+**I signed up and Manage looks empty.**
+Your organization name probably did not match. Email info@puente-dr.org with the name you typed.
+
+**Can I move myself to another organization?**
+No. It decides which records you see, so Puente staff change it.
+
+**We are two organizations that should be one.**
+Ask Puente staff to retire one and add its name as a nickname of the other.

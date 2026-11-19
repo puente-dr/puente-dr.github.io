@@ -1,0 +1,86 @@
+---
+title: Apodos
+description: Las otras formas de escribir el nombre de una organización — cómo las compara Puente, por qué un apodo solo puede ser de una organización, y cómo pedir que se agregue uno.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - data/exporting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import oneOrg from '@shots/es/admin-03-one-organization.png';
+import unmatched from '@shots/es/admin-04-waiting-room.png';
+import create from '@shots/es/admin-05-create-organization.png';
+
+Cada organización tiene un nombre oficial y una lista de apodos: otras formas de escribir el nombre que también reconoce. Si el nombre oficial es «Example Health Trust» y «EHT» es un apodo, quien se registra como «EHT» entra a la organización correcta, y los registros archivados como «EHT» aparecen con los demás.
+
+Agregar un apodo es el arreglo más útil que tiene Puente cuando parece que a una organización le faltan registros. No cambia nada en los registros mismos.
+
+## Dónde se ven
+
+{/* claim: org-nickname-what */}
+En la pantalla Organizaciones, cada organización muestra su nombre oficial seguido de <UI>siempre coincide</UI>, y luego sus apodos. El nombre oficial siempre cuenta, así que nunca hace falta agregarlo como apodo. En Manage los apodos se llaman formas de escribirlo.
+
+<Shot src={oneOrg} alt="Example Health Trust con su código corto, el nombre oficial marcado como que siempre coincide, los apodos EHT y Example Health, y un cuadro para escribir las formas separadas por comas con su botón para guardar." caption="El nombre oficial y luego dos apodos." />
+
+## Cómo se comparan los nombres
+
+{/* claim: org-nickname-matching */}
+Cuando Puente decide a qué organización pertenece un nombre escrito (al registrarse, o al leer la organización de una cuenta), no se fija en:
+
+- las mayúsculas: `EHT` y `eht` coinciden;
+- los acentos: `Clínica` y `Clinica` coinciden;
+- los espacios al principio o al final: `EHT ` y `EHT` coinciden.
+
+Sí se fija en los espacios o signos dentro del nombre: `E.H.T.` y `EHT` son formas distintas.
+
+{/* claim: org-nickname-exports */}
+Cuando Puente reúne los registros de una organización (para Manage y para cada exportación), usa el nombre oficial y cada apodo exactamente como están escritos, porque los registros guardan la forma exacta con la que se recolectaron. Por eso, cuando mandes un apodo, cópialo tal como aparece en los registros.
+
+## Un apodo, una organización
+
+{/* claim: org-nickname-unique */}
+Un apodo solo puede pertenecer a una organización. Si otra organización ya usa esa forma de escribirlo, Puente la rechaza y dice cuál organización la tiene. Si dos grupos reclamaran el mismo nombre, sería imposible saber de quién es cada registro.
+
+Eso incluye los nombres oficiales: el nombre oficial de una organización no puede ser apodo de otra. La excepción es una organización retirada, cuyos nombres quedan libres; así es como se unen dos organizaciones. Mira [Organizaciones](/docs/es/organizations/organizations/).
+
+## Pedir que se agregue un apodo
+
+{/* claim: org-nickname-staff */}
+Los apodos los agrega el personal de Puente. Escribe a info@puente-dr.org con:
+
+1. el nombre oficial de tu organización;
+2. cada forma de escribirlo que hayas visto, tal como está escrita;
+3. si puedes, un ejemplo: una persona que se registró con ese nombre, o una comunidad de la que parecen faltar registros.
+
+Quienes administran ven en la pantalla Organizaciones un cuadro <UI>Formas de escribirlo, separadas por comas</UI> y un botón <UI>Guardar formas de escribirlo</UI>, pero guardar solo funciona para el personal de Puente. A cualquier otra persona le aparece un mensaje de error debajo del cuadro.
+
+<Aside type="tip">
+Anota cada forma de escribir el nombre que encuentres en el campo (abreviaturas, nombres viejos, un acento que falta) y mándalas todas juntas. Un solo correo puede recuperar meses de registros.
+</Aside>
+
+## Cuentas que no coinciden con ninguna organización
+
+{/* claim: org-unmatched-list */}
+El personal de Puente ve una lista de <UI>Cuentas que no coinciden con ninguna organización</UI>: el nombre que escribió cada persona, al lado de su correo. Lo normal es agregar esa forma de escribirlo como apodo de la organización correcta, y desde ese momento la cuenta coincide.
+
+<Shot src={unmatched} alt="Dos filas: Water Project South al lado de eli@example.org, y Exampel Health Trust al lado de dani@example.org." caption="Lo que escribieron las personas, y quiénes son." />
+
+## Cuando el personal crea una organización
+
+{/* claim: org-staff-create */}
+El personal puede agregar apodos al crear una organización, en <UI>Otras formas de escribirlo, separadas por comas</UI>. La ayuda dice <UI>Todas las formas vistas en el campo. El nombre de la organización siempre coincide, así que no hace falta incluirlo.</UI>
+
+<Shot src={create} alt="El formulario para agregar una organización asociada: nombre de la organización, código corto, otras formas de escribirlo separadas por comas y un botón para agregar la organización." caption="Anotar las formas desde el principio ahorra un arreglo después." />
+
+## Preguntas frecuentes
+
+**A nuestras exportaciones les falta la mitad de los registros.**
+Lo más probable es que se recolectaran con otra forma de escribir el nombre de tu organización. Manda cada forma que hayas visto a info@puente-dr.org.
+
+**¿Un apodo cambia los registros?**
+No. Los registros conservan su forma de escribirlo; el apodo hace que Puente los encuentre.
+
+**¿Nuestro apodo puede ser igual al de otra organización?**
+No. Cada forma de escribirlo pertenece a una sola organización.

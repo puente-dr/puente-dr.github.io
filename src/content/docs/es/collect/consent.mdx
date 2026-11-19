@@ -1,0 +1,100 @@
+---
+title: Consentimiento
+description: La pantalla de consentimiento con la que abren los formularios — qué dice su resumen de privacidad, cómo recorrerla con la persona y qué pasa si dice que no.
+related:
+  - privacy/protecting-data
+  - collect/resident-id-and-households
+  - collect/puente-forms
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import consent from '@shots/es/collect-consent.png';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import residentId from '@shots/es/collect-resident-id.png';
+
+Antes de hacerle una sola pregunta a alguien, Collect te pide confirmar que la persona está de acuerdo con cómo se va a usar su información. Cada formulario que abres desde la carpeta — los cuatro de Puente y los personalizados de tu organización — abre en una pantalla de consentimiento, y las preguntas no aparecen hasta que el consentimiento queda marcado.
+
+La pantalla es corta a propósito. Léela con la persona, responde sus dudas, y solo entonces marca la casilla.
+
+## Cuándo aparece la pantalla de consentimiento
+
+{/* claim: collect-consent-screen */}
+Toca cualquier formulario en la carpeta y primero aparece la pantalla <UI>Formulario de consentimiento</UI>. Tiene tres partes:
+
+- Un recuadro con un resumen, en lenguaje sencillo, de lo que guarda Collect.
+- <UI>Ver política completa</UI>, debajo del resumen.
+- Una casilla, <UI>El miembro de la comunidad acepta la política de datos</UI>, y el botón <UI>Continuar con el formulario</UI>.
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla Recopilar datos con las tarjetas de identificación de residente y salud ambiental en Formularios Puente." caption="Al tocar cualquier formulario aquí, primero se abre la pantalla de consentimiento." />
+<Shot phone src={consent} alt="La pantalla de consentimiento: un recuadro con el resumen de privacidad y un botón para ver la política completa, una casilla vacía para el acuerdo de la persona y el botón para continuar con el formulario." caption="La pantalla de consentimiento. La casilla empieza vacía cada vez." />
+</div>
+
+## Qué le dice el resumen a la persona
+
+{/* claim: collect-consent-summary */}
+El resumen en pantalla dice, en pocas palabras:
+
+- Collect guarda lo que envían los usuarios autorizados: datos de contacto, datos demográficos, información del hogar y la ubicación, coordenadas GPS precisas, fotografías, información de salud, respuestas de formularios e identificadores de cuenta.
+- Los registros pueden estar disponibles para los usuarios autorizados de la organización que los recopila.
+- Puente no usa estos datos para publicidad, personalización de productos ni seguimiento.
+- La fecha en que se actualizó la Política de privacidad vigente.
+
+Léelo en voz alta, o explícalo con tus palabras en el idioma en que la persona se sienta más cómoda. Si pregunta quién va a ver sus respuestas, la respuesta honesta es el segundo punto: las personas de tu organización que usan Puente.
+
+## Recorrerla con la persona
+
+El consentimiento es una conversación, no un toque en la pantalla. Unos cuantos hábitos lo hacen de verdad:
+
+- Antes de abrir el formulario, di quién eres, con qué organización trabajas y por qué estás de visita.
+- Sostén el teléfono de modo que la persona vea la pantalla mientras lees.
+- Pregúntale si tiene dudas, y espera la respuesta. Quedarse en silencio no es aceptar.
+- Déjale claro que puede decir que no, y que decir que no no cambia en nada cómo la tratas.
+
+## Mostrar la política completa
+
+{/* claim: collect-consent-full-policy */}
+Toca <UI>Ver política completa</UI> para mostrar el mismo resumen en una ventana con <UI>Abrir política vigente</UI>, que abre la Política de privacidad completa de Puente en el navegador del teléfono ([puente-dr.org/privacy-policy](https://www.puente-dr.org/privacy-policy/)). Eso necesita conexión. Toca <UI>Ok</UI> para volver a la pantalla de consentimiento.
+
+## Marcar el consentimiento y continuar
+
+{/* claim: collect-consent-required */}
+Cuando la persona está de acuerdo, marca <UI>El miembro de la comunidad acepta la política de datos</UI> y toca <UI>Continuar con el formulario</UI>. Aparecen las preguntas del formulario.
+
+Si tocas <UI>Continuar con el formulario</UI> sin la marca, la aplicación te detiene con <UI>El miembro de la comunidad debe dar su consentimiento antes de poder continuar.</UI> y te deja en la pantalla de consentimiento.
+
+<div class="shots">
+<Shot phone src={residentId} alt="El formulario de identificación de residente en la sección de demografía, con los campos de nombre, apellido, apodo y fecha de nacimiento." caption="Lo que aparece después de continuar — aquí, el comienzo de la identificación de residente." />
+</div>
+
+## Si la persona dice que no
+
+{/* claim: collect-consent-back */}
+No marques la casilla. Toca <UI>Atrás</UI>, encima de la pantalla de consentimiento, para salir del formulario; no se ha guardado nada. Dale las gracias y sigue.
+
+<Aside type="caution" title="Nunca marques la casilla por otra persona">
+La marca es tu declaración de que esta persona aceptó. No la marques para pasar la pantalla, para ahorrar tiempo ni porque un familiar dijo que no había problema. Pregúntale a la persona de quien es el registro. Si se trata de un niño o una niña, sigue la regla de tu organización sobre quién da el consentimiento.
+</Aside>
+
+## Quién puede ver los registros
+
+{/* claim: collect-consent-org-scope */}
+Las aplicaciones de cada organización muestran sus propios registros: cuando buscas en Collect o abres Manage, ves los registros de tu organización. Para saber qué hace Puente para proteger los datos, y qué no afirma, mira [Proteger los datos](/docs/es/privacy/protecting-data/).
+
+## Formularios siguientes sugeridos
+
+{/* claim: collect-consent-suggested */}
+<Aside type="caution" title="Los formularios siguientes sugeridos no vuelven a preguntar">
+Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: usa el consentimiento que acabas de registrar para esa persona. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
+</Aside>
+
+## Preguntas frecuentes
+
+{/* claim: collect-consent-required */}
+**¿La aplicación recuerda el consentimiento de una persona?**
+No. La casilla empieza vacía cada vez que abres un formulario. Pregunta siempre.
+
+{/* claim: collect-consent-screen */}
+**¿Puedo saltarme el consentimiento en un seguimiento rápido?**
+Desde la carpeta, no: cada formulario que abres ahí empieza en la pantalla de consentimiento. La única excepción son los formularios siguientes sugeridos, más abajo.

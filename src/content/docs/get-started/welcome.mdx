@@ -1,0 +1,91 @@
+---
+title: Welcome to Puente
+description: What Puente is — two apps and one account — how a survey travels from a phone to a spreadsheet, and where to start.
+related:
+  - get-started/data-collectors
+  - get-started/data-managers
+  - get-started/glossary
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import onboarding from '@shots/en/collect-onboarding-welcome.png';
+import queue from '@shots/en/collect-03-queue.png';
+import login from '@shots/en/manage-login.png';
+import review from '@shots/en/manage-review.png';
+
+Puente helps community health teams collect information about the people they serve, keep it in one place, and use it. Surveyors fill in forms on a phone, in communities with or without signal. Coordinators build those forms, check what arrived and download it, on a computer.
+
+These docs explain how both halves work. Start with the overview below, then follow the path for your role.
+
+## Two apps, one account
+
+{/* claim: start-two-apps */}
+{/* claim: start-platforms */}
+- **Puente Collect** is the phone app, for [iPhone](https://apps.apple.com/us/app/puente-collect/id1362371696) and [Android](https://play.google.com/store/apps/details?id=puente.collect). You use it to find people, fill in forms and send them.
+- **Puente Manage** is the website, at [puente-manage.vercel.app](https://puente-manage.vercel.app). You use it to build forms, review and clean records, run your organization and export data.
+
+The same account — your email or phone number and password — signs you in to both.
+
+{/* claim: start-languages */}
+Both apps work in English, Spanish and Haitian Creole.
+
+<div class="shots">
+<Shot phone src={onboarding} alt="Collect's first welcome screen: the Puente logo, the line Bridging communities with data, a short description, and Skip and Let's go buttons." caption="Collect on the phone: what surveyors use in the field." />
+</div>
+
+<Shot src={login} alt="The Puente Manage sign-in page with Email or phone number and Password fields, a Sign in button, Forgot password and Create account links, and a note: Collecting in the field? Open Puente Collect on your phone instead." caption="Manage on the web: what coordinators use in the office. The note points surveyors back to the phone." />
+
+## How a survey travels
+
+{/* claim: start-survey-path */}
+Every record makes the same trip:
+
+1. **Fill in.** A surveyor opens a form in Collect. The person agrees to the data policy on the consent screen, and the surveyor completes the form.
+2. **Wait on the phone.** With no signal, Collect says <UI>Saved offline — will sync when you reconnect</UI>. The form is now on that phone only.
+3. **Send.** Back in signal, the surveyor opens Offline Sync — the cloud icon — and taps <UI>Retry</UI>. Nothing is sent until someone does.
+4. **Arrive in Manage.** The record appears for everyone in your organization: on the dashboard, in the Form Manager and in Data Curation.
+5. **Export.** A coordinator downloads the form's records as a spreadsheet.
+
+<Aside type="caution" title="Step 3 is not automatic">
+The offline banner says records will sync automatically, but they do not. Until someone taps Retry, the phone holds the only copy. Make it a daily habit. See [Working offline](/docs/collect/offline-sync/).
+</Aside>
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen with one Resident ID form waiting to sync, a Discard link and a Retry button." caption="Offline Sync: everything still on this phone, and the Retry button that sends it." />
+</div>
+
+## Your organization
+
+{/* claim: start-org-scope */}
+Everyone in Puente belongs to one organization — the clinic, mission or program they work for. Your organization decides which records you see: your forms, your residents, your exports.
+
+{/* claim: start-org-first-admin */}
+The first person to sign up for an organization becomes its **administrator**; everyone after is a **member**. Members can collect and use Manage straight away — there is no approval step. Administrators can also name other administrators and deactivate people who leave. See [Organizations](/docs/organizations/organizations/).
+
+## What you need to begin
+
+{/* claim: start-signin-online */}
+- **An account.** One per person, with your own email or phone number and password. Never share a login.
+- **A phone** with Collect, for anyone who collects data. Signing in needs a connection, and so does sending forms — but filling them in does not.
+- **A computer with a web browser**, for anyone who builds forms, reviews records or exports data.
+- **Signal at least once a day**, so that the forms collected that day reach Puente the same evening.
+
+## Where to start
+
+**You collect data in the field.** Start with [Start here: data collectors](/docs/get-started/data-collectors/): install Collect, sign in, find people, fill in a form and send it.
+
+**You run things from a computer.** Start with [Start here: data managers](/docs/get-started/data-managers/): set up your organization, build forms, check what arrived and export it.
+
+<Shot src={review} alt="The Manage dashboard: a Needs attention list with records missing key fields and records with an unresolved household link, a Community coverage list, and a total of records synced." caption="Review, the Manage dashboard: what has arrived and what needs fixing." />
+
+## Find your way around
+
+- **[Collect](/docs/collect/install-and-sign-in/)** — the phone app, screen by screen.
+- **[Manage](/docs/manage/sign-in/)** — the website: forms, review, cleaning.
+- **[Organizations](/docs/organizations/organizations/)** — members, administrators and nicknames.
+- **[Data](/docs/data/exporting-data/)** — exports, reading the files, research files.
+- **[Privacy](/docs/privacy/protecting-data/)** — protecting people's data, deleting an account.
+- **[Guides](/docs/guides/set-up-your-organization/)** — step-by-step walkthroughs for common jobs.
+- **[Help](/docs/help/troubleshooting/)** — troubleshooting and how to reach Puente.
+- **[Glossary](/docs/get-started/glossary/)** — the words these docs use.

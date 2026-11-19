@@ -1,0 +1,117 @@
+---
+title: Field day checklist
+description: A pause-point checklist for surveyors and coordinators — the day before, before leaving, during the visits, each evening, and after the round.
+related:
+  - collect/offline-sync
+  - collect/find-records
+  - guides/your-first-day-collecting
+  - guides/running-a-clinic-day
+roles: [data-collector, data-manager]
+format: checklist
+minutes: 3
+thumbnail: ../../../assets/shots/en/collect-04-all-caught-up.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import storage from '@shots/en/find-05-storage-limit.png';
+import queue from '@shots/en/collect-03-queue.png';
+import caughtUp from '@shots/en/collect-04-all-caught-up.png';
+import collected from '@shots/en/manage-form-manager-expanded.png';
+
+Use this list on every field day. It is built around pause points: moments when the team stops for a minute and checks a few things before moving on. Most of it protects one gap — between saving a form on a phone and that form reaching Puente, when the phone holds the only copy.
+
+Surveyors do the phone items. The coordinator does the Manage items and checks that every phone is done. Tick the boxes as you go.
+
+## The day before, with internet
+
+These need a connection, so do them at the office or at home.
+
+{/* claim: guide-update-version */}
+- [ ] Update Puente Collect from the App Store or Google Play (the current version is 15.7.5)
+
+{/* claim: guide-signin-internet */}
+- [ ] Sign in on every phone that will collect — signing in needs internet
+
+{/* claim: guide-forms-reach-phones */}
+- [ ] Under the folder, tap the refresh arrow beside <UI>Custom Forms</UI> and check that today's forms are listed
+
+{/* claim: guide-search-offline */}
+- [ ] Open the magnifying glass once, so the phone saves the residents for offline search
+
+{/* claim: guide-storage-limit */}
+- [ ] If the community is large, check the gear → <UI>Find Records</UI> → <UI>Record storage limit</UI> (it starts at 2,000)
+- [ ] Charge every phone; pack chargers and power banks
+- [ ] Print the paper sign-in sheet, and spare paper forms in case a phone fails
+
+<div class="shots">
+<Shot phone src={storage} alt="A settings screen headed Find Records, showing Current records stored and Record storage limit 2000 with an Edit link." caption="How many residents the phone can search with no signal." />
+</div>
+
+## Before you leave
+
+- [ ] Every phone is signed in under the right person's own account
+- [ ] Every phone shows the forms for the day
+- [ ] Everyone knows who to call if a phone stops working
+- [ ] Everyone knows the plan for the household section of the Resident ID form
+
+## During the visits
+
+{/* claim: guide-search-one-field */}
+- [ ] Search before registering: surname alone, then first name, then nickname, then the first digits of the cédula
+
+{/* claim: guide-consent */}
+- [ ] Tick <UI>Community member agrees to data policy</UI> only when the person has agreed
+
+{/* claim: guide-location-button */}
+- [ ] Tap <UI>Get Location</UI> at the home, and tap again if it shows `(0.00, 0.00)`
+
+{/* claim: guide-save-messages */}
+- [ ] Read the message after each submit: <UI>Saved offline — will sync when you reconnect</UI> means the form is still on the phone
+- [ ] Write every person on the paper sign-in sheet
+
+<Aside type="caution" title="Three things never to do in the field">
+{/* claim: guide-logout-offline */}
+Never log out, never clear the app's data, never uninstall. Forms that have not been sent live inside the app, and signing back in needs a connection.
+</Aside>
+
+## Each evening
+
+{/* claim: guide-sync-not-automatic */}
+- [ ] Connect each phone to reliable wifi, open the cloud (<UI>Offline Sync</UI>) and tap <UI>Retry</UI> — sending is not automatic
+
+{/* claim: guide-caught-up */}
+- [ ] Wait until it reads <UI>No forms queued. You are all caught up!</UI>
+
+{/* claim: guide-households-not-listed */}
+- [ ] Tap <UI>Retry</UI> even when nothing is listed: households created offline are not shown there, but they are sent
+
+{/* claim: guide-still-on-device */}
+- [ ] If a form stays in the list, leave it — <UI>Your forms are still saved on this device. Nothing has been lost.</UI> Try again on a better connection
+- [ ] The coordinator marks each phone as done
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen with one queued Resident ID form, a Discard link beside it and a Retry button." caption="Not done: one form is still on this phone." />
+<Shot phone src={caughtUp} alt="The Offline Sync screen with an empty queue, reading: No forms queued. You are all caught up!" caption="Done for the day." />
+</div>
+
+## After the round, in Manage
+
+{/* claim: guide-forms-collected */}
+- [ ] In <UI>Manage</UI>, expand each form's row and press <UI>Refresh</UI>; compare <UI>Forms collected</UI> with the sign-in sheet
+
+{/* claim: guide-review-dashboard */}
+- [ ] Open <UI>Review</UI> and look at <UI>Needs attention</UI>
+- [ ] Note any person registered twice, for the coordinator to fix
+- [ ] Write down what went wrong and what to change next time
+
+<Shot src={collected} alt="Form Manager with the Vision exam row expanded, showing Forms collected: 37 and a Refresh button." caption="If this number is lower than the sign-in sheet, a phone still has forms." />
+
+## FAQ
+
+**Do we need every item every day?**
+The evening sync, yes, every day. The day-before list matters most before the first day of a round.
+
+{/* claim: guide-discard-permanent */}
+**A form keeps failing. Can we discard it?**
+Only with the coordinator, and only after copying its answers to paper. Discarding deletes it from the phone permanently.

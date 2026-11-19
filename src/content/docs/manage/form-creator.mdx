@@ -1,0 +1,126 @@
+---
+title: Form Creator
+description: Build a custom form from seven blocks, preview it, publish it to your team's phones, and change it later without splitting its answers.
+related:
+  - manage/form-manager
+  - collect/custom-forms
+  - guides/designing-a-form-for-research
+  - data/reading-export-files
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import empty from '@shots/en/manage-form-creator.png';
+import edit from '@shots/en/manage-form-creator-edit.png';
+import palette from '@shots/en/manage-02-blocks-palette.png';
+import canvas from '@shots/en/manage-04-blocks-on-canvas.png';
+
+A custom form is one your organization designs itself, in Manage, without anyone writing code. You drag question blocks into order, write the questions, and publish. Surveyors then find the form on their phones under Custom Forms, next to Puente's own forms.
+
+## Open the Form Creator
+
+{/* claim: manage-fc-open */}
+Press <UI>Create</UI> in the left menu, or <UI>+ Create form</UI> in the [Form Manager](/docs/manage/form-manager/). The page is titled <UI>Form Creator</UI>, with <UI>Reset form</UI>, <UI>Preview form</UI> and <UI>Publish</UI> at the top right.
+
+<Shot src={empty} alt="An empty Form Creator: a settings card with Type of form set to Custom, Form name, Description and an Allow research export checkbox; an empty Form builder area; a Blocks list on the right; and an Inspector panel reading Select a block to edit." caption="Settings at the top, your questions in the Form builder, the blocks you can add on the right." />
+
+## Name the form
+
+{/* claim: manage-fc-settings */}
+- <UI>Type of form</UI> — leave it on <UI>Custom</UI>.
+- <UI>Form name</UI> — what surveyors see on the phone and what the export file is called. Make it specific: "Water access — Los Pinos", not "Survey".
+- <UI>Description</UI> — how the form will be used.
+
+{/* claim: manage-fc-type-collect */}
+Collect lists only forms of type <UI>Custom</UI> under Custom Forms. <UI>Assets</UI> forms belong to Collect's asset screens instead.
+
+{/* claim: manage-fc-research */}
+<UI>Allow research export</UI> starts unticked. Tick it only if this form's answers may leave Puente as a de-identified file for a research partner with ethics approval. It adds an <UI>Export research file</UI> button to the form, and location questions are left out of that file. See [Research exports](/docs/data/research-exports/).
+
+## The seven blocks
+
+{/* claim: manage-fc-blocks */}
+The <UI>Blocks</UI> list holds seven blocks. That is the whole palette.
+
+| Block | Use it for |
+|---|---|
+| <UI>Question - Number response</UI> | An answer that is a number |
+| <UI>Question - Text response</UI> | An answer written in words |
+| <UI>Question (Side label) - Text or Number Response</UI> | A short answer with its label beside it |
+| <UI>Question - Single select</UI> | Pick one option |
+| <UI>Question - Multi-select</UI> | Pick several options |
+| <UI>Input - Header</UI> | A title that splits a long form into sections |
+| <UI>Geolocation</UI> | The surveyor taps a button to record where they are |
+
+<div class="shots">
+<Shot phone src={palette} alt="The Blocks panel listing all seven blocks, each with an information icon, above an empty Inspector panel." caption="All seven blocks. The (i) beside each one explains it." />
+</div>
+
+{/* claim: manage-fc-number-keypad */}
+Use the number block for anything you will count or add up. On the phone it opens a number keypad.
+
+## Build the form
+
+{/* claim: manage-fc-drag */}
+1. Drag a block from <UI>Blocks</UI> into the <UI>Form builder</UI>.
+2. Click <UI>Enter your question here</UI> and type the question.
+3. For a select block, type each choice and use <UI>Add option</UI> and <UI>Remove</UI>. <UI>Add Text Question When Selected</UI> asks a follow-up when that choice is picked.
+4. Drag blocks up and down to reorder them. The trash can removes one.
+
+<Shot src={canvas} alt="Three question blocks in the Form builder: a single select with Option 1, Add option, Remove and Add Text Question When Selected; a number response asking How many people live in this house?; and an empty text response. Each has an Answer is required checkbox." caption="The question text you type here becomes the column heading in the export." />
+
+{/* claim: manage-fc-inspector */}
+Click a block to open it in the <UI>Inspector</UI>: its <UI>Label</UI>, its <UI>Formik key</UI> (the internal name, read-only), and switches for <UI>Required</UI>, <UI>Allow other</UI> and <UI>Multi-select</UI>.
+
+## Preview and publish
+
+{/* claim: manage-fc-preview */}
+<UI>Preview form</UI> opens a panel showing the form as the phone draws it. <UI>Close</UI> returns to the builder.
+
+{/* claim: manage-fc-publish */}
+Press <UI>Publish</UI>. On success a <UI>Success!</UI> message appears for a few seconds and the builder clears, ready for the next form.
+
+{/* claim: manage-fc-reaches-phone */}
+Phones pick the form up when the surveyor refreshes Custom Forms in Collect, with a connection — signing in alone does not fetch it.
+
+{/* claim: manage-fc-publish-silent */}
+<Aside type="caution" title="A failed publish says nothing">
+If publishing fails, Manage shows no error — the builder simply does not clear and no <UI>Success!</UI> appears. After every publish, check the form in the Form Manager and on a phone before the team goes out.
+</Aside>
+
+{/* claim: manage-fc-reset */}
+<UI>Reset form</UI> clears the whole builder at once, without asking. Unpublished work is lost.
+
+## Change a published form
+
+{/* claim: manage-fc-edit */}
+In the Form Manager, press <UI>Edit</UI> on the form. It opens here with its settings and blocks; <UI>Publish</UI> saves the changes to the same form.
+
+<Shot src={edit} alt="The Form Creator with Water access — Example Community loaded: its name and description filled in, Allow research export unticked, and a Single select block asking Water source with options tap and well." caption="An existing form open for editing." />
+
+{/* claim: manage-fc-rename */}
+You can reword a question that already has answers. Its internal name was fixed when the form was first saved, so old and new answers stay together, and the export puts them in one column under the new wording. Rewording does not change answers already given: if you change what the question asks, add a new question instead.
+
+## Your question is the column heading
+
+{/* claim: manage-fc-column-heading */}
+In the export, each question becomes one column, headed with the question text. Keep questions short enough to read as headings, and never give two questions the same text.
+
+{/* claim: manage-fc-accents */}
+Column headings lose their Spanish accents and the opening ¿ and ¡: `¿Cuántos niños?` arrives as `Cuantos ninos?`. Write correct Spanish anyway — surveyors read the question on the phone, accents intact.
+
+## What the builder does not offer
+
+{/* claim: manage-fc-not-offered */}
+Collect can show more kinds of question than these seven: photos, household links, fields filled in from records already on the phone, repeating groups (once per child, say), and several numbers in a row. Puente's own forms use them. They are left out of the builder on purpose: each needs rules a drag-and-drop block cannot carry. If you need one, email info@puente-dr.org describing what you want to collect.
+
+## FAQ
+
+**I published and the form is not on the phone.**
+Refresh Custom Forms in Collect. If it is still missing, check the Form Manager: if the form is not listed there, the publish failed.
+
+**Can I edit Puente's built-in forms?**
+No. In the Form Manager only custom forms have Edit.
+
+**Can I save a draft and finish later?**
+No. The builder has no save button; a form is kept only when you publish it.

@@ -1,0 +1,324 @@
+{
+ "claims": {
+  "help-signin-online": {
+   "claim": "Signing in to Collect needs a connection.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "Online-only mode: offline login is no longer supported",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Logging in requires an internet connection, so offline login isn't available.",
+     "line": 83
+    }
+   ]
+  },
+  "help-wrong-password": {
+   "claim": "Wrong credentials message; reset by email in Collect.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"usernamePasswordIncorrect\": \"Your username or password may be incorrect, please try again.\",",
+     "line": 82
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"enterEmail\": \"Please enter your email to reset your password\",",
+     "line": 67
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"label\": \"Forgot Password?\",",
+     "line": 66
+    }
+   ]
+  },
+  "help-deactivated": {
+   "claim": "Collect sign-in fails offline or with a wrong email/password; a deactivated account is not refused at sign-in (both apps use Parse.User.logIn).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
+     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
+     "line": 30
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
+     "line": 338
+    }
+   ]
+  },
+  "help-empty-app": {
+   "claim": "A refused organization name still creates the account, unlinked; an unmatched account shows an empty app.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "// Refused. The ACCOUNT is still created — an unidentified organization",
+     "line": 119
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "// an account match no records and show an empty app with no error.",
+     "line": 163
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "distance <= 2           -> too close.",
+     "line": 120
+    }
+   ]
+  },
+  "help-custom-forms-refresh": {
+   "claim": "Custom forms reach the phone when the Custom Forms list is refreshed (not at sign-in); the empty state tells you to refresh.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "const refreshCustomForms = () => {",
+     "line": 92
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noCustomForms\": \"No custom forms — try refreshing\",",
+     "line": 107
+    }
+   ]
+  },
+  "help-search": {
+   "claim": "Search matches the start of one field; offline it reads only saved records.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "const anchoredQuery = `^${escapeRegex(qry)}`;",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineNotice\": \"You're offline. Showing saved records.\",",
+     "line": 480
+    }
+   ]
+  },
+  "help-sync-manual": {
+   "claim": "Nothing is sent until Retry in Offline Sync, despite the banner.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineBanner\": \"You're offline. Records will save and sync automatically.\"",
+     "line": 382
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "NetInfo.addEventListener((state) => {",
+     "line": 62
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "handleUpload({",
+     "line": 72
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"retry\": \"Retry\"",
+     "line": 511
+    }
+   ]
+  },
+  "help-sync-failures": {
+   "claim": "Offline Sync distinguishes offline and server-refused failures; forms stay on the device; Discard is permanent.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"failedOffline\": \"You are offline. Reconnect to the internet and try again.\",",
+     "line": 786
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"failedOnline\": \"The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.\",",
+     "line": 787
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"stillOnDevice\": \"Your forms are still saved on this device. Nothing has been lost.\",",
+     "line": 785
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Discarding deletes it from this device permanently and it cannot be recovered.",
+     "line": 791
+    }
+   ]
+  },
+  "help-household-queue": {
+   "claim": "Offline households are not listed in Offline Sync but are sent on Retry.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "\"offlineAssetSupForms\",",
+     "line": 9
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/post/index.js",
+     "quote": "households: \"offlineHouseholds\",",
+     "line": 30
+    }
+   ]
+  },
+  "help-logout-blocked": {
+   "claim": "Logging out is blocked offline and warns about unsynced records.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/confirmLogout.js",
+     "quote": "I18n.t(\"accountSettings.logoutBlockedOfflineTitle\"),",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"logoutBlockedOfflineTitle\": \"Can't log out right now\",",
+     "line": 558
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "They will stay on the device, but you cannot sync them until you log back in.",
+     "line": 560
+    }
+   ]
+  },
+  "help-export-small": {
+   "claim": "Exports follow the organization name and its nicknames; nicknames are added by Puente staff.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/organization.py",
+     "quote": "values = [org.get('name')] + list(org.get('aliases') or [])",
+     "line": 51
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'editOrganizationAliases requires the master key or the puente_staff role',",
+     "line": 114
+    }
+   ]
+  },
+  "help-publish-silent": {
+   "claim": "Manage does not show publish failures; errors go to the console.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "console.log(err); //eslint-disable-line",
+     "line": 170
+    }
+   ]
+  },
+  "help-feedback-email": {
+   "claim": "Contact us / Feedback opens an email to info@puente-dr.org.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/SupportSettings/Feedback/index.js",
+     "quote": "recipients: [\"info@puente-dr.org\"],",
+     "line": 15
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"feedback\": \"Contact us / Feedback\",",
+     "line": 606
+    }
+   ]
+  },
+  "help-version-label": {
+   "claim": "Collect settings show the app version.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "{I18n.t(\"accountSettings.versionLabel\", {",
+     "line": 412
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"versionLabel\": \"Version %{version} (%{build})\",",
+     "line": 566
+    }
+   ]
+  },
+  "help-staff-add-org": {
+   "claim": "Puente staff add organizations to the Manage sign-up list by hand; the link opens an email.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Puente staff add organizations by hand, which is what keeps the list worth trusting.",
+     "line": 126
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/register/index.js",
+     "quote": "mailto:info@puente-dr.org?subject=Add%20my%20organization%20to%20Puente%20Manage",
+     "line": 166
+    }
+   ]
+  },
+  "help-staff-org-change": {
+   "claim": "People cannot change their own organization; email info@.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Email info@puente-dr.org to change it.",
+     "line": 115
+    }
+   ]
+  },
+  "help-staff-aliases": {
+   "claim": "Org admins see Save spellings, but saving nicknames requires Puente staff.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_aliases_save\": \"Save spellings\",",
+     "line": 144
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'editOrganizationAliases requires the master key or the puente_staff role',",
+     "line": 114
+    }
+   ]
+  },
+  "help-staff-last-admin": {
+   "claim": "The last administrator cannot be demoted or deactivated; staff can appoint admins.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'setOrgAdmin requires the master key, the puente_staff role, or the '",
+     "line": 299
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'Cannot demote the last admin of an organization. Appoint another admin '",
+     "line": 313
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "'Cannot deactivate the last admin of an organization. Appoint another '",
+     "line": 328
+    }
+   ]
+  },
+  "help-staff-blocks": {
+   "claim": "The Form Creator offers seven block types.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "textKey: 'form_creator_type_number',",
+     "line": 23
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "textKey: 'form_creator_type_geolocation',",
+     "line": 59
+    }
+   ]
+  }
+ }
+}

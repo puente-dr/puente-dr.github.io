@@ -1,0 +1,102 @@
+---
+title: Leer los archivos exportados
+description: Qué significa una fila en cada exportación, cómo unir archivos por objectId y los lugares donde la hoja de cálculo es distinta de lo que viste en la app.
+related:
+  - data/exporting-data
+  - data/research-exports
+  - manage/data-curation
+  - manage/form-creator
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/es/export-01-form-manager.png';
+import creator from '@shots/es/manage-form-creator-edit.png';
+import curation from '@shots/es/manage-data-curation.png';
+
+Una exportación es un archivo CSV por formulario. Esta página es para quien abre esos archivos: la persona coordinadora que prepara un informe, o el analista que los recibe meses después. Casi todo el archivo es exactamente lo que escribieron los encuestadores. Algunas cosas tienen una forma distinta de la app, y cada una confunde a quien no la espera.
+
+Si todavía no has descargado un archivo, empieza por [Exportar datos](/docs/es/data/exporting-data/).
+
+## Una fila por registro, no por persona
+
+El archivo `SurveyData` — Identificación de residente en Collect — tiene una fila por persona. Todos los demás archivos tienen una fila por cada formulario llenado.
+
+{/* claim: data-row-per-record */}
+Si le tomas los signos vitales a la misma persona tres veces, el archivo `Vitals` tiene tres filas para ella. Cada fila ya trae los datos de esa persona — nombre, comunidad, organización — copiados de su Identificación de residente, así que puedes filtrar o hacer tablas dinámicas con ellos sin unir nada.
+
+<Aside type="tip" title="Cuenta personas en el archivo de personas">
+El número de filas de un archivo de Vitals es el número de tomas, no el número de personas atendidas. Para contar personas, cuenta las filas de `SurveyData`, o los valores distintos de `objectId` en otro archivo.
+</Aside>
+
+<Shot src={formManager} alt="El Gestor de formularios con los cuatro formularios de Puente — SurveyData, HistoryEnvironmentalHealth, Vitals y EvaluationMedical — cada uno con un botón Exportar, y dos formularios personalizados debajo." caption="Cada botón de exportar te da uno de estos archivos. SurveyData es el archivo de personas; los demás son visitas." />
+
+## Unir archivos por objectId
+
+{/* claim: data-join-objectid */}
+Cuando sí necesites combinar dos archivos, únelos por la columna `objectId`. Significa lo mismo en todos los archivos: **de qué persona trata esta fila**. En los archivos de Vitals, salud ambiental, evaluación médica y formularios personalizados, el id del formulario mismo está en otra columna, `idSupplementary`, para que nunca se confundan.
+
+Nunca unas por nombre ni por comunidad. Los nombres se escriben de varias formas, y los nombres de comunidad pierden los acentos en algunos archivos (mira más abajo).
+
+## Registros sin persona
+
+{/* claim: data-orphans */}
+Un formulario cuyo registro de persona falta también se exporta. Llega con las columnas de la persona en blanco en vez de quedar fuera, así que el trabajo recogido nunca desaparece en silencio de una descarga. Si ves filas así, avísale a tu coordinación; hay que repararlas en Puente, no en la hoja de cálculo.
+
+## Las personas idénticas se juntan en una fila
+
+{/* claim: data-dedupe */}
+La exportación de `SurveyData` quita las filas idénticas entre sí. Si dos Identificaciones de residente coinciden en todos los datos — nombre, apodo, sexo, fecha de nacimiento, teléfono, educación, ocupación, comunidad, ciudad, provincia, cédula, encuestador, organización, coordenadas y foto — salen como **una sola** fila.
+
+Eso esconde los duplicados exactos, como un formulario enviado dos veces. También significa que el número de filas del archivo de personas no siempre es el número de registros en Puente: los dos duplicados siguen siendo dos personas en la app, cada una con su historial. Las personas que difieren en cualquier dato quedan como dos filas.
+
+{/* claim: data-clean-duplicates */}
+Para corregir duplicados en el origen, usa <UI>Limpiar</UI> en Manage, que muestra cuántos duplicados encontró. Mira [Curación de datos](/docs/es/manage/data-curation/).
+
+<Shot src={curation} alt="La pantalla Curación de datos con las pestañas Registros y Auditoría de comunidades, un resumen con el número de registros, la completitud promedio, los duplicados y las anomalías, y una tabla de registros por nombre, comunidad, encuestador y fecha." caption="Corrige los duplicados en Puente y vuelve a exportar. Editar la hoja de cálculo no corrige nada para la próxima exportación." />
+
+## La edad es una resta
+
+{/* claim: data-age-subtraction */}
+La columna `age` del archivo de personas es **este año menos el año de nacimiento**, nada más. Quien cumple años más adelante en el año aparece con un año de más. Para contar una comunidad por rangos de edad suele estar bien. Cuando un solo año importa — un corte pediátrico, una regla de elegibilidad — calcula la edad tú desde `dob`.
+
+Si el encuestador escribió una edad porque no se sabía la fecha de nacimiento, se conserva ese número. Si una fecha de nacimiento no se puede leer, `age` queda en blanco en vez de adivinarse.
+
+## Acentos en los archivos de formularios personalizados
+
+{/* claim: data-accents-stripped */}
+En los cuatro archivos de Puente, el texto conserva sus acentos: `Peña`, `Baní`. En la exportación de un formulario **personalizado**, se quitan los acentos tanto de las respuestas como de los títulos de columna — `Peña` se vuelve `Pena`, y `¿` y `¡` desaparecen.
+
+<Aside type="caution">
+Por eso la misma comunidad puede aparecer escrita de dos maneras en dos archivos. Un BUSCARV o una tabla dinámica que una por nombre de comunidad va a perder filas sin avisar. Une por `objectId`.
+</Aside>
+
+## Tus preguntas se vuelven columnas
+
+{/* claim: data-question-columns */}
+En la exportación de un formulario personalizado, cada pregunta se vuelve una columna, con el texto de la pregunta como título. Lo que escribas como pregunta en el Creador de formularios es lo que un analista lee arriba de la columna, así que escríbelo para que se entienda solo.
+
+Si cambias el nombre de una pregunta después de que ya la respondieron, las respuestas viejas y nuevas quedan en una sola columna, con el título actual.
+
+<Shot src={creator} alt="El Creador de formularios con un formulario llamado Water access — Example Community y una pregunta de selección única titulada Water source con las opciones tap y well." caption="El texto de la pregunta que escribes aquí se vuelve el título de la columna en la exportación." />
+
+{/* claim: data-column-collision */}
+Si una pregunta se llama igual que una columna integrada — `communityname`, por ejemplo — tu columna se renombra `communityname_from_custom_form`. Las dos columnas están en el archivo.
+
+## Qué no está en el archivo
+
+{/* claim: data-not-in-file */}
+- **Fotos y firmas.** El archivo de personas tiene una columna `pictureURL`: un enlace, no la imagen. Los archivos de formularios personalizados no traen ninguna de las dos.
+- **Los ids propios del teléfono.** Los ids que crea un teléfono sin conexión ayudan a Puente a reconocer un formulario enviado dos veces. No significan nada en una hoja de cálculo, así que no se incluyen.
+- **Registros de otras organizaciones.** Una exportación cubre solo tu organización.
+
+## Preguntas frecuentes
+
+**¿Por qué el archivo de Vitals repite el mismo nombre?**
+Una fila por toma. Los datos de la persona se repiten en cada una.
+
+**¿Qué columna me dice de quién trata una fila?**
+`objectId`, en todos los archivos.
+
+**¿Puedo corregir errores en la hoja de cálculo?**
+Puedes, pero Puente no se entera. Corrige los registros en Manage y vuelve a exportar.

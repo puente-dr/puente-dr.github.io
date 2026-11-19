@@ -1,0 +1,108 @@
+---
+title: Tu primera semana en Manage
+description: La primera semana de quien gestiona los datos en Puente Manage — iniciar sesión, ubicarte en el menú, revisar lo que llegó cada noche, limpiar registros y hacer y leer tu primera exportación.
+related:
+  - manage/review
+  - manage/form-manager
+  - manage/data-curation
+  - data/reading-export-files
+roles: [data-manager]
+format: guide
+minutes: 3
+thumbnail: ../../../../assets/shots/es/manage-review.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import login from '@shots/es/manage-login.png';
+import review from '@shots/es/manage-review.png';
+import formManager from '@shots/es/manage-form-manager-top.png';
+import curation from '@shots/es/manage-data-curation.png';
+
+Puente Manage es la aplicación web donde cuidas lo que tu equipo recoge en sus teléfonos. En tu primera semana harás sobre todo cuatro cosas: revisar lo que llegó, compararlo con lo que el equipo dice que hizo, corregir errores pequeños y descargar un archivo. Esta guía las recorre en el orden en que las vas a necesitar.
+
+## Inicia sesión
+
+{/* claim: guide-manage-signin */}
+Abre [puente-manage.vercel.app](https://puente-manage.vercel.app) en una computadora. Tu cuenta es la misma que usas en Collect: escribe tu correo o tu número de teléfono y tu contraseña.
+
+<Shot src={login} alt="La página para iniciar sesión en Puente Manage con los campos de correo o teléfono y contraseña, un botón para entrar, enlaces para recuperar la contraseña y crear una cuenta, y una nota amarilla que dice al personal de campo que abra Puente Collect." caption="Una cuenta para las dos aplicaciones. Manage es para la oficina; Collect es para el campo." />
+
+## Ubícate en el menú
+
+{/* claim: guide-manage-menu */}
+El menú de la izquierda tiene seis lugares:
+
+| En el menú | Abre | Qué haces ahí |
+|---|---|---|
+| <UI>Gestionar</UI> | Gestor de formularios | Ver cada formulario, cuántos llegaron, y exportar |
+| <UI>Crear</UI> | Creador de formularios | Crear o editar un formulario |
+| <UI>Limpiar</UI> | Curación de datos | Buscar, corregir y quitar duplicados |
+| <UI>Mercado</UI> | Mercado de formularios | Copiar un formulario ya hecho |
+| <UI>Revisar</UI> | Panel | Ver lo que requiere atención |
+| <UI>Configuración</UI> | Configuración de la cuenta | Tu nombre, teléfono, correo y contraseña |
+
+<UI>Cuenta</UI> y <UI>Cerrar sesión</UI> están abajo.
+
+## Revisa lo que llegó cada noche
+
+Hazlo costumbre la primera semana: después de que el equipo sincroniza, dedica diez minutos a Manage.
+
+{/* claim: guide-review-dashboard */}
+Empieza en <UI>Revisar</UI>. <UI>Requiere atención</UI> lista problemas en los registros recientes, como <UI>registros a los que les faltan campos clave</UI> o <UI>registros con un vínculo de hogar sin resolver</UI>, cada uno con una etiqueta de gravedad. <UI>Cobertura comunitaria</UI> muestra de qué comunidades llegaron registros.
+
+<Shot src={review} alt="El panel Revisar: Requiere atención muestra 5 de 48 registros con un vínculo de hogar sin resolver y 5 de 48 registros a los que les faltan campos clave; Cobertura comunitaria muestra seis comunidades." caption="Lee Requiere atención cada noche la primera semana. Los problemas se corrigen mejor mientras el equipo todavía recuerda la visita." />
+
+{/* claim: guide-forms-collected */}
+Luego abre <UI>Gestionar</UI>. Expande la fila de un formulario con la flecha y pulsa <UI>Actualizar</UI> para ver <UI>Formularios recolectados</UI>. Compáralo con lo que reportó el equipo. Si es menor, algún teléfono todavía no ha sincronizado.
+
+{/* claim: guide-builtin-names */}
+Los cuatro formularios de Puente aparecen con su nombre interno: `SurveyData` es Identificación de residente, `HistoryEnvironmentalHealth` es Salud Ambiental, `Vitals` es Partes vitales y `EvaluationMedical` es Evaluación Médica. Tus formularios propios están en <UI>Formularios personalizados</UI>.
+
+<Shot src={formManager} alt="El Gestor de formularios con los formularios de Puente SurveyData, HistoryEnvironmentalHealth, Vitals y EvaluationMedical, cada uno con un botón Exportar, y los formularios personalizados debajo con Editar, Duplicar, Eliminar y Exportar." caption="Cada fila tiene su propio botón Exportar." />
+
+## Limpia los registros
+
+{/* claim: guide-data-curation */}
+<UI>Limpiar</UI> abre la Curación de datos. Arriba cuenta los registros, su completitud promedio, los duplicados y las anomalías. Filtra por encuestador o por comunidad, y abre un registro para corregirlo. La pestaña <UI>Auditoría de comunidades</UI> agrupa las formas de escribir una misma comunidad para que les pongas un solo nombre.
+
+<Shot src={curation} alt="La Curación de datos con la pestaña Registros abierta: 48 registros, 92 % de completitud promedio, 0 duplicados, 0 anomalías, filtros por encuestador y comunidad, y una tabla de registros con barras de completitud." caption="Corrige lo que el equipo anotó mal mientras todavía puedes preguntarle." />
+
+<Aside type="caution" title="Algunos cambios no se pueden deshacer">
+{/* claim: guide-curation-permanent */}
+Una corrección cambia el registro para toda tu organización. Eliminar un duplicado y renombrar los registros de una comunidad no se pueden deshacer. Si tienes dudas, pregunta primero al encuestador.
+</Aside>
+
+## Haz tu primera exportación
+
+{/* claim: guide-export-csv */}
+En <UI>Gestionar</UI>, pulsa <UI>Exportar</UI> en la fila de un formulario. Manage descarga un archivo CSV que puedes abrir en Excel o Google Sheets. Si todavía no ha llegado nada, dice <UI>Este formulario todavía no tiene registros para exportar.</UI>
+
+{/* claim: guide-export-identified */}
+El archivo contiene nombres, números de cédula, teléfonos, fechas de nacimiento y ubicaciones. Guárdalo en una computadora que solo uses tú, y nunca lo envíes por correo.
+
+## Lee la exportación
+
+Cada formulario da su propio archivo, con una fila por cada vez que se llenó el formulario y una columna por cada pregunta.
+
+{/* claim: guide-export-joined */}
+- `SurveyData` es el archivo de personas: cuenta a las personas ahí, no en los otros archivos.
+- La exportación de un formulario personalizado une cada respuesta al registro completo de la persona, así que cada fila también trae sus datos.
+
+{/* claim: guide-accents-stripped */}
+- Las exportaciones de formularios personalizados quitan los acentos de las respuestas y de los títulos de las columnas: `El Río` se vuelve `El Rio`.
+
+Más sobre columnas y cómo unir archivos: [Leer los archivos exportados](/docs/es/data/reading-export-files/).
+
+## Preguntas frecuentes
+
+{/* claim: guide-org-members-can-work */}
+**¿Cualquier persona de mi equipo puede hacer esto?**
+Sí. Cualquier miembro de tu organización puede usar Manage y descargar exportaciones completas. Invita solo a quien deba ver esos datos.
+
+**El conteo es menor que lo que dijo el equipo.**
+A un teléfono le quedan formularios. Pide al encuestador que abra la nube y toque Reintentar con wifi.
+
+{/* claim: guide-export-failed */}
+**La exportación dice que no se pudo completar.**
+<UI>No se pudo completar la descarga. Por favor, inténtelo de nuevo.</UI> Inténtalo una vez más; si sigue pasando, escribe a info@puente-dr.org con el nombre del formulario.

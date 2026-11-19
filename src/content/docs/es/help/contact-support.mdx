@@ -1,0 +1,88 @@
+---
+title: Contactar a soporte
+description: Cómo comunicarte con Puente, los cambios que solo puede hacer el personal de Puente, qué poner en tu mensaje y qué nunca enviar.
+related:
+  - help/troubleshooting
+  - privacy/delete-your-account
+  - organizations/nicknames
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/es/collect-settings.png';
+import account from '@shots/es/manage-account-settings.png';
+import notListed from '@shots/es/manage-register-not-listed.png';
+
+La mayoría de los problemas del día a día se resuelven dentro de tu propio equipo: un administrador puede agregar o quitar personas, y [Solución de problemas](/docs/es/help/troubleshooting/) cubre los errores comunes. Pero algunos cambios solo los puede hacer el personal de Puente. Esta página los enumera y explica cómo escribirle a Puente para recibir respuesta rápido.
+
+## Cómo comunicarte con Puente
+
+Escribe a [info@puente-dr.org](mailto:info@puente-dr.org).
+
+{/* claim: help-feedback-email */}
+Desde el teléfono: toca el engranaje, luego <UI>Apoyo</UI> y después <UI>Contáctenos / Comentarios</UI>. Escribe tu mensaje y toca <UI>Enviar correo</UI>; Collect abre tu app de correo con un mensaje para info@puente-dr.org, listo para enviar.
+
+<div class="shots">
+<Shot phone src={settings} alt="La pantalla de configuración de la cuenta en Collect con dos botones arriba para la configuración y el apoyo, y una lista de ajustes debajo." caption="Contáctenos / Comentarios está del lado de Apoyo en la pantalla del engranaje." />
+</div>
+
+## Lo que solo Puente puede hacer
+
+{/* claim: help-staff-add-org */}
+{/* claim: help-staff-aliases */}
+{/* claim: help-staff-org-change */}
+{/* claim: help-empty-app */}
+{/* claim: help-staff-last-admin */}
+{/* claim: help-staff-blocks */}
+{/* claim: data-research-study-id */}
+- **Agregar tu organización a la lista de registro de Manage.** El registro en la web solo muestra organizaciones que ya existen. Usa <UI>Mi organización no aparece</UI>, que abre un correo a Puente, y no escojas una parecida en su lugar.
+- **Agregar un apodo para tu organización** — otra forma de escribir el nombre que usa tu equipo. La pantalla de organizaciones muestra un cuadro <UI>Guardar formas de escribirlo</UI>, pero solo el personal de Puente puede guardarlo. Mira [Apodos](/docs/es/organizations/nicknames/).
+- **Pasar una cuenta a otra organización.** Tu organización decide qué registros ves, así que no puedes cambiarla tú.
+- **Resolver un nombre de organización rechazado.** Si Collect rechazó el nombre que escribiste al registrarte, tu cuenta existe pero no está unida a ninguna organización.
+- **Reemplazar al último administrador.** El último administrador de una organización no se puede quitar ni desactivar. Si esa persona se fue, Puente puede nombrar a otra.
+- **Pedir un tipo nuevo de pregunta.** El Creador de formularios ofrece siete bloques. Si tu programa necesita algo que no pueden hacer, dile a Puente qué y por qué.
+- **Buscar un ID de estudio.** Solo Puente puede convertir el código `P-…` de un archivo de investigación en una persona.
+- **Eliminar una cuenta o datos personales.** Mira [Eliminar tu cuenta](/docs/es/privacy/delete-your-account/).
+
+<Shot src={notListed} alt="El formulario de registro de Manage con el selector de organización vacío, el enlace Mi organización no aparece y una nota que dice que el personal de Puente agrega las organizaciones a mano, con un enlace para enviar por correo el nombre de la organización." caption="El registro de Manage solo muestra organizaciones que Puente ya agregó. El enlace te prepara el correo." />
+
+<Shot src={account} alt="La página de configuración de la cuenta en Manage. La organización no se puede editar y lleva una nota que dice que tu organización determina qué registros puedes ver y que escribas a info@puente-dr.org para cambiarla." caption="La organización es el único dato de la cuenta que no puedes cambiar tú." />
+
+## Qué incluir
+
+Un mensaje que Puente puede atender de inmediato suele tener:
+
+- tu **nombre** y tu **organización**, escrita como te registraste;
+- la **app** — Collect o Manage — y, si es Collect, el tipo de teléfono y la versión de la app;
+- **qué estabas haciendo**, paso a paso, y **qué esperabas**;
+- el **mensaje exacto** de la pantalla, copiado palabra por palabra;
+- el **nombre del formulario** y más o menos **cuándo** pasó;
+- para un apodo, la **forma exacta** en que tu equipo escribe el nombre.
+
+{/* claim: help-version-label */}
+La versión de Collect aparece en la pantalla de ajustes del engranaje, después de la palabra Versión.
+
+## Qué nunca enviar
+
+<Aside type="caution" title="Deja los datos de pacientes fuera del correo">
+Nunca envíes contraseñas, nombres de pacientes, números de cédula, teléfonos, datos de salud, archivos exportados ni capturas de pantalla que muestren algo de esto. Describe el registro: el formulario, la comunidad y la fecha. Si Puente necesita más, te lo pedirá.
+</Aside>
+
+Para buscar un ID de estudio, envía solo el código. Nunca envíes un código junto con un nombre.
+
+## Urgente o puede esperar
+
+Escribe **«Urgente»** al comienzo del asunto cuando:
+
+{/* claim: help-sync-failures */}
+- los formularios no salen de un teléfono después de varios intentos con buena conexión y la app dice que el servidor no los aceptó — el teléfono tiene la única copia;
+- alguien que se fue todavía tiene acceso (hoy <UI>Desactivar</UI> cierra la sesión pero no impide volver a entrar);
+- las exportaciones siguen fallando antes de una fecha límite.
+
+Estos **pueden esperar** una respuesta normal: apodos nuevos, agregar una organización a la lista de registro, pasar una cuenta a otra organización y pedidos de tipos nuevos de pregunta.
+
+## Preguntas frecuentes
+
+{/* claim: privacy-deactivate */}
+**¿Puede mi administrador hacer algo de esto?**
+Un administrador puede nombrar a otro administrador, y desactivar y reactivar a los miembros de su propia organización. Todo lo de la lista de arriba necesita a Puente.

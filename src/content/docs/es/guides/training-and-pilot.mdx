@@ -1,0 +1,103 @@
+---
+title: Capacitación y una prueba piloto
+description: Cómo capacitar a un equipo en Puente Collect — quién capacita, practicar en modo avión sin dejar datos de prueba, una sesión de 90 minutos, una prueba piloto pequeña y qué revisar después.
+related:
+  - guides/set-up-your-organization
+  - guides/field-day-checklist
+  - collect/offline-sync
+  - manage/review
+roles: [data-manager]
+format: guide
+minutes: 3
+thumbnail: ../../../../assets/shots/es/collect-05-discard-confirm.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/es/collect-01-offline-banner.png';
+import discard from '@shots/es/collect-05-discard-confirm.png';
+import household from '@shots/es/collect-household.png';
+import review from '@shots/es/manage-review.png';
+
+En la capacitación el equipo aprende los dos hábitos que protegen los datos: buscar antes de registrar, y sincronizar cada noche. Esta guía cubre quién capacita, cómo practicar sin dejar personas inventadas en tus datos, un plan de sesión y una prueba piloto pequeña antes de la primera ronda real.
+
+## Quién capacita
+
+Elige a una persona como responsable técnico del equipo: la primera a quien todos preguntan por la aplicación. Capacítala primero, sola, antes que al resto. Prepara los teléfonos, hace la sincronización de la noche y responde dudas en el campo.
+
+{/* claim: guide-dhis2-support */}
+Ese orden sigue la guía de implementación de DHIS2, que dice que el equipo de soporte técnico debe capacitarse antes que el primer usuario final.
+
+{/* claim: guide-dhis2-devices */}
+Capacita en los teléfonos que la gente va a llevar. La guía de DHIS2 dice lo mismo: "If possible, train users on the devices they will use in their work" (si es posible, capacitar en los dispositivos de trabajo). Cada persona se registra con su propia cuenta, en su propio teléfono, durante la sesión.
+
+## Practica en modo avión
+
+Practicar con señal envía personas inventadas directo a los registros de tu organización. Practica sin señal, y descarta los formularios de práctica antes de que nadie sincronice.
+
+{/* claim: guide-practice-discard */}
+1. Activa el modo avión.
+2. Llena un formulario para una persona inventada y envíalo. Aparecen el aviso y <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI>.
+3. Abre la nube (<UI>Sincronización sin conexión</UI>). El formulario de práctica está ahí.
+4. Toca <UI>Descartar</UI> y luego <UI>Descartar permanentemente</UI>.
+5. Solo entonces desactiva el modo avión.
+
+<div class="shots">
+<Shot phone src={banner} alt="Un formulario en un teléfono con un aviso ámbar que dice: Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente." caption="El modo avión muestra el aviso sin conexión. Así se ve trabajar en una comunidad sin señal." />
+<Shot phone src={discard} alt="Un cuadro titulado ¿Descartar este formulario? que advierte que el formulario no ha llegado al servidor y que descartarlo lo elimina de forma permanente, con Descartar permanentemente y Cancelar." caption="Correcto para un formulario de práctica. Incorrecto para cualquiera real." />
+</div>
+
+<Aside type="caution" title="Elige «Solo crear ID» en la sección del hogar">
+{/* claim: guide-households-not-listed */}
+Un hogar creado sin señal no aparece en Sincronización sin conexión, así que no se puede descartar, y se envía la próxima vez que alguien toque <UI>Reintentar</UI>. Al practicar el formulario de identificación, elige <UI>Solo crear ID</UI> en la sección del hogar.
+</Aside>
+
+<div class="shots">
+<Shot phone src={household} alt="La sección del hogar del formulario de identificación con sus tres opciones." caption="En la práctica, siempre Solo crear ID." />
+</div>
+
+## Una sesión de 90 minutos
+
+| Tiempo | Qué | Cómo |
+|---|---|---|
+| 0–10 min | Por qué importa | Un formulario, una persona, un teléfono: hasta que se envía, el teléfono tiene la única copia |
+| 10–25 min | Registrarse e iniciar sesión | Cada persona, en su propio teléfono, con señal; elegir la organización de las sugerencias |
+| 25–40 min | Buscar antes de registrar | En parejas, buscar a las personas inventadas del otro por apellido, apodo y cédula |
+| 40–65 min | Una visita completa sin señal | Modo avión: consentimiento, identificación con Solo crear ID, otro formulario, y descartar |
+| 65–80 min | La sincronización de la noche | Con señal: abrir la nube, tocar Reintentar, leer el resultado |
+| 80–90 min | Preguntas | Repasar juntos la lista para el día de campo |
+
+{/* claim: guide-search-one-field */}
+Dedica tiempo de verdad a la búsqueda. Coincide con el principio de un campo, así que un nombre completo escrito junto no encuentra a nadie, y esa es la razón más común para registrar a alguien dos veces.
+
+## Haz una prueba piloto pequeña
+
+{/* claim: guide-dhis2-pilot */}
+Antes de que salga todo el equipo, manda a dos o tres personas capacitadas un día corto con el formulario real. DHIS2 aconseja "Finalize and pilot the tracker before scaling it" (terminar y probar antes de ampliar); lo mismo vale para un formulario de Puente.
+
+Los datos de la prueba piloto son reales: las personas visitadas tienen que dar su consentimiento y los registros se quedan.
+
+## Qué revisar después de la prueba piloto
+
+{/* claim: guide-forms-collected */}
+- En el Gestor de formularios (<UI>Gestionar</UI>), expande la fila del formulario, pulsa <UI>Actualizar</UI> y compara <UI>Formularios recolectados</UI> con la hoja de registro en papel.
+
+{/* claim: guide-review-dashboard */}
+- Abre <UI>Revisar</UI>. Lee <UI>Requiere atención</UI>, por ejemplo <UI>registros a los que les faltan campos clave</UI>.
+- Exporta el formulario y lee el archivo. ¿Cada pregunta es una columna que puedes usar?
+- Pregunta al equipo de la prueba qué les confundió, y corrige el formulario antes de la ronda.
+
+<Shot src={review} alt="El panel Revisar: Requiere atención muestra registros con un vínculo de hogar sin resolver y registros a los que les faltan campos clave; Cobertura comunitaria muestra seis comunidades." caption="Después de la prueba piloto, Requiere atención muestra lo que la capacitación no cubrió." />
+
+## Lleva una lista de personas capacitadas
+
+Lleva una lista sencilla: nombre, teléfono, fecha de capacitación, si pasó la práctica en modo avión y si ya hizo un día piloto. Solo quien está en la lista sale sin acompañamiento.
+
+{/* claim: guide-org-deactivate */}
+Cuando alguien deja el equipo, sácalo de la lista y usa <UI>Desactivar</UI> en la pantalla Organizaciones. Eso cierra su sesión en las dos aplicaciones. Hoy no impide que vuelvan a entrar con su contraseña — ninguna de las dos aplicaciones revisa todavía si la cuenta está desactivada al iniciar sesión —, así que avísale también a Puente en info@puente-dr.org.
+
+## Para leer más
+
+{/* claim: guide-who-checklist */}
+- [DHIS2: Build your tracker programs](https://docs.dhis2.org/en/implement/tracker-implementation/build-your-tracker-programs.html) — guía de implementación sobre capacitación y pruebas piloto (en inglés).
+- [Lista de verificación de la seguridad de la cirugía de la OMS](https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources) — el modelo de las listas con pausas como la [lista para el día de campo](/docs/es/guides/field-day-checklist/): el equipo se detiene unos momentos en tres puntos críticos.

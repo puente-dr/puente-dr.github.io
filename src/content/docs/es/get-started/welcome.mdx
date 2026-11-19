@@ -1,0 +1,91 @@
+---
+title: Bienvenida a Puente
+description: Qué es Puente — dos apps y una sola cuenta —, cómo viaja una encuesta desde un teléfono hasta una hoja de cálculo y por dónde empezar.
+related:
+  - get-started/data-collectors
+  - get-started/data-managers
+  - get-started/glossary
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import onboarding from '@shots/es/collect-onboarding-welcome.png';
+import queue from '@shots/es/collect-03-queue.png';
+import login from '@shots/es/manage-login.png';
+import review from '@shots/es/manage-review.png';
+
+Puente ayuda a los equipos de salud comunitaria a recoger información sobre las personas que atienden, guardarla en un solo lugar y usarla. Los encuestadores llenan formularios en un teléfono, en comunidades con o sin señal. La coordinación crea esos formularios, revisa lo que llegó y lo descarga, en una computadora.
+
+Esta documentación explica cómo funcionan las dos partes. Empieza por el resumen de abajo y luego sigue el camino de tu rol.
+
+## Dos apps, una cuenta
+
+{/* claim: start-two-apps */}
+{/* claim: start-platforms */}
+- **Puente Collect** es la app del teléfono, para [iPhone](https://apps.apple.com/us/app/puente-collect/id1362371696) y [Android](https://play.google.com/store/apps/details?id=puente.collect). Con ella buscas personas, llenas formularios y los envías.
+- **Puente Manage** es el sitio web, en [puente-manage.vercel.app](https://puente-manage.vercel.app). Con él creas formularios, revisas y limpias registros, manejas tu organización y exportas datos.
+
+La misma cuenta — tu correo o teléfono y tu contraseña — sirve para entrar a las dos.
+
+{/* claim: start-languages */}
+Las dos apps funcionan en español, inglés y criollo haitiano.
+
+<div class="shots">
+<Shot phone src={onboarding} alt="La primera pantalla de bienvenida de Collect: el logo de Puente, una frase sobre unir comunidades con datos, una descripción corta y los botones para saltar y empezar." caption="Collect en el teléfono: lo que usan los encuestadores en el campo." />
+</div>
+
+<Shot src={login} alt="La página de inicio de sesión de Puente Manage con los campos de correo o teléfono y contraseña, un botón para iniciar sesión, enlaces para recuperar la contraseña y crear una cuenta, y una nota que invita a quien recoge datos en el campo a usar Puente Collect en el teléfono." caption="Manage en la web: lo que usa la coordinación en la oficina. La nota manda a los encuestadores de vuelta al teléfono." />
+
+## Cómo viaja una encuesta
+
+{/* claim: start-survey-path */}
+Cada registro hace el mismo recorrido:
+
+1. **Llenar.** Un encuestador abre un formulario en Collect. La persona acepta la política de datos en la pantalla de consentimiento, y el encuestador completa el formulario.
+2. **Esperar en el teléfono.** Sin señal, Collect dice <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI>. Ahora el formulario está solo en ese teléfono.
+3. **Enviar.** Ya con señal, el encuestador abre la sincronización sin conexión — el ícono de la nube — y toca <UI>Reintentar</UI>. No se envía nada hasta que alguien lo hace.
+4. **Llegar a Manage.** El registro aparece para todos en tu organización: en el panel, en el Gestor de formularios y en Curación de datos.
+5. **Exportar.** Alguien de la coordinación descarga los registros del formulario como hoja de cálculo.
+
+<Aside type="caution" title="El paso 3 no es automático">
+El aviso sin conexión dice que los registros se sincronizarán automáticamente, pero no es así. Hasta que alguien toca Reintentar, el teléfono tiene la única copia. Hazlo un hábito diario. Mira [Trabajar sin conexión](/docs/es/collect/offline-sync/).
+</Aside>
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de sincronización sin conexión con una Identificación de residente esperando, un enlace Descartar y un botón Reintentar." caption="La sincronización sin conexión: todo lo que sigue en este teléfono, y el botón que lo envía." />
+</div>
+
+## Tu organización
+
+{/* claim: start-org-scope */}
+Cada persona en Puente pertenece a una organización — la clínica, misión o programa donde trabaja. Tu organización decide qué registros ves: tus formularios, tus residentes, tus exportaciones.
+
+{/* claim: start-org-first-admin */}
+La primera persona que se registra en una organización se vuelve su **administrador**; todas las que llegan después son **miembros**. Los miembros pueden recoger datos y usar Manage enseguida — no hay paso de aprobación. Los administradores además pueden nombrar a otros administradores y desactivar a quien se va. Mira [Organizaciones](/docs/es/organizations/organizations/).
+
+## Qué necesitas para empezar
+
+{/* claim: start-signin-online */}
+- **Una cuenta.** Una por persona, con tu propio correo o teléfono y tu contraseña. Nunca compartas un usuario.
+- **Un teléfono** con Collect, para quien recoge datos. Iniciar sesión necesita conexión, y enviar formularios también — pero llenarlos no.
+- **Una computadora con navegador**, para quien crea formularios, revisa registros o exporta datos.
+- **Señal al menos una vez al día**, para que los formularios recogidos ese día lleguen a Puente esa misma noche.
+
+## Por dónde empezar
+
+**Recoges datos en el campo.** Empieza por [Empieza aquí: recolección de datos](/docs/es/get-started/data-collectors/): instala Collect, inicia sesión, busca personas, llena un formulario y envíalo.
+
+**Manejas el trabajo desde una computadora.** Empieza por [Empieza aquí: gestión de datos](/docs/es/get-started/data-managers/): prepara tu organización, crea formularios, revisa lo que llegó y expórtalo.
+
+<Shot src={review} alt="El panel de Manage: una lista de lo que requiere atención, con registros a los que les faltan campos clave y registros con un vínculo de hogar sin resolver, una lista de cobertura comunitaria y el total de registros sincronizados." caption="Revisar, el panel de Manage: lo que llegó y lo que hay que corregir." />
+
+## Cómo moverte por la documentación
+
+- **[Collect](/docs/es/collect/install-and-sign-in/)** — la app del teléfono, pantalla por pantalla.
+- **[Manage](/docs/es/manage/sign-in/)** — el sitio web: formularios, revisión, limpieza.
+- **[Organizaciones](/docs/es/organizations/organizations/)** — miembros, administradores y apodos.
+- **[Datos](/docs/es/data/exporting-data/)** — exportaciones, cómo leer los archivos, archivos de investigación.
+- **[Privacidad](/docs/es/privacy/protecting-data/)** — proteger los datos de las personas, eliminar una cuenta.
+- **[Guías](/docs/es/guides/set-up-your-organization/)** — recorridos paso a paso para tareas comunes.
+- **[Ayuda](/docs/es/help/troubleshooting/)** — solución de problemas y cómo comunicarte con Puente.
+- **[Glosario](/docs/es/get-started/glossary/)** — las palabras que usa esta documentación.

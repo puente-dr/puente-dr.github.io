@@ -1,0 +1,113 @@
+---
+title: Gestor de formularios
+description: Todos los formularios con los que recolecta tu organización en una lista — los cuatro de Puente, tus formularios personalizados y los botones para editarlos, copiarlos, eliminarlos y exportarlos.
+related:
+  - manage/form-creator
+  - data/exporting-data
+  - data/research-exports
+  - collect/custom-forms
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import manager from '@shots/es/manage-form-manager.png';
+import expanded from '@shots/es/manage-form-manager-expanded.png';
+import noRecords from '@shots/es/export-03-no-records-yet.png';
+
+El Gestor de formularios muestra todos los formularios con los que recolecta tu organización. Desde aquí empiezas una exportación, abres un formulario para editarlo, copias uno como punto de partida de otro, o retiras uno que ya no usas.
+
+## Abrir el Gestor de formularios
+
+{/* claim: manage-fm-open */}
+En el menú de la izquierda, pulsa <UI>Gestionar</UI>. La página se llama <UI>Gestor de formularios</UI>. Tiene dos listas: <UI>Formularios de Puente</UI> arriba y tus <UI>Formularios personalizados</UI> debajo.
+
+<Shot src={manager} alt="El Gestor de formularios: un botón para crear formulario y una casilla de búsqueda, una tabla de Formularios de Puente con SurveyData, HistoryEnvironmentalHealth, Vitals y EvaluationMedical, cada uno con un botón Exportar, y una tabla de formularios personalizados cuyas filas tienen Editar, Duplicar, Eliminar y Exportar." caption="Los formularios de Puente solo tienen Exportar. Los tuyos también se pueden editar, copiar y eliminar." />
+
+{/* claim: manage-fm-search-create */}
+<UI>+ Crear formulario</UI> abre un [Creador de formularios](/docs/es/manage/form-creator/) vacío. <UI>Buscar formularios…</UI> deja en las dos listas solo los formularios cuyo nombre contiene lo que escribes.
+
+## Los formularios de Puente y sus nombres en Collect
+
+{/* claim: manage-fm-puente-forms */}
+Manage muestra los cuatro formularios de Puente con sus nombres internos. En el teléfono tienen nombres más claros:
+
+| En Manage | En Collect |
+|---|---|
+| SurveyData | Identificación de residente |
+| HistoryEnvironmentalHealth | Salud Ambiental |
+| Vitals | Partes vitales |
+| EvaluationMedical | Evaluación Médica |
+
+SurveyData guarda a las personas mismas: una fila por residente. Los otros tres son visitas vinculadas a un residente. Mira [Formularios de Puente](/docs/es/collect/puente-forms/).
+
+{/* claim: manage-fm-custom-actions */}
+Estos cuatro solo se pueden exportar. Aquí no se pueden editar, copiar ni eliminar.
+
+## Formularios personalizados y sus botones
+
+Los formularios personalizados son los que creó tu organización. Cada fila tiene cuatro botones:
+
+{/* claim: manage-fm-edit-dup */}
+- <UI>Editar</UI> abre el formulario en el Creador de formularios. Al publicar, los cambios se guardan en el mismo formulario.
+- <UI>Duplicar</UI> abre una copia en el Creador de formularios. Al publicar, se guarda como un formulario nuevo; el original no cambia.
+- <UI>Eliminar</UI> retira el formulario (más abajo).
+- <UI>Exportar</UI> descarga sus respuestas como hoja de cálculo.
+
+{/* claim: manage-fm-records-view */}
+Pulsa el nombre de un formulario para ver sus registros en una tabla. <UI>← Volver</UI> regresa a la lista.
+
+## Ver cuántos formularios se recolectaron
+
+{/* claim: manage-fm-expand */}
+Pulsa la flecha al principio de una fila para abrirla. La fila muestra <UI>Formularios recolectados</UI> con un número, y un botón <UI>Actualizar</UI>.
+
+<Aside type="caution" title="La cifra empieza en 0">
+El número dice 0 hasta que pulsas <UI>Actualizar</UI>: no se carga al abrir la fila. Pulsa <UI>Actualizar</UI> antes de leerlo. Si la cifra no carga, la fila dice <UI>Estos registros no se cargaron.</UI> en vez de mostrar un cero falso.
+</Aside>
+
+<Shot src={expanded} alt="La fila de Vision exam abierta: formularios recolectados 37 con un botón Actualizar, dos frases que describen el archivo de investigación y los registros completos, y los botones de exportar archivo de investigación y registros completos." caption="Una fila abierta. Este formulario permite la exportación para investigación, así que tiene dos botones de exportar y explica la diferencia." />
+
+## Formularios de investigación: dos botones
+
+{/* claim: manage-fm-research */}
+Un formulario personalizado creado con <UI>Permitir exportación para investigación</UI> marcado lleva la etiqueta <UI>Investigación activada</UI> bajo su nombre, y dos botones en lugar de <UI>Exportar</UI>:
+
+- <UI>Exportar archivo de investigación</UI>: un ID de estudio, edad, sexo, comunidad y las respuestas del formulario. Sin nombres, números de cédula, teléfonos, fechas de nacimiento ni ubicaciones. Es el único archivo que se envía a un socio de investigación.
+- <UI>Exportar registros completos</UI>: cada respuesta con el nombre, número de cédula, teléfono, fecha de nacimiento y ubicación de la persona. Se queda dentro de Puente.
+
+La fila abierta repite las dos descripciones. Los cuatro formularios de Puente nunca tienen archivo de investigación. Mira [Exportaciones para investigación](/docs/es/data/research-exports/).
+
+## Exportar un formulario
+
+{/* claim: manage-fm-export-csv */}
+Pulsa <UI>Exportar</UI>. Tu navegador descarga un archivo CSV con el nombre del formulario. El archivo de investigación lleva «research» y la fecha en el nombre, para que no se confundan. El archivo abre en Excel con los acentos bien.
+
+{/* claim: org-member-exports */}
+Cualquier miembro de tu organización puede descargar los registros completos, con datos que identifican a las personas, no solo quienes administran. Trata cada exportación como privada. [Exportar datos](/docs/es/data/exporting-data/) explica qué contiene cada archivo.
+
+{/* claim: manage-fm-export-messages */}
+Si no se descarga nada, un mensaje arriba en la esquina dice por qué:
+
+| Mensaje | Qué hacer |
+|---|---|
+| <UI>Este formulario todavía no tiene registros para exportar.</UI> | No se ha sincronizado nada de este formulario. Revisa los teléfonos. |
+| <UI>No se pudo completar la descarga. Por favor, inténtelo de nuevo.</UI> | Inténtalo de nuevo. Falló la descarga; tus registros no se perdieron. |
+| <UI>Tu sesión expiró. Inicia sesión de nuevo para exportar.</UI> | Cierra sesión, vuelve a entrar y exporta otra vez. |
+
+<Shot src={noRecords} alt="El Gestor de formularios con un mensaje arriba a la derecha que dice que el formulario todavía no tiene registros para exportar, y un botón para descartarlo." caption="Un formulario vacío lo dice, en vez de descargar un archivo vacío." />
+
+## Eliminar un formulario
+
+{/* claim: manage-fm-delete */}
+Pulsa <UI>Eliminar</UI> y confirma con <UI>Eliminar formulario</UI> cuando pregunte <UI>¿Quieres eliminar este formulario?</UI> El formulario sale del Gestor de formularios, y los teléfonos dejan de mostrarlo la próxima vez que actualicen sus formularios personalizados. Sus respuestas no se borran: eliminar marca el formulario como retirado.
+
+## Preguntas frecuentes
+
+**¿Por qué no aparece un formulario que creé?**
+Si la lista no cargó, la página dice <UI>Sus formularios personalizados no se cargaron.</UI> con un botón <UI>Intentar de nuevo</UI>. Si no, revisa que el Creador de formularios de verdad lo publicó.
+
+**¿Por qué no puedo editar SurveyData?**
+Los cuatro formularios de Puente solo tienen el botón Exportar. Editar, Duplicar y Eliminar son para los formularios personalizados.
+
+**¿Quién puede exportar los registros completos?**
+Cualquier miembro de tu organización.

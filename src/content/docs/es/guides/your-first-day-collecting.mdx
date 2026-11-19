@@ -1,0 +1,116 @@
+---
+title: Tu primer día recogiendo datos
+description: El primer día de un encuestador con Puente Collect de principio a fin — iniciar sesión, encontrar a las personas, el consentimiento, llenar formularios sin señal y enviarlo todo en la noche.
+related:
+  - collect/getting-around
+  - collect/find-records
+  - collect/offline-sync
+  - guides/field-day-checklist
+roles: [data-collector]
+format: guide
+minutes: 3
+thumbnail: ../../../../assets/shots/es/collect-home.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/es/collect-sign-in.png';
+import home from '@shots/es/collect-home.png';
+import consent from '@shots/es/collect-consent.png';
+import household from '@shots/es/collect-household.png';
+import banner from '@shots/es/collect-01-offline-banner.png';
+import caughtUp from '@shots/es/collect-04-all-caught-up.png';
+
+Este es un recorrido por un día normal de campo con Puente Collect, en el orden en que pasan las cosas: prepararte con señal, visitar los hogares y enviar el trabajo del día en la noche. Quien coordina ya preparó tu organización y te dijo qué formularios usar.
+
+## Inicia sesión antes de salir
+
+{/* claim: guide-signin-internet */}
+Iniciar sesión necesita conexión a internet, así que hazlo en tu casa o en la oficina, nunca en la comunidad. Escribe tu correo o tu número de teléfono y tu contraseña, y toca <UI>Iniciar sesión</UI>.
+
+<div class="shots">
+<Shot phone src={signIn} alt="La pantalla de inicio de sesión de Collect con los campos de correo o teléfono y contraseña, un enlace para recuperar la contraseña y un botón azul para iniciar sesión." caption="Inicia sesión mientras tienes señal. La sesión sigue abierta todo el día." />
+<Shot phone src={home} alt="La pantalla de inicio de Collect con los conteos de actividad y la barra de cinco íconos abajo, con la casa resaltada." caption="Inicio. La barra de abajo tiene cinco íconos y ninguna palabra." />
+</div>
+
+{/* claim: guide-tabs */}
+La barra de abajo tiene cinco íconos: la lupa (buscar personas), la carpeta (formularios), la casa (inicio), la nube (enviar el trabajo guardado) y el engranaje (configuración). Collect abre en la casa.
+
+{/* claim: guide-search-offline */}
+Mientras todavía tengas señal, abre la lupa una vez. Así el teléfono guarda a los residentes de la comunidad y puedes buscarlos después sin señal.
+
+## Busca primero a la persona
+
+La mayoría de las personas que visitas ya están en Puente. Antes de registrar a nadie, búscala con la lupa.
+
+{/* claim: guide-search-one-field */}
+La búsqueda lee un campo a la vez, desde el principio: un nombre, un apellido, un apodo o los primeros dígitos de una cédula. Un nombre completo escrito junto no encuentra a nadie. Prueba solo el apellido, luego el nombre, luego el apodo.
+
+Si de verdad es nueva, regístrala con el formulario <UI>Identificación de residente</UI> en la carpeta.
+
+## Pide el consentimiento
+
+{/* claim: guide-consent */}
+Cada formulario que abres desde la carpeta empieza en una pantalla de consentimiento. Léele el resumen a la persona, o deja que lo lea. El formulario solo abre después de marcar <UI>El miembro de la comunidad acepta la política de datos</UI> y tocar <UI>Continuar con el formulario</UI>.
+
+<div class="shots">
+<Shot phone src={consent} alt="La pantalla de consentimiento con el resumen de privacidad, un botón para ver la política completa, la casilla de aceptación sin marcar y el botón para continuar con el formulario." caption="Marca la casilla solo cuando la persona haya aceptado." />
+</div>
+
+## Llena los formularios
+
+{/* claim: guide-attach-resident */}
+<UI>Salud Ambiental</UI>, <UI>Evaluación Médica</UI> y <UI>Partes vitales</UI> son de una persona. El botón dice <UI>Adjuntar una residente de la comunidad</UI> hasta que eliges de quién es el formulario.
+
+{/* claim: guide-location-button */}
+La ubicación no es automática. Toca <UI>Obtener ubicación</UI> mientras estás en la casa y revisa los números que muestra. Si muestra `(0.00, 0.00)`, el teléfono no encontró la posición: toca <UI>Obtener ubicación de nuevo</UI>.
+
+{/* claim: guide-household-options */}
+El formulario de identificación termina con una sección del hogar: <UI>Solo crear ID</UI>, <UI>Crear un nuevo hogar</UI> o <UI>Vincular ID con un hogar existente</UI>. Pregunta a quien coordina cuál usa tu equipo.
+
+<div class="shots">
+<Shot phone src={household} alt="El final del formulario de identificación: el botón para obtener la ubicación de nuevo sobre (0.00, 0.00), las opciones de foto y la sección del hogar con sus tres opciones." caption="Las opciones del hogar. (0.00, 0.00) quiere decir que todavía no se encontró la ubicación." />
+</div>
+
+## Trabaja sin señal
+
+{/* claim: guide-save-messages */}
+Cuando no hay señal, un aviso dice <UI>Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente.</UI> Sigue trabajando. Al enviar, el mensaje te dice qué pasó: <UI>Formulario entregado satisfactoriamente</UI> quiere decir que llegó a Puente; <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> quiere decir que espera en este teléfono.
+
+<div class="shots">
+<Shot phone src={banner} alt="Un formulario en un teléfono con un aviso ámbar arriba que dice: Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente." caption="Estar sin conexión es normal. No se pierde nada." />
+</div>
+
+<Aside type="caution" title="Hasta que se envía, el teléfono tiene la única copia">
+{/* claim: guide-logout-offline */}
+No cierres sesión, no borres los datos de la aplicación ni la desinstales mientras haya formularios esperando. Collect no te deja cerrar sesión sin señal, y te avisa si todavía quedan formularios en el teléfono.
+</Aside>
+
+## Envíalo todo en la noche
+
+{/* claim: guide-sync-not-automatic */}
+Aunque el aviso diga otra cosa, nada se envía solo. Cada noche, conéctate a una red wifi confiable, toca la nube para abrir <UI>Sincronización sin conexión</UI> y toca <UI>Reintentar</UI>.
+
+{/* claim: guide-caught-up */}
+Quédate en la red hasta que la pantalla diga <UI>No hay formularios en cola. ¡Estás al día!</UI>
+
+<div class="shots">
+<Shot phone src={caughtUp} alt="La pantalla de Sincronización sin conexión con la cola vacía: No hay formularios en cola. ¡Estás al día!" caption="Este es el único estado terminado. Cualquier otro quiere decir que algo sigue en el teléfono." />
+</div>
+
+{/* claim: guide-households-not-listed */}
+Los hogares que creaste sin señal no aparecen en esta pantalla, pero se envían cuando tocas <UI>Reintentar</UI>. Tócalo siempre, aunque la pantalla diga que no hay nada en cola.
+
+## Preguntas frecuentes
+
+{/* claim: guide-discard-permanent */}
+**Un formulario no se envía. ¿Lo descarto?**
+No. Inténtalo de nuevo con mejor conexión y avisa a quien coordina. Descartarlo lo borra del teléfono para siempre.
+
+{/* claim: guide-forgot-password */}
+**Olvidé mi contraseña en el campo.**
+Toca <UI>¿olvidado tu contraseña?</UI> cuando tengas señal: Collect te pide tu correo y te envía un enlace para cambiarla. Mientras tanto, sigue en papel.
+
+{/* claim: guide-forms-reach-phones */}
+**El formulario del que me hablaron no está en la carpeta.**
+Con señal, toca la flecha de actualizar junto a <UI>Formularios personalizados</UI>. Si dice <UI>Sin formularios personalizados — intenta actualizar</UI>, avisa a quien coordina.

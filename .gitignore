@@ -1,0 +1,6 @@
+node_modules/
+dist/
+_site/
+.astro/
+tools/floor/shots/
+tools/floor/report/

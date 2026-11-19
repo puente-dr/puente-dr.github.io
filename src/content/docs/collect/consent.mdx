@@ -1,0 +1,100 @@
+---
+title: Consent
+description: The consent screen forms open on — what its privacy summary says, how to go through it with the person, and what happens if they say no.
+related:
+  - privacy/protecting-data
+  - collect/resident-id-and-households
+  - collect/puente-forms
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import consent from '@shots/en/collect-consent.png';
+import gallery from '@shots/en/collect-forms-gallery.png';
+import residentId from '@shots/en/collect-resident-id.png';
+
+Before you ask anyone a single question, Collect asks you to confirm that the person agrees to how their information will be used. Every form you open from the folder — the four Puente forms and your organization's custom forms — opens on a consent screen, and the questions stay hidden until consent is recorded.
+
+The screen is short on purpose. Read it with the person, answer their questions, and only then tick the box.
+
+## When the consent screen appears
+
+{/* claim: collect-consent-screen */}
+Tap any form under the folder and the <UI>Consent Form</UI> screen appears first. It has three parts:
+
+- A box with a plain-language summary of what Collect stores.
+- <UI>View Full Policy</UI>, under the summary.
+- A checkbox, <UI>Community member agrees to data policy</UI>, and the <UI>Continue to Form</UI> button.
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen with Resident ID and Environmental Health cards under Puente Forms." caption="Tapping any form here opens the consent screen first." />
+<Shot phone src={consent} alt="The Consent Form screen: a bordered box with the privacy summary and a View Full Policy button, an empty checkbox labeled Community member agrees to data policy, and a Continue to Form button." caption="The consent screen. The checkbox starts empty every time." />
+</div>
+
+## What the summary tells the person
+
+{/* claim: collect-consent-summary */}
+The summary on screen says, in short:
+
+- Collect stores what authorized users submit: contact details, demographics, household and location information, precise GPS coordinates, photographs, health information, form responses and account identifiers.
+- Records may be available to authorized users of the organization collecting them.
+- Puente does not use the data for advertising, product personalization or tracking.
+- The date the current Privacy Policy was last updated.
+
+Read it aloud, or explain it in your own words in the language the person is most comfortable in. If they ask who will see their answers, the honest answer is the second point: people in your organization who use Puente.
+
+## Go through it with the person
+
+Consent is a conversation, not a tap. A few habits make it a real one:
+
+- Say who you are, which organization you work with, and why you are visiting, before you open the form.
+- Hold the phone so the person can see the screen while you read.
+- Ask whether they have questions, and wait for an answer. Silence is not agreement.
+- Make it clear they can say no, and that saying no changes nothing about how you treat them.
+
+## Show the full policy
+
+{/* claim: collect-consent-full-policy */}
+Tap <UI>View Full Policy</UI> to show the same summary in a window with <UI>Open Current Policy</UI>, which opens Puente's full Privacy Policy in the phone's browser ([puente-dr.org/privacy-policy](https://www.puente-dr.org/privacy-policy/)). That needs a connection. Tap <UI>Ok</UI> to return to the consent screen.
+
+## Record consent and continue
+
+{/* claim: collect-consent-required */}
+When the person agrees, tick <UI>Community member agrees to data policy</UI> and tap <UI>Continue to Form</UI>. The form's questions appear.
+
+If you tap <UI>Continue to Form</UI> without the tick, the app stops you with <UI>Community member must consent before you can continue.</UI> and stays on the consent screen.
+
+<div class="shots">
+<Shot phone src={residentId} alt="The Resident ID form under the heading Demographics, with First Name, Last Name, Nickname and Date of Birth fields." caption="What appears after Continue to Form — here, the start of Resident ID." />
+</div>
+
+## If the person says no
+
+{/* claim: collect-consent-back */}
+Do not tick the box. Tap <UI>Back</UI>, above the consent screen, to leave the form; nothing has been saved. Thank them, and move on.
+
+<Aside type="caution" title="Never tick the box for someone">
+The tick is your statement that this person agreed. Do not tick it to get past the screen, to save time, or because a family member said it would be fine. Ask the person the record is about. For a child, follow your organization's rule on who gives consent.
+</Aside>
+
+## Who can see the records
+
+{/* claim: collect-consent-org-scope */}
+Each organization's apps show its own records: when you search in Collect or open Manage, you see your organization's records. For what Puente does to protect data, and what it does not claim, see [Protecting data](/docs/privacy/protecting-data/).
+
+## Suggested next forms
+
+{/* claim: collect-consent-suggested */}
+<Aside type="caution" title="Suggested next forms do not ask again">
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+</Aside>
+
+## FAQ
+
+{/* claim: collect-consent-required */}
+**Does the app remember consent for a person?**
+No. The checkbox starts empty every time you open a form. Ask every time.
+
+{/* claim: collect-consent-screen */}
+**Can I skip consent for a quick follow-up?**
+Not from the folder: every form opened there starts on the consent screen. The one exception is Suggested next forms, below.

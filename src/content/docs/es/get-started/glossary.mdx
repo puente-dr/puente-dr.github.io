@@ -1,0 +1,103 @@
+---
+title: Glosario
+description: Las palabras que usa esta documentación, con los nombres que ves en pantalla en Collect y Manage.
+related:
+  - get-started/welcome
+  - collect/getting-around
+  - data/reading-export-files
+---
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import queue from '@shots/es/collect-03-queue.png';
+import formManager from '@shots/es/export-01-form-manager.png';
+
+Las palabras que se usan en esta documentación, agrupadas por tema. Cuando las apps muestran una palabra en pantalla, aparece tal como se ve.
+
+## Cuentas y organizaciones
+
+{/* claim: start-org-scope */}
+**Organización** — la clínica, misión o programa donde trabajas. Cada cuenta pertenece a una, y la organización decide qué registros ves.
+
+{/* claim: start-nicknames */}
+**Apodo** — otra forma de escribir el nombre de una organización, como una abreviatura. Manage las llama formas de escribirlo. Los registros guardados con cualquiera de esas formas cuentan como de esa organización. Solo el personal de Puente puede agregar una. Mira [Apodos](/docs/es/organizations/nicknames/).
+
+{/* claim: start-org-first-admin */}
+**Administrador** — aparece como <UI>Administrador</UI>. La primera persona que se registra en una organización se vuelve administrador. Los administradores además pueden usar <UI>Hacer administrador</UI> y <UI>Desactivar</UI> con las personas de su propia organización.
+
+{/* claim: data-export-members */}
+**Miembro** — todas las demás personas de una organización. Los miembros pueden recoger datos, usar Manage, crear formularios y exportar.
+
+{/* claim: privacy-deactivate */}
+**Desactivado** — una cuenta que un administrador apagó con <UI>Desactivar</UI>. Sus sesiones se cierran, así que las aplicaciones la sacan; hoy todavía puede volver a entrar con su contraseña. <UI>Reactivar</UI> lo deshace.
+
+## Personas y hogares
+
+{/* claim: start-puente-forms */}
+**Residente** — una persona que tu organización encuesta. Cada residente se registra una sola vez, con el formulario <UI>Identificación de residente</UI>.
+
+**Identificación de residente / SurveyData** — el formulario que registra a una persona. Collect lo llama Identificación de residente; Manage y la exportación lo llaman `SurveyData`.
+
+{/* claim: start-household */}
+**Hogar** — las personas que viven juntas en una casa. Un residente se puede unir a un hogar, y Collect puede <UI>Crear un nuevo hogar</UI>. Mira [Identificación de residente y hogares](/docs/es/collect/resident-id-and-households/).
+
+{/* claim: data-join-objectid */}
+**objectId** — la columna de cada exportación que dice de qué persona trata una fila. Une los archivos exportados por ella.
+
+## Formularios
+
+{/* claim: start-puente-forms */}
+**Formularios de Puente** — los cuatro formularios integrados, bajo <UI>Formularios Puente</UI> en Collect: Identificación de residente, Salud Ambiental, Partes vitales y Evaluación Médica. En Manage aparecen como `SurveyData`, `HistoryEnvironmentalHealth`, `Vitals` y `EvaluationMedical`.
+
+{/* claim: help-custom-forms-refresh */}
+**Formulario personalizado** — un formulario que tu organización crea en Manage. Aparece bajo <UI>Formularios personalizados</UI> en Collect.
+
+{/* claim: start-forms */}
+**Publicar** — <UI>Publicar</UI> en el Creador de formularios envía un formulario personalizado a los teléfonos de tu organización. Revisa un teléfono después: una publicación fallida no muestra ningún error.
+
+{/* claim: start-pin */}
+**Fijar** — mantén presionado un formulario en Collect para agregarlo a <UI>Formularios favoritos</UI>, así queda arriba.
+
+{/* claim: privacy-consent */}
+**Formulario de consentimiento** — la pantalla <UI>Formulario de consentimiento</UI> con la que abren los formularios que empiezas desde la carpeta. El formulario no abre hasta que se marca <UI>El miembro de la comunidad acepta la política de datos</UI>.
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla de recolección de datos con las tarjetas de los formularios de Puente, el área de formularios favoritos vacía y la lista de formularios personalizados vacía con una flecha para actualizar." caption="El ícono de la carpeta: formularios de Puente, favoritos y personalizados." />
+</div>
+
+## Enviar formularios
+
+{/* claim: start-survey-path */}
+**Sincronizar** — enviar a Puente los formularios guardados en un teléfono. Hasta que un formulario se sincroniza, el teléfono tiene la única copia.
+
+**Sincronización sin conexión** — la pantalla <UI>Sincronización sin conexión</UI>, detrás del ícono de la nube. Muestra los formularios que esperan en este teléfono.
+
+{/* claim: help-sync-manual */}
+**Reintentar** — el botón <UI>Reintentar</UI> de la sincronización sin conexión. Envía todo lo que espera. No se envía nada hasta que alguien lo pulsa.
+
+{/* claim: help-sync-failures */}
+**Descartar** — <UI>Descartar</UI> quita un formulario pendiente del teléfono de forma permanente. No se puede recuperar.
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de sincronización sin conexión con una Identificación de residente esperando, un enlace Descartar y un botón Reintentar." caption="La sincronización sin conexión, con Reintentar y Descartar." />
+</div>
+
+## Sacar los datos
+
+{/* claim: data-export-buttons */}
+**Exportar** — el botón <UI>Exportar</UI> junto a cada formulario en el Gestor de formularios de Manage. Descarga los registros de ese formulario.
+
+{/* claim: start-check-arrived */}
+**Gestor de formularios** — la pantalla <UI>Gestor de formularios</UI>, que se abre con <UI>Gestionar</UI> en el menú de la izquierda. Muestra todos los formularios, con un conteo de formularios recolectados bajo la flecha de cada uno, y sus botones de exportar.
+
+**Revisar** — <UI>Revisar</UI> en el menú de Manage abre el panel: lo que se sincronizó y lo que <UI>Requiere atención</UI>.
+
+**CSV** — el archivo de hoja de cálculo que produce una exportación. Se abre en Excel, Google Sheets y otros programas de hojas de cálculo.
+
+{/* claim: data-research-two-buttons */}
+**Archivo de investigación** — una exportación sin datos personales de un formulario personalizado, hecha con <UI>Exportar archivo de investigación</UI>. Es el único archivo que debe salir de Puente. Mira [Exportaciones para investigación](/docs/es/data/research-exports/).
+
+{/* claim: data-research-study-id */}
+**ID de estudio** — el código, como `P-3fa9c01b2e`, que reemplaza a una persona en un archivo de investigación. Solo Puente puede convertirlo de nuevo en una persona.
+
+<Shot src={formManager} alt="El Gestor de formularios con los cuatro formularios de Puente — SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical — y dos formularios personalizados, cada uno con un botón Exportar." caption="En Manage, los formularios de Puente aparecen con sus nombres internos." />

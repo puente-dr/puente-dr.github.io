@@ -1,0 +1,103 @@
+---
+title: Glossary
+description: The words these docs use, with the names you will see on screen in Collect and Manage.
+related:
+  - get-started/welcome
+  - collect/getting-around
+  - data/reading-export-files
+---
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/en/collect-forms-gallery.png';
+import queue from '@shots/en/collect-03-queue.png';
+import formManager from '@shots/en/export-01-form-manager.png';
+
+The words used across these docs, grouped by topic. Where the apps show a word on screen, it is given as it appears.
+
+## Accounts and organizations
+
+{/* claim: start-org-scope */}
+**Organization** — the clinic, mission or program you work for. Every account belongs to one, and it decides which records you see.
+
+{/* claim: start-nicknames */}
+**Nickname** — another spelling of an organization's name, such as an abbreviation. Manage calls them spellings. Records filed under any of an organization's spellings count as that organization's. Only Puente staff can add one. See [Nicknames](/docs/organizations/nicknames/).
+
+{/* claim: start-org-first-admin */}
+**Administrator** — shown as <UI>Administrator</UI>. The first person to sign up for an organization becomes one. Administrators can also use <UI>Make administrator</UI> and <UI>Deactivate</UI> for people in their own organization.
+
+{/* claim: data-export-members */}
+**Member** — everyone else in an organization. Members can collect, use Manage, build forms and export.
+
+{/* claim: privacy-deactivate */}
+**Deactivated** — an account an administrator has switched off with <UI>Deactivate</UI>. Their sessions end, so the apps sign them out; today they can still sign back in with their password. <UI>Reactivate</UI> undoes it.
+
+## People and households
+
+{/* claim: start-puente-forms */}
+**Resident** — a person your organization surveys. Each resident is registered once, with a <UI>Resident ID</UI> form.
+
+**Resident ID / SurveyData** — the form that registers a person. Collect calls it Resident ID; Manage and the export call it `SurveyData`.
+
+{/* claim: start-household */}
+**Household** — the people who live together in one home. A resident can be linked to a household, and Collect can <UI>Create a new household</UI>. See [Resident ID and households](/docs/collect/resident-id-and-households/).
+
+{/* claim: data-join-objectid */}
+**objectId** — the column in every export that says which person a row is about. Join export files on it.
+
+## Forms
+
+{/* claim: start-puente-forms */}
+**Puente forms** — the four built-in forms, under <UI>Puente Forms</UI> in Collect: Resident ID, Environmental Health, Vitals and Medical Evaluation. In Manage they appear as `SurveyData`, `HistoryEnvironmentalHealth`, `Vitals` and `EvaluationMedical`.
+
+{/* claim: help-custom-forms-refresh */}
+**Custom form** — a form your organization builds in Manage. It appears under <UI>Custom Forms</UI> in Collect.
+
+{/* claim: start-forms */}
+**Publish** — <UI>Publish</UI> in the Form Creator sends a custom form to your organization's phones. Check a phone afterwards: a failed publish shows no error.
+
+{/* claim: start-pin */}
+**Pin** — press and hold a form in Collect to add it to <UI>Pinned Forms</UI>, so it sits at the top.
+
+{/* claim: privacy-consent */}
+**Consent form** — the <UI>Consent Form</UI> screen forms open on when you start them from the folder. The form does not open until <UI>Community member agrees to data policy</UI> is ticked.
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen with Puente Forms cards for Resident ID and Environmental Health, an empty Pinned Forms area and an empty Custom Forms list with a refresh arrow." caption="The folder icon: Puente Forms, Pinned Forms and Custom Forms." />
+</div>
+
+## Sending forms
+
+{/* claim: start-survey-path */}
+**Sync** — sending forms saved on a phone to Puente. Until a form syncs, the phone holds the only copy.
+
+**Offline Sync** — the <UI>Offline Sync</UI> screen, behind the cloud icon. It lists the forms waiting on this phone.
+
+{/* claim: help-sync-manual */}
+**Retry** — the <UI>Retry</UI> button on Offline Sync. It sends everything waiting. Nothing is sent until someone presses it.
+
+{/* claim: help-sync-failures */}
+**Discard** — <UI>Discard</UI> removes a waiting form from the phone permanently. It cannot be recovered.
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen with one Resident ID form under Waiting to sync, a Discard link and a Retry button." caption="Offline Sync, with Retry and Discard." />
+</div>
+
+## Getting data out
+
+{/* claim: data-export-buttons */}
+**Export** — the <UI>Export</UI> button beside each form in Manage's Form Manager. It downloads that form's records.
+
+{/* claim: start-check-arrived */}
+**Form Manager** — the <UI>Form Manager</UI> screen, opened with <UI>Manage</UI> in the left menu. It lists every form, with a count of forms collected under each one's arrow, and its export buttons.
+
+**Review** — <UI>Review</UI> in the Manage menu opens the dashboard: what has synced, and what <UI>Needs attention</UI>.
+
+**CSV** — the spreadsheet file an export produces. It opens in Excel, Google Sheets and other spreadsheet programs.
+
+{/* claim: data-research-two-buttons */}
+**Research file** — a de-identified export of a custom form, made with <UI>Export research file</UI>. The only file meant to leave Puente. See [Research exports](/docs/data/research-exports/).
+
+{/* claim: data-research-study-id */}
+**Study ID** — the code, like `P-3fa9c01b2e`, that stands in for a person in a research file. Only Puente can turn it back into a person.
+
+<Shot src={formManager} alt="The Form Manager with the four Puente forms — SurveyData, HistoryEnvironmentalHealth, Vitals, EvaluationMedical — and two custom forms, each with an Export button." caption="Puente forms appear by their internal names in Manage." />

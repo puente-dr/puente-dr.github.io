@@ -1,0 +1,112 @@
+---
+title: Organizaciones
+description: Qué es una organización en Puente, las dos formas de crearla, por qué se rechaza un nombre muy parecido a uno que ya existe, y cómo se retiran o se unen organizaciones.
+related:
+  - organizations/members-and-administrators
+  - organizations/nicknames
+  - manage/sign-in
+  - guides/set-up-your-organization
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import suggest from '@shots/es/collect-02-signup-organization-suggestions.png';
+import chosen from '@shots/es/collect-03-signup-organization-selected.png';
+import picker from '@shots/es/register-02-picker-synthetic.png';
+import create from '@shots/es/admin-05-create-organization.png';
+
+Una organización es el grupo al que pertenece tu cuenta: una clínica, un proyecto de agua, un equipo de misión. Es el nombre en la carpeta que guarda los registros de ese grupo y las cuentas de su gente.
+
+{/* claim: org-what */}
+Tu organización decide qué registros ves. En Collect y en Manage, las aplicaciones de cada organización muestran sus propios registros. El resumen de privacidad de Collect dice que los registros pueden estar disponibles para los usuarios autorizados de la organización que los recolecta.
+
+La organización significa lo mismo en las dos aplicaciones. Esta página explica cómo nacen las organizaciones y cómo se retiran.
+
+## Por qué importa el nombre
+
+Para una persona, «Example Health Trust», «EHT» y «Exampel Health Trust» son claramente el mismo grupo. Para una computadora son tres. Los registros se archivan con el nombre de organización que se usó al recolectarlos, así que una forma de escribir distinta puede dejar cientos de registros donde nadie los busca.
+
+{/* claim: org-nickname-what */}
+Por eso Puente guarda un nombre oficial por organización, más una lista de otras formas de escribirlo que también reconoce. Esas son los [apodos](/docs/es/organizations/nicknames/).
+
+## Forma de entrar 1: registrarse en Collect
+
+En el teléfono, el campo de organización sugiere nombres que coinciden mientras escribes.
+
+<div class="shots">
+<Shot phone src={suggest} alt="El formulario de registro de Collect con Pu escrito en el campo de organización y la sugerencia Puente debajo." caption="Al escribir, sugiere organizaciones que ya existen." />
+<Shot phone src={chosen} alt="El formulario de registro de Collect con una organización elegida que llena el campo." caption="Una sugerencia, elegida." />
+</div>
+
+{/* claim: org-collect-creates */}
+- **Si eliges una sugerencia**, entras a esa organización.
+- **Si escribes un nombre claramente nuevo**, Puente crea la organización y tú quedas con el rol de administrador.
+
+Así un socio nuevo puede empezar sin esperar a nadie. También significa que un error al escribir podría crear una segunda copia de un grupo que ya existe; para eso está la revisión de abajo.
+
+## La revisión de nombres parecidos
+
+{/* claim: org-too-close */}
+Antes de crear una organización, Puente compara el nombre nuevo con cada nombre y apodo que ya existe, sin fijarse en mayúsculas ni acentos.
+
+| Escribes | Ya está en Puente | Resultado |
+|---|---|---|
+| `Example Health Trust` | `Example Health Trust` | Entras a ella |
+| `example health trust` | `Example Health Trust` | Entras a ella: las mayúsculas no importan |
+| `Exampel Health Trust` | `Example Health Trust` | Rechazado: una o dos letras de diferencia |
+| `Example Health Trust North` | `Example Health Trust` | Rechazado: un nombre contiene al otro |
+| `Clínica San Rafael` | nada parecido | Se crea |
+
+{/* claim: org-refused-effect */}
+Un nombre rechazado no impide registrarse. Igual recibes tu cuenta, pero no queda vinculada a ninguna organización: Manage te muestra un panel vacío, y Collect te sigue dejando recolectar y sincronizar. Escribe a info@puente-dr.org con el nombre que pusiste, y el personal de Puente te vincula a la organización correcta o crea una nueva.
+
+<Aside type="tip">
+Un rechazo cuesta un correo. Un duplicado creado por error parte en dos los registros de un grupo sin que nadie lo note, y eso es mucho más difícil de arreglar.
+</Aside>
+
+## Forma de entrar 2: registrarse en Manage
+
+{/* claim: manage-register-org-list */}
+En la página de registro de Manage, <UI>Organización</UI> es una lista fija. Eliges de ella; ahí no puedes escribir un nombre nuevo.
+
+<Shot src={picker} alt="El formulario Crear una cuenta de Manage con Exam escrito en el campo Organización y Example Health Trust ofrecida debajo." caption="Manage solo ofrece organizaciones que ya existen." />
+
+{/* claim: manage-register-not-listed */}
+Si la tuya no está, pulsa <UI>Mi organización no aparece</UI> y usa el enlace de correo que aparece. El personal de Puente agrega las organizaciones a mano. No elijas una que casi es la tuya. Mira [Iniciar sesión en Manage](/docs/es/manage/sign-in/).
+
+## Cómo crea el personal una organización
+
+{/* claim: org-staff-create */}
+El personal de Puente agrega organizaciones en la pantalla Organizaciones de Manage, en <UI>Agregar una organización asociada</UI>:
+
+- <UI>Nombre de la organización</UI>: el nombre oficial.
+- <UI>Código corto</UI>: <UI>Corto, en minúsculas y permanente. Se usa en las exportaciones.</UI>
+- <UI>Otras formas de escribirlo, separadas por comas</UI>: cada forma vista en el campo.
+
+Puente rechaza un código corto o una forma de escribirlo que ya usa otra organización, y dice cuál organización la tiene.
+
+<Shot src={create} alt="Un formulario con los campos nombre de la organización, código corto y otras formas de escribirlo, ayudas debajo de los dos últimos y un botón para agregar la organización." caption="Solo para el personal de Puente. El código corto no se puede cambiar después." />
+
+## Retirar o unir organizaciones
+
+{/* claim: org-retire */}
+Las organizaciones no se borran, porque se perdería el registro de quién recolectó qué. El personal de Puente las retira. Una organización retirada ya no se ofrece cuando alguien se registra, pero sus registros pasados le siguen perteneciendo.
+
+Retirar también libera sus nombres, y así dos organizaciones se vuelven una:
+
+1. El personal retira la organización B.
+2. El personal agrega el nombre de B como apodo de la organización A.
+3. Los registros de B ahora aparecen con los de A, y la entrada de B se queda guardada, así que todavía se sabe de dónde vinieron.
+
+Para retirar o unir, escribe a info@puente-dr.org.
+
+## Preguntas frecuentes
+
+**Me registré y Manage se ve vacío.**
+Lo más probable es que el nombre de tu organización no coincidiera. Escribe a info@puente-dr.org con el nombre que pusiste.
+
+**¿Puedo pasarme a otra organización?**
+No. Decide qué registros ves, así que lo cambia el personal de Puente.
+
+**Somos dos organizaciones que deberían ser una.**
+Pide al personal de Puente que retire una y agregue su nombre como apodo de la otra.

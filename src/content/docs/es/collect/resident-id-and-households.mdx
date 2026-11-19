@@ -1,0 +1,122 @@
+---
+title: Identificación de residente y hogares
+description: Registra a una persona con el formulario de identificación — qué campos son obligatorios, cómo funcionan la ubicación y las fotos, y cómo vincularla a un hogar.
+related:
+  - collect/find-records
+  - collect/puente-forms
+  - collect/consent
+  - collect/offline-sync
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import residentId from '@shots/es/collect-resident-id.png';
+import household from '@shots/es/collect-household.png';
+
+**Identificación de residente** es el formulario que crea a una persona en Puente. Todos los demás formularios de Puente — Salud Ambiental, Evaluación Médica, Partes vitales — se agregan a una persona, así que la persona tiene que existir primero. Llenas la identificación una sola vez por persona, la primera vez que la conoces.
+
+Antes de empezar una, busca a la persona con la lupa. La mayoría de las personas que visitas ya están registradas; mira [Buscar registros](/docs/es/collect/find-records/).
+
+## Empezar una identificación
+
+{/* claim: collect-rid-start */}
+Toca la carpeta y luego la tarjeta <UI>Identificación de residente</UI> en <UI>Formularios Puente</UI>. El formulario abre en la pantalla de consentimiento; cuando la persona acepta y continúas, aparece el formulario. Mira [Consentimiento](/docs/es/collect/consent/).
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla Recopilar datos con una tarjeta azul de identificación de residente y una verde de salud ambiental en Formularios Puente." caption="La identificación de residente es la primera tarjeta de Formularios Puente." />
+</div>
+
+## Qué recoge el formulario
+
+{/* claim: collect-rid-fields */}
+El formulario tiene tres partes.
+
+**Demografía**
+
+| Campo | ¿Obligatorio? |
+|---|---|
+| <UI>Primer Nombre</UI>, <UI>Apellido</UI> | Obligatorio |
+| <UI>Apodo</UI> | Opcional — como la gente realmente le dice. La búsqueda lo lee. |
+| <UI>Fecha de nacimiento</UI> (día, mes, año) | Opcional |
+| <UI>Edad (si la fecha no está disponible)</UI> | Opcional |
+| <UI>Sexo</UI> | Obligatorio |
+| <UI>Número de teléfono</UI> | Opcional |
+| <UI>Estado civil</UI> | Obligatorio |
+| <UI>Ocupación</UI> | Opcional |
+| <UI>Nivel de Educación</UI> | Obligatorio |
+
+**Ubicación** — <UI>Nombre de comunidad</UI>, <UI>Sub-condado</UI>, <UI>Ciudad</UI>, <UI>Provincia</UI>, <UI>Región</UI> y <UI>País</UI>, todos opcionales. Mientras escribes, estos campos sugieren nombres que ya están en Puente; elige una sugerencia para que la misma comunidad no quede escrita de tres formas distintas. Después vienen el punto en el mapa y una foto (más abajo).
+
+**Hogar** — cómo se relaciona la persona con un hogar (más abajo).
+
+<div class="shots">
+<Shot phone src={residentId} alt="La parte de arriba del formulario de identificación, en la sección de demografía: los campos de nombre, apellido y apodo, los cuadros de día, mes y año de nacimiento y un campo de edad." caption="El comienzo del formulario. Nombre y apellido son obligatorios; el apodo no, pero es como le dicen los vecinos." />
+</div>
+
+## Guardar el formulario
+
+{/* claim: collect-rid-save */}
+El botón de abajo dice <UI>Forma vacía</UI> hasta que escribes algo, y después <UI>Guardar Registro</UI>. Si falta un campo obligatorio, el formulario te dice cuál y no guarda.
+
+Al guardar, el mensaje te dice dónde quedó el registro:
+
+- <UI>Formulario entregado satisfactoriamente</UI>, después del nombre de la persona — llegó a Puente.
+- <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> — está solo en el teléfono, esperando a que lo envíes desde la nube. Mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
+
+{/* claim: collect-suggested-next */}
+Después de guardar una identificación, la pantalla muestra <UI>Formularios siguientes sugeridos</UI>: tus formularios favoritos. Toca uno y se abre para la persona que acabas de registrar, sin tener que buscarla.
+
+<Aside type="caution" title="Los formularios siguientes sugeridos no vuelven a preguntar">
+Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: usa el consentimiento que acabas de registrar para esa persona. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
+</Aside>
+
+## Registrar la ubicación
+
+{/* claim: collect-rid-location */}
+La ubicación **no** se registra sola. Párate en la casa y toca <UI>Obtener ubicación de nuevo</UI>; las coordenadas aparecen debajo del botón. Hasta que lo tocas, el formulario muestra (0.00, 0.00).
+
+Si el teléfono no encuentra su posición en 20 segundos, la aplicación muestra un aviso de tiempo agotado y el formulario se queda con 0, 0 — un punto en el mar, frente a África. Sal al aire libre, espera un momento y vuelve a tocar el botón hasta que aparezcan números reales.
+
+<Aside type="caution" title="0.00, 0.00 no es una ubicación">
+Un registro guardado con (0.00, 0.00) no tiene un punto útil en el mapa. Revisa los números debajo del botón antes de guardar.
+</Aside>
+
+## Agregar una foto
+
+{/* claim: collect-rid-photo */}
+En <UI>Evaluación de fotos</UI>, toca <UI>Tomar foto</UI> para usar la cámara, o <UI>Usar imagen del carrete de la cámara</UI> para elegir una que ya está en el teléfono. La foto es opcional. Pide permiso a la persona primero.
+
+## Vincular a la persona con un hogar
+
+{/* claim: collect-household-options */}
+Al final del formulario, en <UI>Casa</UI>, elige una de tres opciones:
+
+<div class="shots">
+<Shot phone src={household} alt="El final del formulario de identificación: el botón para obtener la ubicación de nuevo sobre las coordenadas (0.00, 0.00), la sección de fotos con los botones de cámara y carrete, las tres opciones de hogar y un botón rojo de formulario vacío." caption="Ubicación, foto y las tres opciones de hogar. Las coordenadas siguen en 0.00 porque nadie ha tocado el botón." />
+</div>
+
+{/* claim: collect-household-nothing */}
+- <UI>Solo crear ID</UI> — sin hogar. El formulario dice <UI>Ha elegido no vincular un hogar.</UI> y ofrece <UI>Agrega o crea un hogar</UI> por si cambias de idea.
+
+{/* claim: collect-household-create */}
+- <UI>Crear un nuevo hogar</UI> — para la primera persona que registras en una casa. Toca el botón <UI>Casa</UI> que aparece; el formulario confirma <UI>Ha creado correctamente un nuevo hogar.</UI>
+
+{/* claim: collect-household-link */}
+- <UI>Vincular ID con un hogar existente</UI> — para todas las demás personas de esa casa. Se abre una búsqueda: encuentra a alguien que ya esté vinculado a ese hogar, elige el papel de esta persona y envía. La lista de papeles sale en inglés aunque la aplicación esté en español: Parent (madre o padre), Sibling (hermano o hermana), Grand-Parent (abuelo o abuela), Cousin (primo o prima) y Other (otro). El formulario muestra <UI>Vinculada</UI>.
+
+Registra primero a quien encabeza el hogar y crea el hogar con esa persona. Todas las demás se vinculan a ella.
+
+## Preguntas frecuentes
+
+{/* claim: collect-rid-fields */}
+**¿Qué campos tengo que llenar?**
+Nombre, apellido, sexo, estado civil y nivel de educación. Todo lo demás es opcional.
+
+{/* claim: collect-households-not-listed */}
+**Creé un hogar sin conexión. ¿Por qué no está en la Sincronización sin conexión?**
+Los hogares guardados sin conexión no aparecen en esa lista, pero se envían cuando tocas <UI>Reintentar</UI>. Mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
+
+{/* claim: collect-duplicates */}
+**Registré a alguien dos veces. ¿Y ahora?**
+Dile a tu coordinador los dos nombres y la fecha. Alguien con acceso a Manage puede encontrar el duplicado y borrarlo en [Curación de datos](/docs/es/manage/data-curation/).

@@ -1,0 +1,107 @@
+---
+title: Getting around Collect
+description: The five icons along the bottom of Collect, what each screen is for, and how to read the Home screen's activity cards.
+related:
+  - collect/install-and-sign-in
+  - collect/find-records
+  - collect/offline-sync
+  - collect/settings
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import tabBar from '@shots/en/collect-tab-bar.png';
+import home from '@shots/en/collect-home.png';
+import gallery from '@shots/en/collect-forms-gallery.png';
+
+Everything in Collect hangs off one bar of five icons along the bottom of the screen. The icons have no words under them, so this page names them by their pictures. Once you know the five, you know the app.
+
+After you sign in, Collect opens on Home, the middle icon.
+
+## The five icons
+
+{/* claim: collect-tabs */}
+From left to right:
+
+| Icon | Opens | Use it to |
+|---|---|---|
+| Magnifying glass | **Find Record** | Look up a resident already in Puente and add to their record. |
+| Folder | **Collect Data** | Start a form: Puente's own forms, your pinned forms and your organization's forms. |
+| House | **Home** | See how much you and your organization have collected. |
+| Cloud with an arrow | **Offline Sync** | See forms saved on the phone and send them. |
+| Gear | **Account Settings** | Your account, language, theme, offline records and support. |
+
+The icon for the screen you are on is filled in and sits on a shaded pill. Screen readers announce each icon by name (Find Record, Data Collection, Home, Offline, Settings).
+
+<div class="shots">
+<Shot src={tabBar} alt="The Collect tab bar: a magnifying glass, a folder, a house, a cloud with an upward arrow highlighted on a shaded pill, and a gear." caption="The five icons. Here the cloud is selected, so Offline Sync is open." />
+</div>
+
+## Home
+
+{/* claim: collect-home-default */}
+Home is the screen you land on after signing in. It greets you by name and shows your organization underneath.
+
+{/* claim: collect-home-cards */}
+Below that, cards count the records collected:
+
+- <UI>Activity across the Organization</UI> — every form your organization collected, of any kind.
+- <UI>My Surveys</UI> — every form you collected, of any kind.
+- <UI>My Vitals</UI> and <UI>Org Vitals</UI> — Vitals forms, yours and your organization's.
+- <UI>My Environmental Health</UI> and <UI>Org Environmental Health</UI> — Environmental Health forms, yours and your organization's.
+
+The buttons above the cards set the period: <UI>Last 7 Days</UI>, <UI>Last 30 Days</UI> or <UI>All Time</UI>. Tap any card to open its details.
+
+<div class="shots">
+<Shot phone src={home} alt="The Home screen: Welcome back, Mr. Testerson, the time buttons Last 7 Days, Last 30 Days and All Time, and cards for Activity across the Organization, My Surveys, My Vitals and Org Vitals, all at 0." caption="Home on a new account. The numbers grow as records reach Puente." />
+</div>
+
+When the phone is offline, Home says <UI>Showing cached data</UI>: the numbers are the last ones the phone saw, not today's.
+
+<Aside type="note" title="Home counts what reached Puente">
+A form still waiting on the phone is not in these numbers yet. To see what is waiting, open the cloud.
+</Aside>
+
+## Collect Data (the folder)
+
+{/* claim: collect-forms-tab */}
+The folder opens the forms screen, headed <UI>Collect Data</UI>. It has four sections:
+
+- <UI>Puente Forms</UI> — Resident ID, Environmental Health, Medical Evaluation and Vitals. See [Puente forms](/docs/collect/puente-forms/).
+- <UI>Pinned Forms</UI> — the forms you use most, kept at the top. Press and hold a form to pin it.
+- <UI>Custom Forms</UI> — forms your organization built in Manage. See [Custom forms](/docs/collect/custom-forms/).
+- <UI>Workflows</UI> — the same custom forms, grouped.
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen with Resident ID and Environmental Health cards under Puente Forms, an empty Pinned Forms card, an empty Custom Forms card with a refresh button, and a Workflows heading." caption="The forms screen. Puente Forms scrolls sideways to show all four." />
+</div>
+
+Every form you open from the folder starts on a consent screen; see [Consent](/docs/collect/consent/).
+
+## Find Record (the magnifying glass)
+
+Search for a resident by name, nickname, cédula or household ID, open their record and add a form to it. [Find records](/docs/collect/find-records/) covers the search in detail.
+
+## Offline Sync (the cloud)
+
+{/* claim: collect-sync-manual */}
+Forms you save without a connection wait on the phone until you send them from here. Sending is not automatic: open the cloud and tap <UI>Retry</UI> when you have signal. [Offline and sync](/docs/collect/offline-sync/) explains every message on this screen.
+
+## Account Settings (the gear)
+
+Your name, phone and email, password, language, theme, offline records, support, and <UI>Log out</UI>. See [Settings](/docs/collect/settings/).
+
+## First-visit tips
+
+{/* claim: collect-coachmarks */}
+The first time you open Home, the forms screen, Find Record and the gear, a short tip card explains the screen. Tap <UI>Got it</UI> to close it. Each tip shows once on that phone.
+
+## FAQ
+
+{/* claim: collect-home-cards */}
+**Why does Home show 0 when I just collected a form?**
+Either the form is still waiting on the phone, or the card is set to a period that does not include it. Check the cloud, then try <UI>All Time</UI>.
+
+{/* claim: collect-reset-onboarding */}
+**How do I see the first-launch tour and the tips again?**
+Under the gear, tap <UI>Reset Onboarding</UI>. The tour and every first-visit tip come back; your saved records are not affected.

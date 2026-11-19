@@ -1,0 +1,99 @@
+---
+title: Formularios personalizados
+description: Dónde aparecen en Collect los formularios propios de tu organización, cómo actualizarlos, fijar los que más usas y agregarlos a un residente.
+related:
+  - manage/form-creator
+  - manage/form-manager
+  - collect/puente-forms
+  - collect/offline-sync
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import creator from '@shots/es/manage-form-creator-edit.png';
+import manager from '@shots/es/manage-form-manager.png';
+
+Los formularios personalizados son las preguntas que tu organización escribe para sí misma — una encuesta de agua, un examen de la vista, una visita de seguimiento. Alguien los crea en Puente Manage, y aparecen en Collect para todas las personas de la organización, al lado de los cuatro formularios de Puente.
+
+Esta página cubre el lado de Collect: encontrar los formularios, mantener la lista al día, fijarlos y llenarlos. Para crear uno, mira [Creador de formularios](/docs/es/manage/form-creator/).
+
+## De dónde salen
+
+{/* claim: collect-custom-source */}
+Un formulario personalizado empieza en el Creador de formularios de Manage, con <UI>Tipo de formulario</UI> en <UI>Personalizado</UI>, y llega a los teléfonos cuando alguien pulsa <UI>Publicar</UI>. Collect muestra entonces todos los formularios personalizados de tu organización, incluidos los marcados con cualquier otra forma de escribir el nombre de tu organización.
+
+<Shot src={creator} alt="El Creador de formularios de Manage con el tipo de formulario en Personalizado, el nombre y la descripción del formulario, la casilla de exportación para investigación y una pregunta de selección única sobre la fuente de agua." caption="Un formulario personalizado en construcción en Manage. Publicar, arriba a la derecha, lo envía a los teléfonos." />
+
+{/* claim: collect-publish-silent */}
+<Aside type="caution" title="Revisa el teléfono después de publicar">
+Manage no avisa cuando una publicación falla. Después de publicar, actualiza los formularios personalizados en un teléfono y confirma que el formulario está ahí antes de que alguien salga al campo.
+</Aside>
+
+## Encontrar los formularios de tu organización
+
+{/* claim: collect-forms-tab */}
+Toca la carpeta. Los formularios de tu organización están en <UI>Formularios personalizados</UI>, debajo de <UI>Formularios Puente</UI> y <UI>Formularios favoritos</UI>. Desliza la fila de lado si no caben todos en la pantalla.
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla Recopilar datos: los formularios de Puente, una tarjeta vacía de favoritos, y el título de formularios personalizados con una flecha circular para actualizar encima de una tarjeta vacía." caption="Todavía no hay formularios personalizados en este teléfono. La flecha al lado del título los trae." />
+</div>
+
+## Actualizar la lista
+
+{/* claim: collect-custom-refresh */}
+El teléfono guarda una copia de los formularios personalizados de tu organización, así que siguen funcionando sin señal. Para traer los nuevos, toca la flecha circular al lado de <UI>Formularios personalizados</UI> mientras tengas conexión. Hazlo en un teléfono nuevo, después de iniciar sesión y cada vez que alguien publique un formulario. (<UI>Descargar registros para usar sin conexión</UI>, en el engranaje dentro de <UI>Registros sin conexión</UI>, también los trae.)
+
+Si la lista está vacía, la tarjeta dice <UI>Sin formularios personalizados — intenta actualizar</UI>. Actualizar sin conexión deja la lista que el teléfono ya tiene.
+
+<Aside type="tip" title="Actualiza antes de salir">
+Haz que actualizar sea parte de prepararte para un día de campo. Un formulario publicado después de que te quedaste sin señal no llega a tu teléfono hasta que vuelvas.
+</Aside>
+
+## Llenar un formulario personalizado
+
+{/* claim: collect-custom-attach */}
+Toca el formulario. Como todos, abre en la pantalla de consentimiento; mira [Consentimiento](/docs/es/collect/consent/). Después funciona como Partes vitales: hay un cuadro <UI>Buscar por nombre o ID</UI> encima de las preguntas, y el botón de abajo dice <UI>Adjuntar una residente de la comunidad</UI> hasta que eliges a la persona de quien son las respuestas. Cuando hay alguien agregado, dice <UI>Guardar Registro</UI>.
+
+{/* claim: collect-supp-saved */}
+Al guardar ves los mismos dos mensajes que en los formularios de Puente: <UI>Formulario entregado satisfactoriamente</UI>, o <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI>. Un formulario personalizado que espera en la Sincronización sin conexión aparece con su propio título y el nombre de la persona.
+
+## Fijar los formularios que más usas
+
+{/* claim: collect-pin */}
+Mantén presionado cualquier formulario — uno personalizado o uno de Puente — para fijarlo. Aparece en <UI>Formularios favoritos</UI>, arriba en la pantalla. Para quitarlo, mantenlo presionado dentro de <UI>Formularios favoritos</UI>.
+
+Sin nada fijado, la sección dice <UI>Sin formularios fijados — mantén presionado para fijar</UI>. Lo que fijas se guarda solo en este teléfono.
+
+{/* claim: collect-suggested-next */}
+Los favoritos hacen un segundo trabajo. Después de guardar una identificación de residente, la pantalla <UI>Formularios siguientes sugeridos</UI> los muestra; al tocar uno se abre para la persona que acabas de registrar. Fija los formularios que llenas después de cada registro y te ahorras la búsqueda cada vez.
+
+<Aside type="caution" title="Los formularios siguientes sugeridos no vuelven a preguntar">
+Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: usa el consentimiento que acabas de registrar para esa persona. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
+</Aside>
+
+## Flujos de trabajo
+
+{/* claim: collect-workflows */}
+Debajo de <UI>Formularios personalizados</UI>, la sección <UI>Flujos de trabajo</UI> muestra los mismos formularios agrupados por flujo de trabajo, con su propia flecha para actualizar. Los formularios publicados desde el Creador de formularios de hoy no llevan flujo de trabajo, así que todos quedan en un solo grupo: <UI>Sin flujo de trabajo asignado</UI>.
+
+## Registros y exportaciones
+
+{/* claim: collect-custom-manage */}
+Todo lo que se recolecta con un formulario personalizado aparece en Manage, en la fila de ese formulario del <UI>Gestor de formularios</UI>, desde donde se puede exportar.
+
+<Shot src={manager} alt="El Gestor de formularios de Manage: una tabla con los cuatro formularios de Puente por su nombre interno y una tabla de formularios personalizados con dos formularios y sus botones de editar, duplicar, eliminar y exportar." caption="Los formularios personalizados en Manage, cada uno con su propia exportación." />
+
+## Preguntas frecuentes
+
+{/* claim: collect-custom-refresh */}
+**Un colega ve un formulario nuevo y yo no. ¿Por qué?**
+Tu teléfono tiene la lista de la última vez que trajo formularios. Toca la flecha al lado de los formularios personalizados con conexión.
+
+{/* claim: collect-custom-attach */}
+**¿Por qué no puedo guardar el formulario?**
+No hay residente agregado. Busca a la persona arriba del formulario y toca su tarjeta.
+
+{/* claim: collect-pin-cleared */}
+**Mis formularios favoritos desaparecieron.**
+Los favoritos viven en el teléfono. Tocar <UI>Eliminar usuario</UI> en la pantalla de inicio de sesión los borra, y un teléfono nuevo no los tiene. Fíjalos otra vez.

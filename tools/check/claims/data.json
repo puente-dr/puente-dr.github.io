@@ -1,0 +1,464 @@
+{
+ "claims": {
+  "data-export-buttons": {
+   "claim": "Every form in Form Manager has its own Export button; files are CSV.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/index.js",
+     "quote": "<CSVButton form={row} surveyingOrganization={organization} shortCode={shortCode} />",
+     "line": 149
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "type: 'text/csv;charset=utf-8'",
+     "line": 86
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_button\": \"Export\",",
+     "line": 201
+    }
+   ]
+  },
+  "data-one-file-per-form": {
+   "claim": "Each Puente form and each custom form exports separately.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "HistoryEnvironmentalHealth: EnvironmentalHealth,",
+     "line": 23
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "CustomData.getSpecificRecordsByShortCode(code, customFormId)",
+     "line": 51
+    }
+   ]
+  },
+  "data-file-name": {
+   "claim": "The file is named after the form and the moment the button was pressed.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "onClick={() => download('full', fetchCSVData, `${name}-${new Date()}.csv`)}",
+     "line": 107
+    }
+   ]
+  },
+  "data-excel-bom": {
+   "claim": "Files start with a UTF-8 byte-order mark so Excel opens accents correctly.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "// U+FEFF, written as the bytes EF BB BF: how Excel recognises a UTF-8 CSV.",
+     "line": 11
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "// as Windows-1252, so \"jiménez\" opens as \"jimÃ©nez\".",
+     "line": 83
+    }
+   ]
+  },
+  "data-export-loading": {
+   "claim": "The button reads Loading… while the export runs.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "text={loading === 'full' ? t('export_loading')",
+     "line": 105
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_loading\": \"Loading…\",",
+     "line": 202
+    }
+   ]
+  },
+  "data-export-messages": {
+   "claim": "Empty, failed and signed-out exports show different messages; a header-only file is a real file.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_empty\": \"This form has no records to export yet.\",",
+     "line": 199
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_failed\": \"The export could not be completed. Please try again.\",",
+     "line": 200
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_signed_out\": \"Your sign-in has expired. Sign in again to export.\"",
+     "line": 421
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "// A header-only CSV is NOT blank: zero rows is a real answer, and the",
+     "line": 76
+    }
+   ]
+  },
+  "data-export-aliases": {
+   "claim": "An export follows every spelling the organization goes by.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/organization.py",
+     "quote": "\"\"\"Every `surveyingOrganization` string belonging to `short_code`.",
+     "line": 32
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/organization.py",
+     "quote": "values = [org.get('name')] + list(org.get('aliases') or [])",
+     "line": 51
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/_utils/formRecordsQuery.js",
+     "quote": "Scoped to every `surveyingOrganization` string the organization goes by",
+     "line": 9
+    }
+   ]
+  },
+  "data-export-members": {
+   "claim": "Any member of the organization can download its exports; Puente staff can reach every organization.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "an organization-scoped route serves only that organization's members;",
+     "line": 9
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "if who['isStaff']:",
+     "line": 155
+    }
+   ]
+  },
+  "data-export-identified": {
+   "claim": "Full exports contain names, ID numbers, phone numbers, birth dates and locations.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "Every export route serves identified patient records: names, phone numbers,",
+     "line": 1
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_manager_full_records_contents\": \"Full records: every answer with the person's name, ID number, phone number, birth date and location. Keep this file inside Puente.\",",
+     "line": 418
+    }
+   ]
+  },
+  "data-row-per-record": {
+   "claim": "Supplementary and custom-form files have one row per submission, with the person columns copied in.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/supplementary.py",
+     "quote": "merged_df = pd.merge(df2, df, on=\"objectId\", how=\"left\")",
+     "line": 150
+    }
+   ]
+  },
+  "data-join-objectid": {
+   "claim": "objectId is the person in every file; the submission id is idSupplementary.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/supplementary.py",
+     "quote": "df2 = df2.rename(columns = {'objectId':'idSupplementary','client.objectId':'objectId', 'surveyingUser':'surveyingUserSupplementary'})",
+     "line": 127
+    }
+   ]
+  },
+  "data-orphans": {
+   "claim": "A record with no linked person still exports, with blank person columns.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/supplementary.py",
+     "quote": "# pre-2026 offline uploader bug, among others) must still export — with",
+     "line": 130
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/supplementary.py",
+     "quote": "# blank person columns — rather than silently vanish from downloads.",
+     "line": 131
+    }
+   ]
+  },
+  "data-dedupe": {
+   "claim": "The people export drops rows identical in every human field.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
+     "quote": "df = df.drop_duplicates(subset=DEDUPE_COLUMNS)",
+     "line": 64
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
+     "quote": "'cedulaNumber', 'surveyingUser', 'surveyingOrganization', 'latitude',",
+     "line": 16
+    }
+   ]
+  },
+  "data-age-subtraction": {
+   "claim": "People-export age is this year minus birth year; a typed age is kept; unreadable dates give blank.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/script.py",
+     "quote": "return int(today.year - int(born.split(\"-\")[0]))",
+     "line": 80
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/script.py",
+     "quote": "if age != \"\":",
+     "line": 58
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/script.py",
+     "quote": "# Blank, not a guess. A wrong age on an exported record is worse than no",
+     "line": 73
+    }
+   ]
+  },
+  "data-accents-stripped": {
+   "claim": "Custom-form exports strip accents from headings and answers.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result.columns = [replace_spanish_characters(col) for col in result.columns]",
+     "line": 106
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result = result.map(lambda x: replace_spanish_characters(x) if isinstance(x, str) else x)",
+     "line": 108
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "'ñ': 'n', 'ü': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I',",
+     "line": 4
+    }
+   ]
+  },
+  "data-question-columns": {
+   "claim": "Each question becomes a column under its label; renamed questions share one column.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "pivoted = expanded_df.pivot(index=\"index\", columns=\"title\", values=\"answer\")",
+     "line": 87
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "\"\"\"Collapse alias titles for the same spec field into one column named by label.\"\"\"",
+     "line": 45
+    }
+   ]
+  },
+  "data-column-collision": {
+   "claim": "A question named like a built-in column gets _from_custom_form.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "pivoted.rename(columns={col: f\"{col}_from_custom_form\"}, inplace=True)",
+     "line": 93
+    }
+   ]
+  },
+  "data-not-in-file": {
+   "claim": "Photos are links in the people file, dropped from custom-form files; phone-minted ids are left out.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
+     "quote": "df.rename(columns={'picture.url':'pictureURL'}, inplace=True)",
+     "line": 65
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "\"signature.url\", \"memberofthefollowingorganizations\",",
+     "line": 98
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/supplementary.py",
+     "quote": "'objectIdOffline',",
+     "line": 51
+    }
+   ]
+  },
+  "data-clean-duplicates": {
+   "claim": "Clean (Data Curation) shows duplicates.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "<span>{dups.size} {t('data_curation_dups')}</span>",
+     "line": 292
+    }
+   ]
+  },
+  "data-research-two-buttons": {
+   "claim": "A form with research export on has Export research file and Export full records, a badge, and on-screen notes.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_research_button\": \"Export research file\",",
+     "line": 414
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_full_records_button\": \"Export full records\",",
+     "line": 415
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_manager_research_badge\": \"Research export on\",",
+     "line": 416
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_manager_research_file_contents\": \"Research file: a study ID, age, sex, community and this form's answers.",
+     "line": 417
+    }
+   ]
+  },
+  "data-research-allow": {
+   "claim": "Allow research export is a per-form setting on custom forms in the Form Creator.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_creator_allow_research_export\": \"Allow research export\",",
+     "line": 419
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/data-export/offersResearchExport.js",
+     "quote": "form.customForm === true && form.allowResearchExport === true && shortCode,",
+     "line": 8
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
+     "quote": "return {'message': 'Research export is not turned on for this form.'}, 403",
+     "line": 168
+    }
+   ]
+  },
+  "data-research-filename": {
+   "claim": "The research file is named form - research - date.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "`${name} - research - ${localDate()}.csv`,",
+     "line": 125
+    }
+   ]
+  },
+  "data-research-columns": {
+   "claim": "Research file columns: allow-listed columns, then the question columns; location questions excluded.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "ALLOWED_COLUMNS = (",
+     "line": 23
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "'age_reported_date',",
+     "line": 29
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "EXCLUDED_FIELD_TYPES = ('geolocation',)",
+     "line": 38
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "out['visit_date'] = visit.map(lambda d: d.isoformat() if d else '')",
+     "line": 111
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "visit = flat['createdAt_x'].map(_visit_date)",
+     "line": 107
+    }
+   ]
+  },
+  "data-research-ages": {
+   "claim": "age_at_visit is exact on the visit date from the birth date; age_as_reported is the typed age with its date.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "\"\"\"Completed years on `on`. Blank when the birth date is not an exact date:",
+     "line": 72
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "return on.year - born.year - ((on.month, on.day) < (born.month, born.day))",
+     "line": 77
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "out['age_as_reported'] = flat['age'] if 'age' in flat.columns else ''",
+     "line": 116
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "# age. That age is as of when the person was recorded, so it ships with",
+     "line": 114
+    }
+   ]
+  },
+  "data-research-allowlist": {
+   "claim": "The file is selected from an allow-list, not trimmed with a block-list.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "The file is SELECTED from an allow-list, never trimmed with a block-list. A",
+     "line": 5
+    }
+   ]
+  },
+  "data-research-study-id": {
+   "claim": "Study IDs are keyed hashes Puente can recompute; researchers cannot reverse them.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "return f'{prefix}-{digest[:10]}'",
+     "line": 49
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "out['study_id'] = flat['objectId'].map(lambda v: _pseudonym('P', v, secret))",
+     "line": 109
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "`submission_id`). Puente can recompute them from the secret to answer \"which",
+     "line": 10
+    }
+   ]
+  },
+  "data-research-all-rows": {
+   "claim": "The research query selects every submission of the form for the organization; no consent filter.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
+     "quote": "\"formSpecificationsId\": formid,",
+     "line": 145
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
+     "quote": "\"surveyingOrganization\": organization_utils.organization_where(values),",
+     "line": 106
+    }
+   ]
+  },
+  "data-research-audit": {
+   "claim": "Puente logs who downloaded a research file and how many rows, never the contents.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
+     "quote": "# Who received what, so Puente can answer it later. Never record contents.",
+     "line": 178
+    }
+   ]
+  }
+ }
+}

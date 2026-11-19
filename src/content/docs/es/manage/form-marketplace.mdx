@@ -1,0 +1,91 @@
+---
+title: Mercado de formularios
+description: Empieza un formulario nuevo a partir de uno hecho — explora el Mercado de formularios, duplica un formulario en el Creador, adáptalo y publícalo como tuyo.
+related:
+  - manage/form-creator
+  - manage/form-manager
+  - collect/custom-forms
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import market from '@shots/es/manage-marketplace.png';
+import sidebar from '@shots/es/manage-sidebar.png';
+import loaded from '@shots/es/manage-form-creator-edit.png';
+
+El Mercado de formularios es un estante de formularios ya hechos que Puente puso para que los use cualquier organización. En vez de armar una encuesta de agua del hogar desde cero, copias una del Mercado, cambias lo que necesites y la publicas como tu propio formulario personalizado.
+
+{/* claim: manage-mp-duplicate */}
+Nada de lo que haces en el Mercado cambia el original ni afecta a otra organización. Siempre trabajas sobre tu propia copia.
+
+## Abrir el Mercado
+
+{/* claim: manage-mp-open */}
+Pulsa <UI>Mercado</UI> en el menú de la izquierda. La página se llama <UI>Mercado de formularios</UI>, con la línea <UI>Explora y duplica formularios comunitarios de recolección de datos.</UI>
+
+<div class="shots">
+<Shot phone src={sidebar} alt="El menú izquierdo de Manage con Gestionar, Crear, Limpiar y Mercado en el primer grupo, y luego Revisar y Configuración." caption="Mercado es el último elemento del primer grupo." />
+</div>
+
+## Explorar los formularios
+
+{/* claim: manage-mp-cards */}
+Cada formulario es una tarjeta con su nombre, una descripción corta de lo que recolecta y un enlace <UI>Duplicate</UI> (está en inglés también en la versión en español).
+
+<Shot src={market} alt="El Mercado de formularios con tres tarjetas: Household water survey, Child growth check y Clinic sign-in sheet, cada una con una descripción de una línea y un enlace Duplicate." caption="Lee la descripción para saber para qué sirve cada formulario. Los formularios de la imagen son ejemplos." />
+
+Las tarjetas solo muestran nombre y descripción. Para ver las preguntas, duplica el formulario: la copia se abre en el Creador de formularios, donde puedes leer cada bloque y pulsar <UI>Vista previa del formulario</UI> para verlo como en el teléfono.
+
+{/* claim: manage-mp-empty */}
+Si el estante está vacío, la página dice <UI>Todavía no hay formularios disponibles.</UI>
+
+## Duplicar un formulario
+
+{/* claim: manage-mp-duplicate */}
+1. Pulsa <UI>Duplicate</UI> en la tarjeta.
+2. Se abre el [Creador de formularios](/docs/es/manage/form-creator/) con el nombre, la descripción y las preguntas ya puestas.
+3. Cambia lo que necesites: ponle el nombre de tu proyecto, ajusta la redacción de las preguntas, agrega o quita bloques.
+4. Pulsa <UI>Publicar</UI>. El formulario se guarda como un formulario personalizado nuevo de tu organización.
+
+<Shot src={loaded} alt="El Creador de formularios con un formulario cargado: nombre y descripción llenos, la casilla de exportación para investigación y una pregunta de selección única sobre la fuente de agua en el constructor." caption="Así se abre un formulario duplicado, listo para cambiarlo antes de publicar." />
+
+El formulario del Mercado no cambia, y las demás organizaciones nunca ven tu copia.
+
+{/* claim: manage-fc-publish-silent */}
+<Aside type="caution" title="Revisa la copia antes de que tu equipo la use">
+Un formulario duplicado solo llega a los teléfonos cuando se publica. Como con cualquier formulario, una publicación fallida no muestra error. Después de publicar, busca el formulario en el [Gestor de formularios](/docs/es/manage/form-manager/), actualiza Formularios personalizados en un teléfono y llénalo una vez para probarlo.
+</Aside>
+
+## Adaptarlo bien
+
+{/* claim: manage-fc-research */}
+Un formulario hecho es un punto de partida, no una encuesta terminada. Antes de publicar:
+
+- **Cámbiale el nombre.** Dale a la copia un nombre que tus encuestadores reconozcan, como el proyecto y la comunidad. También es el nombre del archivo exportado.
+- **Quita lo que no vas a usar.** Cada pregunta cuesta tiempo en la puerta de una casa.
+- **Usa el bloque numérico para los números.** Le da al encuestador un teclado de números.
+- **Decide sobre la exportación para investigación.** <UI>Permitir exportación para investigación</UI> empieza sin marcar. Márcala solo si un socio de investigación con aprobación ética va a recibir el archivo sin datos que identifiquen a las personas.
+
+## De dónde vienen los formularios del Mercado
+
+{/* claim: manage-mp-source */}
+El Mercado muestra los formularios que Puente marcó para el Mercado. Todas las organizaciones ven el mismo estante; no se filtra por organización. No puedes agregar uno por tu cuenta: el <UI>Tipo de formulario</UI> del Creador solo ofrece <UI>Personalizado</UI> y <UI>Bienes</UI>. Si tu organización creó un formulario que le serviría a otras, escribe a info@puente-dr.org.
+
+## Preguntas frecuentes
+
+{/* claim: manage-mp-source */}
+**¿Podemos copiar un formulario de otra organización?**
+Solo si está en el Mercado. Los formularios personalizados de otras organizaciones no se te muestran.
+
+**¿Duplicar envía el formulario a nuestros teléfonos?**
+No. Abre una copia en el Creador de formularios. Los teléfonos la reciben solo después de que la publicas.
+
+**¿Puedo ver las preguntas antes de duplicar?**
+En la tarjeta no. Duplicar abre la copia en el Creador, y nada se guarda hasta que publicas, así que mirar no cuesta nada.
+
+{/* claim: manage-mp-duplicate */}
+**¿Otras organizaciones ven el formulario que publicamos?**
+No. La copia publicada pertenece a tu organización y solo aparece en tu Gestor de formularios y en los teléfonos de tu equipo. Las demás organizaciones siguen usando el original del Mercado.
+
+**Cambié de idea después de duplicar. ¿Tengo que eliminar algo?**
+No. Sal del Creador sin publicar, o pulsa Restablecer el formulario.

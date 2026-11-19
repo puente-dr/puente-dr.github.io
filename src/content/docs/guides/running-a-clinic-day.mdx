@@ -1,0 +1,124 @@
+---
+title: Running a clinic day
+description: For the coordinator and the on-site tech lead — preparing the phones, searching before registering, the evening sync, checking the count in Manage, and what to do when something breaks.
+related:
+  - collect/offline-sync
+  - guides/field-day-checklist
+  - guides/designing-a-form-for-research
+  - guides/sharing-data-with-researchers
+roles: [data-collector, data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../assets/shots/en/research-04-forms-collected.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/en/collect-01-offline-banner.png';
+import queue from '@shots/en/collect-03-queue.png';
+import byName from '@shots/en/find-01-search-by-name.png';
+import caughtUp from '@shots/en/collect-04-all-caught-up.png';
+import collected from '@shots/en/research-04-forms-collected.png';
+
+A clinic often has no signal. That is fine: Collect saves each form on the phone and sends it later. But between saving and sending, the form exists in one place only — that phone. Most of this guide protects that gap. It is written for the coordinator and the on-site tech lead; surveyors should read the parts marked for them.
+
+## Who does what
+
+| Person | Job |
+|---|---|
+| **Coordinator** | Owns the form, the paper sign-in sheet and the final count. Talks to the research team. |
+| **Tech lead** | Prepares every phone, runs the evening sync, and is the first person anyone asks about the app. |
+| **Surveyors** | Search, register, fill in the exam form. Never log out. |
+
+## Two days before
+
+Do this on every phone that will collect, somewhere with a working internet connection.
+
+{/* claim: guide-update-version */}
+1. **Update Puente Collect** from the App Store or Google Play. The current version is 15.7.5.
+
+{/* claim: guide-signin-internet */}
+2. **Sign in** with each surveyor's own account. Signing in needs internet, so do it now, not at the clinic.
+
+{/* claim: guide-forms-reach-phones */}
+3. **Check the exam form is there.** Under the folder, tap the refresh arrow beside <UI>Custom Forms</UI>.
+
+{/* claim: guide-practice-discard */}
+4. **Test without signal.** Turn on airplane mode, fill in the form for an invented patient, and submit. Open the cloud (<UI>Offline Sync</UI>), tap <UI>Discard</UI> and then <UI>Discard permanently</UI>, so the invented patient never reaches the data.
+5. **Write the phone on a list:** who carries it, and whether it passed the test.
+
+Bring chargers, and one power bank for every two phones. A phone with a flat battery keeps its forms, but it cannot collect new ones.
+
+## Search before you register
+
+For surveyors. The most common mistake at a clinic is registering someone who is already in Puente. The app does not warn you; the patient ends up as two people, with their visits split between them.
+
+{/* claim: guide-search-one-field */}
+Search by surname alone, or by the first digits of the cédula. A full name typed together finds nobody. More ways to search: [Find records](/docs/collect/find-records/).
+
+<div class="shots">
+<Shot phone src={byName} alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it." caption="A surname finds everyone with that surname." />
+</div>
+
+## During the clinic
+
+For surveyors.
+
+- **One exam form per patient visit.** Everything measured at that visit goes in the same form.
+
+{/* claim: guide-save-messages */}
+- **The offline banner is normal.** <UI>You're offline. Records will save and sync automatically.</UI> Keep working.
+
+{/* claim: guide-queue-on-device */}
+- **Never log out, clear the app's data or uninstall it.** Forms that have not been sent are stored inside the app.
+- **If a patient does not consent,** answer "No" to the consent question, and follow the clinic's paper process for their care.
+- **Write every patient on the paper sign-in sheet.** It is how the coordinator checks, later, that nobody was lost.
+
+<div class="shots">
+<Shot phone src={banner} alt="A form on a phone with an amber banner across the top reading: You're offline. Records will save and sync automatically." caption="Despite the wording, nothing is sent until someone taps Retry." />
+</div>
+
+## Each evening
+
+{/* claim: guide-sync-not-automatic */}
+1. Connect every phone to a reliable wifi network.
+2. Open the cloud (<UI>Offline Sync</UI>) and tap <UI>Retry</UI>. Nothing is sent until you do.
+
+{/* claim: guide-caught-up */}
+3. Wait until the screen says <UI>No forms queued. You are all caught up!</UI>
+4. The tech lead marks the phone as done on the list. A phone that isn't marked isn't finished for the day.
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen listing one queued Resident ID form, with a Discard link and a Retry button." caption="Still one form on this phone. Tap Retry, not Discard." />
+<Shot phone src={caughtUp} alt="The Offline Sync screen with an empty queue, reading: No forms queued. You are all caught up!" caption="Done for the day." />
+</div>
+
+{/* claim: guide-forms-collected */}
+Then, on a computer, check the total. In Manage, open <UI>Manage</UI>, expand the exam form's row with the arrow, and press <UI>Refresh</UI>. Compare <UI>Forms collected</UI> with the sign-in sheet.
+
+<Shot src={collected} alt="Form Manager with the vision exam row expanded, showing Forms collected: 37." caption="If this is lower than the sign-in sheet, a phone still has forms." />
+
+## When something breaks
+
+{/* claim: guide-still-on-device */}
+{/* claim: guide-logout-offline */}
+| What happened | What to do |
+|---|---|
+| A form stays in the list after Retry. | It is still on the phone: <UI>Your forms are still saved on this device. Nothing has been lost.</UI> Try again on a better connection. Don't discard it. |
+| <UI>The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.</UI> | Wait and try again. If the same forms keep failing on good wifi, report it. |
+| A phone's battery died. | Charge it and open the app again. Its forms are still there. Don't reinstall. |
+| Someone wants to log out with forms waiting. | The app warns them, and blocks it with no signal. Sync first, on wifi. |
+| A patient was registered twice. | Write both names on the sign-in sheet and carry on. The coordinator fixes it after the clinic. |
+
+<Aside type="caution" title="Discarding is permanent">
+{/* claim: guide-discard-permanent */}
+Discard deletes a form from the phone and it cannot be recovered. Use it for the test patient before the clinic, never for a real one.
+</Aside>
+
+## After the clinic
+
+1. Run the evening sync one last time on every phone.
+2. Compare the total in Form Manager with the sign-in sheet. If they differ, find out why before sending anything.
+3. Then follow [Sharing data with researchers](/docs/guides/sharing-data-with-researchers/).
+
+Write to [info@puente-dr.org](mailto:info@puente-dr.org) only if no phone can save forms at all, or a sync seems to have lost forms. Say which phone, what time, and attach a photo of the screen.

@@ -1,0 +1,101 @@
+---
+title: Compartir datos con investigadores
+description: Los pasos entre una clínica y un socio de investigación — elegir el archivo correcto, revisar los papeles, quitar a quienes dijeron que no, buscar nombres y compartirlo de forma segura.
+related:
+  - data/research-exports
+  - guides/designing-a-form-for-research
+  - guides/running-a-clinic-day
+  - privacy/protecting-data
+roles: [data-manager]
+format: guide
+minutes: 3
+thumbnail: ../../../../assets/shots/es/research-00-form-manager.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/es/research-00-form-manager.png';
+import expanded from '@shots/es/manage-form-manager-expanded.png';
+import failed from '@shots/es/export-04-export-failed.png';
+
+El archivo de investigación es la copia de los datos de una clínica que sale de Puente. Esta guía es la rutina para enviarlo: qué botón pulsar, qué revisar en el archivo y cómo entregarlo. Qué significa cada columna, y cómo funcionan los ID de estudio, está en [Exportaciones para investigación](/docs/es/data/research-exports/).
+
+Haz estos pasos cada vez que envías un archivo, no solo la primera vez.
+
+## Usa el archivo de investigación, nunca los registros completos
+
+{/* claim: guide-research-buttons */}
+En Manage, abre <UI>Gestionar</UI>. Un formulario con el archivo de investigación activado lleva la marca <UI>Investigación activada</UI> y tiene dos botones en vez de uno: <UI>Exportar archivo de investigación</UI> y <UI>Exportar registros completos</UI>.
+
+<Shot src={formManager} alt="El Gestor de formularios. En los formularios personalizados, Vision exam lleva la marca Investigación activada y tiene los botones Exportar archivo de investigación y Exportar registros completos; el formulario de registro de la clínica tiene un solo botón Exportar." caption="Solo los formularios con el archivo de investigación activado tienen dos botones." />
+
+{/* claim: guide-research-contents */}
+Expande la fila con la flecha y Manage dice, en palabras simples, qué contiene cada archivo. El archivo de investigación tiene un ID de estudio, la edad, el sexo, la comunidad y las respuestas del formulario, sin nombres, cédulas, teléfonos, fechas de nacimiento ni ubicaciones. El de registros completos tiene todo eso, y no sale de Puente.
+
+<Shot src={expanded} alt="La fila Vision exam expandida: Formularios recolectados: 37 con Actualizar, y dos frases que describen el archivo de investigación y el de registros completos." caption="El botón azul sale. El botón blanco se queda." />
+
+{/* claim: guide-research-filename */}
+El nombre del archivo de investigación lleva el nombre del formulario, la palabra `research` y la fecha, por ejemplo `Vision exam - research - 2026-11-10.csv`.
+
+## Revisa los papeles
+
+Antes de descargar nada, comprueba que tienes por escrito:
+
+- la aprobación ética del estudio;
+- un acuerdo para compartir datos con el socio de investigación;
+- los nombres de las personas del socio que van a recibir el archivo.
+
+Si falta algo, detente y pregunta a quien coordina.
+
+## Quita a todos los que dijeron que no
+
+{/* claim: guide-research-all-rows */}
+El archivo de investigación tiene una fila por cada vez que se llenó el formulario, incluidos los pacientes que respondieron «No» a la pregunta de consentimiento. Quitarlos es tu tarea.
+
+1. Abre el archivo en Excel o Google Sheets.
+2. Selecciona la columna de consentimiento y ordénala.
+3. Elimina cada fila donde la respuesta sea «No».
+4. Guarda el archivo.
+
+<Aside type="caution" title="Cada descarga nueva los vuelve a incluir">
+Cada descarga incluye a todos los pacientes examinados. Quita las filas con «No» cada vez que envías un archivo, aunque ya las hayas quitado del archivo del mes pasado.
+</Aside>
+
+## Busca nombres, y cuenta
+
+Lee cada título de columna. Si alguna columna tiene un nombre, un teléfono o una cédula, detente: es el archivo equivocado, o el formulario lo pidió. Mira [Diseñar un formulario para investigación](/docs/es/guides/designing-a-form-for-research/).
+
+Luego cuenta las filas. El número debe coincidir con la hoja de registro de la clínica, menos los pacientes que dijeron que no. Si es menor, a algún teléfono le pueden quedar formularios: mira [Un día de clínica](/docs/es/guides/running-a-clinic-day/).
+
+## Compártelo de forma segura
+
+- Comparte el archivo en una carpeta compartida que solo puedan abrir personas con nombre. No lo adjuntes a un correo.
+- Anota qué enviaste, a quién y cuándo.
+- Borra tu copia local cuando ya esté compartida, si ya no la necesitas.
+
+## Cuando un investigador pregunta por un paciente
+
+{/* claim: guide-study-id-lookup */}
+Un ID de estudio como `P-3fa9c01b2e` se crea con una clave secreta que solo tiene Puente. Puente puede saber a qué paciente corresponde; el investigador no. Si un investigador pregunta por un ID de estudio, envía el código a [info@puente-dr.org](mailto:info@puente-dr.org). Nunca devuelvas una respuesta con un nombre.
+
+## Si algo sale mal
+
+{/* claim: guide-export-failed */}
+| Qué ves | Qué hacer |
+|---|---|
+| Un solo botón <UI>Exportar</UI> | El archivo de investigación no está activado para este formulario. Marca <UI>Permitir exportación para investigación</UI> en el Creador de formularios y publica. |
+| <UI>No se pudo completar la descarga. Por favor, inténtelo de nuevo.</UI> | Inténtalo una vez más. Si sigue pasando, escribe a info@puente-dr.org con el nombre del formulario. |
+| <UI>Tu sesión expiró. Inicia sesión de nuevo para exportar.</UI> | Vuelve a iniciar sesión en Manage y exporta. |
+| Menos filas que la hoja de registro | A un teléfono le quedan formularios. Sincroniza cada teléfono y exporta de nuevo. |
+
+<Shot src={failed} alt="El Gestor de formularios con un aviso arriba a la derecha que dice que no se pudo completar la descarga, con un enlace para cerrarlo." caption="Inténtalo una vez más antes de pedir ayuda." />
+
+## Preguntas frecuentes
+
+{/* claim: guide-research-contents */}
+**¿Puedo enviar el archivo de registros completos si el investigador tiene aprobación ética?**
+No. Solo el archivo de investigación sale de Puente.
+
+{/* claim: guide-research-columns */}
+**El investigador quiere otra columna.**
+Cambia el formulario en el Creador de formularios, pruébalo en una copia y envía un archivo nuevo. Las columnas del registro del paciente que no están ya en el archivo de investigación no están disponibles.

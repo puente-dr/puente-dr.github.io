@@ -1,0 +1,98 @@
+---
+title: Account settings
+description: Change your name, phone, email, password and language in Manage — and why your organization is the one thing you cannot change here.
+related:
+  - manage/sign-in
+  - organizations/organizations
+  - privacy/delete-your-account
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/en/manage-account-settings.png';
+import sidebar from '@shots/en/manage-sidebar.png';
+import login from '@shots/en/manage-login.png';
+
+Account Settings is your own profile in Manage: the name your team sees, how Puente reaches you, your password and the language Manage speaks. It is the same account you use in Collect, so a change here also applies when you sign in on the phone.
+
+## Open Account Settings
+
+{/* claim: manage-as-open */}
+Press <UI>Settings</UI> in the left menu, or <UI>Account</UI> at the bottom of the menu. Both open <UI>Account Settings</UI>. So does the circle with your initials at the top right of every page.
+
+<div class="shots">
+<Shot phone src={sidebar} alt="The Manage left menu, with Settings under Review and Account and Log out at the bottom." caption="Settings and Account lead to the same page." />
+</div>
+
+## Change your details
+
+{/* claim: manage-as-fields */}
+The form holds:
+
+| Field | Notes |
+|---|---|
+| <UI>First Name</UI>, <UI>Last Name</UI> | Required |
+| <UI>Email Address</UI> | Required. It is also what you sign in with |
+| <UI>Phone Number</UI> | Optional |
+| <UI>Password</UI> | Leave it empty to keep your current password; type a new one to change it |
+
+Press <UI>Update user</UI>. Manage saves your details, signs you in again with them and takes you back to the dashboard.
+
+<Shot src={settings} alt="The Account Settings page: First Name Ada, Last Name Ejemplo, the organization Example Health Trust shown as plain text with a note under it, Phone Number, Email Address, an empty Password box, and Update user and Delete user buttons." caption="Everything here can be edited except the organization." />
+
+{/* claim: manage-one-account */}
+Because Collect uses the same account, sign in on the phone with your new email or password from then on.
+
+## Your organization is read-only
+
+{/* claim: manage-as-org-readonly */}
+Your organization is shown as plain text, not a box, with the note <UI>Your organization determines which records you can see. Email info@puente-dr.org to change it.</UI>
+
+That is deliberate. Moving an account to another organization changes whose records it can see, so Puente staff do it, not the account holder. Email info@puente-dr.org with your name, your current organization and the one you belong to. See [Organizations](/docs/organizations/organizations/).
+
+## Change the language
+
+{/* claim: manage-as-language */}
+Below the form is a <UI>Language</UI> row: **English**, **Español** and **Kreyòl Ayisyen**. Each language is written in itself, so you can find yours even if you cannot read the current one. Manage switches at once and remembers the choice in this browser for a year.
+
+{/* claim: manage-signin-language */}
+The same row is on the sign-in page, so you can change the language before you sign in.
+
+<Shot src={login} alt="The Manage sign-in page with a language row reading Language, English, Español, Kreyòl Ayisyen under the sign-in card." caption="The language row on the sign-in page." />
+
+The language is set per browser, not per account. On a shared office computer, the next person sees the language you chose until they pick their own. Collect has its own language setting under the gear; see [Settings](/docs/collect/settings/).
+
+## Sign out
+
+{/* claim: manage-as-logout */}
+Press <UI>Log out</UI> at the bottom of the left menu. Manage signs you out and returns to the sign-in page. On a shared office computer, always sign out when you finish: anyone at the keyboard can otherwise open your organization's records and exports.
+
+## Delete user
+
+{/* claim: manage-as-delete */}
+<UI>Delete user</UI> marks your account inactive and returns you to the sign-in page. It does not erase the account, and today it does not stop you signing in again. To have an account deleted, email info@puente-dr.org; for someone who has left, an administrator uses <UI>Deactivate</UI>, which signs them out (see [Members and administrators](/docs/organizations/members-and-administrators/)).
+
+<Aside type="caution" title="There is no confirmation">
+<UI>Delete user</UI> acts on the first click. It sits directly under <UI>Update user</UI>, so take care when saving changes.
+</Aside>
+
+{/* claim: manage-as-delete-records */}
+Records you collected are not removed. They belong to your organization and stay with it.
+
+To have your account and personal data deleted, follow [Delete your account](/docs/privacy/delete-your-account/).
+
+## FAQ
+
+**I changed my password. Do I need to update the phone?**
+Yes. The next time Collect asks you to sign in, use the new password.
+
+{/* claim: manage-as-language */}
+**Manage is back in English on another computer. Why?**
+The language is saved in each browser, not in your account. Pick your language again on that computer, and it stays for a year there.
+
+**How do I move to another organization?**
+Email info@puente-dr.org. You cannot change it yourself.
+
+{/* claim: org-admin-actions */}
+**Someone left our team. Do they use Delete user?**
+No. An administrator deactivates them on the Organizations screen. See [Members and administrators](/docs/organizations/members-and-administrators/).
