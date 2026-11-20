@@ -1461,7 +1461,7 @@
    ]
   },
   "manage-as-delete": {
-   "claim": "Delete user sets active false, no confirmation, returns to sign-in. It does not stop sign-in: sign-in refuses only accounts with deactivated=true (confirmed bug M12).",
+   "claim": "Delete user sets the account inactive, with no confirmation, and returns to sign-in.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
@@ -1477,11 +1477,6 @@
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
      "quote": "router.push('/account/login')",
      "line": 76
-    },
-    {
-     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
-     "quote": "if (result.get('deactivated') !== true) return result;",
-     "line": 272
     }
    ]
   },

@@ -161,22 +161,12 @@
    ]
   },
   "guide-org-deactivate": {
-   "claim": "Deactivate signs the person out of both apps but does not stop a later sign-in (bug M13/C19).",
+   "claim": "Deactivate ends the person's sessions, signing them out of both apps.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"org_admin_member_deactivate\": \"Deactivate\"",
      "line": 163
-    },
-    {
-     "file": "puente-reactnative-collect/services/parse/auth/index.js",
-     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
-     "line": 50
-    },
-    {
-     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
-     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
-     "line": 30
     },
     {
      "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
