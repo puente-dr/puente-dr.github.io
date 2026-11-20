@@ -1,0 +1,879 @@
+{
+ "crawledAt": "2026-11-18T02:15:40.538Z",
+ "sites": [
+  {
+   "name": "linear",
+   "home": "https://linear.app/docs",
+   "site": {
+    "darkMode": true,
+    "languageSwitcher": false
+   },
+   "homeFeatures": {
+    "search": true,
+    "sidebarNav": false,
+    "breadcrumbs": true,
+    "onPageToc": false,
+    "relatedArticles": false,
+    "lastUpdated": false,
+    "feedbackOrContact": true,
+    "callouts": false,
+    "steps": true,
+    "tables": false
+   },
+   "articles": [
+    {
+     "url": "https://linear.app/docs/account-preferences",
+     "title": "Preferences",
+     "words": 418,
+     "h2": 4,
+     "h3": 8,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/api-and-webhooks",
+     "title": "API and Webhooks",
+     "words": 422,
+     "h2": 2,
+     "h3": 5,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/billing-and-plans",
+     "title": "Billing and plans",
+     "words": 893,
+     "h2": 4,
+     "h3": 8,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": true
+     }
+    },
+    {
+     "url": "https://linear.app/docs/code-intelligence",
+     "title": "Code Intelligence",
+     "words": 550,
+     "h2": 1,
+     "h3": 4,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/creating-issues",
+     "title": "Issues",
+     "words": 1784,
+     "h2": 11,
+     "h3": 12,
+     "media": 4,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": true
+     }
+    },
+    {
+     "url": "https://linear.app/docs/default-team-pages",
+     "title": "Team pages",
+     "words": 691,
+     "h2": 7,
+     "h3": 3,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/display-options",
+     "title": "Display options",
+     "words": 954,
+     "h2": 3,
+     "h3": 3,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": true,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/favorites",
+     "title": "Favorites",
+     "words": 336,
+     "h2": 2,
+     "h3": 5,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/get-the-app",
+     "title": "Download Linear",
+     "words": 824,
+     "h2": 6,
+     "h3": 8,
+     "media": 4,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/gong",
+     "title": "Gong",
+     "words": 406,
+     "h2": 5,
+     "h3": 0,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/initiative-and-project-updates",
+     "title": "Updates",
+     "words": 1547,
+     "h2": 5,
+     "h3": 10,
+     "media": 5,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/intercom",
+     "title": "Intercom",
+     "words": 942,
+     "h2": 8,
+     "h3": 6,
+     "media": 5,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/jira",
+     "title": "Jira",
+     "words": 1692,
+     "h2": 6,
+     "h3": 10,
+     "media": 6,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": true
+     }
+    },
+    {
+     "url": "https://linear.app/docs/linear-asks-email",
+     "title": "Asks with Email",
+     "words": 751,
+     "h2": 8,
+     "h3": 5,
+     "media": 4,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/linear-to-linear",
+     "title": "Linear to Linear importer",
+     "words": 480,
+     "h2": 4,
+     "h3": 4,
+     "media": 0,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/members-roles",
+     "title": "Members and roles",
+     "words": 1090,
+     "h2": 4,
+     "h3": 8,
+     "media": 0,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/notion",
+     "title": "Notion",
+     "words": 206,
+     "h2": 0,
+     "h3": 3,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/project-dependencies",
+     "title": "Project dependencies",
+     "words": 346,
+     "h2": 5,
+     "h3": 2,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/project-notifications",
+     "title": "Project notifications",
+     "words": 299,
+     "h2": 1,
+     "h3": 2,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/projects",
+     "title": "Projects",
+     "words": 1295,
+     "h2": 12,
+     "h3": 2,
+     "media": 2,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/saml-and-access-control",
+     "title": "SAML",
+     "words": 901,
+     "h2": 6,
+     "h3": 3,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/security-and-access",
+     "title": "Security & Access",
+     "words": 228,
+     "h2": 5,
+     "h3": 0,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/start-guide",
+     "title": "Start Guide",
+     "words": 197,
+     "h2": 2,
+     "h3": 3,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": true,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/third-party-application-approvals",
+     "title": "Third-Party App Approvals",
+     "words": 247,
+     "h2": 4,
+     "h3": 0,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://linear.app/docs/use-cycles",
+     "title": "Cycles",
+     "words": 1376,
+     "h2": 8,
+     "h3": 15,
+     "media": 5,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    }
+   ],
+   "mobileOverflow": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "name": "notion",
+   "home": "https://www.notion.com/help",
+   "site": {
+    "darkMode": true,
+    "languageSwitcher": true
+   },
+   "homeFeatures": {
+    "search": true,
+    "sidebarNav": true,
+    "breadcrumbs": false,
+    "onPageToc": false,
+    "relatedArticles": false,
+    "lastUpdated": false,
+    "feedbackOrContact": true,
+    "callouts": true,
+    "steps": false,
+    "tables": false
+   },
+   "articles": [
+    {
+     "url": "https://www.notion.com/help/billing",
+     "title": "Billing",
+     "words": 1452,
+     "h2": 8,
+     "h3": 4,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": true
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/connect-cursor-to-notion",
+     "title": "Use Cursor in Notion (beta)",
+     "words": 596,
+     "h2": 10,
+     "h3": 0,
+     "media": 0,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/dashboards",
+     "title": "Dashboards view",
+     "words": 1610,
+     "h2": 12,
+     "h3": 13,
+     "media": 5,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": true
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/duplicate-delete-and-restore-content",
+     "title": "Delete & restore content",
+     "words": 1769,
+     "h2": 9,
+     "h3": 11,
+     "media": 1,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": true,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/sharing-and-permissions",
+     "title": "Sharing & permissions settings",
+     "words": 2899,
+     "h2": 14,
+     "h3": 7,
+     "media": 4,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": true,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/use-claude-agents-in-notion",
+     "title": "Use Claude agents in Notion (beta)",
+     "words": 740,
+     "h2": 12,
+     "h3": 0,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/adding-members-admins-and-guests",
+     "title": "Adding members, admins & guests",
+     "words": 227,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/creating-a-page",
+     "title": "Creating a page",
+     "words": 170,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/creating-links-and-backlinks",
+     "title": "Creating links & backlinks",
+     "words": 215,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/journal",
+     "title": "Build a journal in Notion",
+     "words": 197,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/notions-data-retention-settings",
+     "title": "Use Notion’s Data Retention settings to keep your team compliant & restore content",
+     "words": 1270,
+     "h2": 5,
+     "h3": 4,
+     "media": 7,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/organize-your-everyday-life-with-notion-ai",
+     "title": "Organize your everyday life with Notion AI",
+     "words": 2029,
+     "h2": 7,
+     "h3": 3,
+     "media": 7,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": true,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/page-icons-and-covers",
+     "title": "Page icons & covers",
+     "words": 196,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/reminders-and-mentions",
+     "title": "Reminders & @mentions",
+     "words": 198,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/using-notion-for-remote-work",
+     "title": "Using Notion for remote work",
+     "words": 267,
+     "h2": 2,
+     "h3": 1,
+     "media": 3,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": false,
+      "relatedArticles": false,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": false,
+      "steps": false,
+      "tables": false
+     }
+    },
+    {
+     "url": "https://www.notion.com/help/guides/working-offline-in-notion-everything-you-need-to-know",
+     "title": "Everything you need to know about working offline in Notion",
+     "words": 825,
+     "h2": 5,
+     "h3": 3,
+     "media": 5,
+     "features": {
+      "search": true,
+      "sidebarNav": true,
+      "breadcrumbs": true,
+      "onPageToc": true,
+      "relatedArticles": true,
+      "lastUpdated": false,
+      "feedbackOrContact": true,
+      "callouts": true,
+      "steps": false,
+      "tables": false
+     }
+    }
+   ],
+   "mobileOverflow": [
+    0,
+    0,
+    99
+   ]
+  }
+ ]
+}

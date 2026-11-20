@@ -1,0 +1,109 @@
+---
+title: Research exports
+description: The de-identified research file — how it differs from full records, how to turn it on for a form, what columns it has and how study IDs work.
+related:
+  - data/exporting-data
+  - guides/sharing-data-with-researchers
+  - guides/designing-a-form-for-research
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import allow from '@shots/en/research-03-allow-research-export.png';
+import manager from '@shots/en/research-00-form-manager.png';
+import rows from '@shots/en/research-04-forms-collected.png';
+
+Sometimes the people who run a clinic and the people who study it are different teams. The **research file** is a version of a custom form's export made for a research partner: it keeps what happened at each visit and leaves out who it happened to.
+
+It is the only file meant to leave Puente. This page describes the file itself. For the step-by-step of checking and sending it, see [Sharing data with researchers](/docs/guides/sharing-data-with-researchers/).
+
+## Research file or full records
+
+{/* claim: data-research-two-buttons */}
+A form with the research file turned on is marked <UI>Research export on</UI> in the Form Manager, and has two buttons where other forms have one:
+
+| Button | What you get | Where it goes |
+|---|---|---|
+| <UI>Export research file</UI> (blue) | A study ID, age, sex, community and the form's answers. No names, ID numbers, phone numbers, birth dates or locations. | To a research partner, after your checks. |
+| <UI>Export full records</UI> (white) | Every answer with the person's name, ID number, phone number, birth date and location. | Stays inside your organization. |
+
+Expand the row with the arrow and Manage repeats this in plain words under <UI>Forms collected</UI>.
+
+<Shot src={rows} alt="The Vision exam row expanded: a Research export on badge, Export research file and Export full records buttons, Forms collected: 37 with a Refresh button, and two notes describing each file." caption="The notes under the count say what each file contains. Read them before you choose." />
+
+## Turn on the research file
+
+{/* claim: data-research-allow */}
+The research file is a setting on each custom form. In <UI>Create</UI>, open the form and tick <UI>Allow research export</UI> under the description, then <UI>Publish</UI>. It is off until someone ticks it, and it is not available for the four Puente forms.
+
+<Shot src={allow} alt="The Form Creator's settings card with Type of form, Form name and Description fields and a ticked Allow research export checkbox with an explanation below it." caption="One tick per form. The note below says location questions in this form are left out of the research file." />
+
+Turn it on before the clinic day if you can, so the form you test is the form you will export.
+
+## Columns in the file
+
+{/* claim: data-research-columns */}
+One row for each time the form was filled in. These columns come first, then one column for each question in the form:
+
+| Column | Means |
+|---|---|
+| `study_id` | A code for the patient. The same person has the same code in every row and every download. |
+| `submission_id` | A code for this one visit. |
+| `visit_date` | The day the form reached Puente. |
+| `age_at_visit` | Age in whole years on the visit date, from the birth date. |
+| `age_as_reported` | An age typed into the person's record, for example when the birth date was unknown. |
+| `age_reported_date` | The day the person's record was created — the date that typed age refers to. |
+| `sex`, `communityname`, `city`, `province` | From the person's record. |
+| `surveyingOrganization` | Which organization collected it. |
+
+Because `visit_date` is the day the form reached Puente, a form that waited on a phone for a week carries the day it was sent. Send forms from Offline Sync the same day.
+
+As in every custom-form export, accents are removed from answers and headings: `El Río` becomes `El Rio`.
+
+## Two kinds of age
+
+{/* claim: data-research-ages */}
+Some patients know their birth date; some do not, and the surveyor types an age instead. The file keeps the two apart:
+
+- `age_at_visit` is worked out exactly: a person born on 26 December 1983 and seen on 10 November 2026 is 42, not 43. It is blank when the birth date is not an exact date.
+- `age_as_reported` is the typed age, never converted, and `age_reported_date` says when it was recorded.
+
+If both are blank, the age was never recorded. It is left blank rather than guessed.
+
+## What is kept out
+
+{/* claim: data-research-allowlist */}
+The file is built from a fixed list of **allowed** columns, not by deleting the sensitive ones. So it leaves out names, nicknames, cédula numbers, phone numbers, insurance details, birth dates, GPS coordinates, the photo, the surveyor's account and Puente's own record numbers — and any column added to patient records in the future stays out until someone decides it belongs.
+
+<Aside type="caution" title="Your own questions still go in">
+Every question in the form becomes a column, except location questions. If the form asks for a name, a phone number or a cédula, that answer is in the research file. Leave those questions out of a research form.
+</Aside>
+
+## Study IDs
+
+{/* claim: data-research-study-id */}
+A study ID looks like `P-3fa9c01b2e`. It is made from the person's record with a secret key that only Puente holds, so:
+
+- **It is stable.** A patient seen at two clinics has the same code both times, and researchers can follow them.
+- **Only Puente can reverse it.** If a researcher asks about `P-3fa9c01b2e`, send the code to info@puente-dr.org and Puente can find that patient. The researcher cannot.
+
+{/* claim: data-research-audit */}
+Puente also keeps a note of who downloaded each research file and how many rows it had — never its contents.
+
+<Shot src={manager} alt="The Form Manager. Under Custom forms, the Vision exam form is marked Research export on and has Export research file and Export full records buttons; the Clinic sign-in form below has a single Export button." caption="Only forms with the research file turned on get two buttons." />
+
+{/* claim: data-research-filename */}
+The download is named after the form, the word `research` and the date, for example `Vision exam - research - 2026-11-10.csv`, so it cannot be confused with the full-records file.
+
+## FAQ
+
+**There is only one Export button on my form.**
+The research file is not turned on for it, or it is one of the four Puente forms. Tick Allow research export in the Form Creator and publish.
+
+{/* claim: data-research-all-rows */}
+**Does the research file leave out people who said no to the study?**
+No. It contains every submission. Remove anyone who did not consent before you send it.
+
+**Can a researcher get the full records?**
+They should not. Only the research file leaves Puente.

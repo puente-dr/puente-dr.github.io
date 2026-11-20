@@ -1,0 +1,111 @@
+---
+title: Settings
+description: Everything under the gear in Collect — your account, language, offline records, theme, Calm Mode, support, and logging out safely.
+related:
+  - collect/offline-sync
+  - collect/find-records
+  - privacy/delete-your-account
+  - help/contact-support
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/en/collect-settings.png';
+import language from '@shots/en/collect-language.png';
+import storage from '@shots/en/find-05-storage-limit.png';
+
+The gear, the last icon at the bottom of Collect, opens **Account Settings**. It holds your account details, how the app looks and behaves on this phone, the help options, and the log-out button.
+
+The screen has two tabs at the top: <UI>Settings</UI> and <UI>Support</UI>.
+
+## The Settings tab
+
+{/* claim: collect-settings-list */}
+From top to bottom:
+
+| Item | What it does |
+|---|---|
+| <UI>Name, Phone, Email</UI> | Edit your first and last name, phone number and email. |
+| <UI>Change Password</UI> | Set a new password. You type your current one first. |
+| <UI>Find Records</UI> | How many residents the phone keeps for offline search. |
+| <UI>Language</UI> | Switch the app between English, Spanish and Haitian Creole. |
+| <UI>Offline Records</UI> | Download resident records for offline search, or clear them. |
+| <UI>Theme</UI> | <UI>Light</UI> or <UI>Dark</UI>. |
+| <UI>Calm Mode</UI> | <UI>Reduce animations for clinical focus</UI>. |
+| <UI>Reset Onboarding</UI> | Show the first-launch tour and tips again. |
+
+<div class="shots">
+<Shot phone src={settings} alt="The Collect settings list: Name, Phone, Email; Change Password; Find Records; Language; Offline Records." caption="The Settings list. Each row opens its own screen." />
+</div>
+
+## Your name, phone, email and password
+
+{/* claim: collect-settings-online-only */}
+Changes to your account need a connection. Offline, the app says <UI>You are offline. This change needs an internet connection, and has not been saved.</UI> A new password must be at least 8 characters, typed twice. Your organization is not on this screen; to change it, email info@puente-dr.org.
+
+## Language
+
+{/* claim: collect-language-settings */}
+<UI>Language</UI> opens <UI>Choose Language</UI> with three buttons: <UI>English</UI>, <UI>Spanish</UI> and <UI>Haitian Creole</UI>. The whole app switches, including the consent screen.
+
+<div class="shots">
+<Shot phone src={language} alt="The Choose Language screen with English, Spanish and Haitian Creole buttons and a Back link." caption="Choose the language the person in front of you reads best." />
+</div>
+
+## Records kept for offline search
+
+{/* claim: collect-settings-storage-limit */}
+<UI>Find Records</UI> shows how many residents are stored on the phone and the <UI>Record storage limit</UI>, which starts at 2,000. Raise it before you travel to a community with more residents than that. [Find records](/docs/collect/find-records/) explains the search.
+
+<div class="shots">
+<Shot phone src={storage} alt="The Find Records settings screen showing Current records stored 210 and Record storage limit 2000 with an Edit link." caption="Current records stored is how many people you can search offline right now." />
+</div>
+
+{/* claim: collect-offline-records */}
+<UI>Offline Records</UI> has two buttons:
+
+- <UI>Download records for offline use</UI> — fetches resident records now, while you have signal.
+- <UI>Clear downloaded records</UI> — deletes the residents saved for search. The app asks first and says offline search will be empty until you download again.
+
+Clearing downloaded records does not touch forms waiting in Offline Sync. Those are a separate list.
+
+## Theme and Calm Mode
+
+{/* claim: collect-theme-calm */}
+<UI>Theme</UI> switches between <UI>Light</UI> and <UI>Dark</UI>. <UI>Calm Mode</UI> turns down the app's animations; the switch shows <UI>ON</UI> or <UI>OFF</UI>.
+
+## Support
+
+{/* claim: collect-support */}
+The <UI>Support</UI> tab, headed <UI>Help Center</UI>, has:
+
+- <UI>Contact us / Feedback</UI> — type a message and tap <UI>Send Mail</UI>; it opens an email to info@puente-dr.org in your mail app.
+- <UI>Rate our app</UI> — opens the store's rating prompt.
+- <UI>Delete user?</UI> — explains that records you already submitted belong to your organization and are not removed, then opens the account page in your browser, where you can request deletion. See [Delete your account](/docs/privacy/delete-your-account/).
+
+## Log out
+
+{/* claim: collect-logout-guard */}
+<UI>Log out</UI> is near the bottom of both tabs. It asks <UI>Log out?</UI> and reminds you that you need your username and password to sign back in.
+
+- If forms are still waiting to send, the question says how many, and that you cannot sync them until you sign back in.
+- Offline, Collect refuses with <UI>Can't log out right now</UI>, because signing back in needs a connection.
+
+<Aside type="caution" title="Send everything first">
+Open the cloud and send your forms until it reads <UI>No forms queued. You are all caught up!</UI> before you log out or lend the phone. See [Offline and sync](/docs/collect/offline-sync/).
+</Aside>
+
+## Version
+
+{/* claim: collect-version-label */}
+The last line of the Settings tab shows the app version and build, for example "Version 15.7.5" followed by the build number in brackets. Include it whenever you report a problem.
+
+## FAQ
+
+{/* claim: collect-org-change */}
+**Where do I change my organization?**
+You can't from the app. Email info@puente-dr.org.
+
+{/* claim: collect-offline-records */}
+**Does Clear downloaded records delete my unsent forms?**
+No. It only clears the residents saved for offline search.

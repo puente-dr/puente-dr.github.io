@@ -1,0 +1,115 @@
+---
+title: Formularios de Puente
+description: Los cuatro formularios que trae cada copia de Collect — qué recoge cada uno y cómo agregar los tres formularios de seguimiento a un residente.
+related:
+  - collect/resident-id-and-households
+  - collect/custom-forms
+  - collect/find-records
+  - data/reading-export-files
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import vitals from '@shots/es/collect-vitals.png';
+import attach from '@shots/es/collect-attach-resident.png';
+
+Cada organización tiene en Collect los mismos cuatro formularios, en <UI>Formularios Puente</UI> cuando tocas la carpeta. Uno registra a una persona; los otros tres agregan información al registro de esa persona. Tu organización puede sumar sus propios formularios al lado; mira [Formularios personalizados](/docs/es/collect/custom-forms/).
+
+## Los cuatro formularios
+
+{/* claim: collect-builtin-forms */}
+| Formulario en Collect | Para qué sirve | Nombre en Manage y en las exportaciones |
+|---|---|---|
+| <UI>Identificación de residente</UI> | Registra a una persona: quién es, dónde vive, su hogar. | SurveyData |
+| <UI>Salud Ambiental</UI> | La casa y su entorno. | HistoryEnvironmentalHealth |
+| <UI>Evaluación Médica</UI> | Un problema de salud y el plan para atenderlo. | EvaluationMedical |
+| <UI>Partes vitales</UI> | Medidas: estatura, peso, presión arterial y más. | Vitals |
+
+Manage muestra estos formularios por su nombre interno, el de la última columna. Saber los dos nombres te ahorra confusiones cuando buscas tus registros en el [Gestor de formularios](/docs/es/manage/form-manager/).
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla Recopilar datos con las tarjetas de identificación de residente y salud ambiental en Formularios Puente, y una tercera tarjeta cortada en el borde derecho." caption="Desliza de lado la fila de Formularios Puente para llegar a Evaluación Médica y Partes vitales." />
+</div>
+
+## Identificación de residente
+
+La identificación crea a la persona. Llénala una vez, la primera vez que conoces a alguien, y usa los otros tres formularios en cada visita después. [Identificación de residente y hogares](/docs/es/collect/resident-id-and-households/) explica cada campo.
+
+## Salud Ambiental
+
+{/* claim: collect-env-fields */}
+Preguntas sobre las condiciones de vida del hogar:
+
+- Cuánto tiempo lleva la persona en la comunidad y en esta casa, y el mayor problema de la comunidad.
+- Agua: con qué frecuencia tienen acceso y qué tipo toman.
+- Acceso a baño, letrina, clínica y dentista, y cuántas veces se recoge la basura.
+- La casa: si es propia, el estado del piso y del techo, de qué están hechos el piso y la casa, el tipo de estufa y el acceso a la electricidad.
+- Si la familia se preocupó por no tener suficiente comida el último mes, y si recibe ayuda del gobierno.
+- Cuántas personas viven en la casa, y cuántos niños por grupo de edad.
+
+La cantidad de personas que viven en la casa es obligatoria; lo demás es opcional.
+
+## Evaluación Médica
+
+{/* claim: collect-med-fields */}
+Una nota clínica sobre un problema de salud:
+
+- Condiciones crónicas: hipertensión, diabetes, otras.
+- Si ha visto a un médico, y en qué estado está su atención.
+- La parte del cuerpo afectada, cuánto tiempo lleva, si empezó de repente o poco a poco, y si mejora o empeora.
+- La valoración de quien evalúa: si hace falta una consulta general o una cirugía, si se necesita seguimiento inmediato, y el plan.
+
+Ningún campo es obligatorio.
+
+## Partes vitales
+
+{/* claim: collect-vitals-fields */}
+Medidas, cada una con su unidad al lado del cuadro: estatura (pulgadas), peso (libras), índice de masa corporal, temperatura (°Celsius), pulso, frecuencia respiratoria, presión arterial (sistólica sobre diastólica), <UI>Saturacion de oxígeno en la sangre</UI>, <UI>Nivel de azucar</UI>, <UI>Niveles de hemoglobina</UI>, <UI>Hemoglobina de A1c</UI> y <UI>Nivel de dolor</UI>. Ningún campo es obligatorio: anota lo que mediste y deja el resto en blanco.
+
+<div class="shots">
+<Shot phone src={vitals} alt="El formulario de Partes vitales: el cuadro Buscar por nombre o ID arriba, y luego estatura en pulgadas, peso en libras, índice de masa corporal, temperatura en grados Celsius, pulso y frecuencia respiratoria." caption="Partes vitales abre con el cuadro para buscar al residente encima de la primera pregunta." />
+</div>
+
+<Aside type="caution" title="Revisa las unidades">
+La estatura va en pulgadas y el peso en libras. Si mediste en centímetros o kilos, convierte antes de escribir.
+</Aside>
+
+## Agregar el formulario a un residente
+
+{/* claim: collect-attach-resident */}
+Salud Ambiental, Evaluación Médica y Partes vitales pertenecen a una persona. Cada uno abre con un cuadro <UI>Buscar por nombre o ID</UI> encima de las preguntas. Busca a la persona, toca su tarjeta y llena el formulario.
+
+Hasta que eliges a alguien, el botón de abajo dice <UI>Adjuntar una residente de la comunidad</UI> y no hace nada. Cuando hay un residente agregado, cambia a <UI>Guardar Registro</UI>.
+
+<div class="shots">
+<Shot phone src={attach} alt="La parte de abajo del formulario de Partes vitales: presión arterial, oxígeno, glucosa, hemoglobina y dolor, con el texto para adjuntar un residente donde iría el botón de guardar." caption="Todavía no hay residente elegido, así que el formulario no se puede guardar." />
+</div>
+
+Hay caminos más rápidos que se saltan la búsqueda:
+
+{/* claim: collect-suggested-next */}
+- **Justo después de una identificación.** La pantalla <UI>Formularios siguientes sugeridos</UI> muestra tus favoritos; toca uno y se abre para la persona que acabas de registrar.
+
+<Aside type="caution" title="Los formularios siguientes sugeridos no vuelven a preguntar">
+Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: usa el consentimiento que acabas de registrar para esa persona. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
+</Aside>
+- **Desde el registro de la persona.** Ábrela con la lupa y empieza el formulario desde ahí. Mira [Buscar registros](/docs/es/collect/find-records/).
+
+## Al guardar
+
+{/* claim: collect-supp-saved */}
+El mensaje te dice adónde fue el formulario: <UI>Formulario entregado satisfactoriamente</UI> quiere decir que llegó a Puente; <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> quiere decir que espera en el teléfono. Envía los que esperan desde la nube; mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
+
+## Preguntas frecuentes
+
+{/* claim: collect-attach-resident */}
+**¿Por qué no puedo guardar Partes vitales?**
+No hay residente agregado. Busca a la persona arriba del formulario y toca su tarjeta.
+
+{/* claim: collect-builtin-fixed */}
+**¿Puedo cambiar las preguntas de estos formularios?**
+No. Los cuatro formularios de Puente son iguales para todas las organizaciones. Para hacer tus propias preguntas, crea un formulario personalizado en Manage; mira [Creador de formularios](/docs/es/manage/form-creator/).
+
+**La búsqueda no encuentra a la persona. ¿Qué hago?**
+Busca solo por el apellido, luego por el apodo. Si de verdad es nueva, regístrala primero con la identificación de residente.

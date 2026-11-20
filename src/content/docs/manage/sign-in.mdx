@@ -1,0 +1,104 @@
+---
+title: Sign in to Manage
+description: Open Puente Manage in a browser, create an account under your organization, and get back in when you forget your password.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - manage/review
+  - collect/install-and-sign-in
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import login from '@shots/en/manage-login.png';
+import register from '@shots/en/manage-register.png';
+import picker from '@shots/en/register-02-picker-synthetic.png';
+import notListed from '@shots/en/manage-register-not-listed.png';
+
+{/* claim: manage-one-account */}
+Puente Manage is the web app where coordinators review what the field sent in, build forms and export data. It runs in any browser at [puente-manage.vercel.app](https://puente-manage.vercel.app). You use the same account as in Puente Collect, the phone app.
+
+This page covers the sign-in screen, creating an account, and resetting a forgotten password.
+
+## Sign in
+
+{/* claim: manage-signin-page */}
+Open Manage. The screen is headed **Puente Manage**, with two boxes: <UI>Email or phone number</UI> and <UI>Password</UI>. Type the email you registered with and your password, then press <UI>Sign in →</UI> (or Enter).
+
+{/* claim: manage-signin-dashboard */}
+Manage opens on <UI>Review</UI>, the dashboard. If you followed a link to another page while signed out, it takes you there instead.
+
+<Shot src={login} alt="The Manage sign-in page: Email or phone number and Password boxes, a blue Sign in button, Forgot password and Create account links, a yellow note about Collect, and a language row under it." caption="The sign-in page. The language row at the bottom works before you sign in." />
+
+{/* claim: manage-collect-hint */}
+The yellow note reads <UI>Collecting in the field? Open Puente Collect on your phone instead.</UI> Manage is for the office. Surveys are filled in on the phone, in [Collect](/docs/collect/install-and-sign-in/).
+
+{/* claim: manage-signin-language */}
+To change the language before you sign in, use the row at the bottom of the card: **English**, **Español** or **Kreyòl Ayisyen**.
+
+## Create an account
+
+Press <UI>Create account</UI> on the sign-in page.
+
+{/* claim: manage-register-fields */}
+| Field | Required |
+|---|---|
+| <UI>First Name</UI>, <UI>Last Name</UI> | No, but fill them in so your team can tell who you are |
+| <UI>Organization</UI> | Yes |
+| <UI>Email Address</UI> | Yes |
+| <UI>Phone Number</UI> | No |
+| <UI>Password</UI>, <UI>Confirm Password</UI> | Yes, and the two must match |
+
+<Shot src={register} alt="The Create an account form: First Name, Last Name, an Organization picker reading Please Select, a My organization isn't listed link, Email Address, Phone Number, Password, Confirm Password, and Register and Cancel buttons." caption="Required fields are marked with an asterisk." />
+
+{/* claim: manage-register-email-confirm */}
+Press <UI>Register</UI>. Manage sends a confirmation to your email and opens the dashboard.
+
+{/* claim: org-first-admin */}
+The first person to register in an organization becomes its administrator; everyone after is a member. See [Members and administrators](/docs/organizations/members-and-administrators/).
+
+## Choose your organization
+
+{/* claim: manage-register-org-list */}
+<UI>Organization</UI> is a list of the organizations already in Puente. Type a few letters to narrow it, then pick yours. If the list could not load, the form says <UI>We could not load the list of organizations. Check your connection and reload the page.</UI>
+
+<Shot src={picker} alt="The Organization field with Exam typed in it and a single suggestion, Example Health Trust, below." caption="Typing narrows the list. Pick the exact name, not a close one." />
+
+<Aside type="caution" title="Do not pick an organization that is nearly right">
+Your organization decides which records you can see and where your work is filed. A close-enough choice puts you in someone else's group. You cannot change it yourself afterwards.
+</Aside>
+
+## When your organization isn't listed
+
+{/* claim: manage-register-not-listed */}
+Press <UI>My organization isn't listed</UI>. Manage explains that Puente staff add organizations by hand, and offers a link, <UI>Email us your organization's name</UI>. It opens an email to info@puente-dr.org with the subject "Add my organization to Puente Manage". Once your organization appears in the list, come back and finish registering.
+
+<Shot src={notListed} alt="Close-up of the registration form after pressing My organization isn't listed: a paragraph saying Puente staff add organizations by hand, ending in the link Email us your organization's name." caption="The help text appears right under the Organization field." />
+
+{/* claim: org-collect-creates */}
+Collect works differently: there you can type a new organization name and Puente creates it. [Organizations](/docs/organizations/organizations/) explains both ways in.
+
+## Reset a forgotten password
+
+{/* claim: manage-forgot-password */}
+1. Press <UI>Forgot password</UI> on the sign-in page. The screen reads <UI>Reset your account</UI>.
+2. Type your email in <UI>Phone Number or Email Address</UI>.
+3. Leave <UI>Send account reset email?</UI> selected and press <UI>Send reset email</UI>.
+4. When <UI>Request Sent!</UI> appears, open the email and follow the link.
+
+<Aside type="tip">
+Use the email option. The screen also offers a text message, but Puente no longer sends texts for account confirmation, and the text option has not been confirmed to work.
+</Aside>
+
+## FAQ
+
+**Do I need a separate account for Manage?**
+No. The account you use in Collect works here, and the reverse.
+
+{/* claim: org-refused-effect */}
+**I signed in and the dashboard is empty. Why?**
+Usually your organization does not match one Puente knows, or nothing has synced yet. See [Organizations](/docs/organizations/organizations/).
+
+{/* claim: manage-as-org-readonly */}
+**Can I change my organization later?**
+Not yourself. [Account settings](/docs/manage/account-settings/) shows it read-only; email info@puente-dr.org to change it.

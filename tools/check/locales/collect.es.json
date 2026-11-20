@@ -1,0 +1,797 @@
+{
+  "global": {
+    "yes": "Si",
+    "no": "No",
+    "notSure": "No esta seguro",
+    "other": "Otro",
+    "submit": "Entrega",
+    "saveRecord": "Guardar Registro",
+    "fName": "Primer Nombre",
+    "lName": "Apellido",
+    "city": "Ciudad",
+    "commName": "Nombre de comunidad",
+    "notes": "Notas",
+    "refresh": "Actualiza",
+    "error": "Error",
+    "success": "¡Éxito!",
+    "ok": "OK",
+    "emptyForm": "Forma vacía",
+    "back": "Regresa",
+    "pleaseTryAgain": "Inténtalo de nuevo",
+    "loadMore": "Cargar más",
+    "settings": "Configuración",
+    "tryAgain": "Intentar de nuevo",
+    "cancel": "Cancelar",
+    "recordsStoredOnDevice": "%{count} registros guardados en este dispositivo",
+    "done": "Listo"
+  },
+  "signUp": {
+    "firstName": "Nombre de verdadero",
+    "lastName": "Apellido",
+    "email": "Correo electronico",
+    "phoneNumber": "Número de teléfono",
+    "password": "Contraseña",
+    "password2": "Entra contraseña de nuevo",
+    "organization": "Organización",
+    "termsOfService": {
+      "view": "Ver los términos y el servicio",
+      "acknoledgement": "Al marcar esta casilla, reconozco que he leído y comprendido los Términos y el acuerdo de servicio."
+    },
+    "submit": "Enviar",
+    "toEnglish": "Cambiar el idioma al inglés",
+    "toSpanish": "Cambiar el idioma al español",
+    "errorTerms": "Error, se deben acordar los términos y el servicio",
+    "errorPassword": "Error, sus contraseñas no coinciden.",
+    "usernameError": "Intento de registro fallido.\n\nEs posible que hayas intentado registrarte con un nombre de usuario (correo electrónico/número de teléfono) que ya está registrado con otra cuenta.\n\nComuníquese con su supervisor si cree que esto es un error.",
+    "confirmViaEmail": "¿Enviar confirmación por correo electrónico?",
+    "confirmViaText": "¿Enviar confirmación por mensaje de texto?",
+    "placeholders": {
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "email": "juanperez@ejemplo.com",
+      "phoneNumber": "123-456-7890",
+      "password": "Contraseña"
+    }
+  },
+  "signIn": {
+    "user": "Nombre de usuario",
+    "username": "Número de teléfono o Correo electronico ",
+    "password": "Contraseña",
+    "showPassword": "Mostrar contraseña",
+    "login": "Iniciar sesión",
+    "signUpLink": "Regístrate!",
+    "deleteCreds": "Eliminar usuario",
+    "noAccount": "¿No tienes una cuenta?",
+    "puente2020": "Puente 2020 |",
+    "termsConditions": "Términos y condiciones",
+    "forgotPassword": {
+      "label": "¿olvidado tu contraseña?",
+      "enterEmail": "Ingrese su correo electrónico para restablecer su contraseña",
+      "sendLink": "Enviar enlace de restablecimiento",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "¡Regístrate!",
+      "rememberPass": "¿Recuerdas tu contraseña?",
+      "signIn": "Registrarse",
+      "resetSuccess": "Su enlace de restablecimiento de contraseña se ha enviado a su correo electrónico. Por favor revise su correo electrónico para cambiar su contraseña.",
+      "resetError": "Hubo un error al enviar el enlace para restablecer la contraseña. Asegúrese de haber ingresado su correo electrónico correctamente. Puede intentarlo de nuevo haciendo clic en el botón de abajo. Si cree que el correo electrónico es correcto, comuníquese con su gerente.",
+      "tryAgain": "Intentar de nuevo",
+      "backToSignIn": "Volver a iniciar sesión"
+    },
+    "credentialsModal": {
+      "useCreds": "¿Le gustaría guardar su usuario y contraseña?"
+    },
+    "unableLogin": "No puede iniciar sesión",
+    "usernamePasswordIncorrect": "Su nombre de usuario o contraseña pueden ser incorrectos. Vuelva a intentarlo.",
+    "offlineLoginError": "Está sin conexión. Iniciar sesión requiere conexión a internet, por lo que no se puede iniciar sesión sin conexión. Por favor, conéctese a internet e inténtelo de nuevo.",
+    "invalidSessionToken": "Su sesión ha expirado. Inicie sesión de nuevo.",
+    "credentials": "Usuario y contraseña",
+    "saveLoginCreds": "¿Le gustaría guardar su usuario y contraseña de inicio de sesión para uso futuro?",
+    "registrationSuccess": "¡Cuenta creada!",
+    "registrationSuccessMessage": "Tu cuenta ha sido creada exitosamente. Por favor inicia sesión con tus credenciales."
+  },
+  "pinCode": {
+    "getPinCode": {
+      "enterPinCode": "Ingresar código PIN",
+      "incorrect1": "Código PIN incorrecto, inténtelo de nuevo. Esta es su última oportunidad para ingresar su código PIN, su usuario y contraseña se restablecerán y el código PIN se eliminará en otro intento fallido.",
+      "incorrect2": "Código PIN incorrecto, inténtalo de nuevo"
+    },
+    "storePinCode": {
+      "enterPinCode": "Ingrese el código PIN para usar en lugar del nombre de usuario / contraseña"
+    }
+  },
+  "formsGallery": {
+    "puenteForms": "Formularios Puente",
+    "customForms": "Formularios personalizados",
+    "pinnedForms": "Formularios favoritos",
+    "ourMarketPlace": "Nuestro mercado de formularios",
+    "discoverForms": "Descubra formularios creados por empresas de confianza",
+    "exploreForms": "Explorar formularios",
+    "noCustomForms": "Sin formularios personalizados — intenta actualizar",
+    "noPinnedForms": "Sin formularios fijados — mantén presionado para fijar",
+    "checkOutMarketplace": "Visite nuestro mercado para ver los formularios disponibles",
+    "viewMarketplace": "Ver mercado de formularios",
+    "marketPlace": "Mercado de formularios",
+    "workflows": "Flujos de trabajo",
+    "noWorflowAssigned": "Sin flujo de trabajo asignado"
+  },
+  "identificationForm": {
+    "demographics": "Demografía",
+    "nickname": "Apodo",
+    "age": "Edad (si la fecha no está disponible)",
+    "dob": {
+      "label": "Fecha de nacimiento",
+      "month": "Mes",
+      "day": "Día",
+      "year": "Año"
+    },
+    "sex": {
+      "label": "Sexo",
+      "male": "Masculino",
+      "female": "Femenino",
+      "notSay": "Prefiero no decirlo"
+    },
+    "telephone": "Número de teléfono",
+    "marriageStatus": {
+      "label": "Estado civil",
+      "single": "Soltero/a",
+      "married": "Casado/a",
+      "cohabitation": "Unión libre",
+      "widow": "Viudo/a"
+    },
+    "occupation": "Ocupación",
+    "educationLevel": {
+      "label": "Nivel de Educación",
+      "lessPrim": "No termino la primaria",
+      "prim": "Termino la primaria",
+      "hs": "Termino la escuela secundaria",
+      "someHS": "Algún instituto",
+      "college": "Universidad terminada",
+      "someCollege": "Alguna educación superior",
+      "technicalCourse": "Curso técnico"
+    },
+    "cedulaNumber": "Número de cedula",
+    "location": "Ubicación",
+    "province": "Provincia",
+    "insurance": "Seguro",
+    "insNumber": "Número de seguro",
+    "insProvider": "Proveedor de seguros",
+    "clinicProvider": "Proveedor de la clínica",
+    "latitude": "Latitud",
+    "longitude": "Longitud",
+    "household": "Casa",
+    "subcounty": "Sub-condado",
+    "region": "Región",
+    "country": "País",
+    "photoAssessment": "Evaluación de fotos"
+  },
+  "environmentalHealth": {
+    "name": "Formulario de salud ambiental",
+    "yearsLived": {
+      "community": "Años viviendo en la comunidad",
+      "house": "Años vividos en esta casa",
+      "less1": "Menos de 1 año",
+      "1_2": "1-2 años",
+      "3_4": "3-4 años",
+      "5_10": "5-10 años",
+      "moreThan10": "10+ años"
+    },
+    "biggestProblemComm": {
+      "label": "¿Cuál es el mayor problema de la comunidad?",
+      "Water": "El Agua",
+      "Trash": "La Basura",
+      "Street": "La Calle",
+      "AccessToBathrooms": "El Acceso a Baños",
+      "HouseRepairs": "Reparaciones de la casa",
+      "education": "Educación",
+      "sports": "Deportes",
+      "sanitation": "Sanemiento",
+      "communityAwareness": "Concientización comunitaria"
+    },
+    "waterAccess": {
+      "label": "Acceso al agua",
+      "everyday": "Todos los días",
+      "4_6": "4-6 dias por semana",
+      "2_3": "2-3 dias por semana",
+      "1perWeek": "Menor o igual a 1 día a la semana",
+      "1perMonth": "1 día al mes",
+      "never": "Nunca"
+    },
+    "typeOfWater": {
+      "label": "Tipo de agua que toma",
+      "bottled": "Embotellada",
+      "tap": "Llave",
+      "filtered": "Filtrada"
+    },
+    "bathroomAccess": {
+      "label": "Acceso al baño",
+      "Bathroom": "El baño",
+      "Latrine": "La letrina",
+      "None": "Ninguno"
+    },
+    "latrineAccess": "Acceso a letrinas",
+    "clinicAccess": {
+      "label": "Acceso a la clínica",
+      "Clinic": "Clinica/centro médico",
+      "Polyclinic": "Policlínica",
+      "Hospital": "Hospital",
+      "None": "Ninguno"
+    },
+    "medicalProblemsGo": "¿A dónde vas por problemas médicos?",
+    "dentalAccess": "¿Tienes acceso a un dentista?",
+    "timesPerWeekTrash": {
+      "label": "Veces por semana que se recolecta la basura",
+      "Never": "Nunca",
+      "OnceAWeek": "1 vez a la semana",
+      "TwiceAWeek": "2 veces a la semana",
+      "OnceOrTwiceAMonth": "1-2 veces al mes"
+    },
+    "trashBetweenPickups": "¿Dónde deja su basura al momento de ser recogida?",
+    "houseOwnership": {
+      "label": "¿Esta casa es propia?",
+      "Own": "Propia",
+      "Rent": "Alquilada",
+      "Provided": "Prestada"
+    },
+    "floorCondition": {
+      "label": "¿Estado del suelo de su casa?",
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
+    },
+    "floorMaterial": {
+      "label": "¿Material de piso en tu casa?",
+      "Dirt": "Tierra",
+      "Cement": "Cemento",
+      "Wood": "Madera",
+      "Ceramic": "Cerámico"
+    },
+    "roofCondition": {
+      "label": "¿Estado del techo de su casa?",
+      "Poor": "Malo",
+      "Working": "Regular",
+      "Excellent": "Bueno"
+    },
+    "typeStove": {
+      "label": "¿Tipo de estufa que utiliza?",
+      "charcoalStove": "Anafe con carbón",
+      "stoveTop": "Estufa con tanque de gas",
+      "firewood": "Fogón con leña"
+    },
+    "houseMaterials": {
+      "label": "¿De qué material está hecha tu casa?",
+      "zinc": "Zinc",
+      "wood": "Madera",
+      "woodAndBlock": "Madera y Block",
+      "block": "Cuadra",
+      "brick": "Ladrillo",
+      "clay": "Arcilla",
+      "woodAndZinc": "Madera y Zinc"
+    },
+    "electricityAccess": {
+      "label": "¿Con qué frecuencia tiene acceso a la electricidad?",
+      "never": "Nunca",
+      "sometimes": "A veces",
+      "always": "Siempre"
+    },
+    "foodSecurity": "En el último mes, ¿alguna vez te has preocupado que tú o tu familia no tuvieran suficiente comida para comer?",
+    "govAssistance": {
+      "label": "¿Tiene acceso a la asistencia del gobierno?",
+      "foodStamps": "Cupones de alimentos",
+      "adultLiteracy": "Programa de alfabetización de adultos",
+      "noAssistance": "Sin ayuda",
+      "solidarityCard": "Tarjeta Solidaridad"
+    },
+    "numberIndividualsHouse": "Número de personas que viven en la casa",
+    "numberChildrenUnder5": {
+      "label": "Número de niños menores de 5 años que viven en esta casa",
+      "under_5": "Bajo 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "¿Cuántos niños menores de 5 años?",
+      "6_12_textQuestion": "¿Cuántos niños entre las edades de 6 a 12 años?",
+      "13_18_textQuestion": "¿Cuántos niños entre las edades de 13 a 18 años?"
+    }
+  },
+  "evaluationMedical": {
+    "name": "Formulario de evaluación médica",
+    "chronicHypertension": "Hipertensión crónica",
+    "chronicDiabetes": "Diabetes crónica",
+    "chronicOther": "Otra condición crónica",
+    "doctor": "¿Has visto a un médico por este problema?",
+    "statusOfHealth": {
+      "label": "Estado de salud",
+      "receivingNoSupport": "Recibir tratamiento o atención de seguimiento | No se necesita apoyo",
+      "receivingSupport": "Recibir tratamiento o atención de seguimiento | Se necesita apoyo",
+      "awaitingNoSupport": "En espera de tratamiento o atención de seguimiento | No se necesita apoyo",
+      "noTreatmentSupport": "Sin tratamiento | Se necesita apoyo"
+    },
+    "partOfBody": {
+      "label": "Parte del cuerpo",
+      "bonesJoints": "Huesos o articulaciones",
+      "eyes": "Ojos",
+      "earsNoseThroat": "Oídos, Nariz o Garganta",
+      "skin": "Piel",
+      "headMental": "Problemas mentales o de la cabeza",
+      "stomachIntestines": "Estómago, Intestinos",
+      "bladderUrinary": "Vejiga, tracto urinario",
+      "reproductiveOrgans": "Órganos reproductivos",
+      "nutritionIssues": "Problema de nutrición",
+      "---": "---"
+    },
+    "partOfBodyDescription": "Descripción de parte del cuerpo",
+    "duration": {
+      "label": "Duración",
+      "lastMonth": "En el último mes",
+      "lastYear": "Dentro del año pasado",
+      "last5Years": "En los últimos 5 años",
+      "past5Years": "Últimos 5 años"
+    },
+    "problemSuddenness": {
+      "label": "Problema repentino",
+      "suddenTrauma": "Repentina y debido a un trauma",
+      "suddenNoTrauma": "Repentina pero no por un trauma",
+      "gradually": "Gradualmente"
+    },
+    "progressionOfCondition": {
+      "label": "Progresión de la condición",
+      "improving": "Mejorando",
+      "worsening": "Empeorando",
+      "constant": "Constante"
+    },
+    "generalHealthConsult": "¿Se requiere una consulta de salud general?",
+    "surgicalRequired": "¿Necesidad quirúrgica requerida?",
+    "yourGuess": "Tu invitado",
+    "immediateFollowupRequired": "¿Se requiere seguimiento inmediato?",
+    "plan": "Plan"
+  },
+  "vitals": {
+    "name": "Partes Vitales",
+    "height": "Altura",
+    "inches": "Pulgadas",
+    "weight": "Pesos",
+    "pounds": "Libras",
+    "bmi": "Indice de masa corporal",
+    "temp": "Temperatura",
+    "celsius": "°Celsius",
+    "pulse": "Pulso",
+    "bpm": "Latidos por minuto",
+    "respRate": "Frecuencia respiratoria",
+    "breathspm": "espiras por minuto",
+    "bloodPressure": {
+      "label": "Presion sanguinia",
+      "systolic": "Sistólico",
+      "diastolic": "Diastólico"
+    },
+    "bloodOxygen": "Saturacion de oxígeno en la sangre",
+    "mmHg": "mm Hg",
+    "bloodSugar": "Nivel de azucar",
+    "mgdL": "mg/dL",
+    "hemoglobinLevels": "Niveles de hemoglobina",
+    "hemoglobinA1c": "Hemoglobina de A1c",
+    "gdL": "g/dL",
+    "pain": "Nivel de dolor"
+  },
+  "supplementaryForms": {
+    "attachResident": "Adjuntar una residente de la comunidad"
+  },
+  "assetForms": {
+    "attachForm": "Adjuntar una forma y un activo",
+    "createAsset": "Crear un activo"
+  },
+  "forms": {
+    "successfullySubmitted": "Formulario entregado satisfactoriamente",
+    "savedOffline": "Guardado sin conexión — se sincronizará cuando te reconectes",
+    "offlineBanner": "Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente.",
+    "grabCoffee": "Buen trabajo, tómate un café",
+    "suggestedForms": "Formularios siguientes sugeridos",
+    "viewGallery": "Ver galería de formularios",
+    "returnHome": "Volver a casa"
+  },
+  "gdpr": {
+    "consentForm": "Formulario de consentimiento",
+    "mustConsent": "El miembro de la comunidad debe dar su consentimiento antes de poder continuar.",
+    "policy": "Puente Collect almacena la información enviada por usuarios autorizados, incluidos datos de contacto, datos demográficos, información del hogar y la ubicación, coordenadas GPS precisas, fotografías, información de salud, respuestas de formularios e identificadores de cuenta, para proporcionar las funciones de la aplicación. Los registros pueden estar disponibles para los usuarios autorizados de la organización que los recopila. Puente no utiliza estos datos de la aplicación para publicidad, personalización de productos ni seguimiento. La Política de privacidad vigente se actualizó el 24 de septiembre de 2026.",
+    "viewFullPolicy": "Ver política completa",
+    "communityMemAgrees": "El miembro de la comunidad acepta la política de datos",
+    "continueToForm": "Continuar con el formulario"
+  },
+  "dataCollection": {
+    "collectData": "Recopilar datos",
+    "manageAssets": "Gestionar activos",
+    "newRecord": "Nuevo record",
+    "newAsset": "Nuevo activo",
+    "findRecord": "Buscar registro",
+    "viewAll": "Ver todos los formularios",
+    "viewAssets": "Ver todos los activo",
+    "back": "Atrás"
+  },
+  "home": {
+    "myTasks": "Mis tareas",
+    "comingSoon": "Próximamente",
+    "tasks": "Tareas",
+    "logOut": "Cerrar sesión",
+    "title": "Inicio",
+    "loading": "Cargando...",
+    "offlineCached": "Mostrando datos en caché",
+    "today": "Hoy",
+    "last7Days": "Últimos 7 Días",
+    "last30Days": "Últimos 30 Días",
+    "allTime": "Todo el Tiempo",
+    "welcomeBack": "Bienvenido de vuelta, %{name}",
+    "recentActivity": "Actividad Reciente",
+    "orgActivity": "Actividad de la Organización",
+    "myEnvHealth": "Mi Salud Ambiental",
+    "orgEnvHealth": "Salud Ambiental de la Org",
+    "mySurveys": "Mis Encuestas",
+    "orgSurveys": "Encuestas de la Org",
+    "myVitals": "Mis Signos Vitales",
+    "orgVitals": "Signos Vitales de la Org"
+  },
+  "components": {
+    "autofill": {
+      "placeholder": "Entra",
+      "placeholder_end": "Aquí"
+    }
+  },
+  "cards": {
+    "smallCards": {
+      "residentID": "Identificación de residente",
+      "environmental": "Medio ambiente",
+      "history": "Historia",
+      "medical": "Médica",
+      "evaluation": "Evaluación",
+      "vitals": "Partes vitales"
+    }
+  },
+  "findResident": {
+    "searchIndividual": "Buscar individuo",
+    "typeHere": "Buscar por nombre o ID",
+    "residentCard": {
+      "city": "Ciudad",
+      "community": "Comunidad",
+      "sex": "Sexo",
+      "educationLevel": "Educación"
+    },
+    "residentPage": {
+      "demographics": {
+        "dob": "Fecha de nacimiento:",
+        "city": "Ciudad:",
+        "community": "Comunidad:",
+        "province": "Provincia:",
+        "license": "Número de licencia:"
+      },
+      "forms": {
+        "completedForms": "Formularios completados",
+        "formCategory": "Categoría de formulario",
+        "comingSoon": "Próximamente",
+        "suggestedForms": "Formularios sugeridos"
+      },
+      "household": {
+        "editProfile": "Editar perfil",
+        "demographics": "Demografía",
+        "forms": "Formularios",
+        "household": "Casa",
+        "goBack": "Vuelve para buscar registros"
+      },
+      "viewRecordHistory": "Ver historial de registros"
+    },
+    "emptyState": {
+      "title": "No se encontraron registros",
+      "body": "Prueba con otro nombre o verifica que el registro se haya guardado."
+    },
+    "offlineNotice": "Estás sin conexión. Mostrando registros guardados.",
+    "searching": "Buscando registros…"
+  },
+  "householdManager": {
+    "createHousehold": "Crear un nuevo hogar",
+    "linkIndividual": "Vincular ID con un hogar existente",
+    "household": "Casa",
+    "householdManager": "Administrador del hogar",
+    "relationshipHousehold": "¿Cuál es su función / relación en el hogar?",
+    "linked": "Vinculada",
+    "useSearchBar": "Por favor use la barra de búsqueda para encontrar y seleccionar el hogar correcto.",
+    "doNothing": "Solo crear ID",
+    "successCreateHousehold": "Ha creado correctamente un nuevo hogar.",
+    "noHousehold": "Ha elegido no vincular un hogar.",
+    "addCreateHousehold": "Agrega o crea un hogar"
+  },
+  "header": {
+    "puente": "PUENTE",
+    "surveysCollected": "Encuestas recopiladas",
+    "submitOffline": "Enviar formularios sin conexión",
+    "populateOffline": "Almacenar los datos del residente",
+    "settingsPage": "Página de configuración",
+    "failedAttempt": "Intento fallido de envío de formularios sin conexión.",
+    "tryAgain": "Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
+    "ok": "Okay",
+    "success": "¡Éxito!",
+    "justSubmitted": "Usted acaba de enviar",
+    "form": "formar!",
+    "forms": "formas!",
+    "offline": "Sin conexión",
+    "online": "En línea",
+    "retry": "Reintentar",
+    "sessionExpired": "Sesión expirada. Por favor inicie sesión de nuevo."
+  },
+  "languagePicker": {
+    "english": "Ingles",
+    "spanish": "Español",
+    "creole": "Kreyòl"
+  },
+  "residentIdSearchbar": {
+    "searchIndividual": "Buscar individuo"
+  },
+  "assetSearchbar": {
+    "searchIndividual": "Buscar activo",
+    "placeholder": "Escriba Aquí"
+  },
+  "termsModal": {
+    "termsService": "Política de privacidad",
+    "viewCurrentPolicy": "Abrir política vigente",
+    "ok": "Ok"
+  },
+  "errorPicker": {
+    "invalidFields": "Campos inválidos:"
+  },
+  "accountSettings": {
+    "settings": "Ajustes",
+    "support": "Apoyo",
+    "accountSettings": "Configuraciones de la cuenta",
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico",
+    "changePassword": "Cambiar la contraseña",
+    "findRecords": "Buscar registros",
+    "offlineData": "Registros sin conexión",
+    "language": "Idioma",
+    "back": "Atrás",
+    "logout": "Cerrar sesión",
+    "deleteUser": "¿Eliminar usuario?",
+    "populateIdForms": "Descargar registros para usar sin conexión",
+    "clearCachedIdForms": "Borrar registros descargados",
+    "resetOnboarding": "Reiniciar incorporación",
+    "clearCacheTitle": "¿Borrar los registros en caché?",
+    "clearCacheWarning": "Esto elimina %{count} registros de residentes guardados en este dispositivo. La búsqueda sin conexión quedará vacía hasta que reconstruya el caché, lo cual requiere conexión a Internet.",
+    "clearCacheConfirm": "Borrar caché",
+    "clearCacheDone": "Registros en caché borrados.",
+    "resetOnboardingTitle": "¿Reiniciar la incorporación?",
+    "resetOnboardingWarning": "El tutorial se mostrará de nuevo la próxima vez que abra la aplicación. Sus registros guardados no se ven afectados.",
+    "resetOnboardingConfirm": "Reiniciar",
+    "logoutTitle": "¿Cerrar sesión?",
+    "logoutMessage": "Necesitará su usuario y contraseña para volver a entrar.",
+    "logoutBlockedOfflineTitle": "No puede cerrar sesión ahora",
+    "logoutBlockedOfflineMessage": "Está sin conexión, e iniciar sesión requiere conexión a internet. Si cierra sesión ahora, no podrá volver a entrar hasta que este dispositivo se reconecte. Por favor, conéctese a internet antes de cerrar sesión.",
+    "logoutUnsyncedWarning": "%{count} registros están guardados en este dispositivo y aún no han llegado al servidor. Permanecerán en el dispositivo, pero no podrá sincronizarlos hasta que vuelva a iniciar sesión.",
+    "logoutConfirm": "Cerrar sesión",
+    "deleteUserTitle": "¿Eliminar su cuenta?",
+    "deleteUserWarning": "Esto abre la página de gestión de cuenta en su navegador, donde puede solicitar la eliminación. Los registros que ya ha enviado pertenecen a su organización y no se eliminan con esto.",
+    "deleteUserConfirm": "Continuar",
+    "unsyncedOnDevice": "%{count} registros están guardados en este dispositivo y aún no han llegado al servidor",
+    "versionLabel": "Versión %{version} (%{build})",
+    "offlineDataExplainer": "Descargue los registros de residentes a este dispositivo para poder buscarlos sin conexión. Normalmente se descargan automáticamente cuando busca."
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Registros actuales almacenados",
+    "recordStorageLimit": "Límite de almacenamiento de registros",
+    "errorMessage": "Hubo un error al procesar su solicitud. Asegúrese de estar conectado a Internet y vuelva a intentarlo.",
+    "successMessage": "Has actualizado tu límite de almacenamiento. Puede experimentar problemas relacionados con la aplicación si su teléfono no puede manejar el nuevo límite. Si esto ocurre, su experiencia puede mejorar si reduce el límite.",
+    "findRecords": "Buscar registros",
+    "edit": "Editar",
+    "invalidParams": "Parámetros de edición no válidos. Faltan editMode, existingRecord o formType."
+  },
+  "languageSettings": {
+    "chooseLanguage": "Elige lengua"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "No pudimos guardar sus cambios. Vuelva a intentarlo y contacte a su supervisor si el problema continúa.",
+    "successMessage": "Ha actualizado su cuenta.",
+    "userInformation": {
+      "fname": "Nombre de pila",
+      "lname": "Apellido",
+      "phoneNumber": "Número de teléfono",
+      "email": "Correo electrónico"
+    },
+    "namePhoneEmail": "Nombre, teléfono, correo electrónico",
+    "offlineMessage": "Está sin conexión. Este cambio necesita conexión a Internet y no se ha guardado."
+  },
+  "passwordSettings": {
+    "wrongCreds": "Tu contraseña actual es incorrecta. Inténtalo de nuevo.",
+    "errorMessage": "No pudimos cambiar su contraseña. Vuelva a intentarlo y contacte a su supervisor si el problema continúa.",
+    "successMessage": "Ha actualizado su contraseña.",
+    "changePassword": "Cambiar la contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "offlineMessage": "Está sin conexión. Este cambio necesita conexión a Internet y no se ha guardado.",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "tooShort": "Su nueva contraseña debe tener al menos 8 caracteres.",
+    "mismatch": "Las dos contraseñas nuevas no coinciden."
+  },
+  "supportHome": {
+    "feedback": "Contáctenos / Comentarios",
+    "rateApp": "Califica nuestra aplicación",
+    "helpCenter": "Centro de ayuda",
+    "back": "Atrás"
+  },
+  "feedback": {
+    "feedback": "Realimentación",
+    "enterFeedback": "Ingrese sus comentarios en la entrada a continuación y presione el botón \"Enviar comentarios\". Esto lo redireccionará a su correo electrónico donde puede enviar sus comentarios.",
+    "sendMail": "Enviar correo",
+    "typeFeedback": "Escriba sus comentarios aquí ..."
+  },
+  "pushNotifications": {
+    "updateApp": "Actualiza en la App Store. Tu aplicación está desactualizada."
+  },
+  "paperButton": {
+    "getLocation": "Obtener ubicación",
+    "getLocationAgain": "Obtener ubicación de nuevo",
+    "takePhoto": "Tomar foto",
+    "addAdditional": "Agregar adicional ",
+    "removePrevious": "Quitar el anterior "
+  },
+  "bottomTab": {
+    "dataCollection": "Recopilación de datos",
+    "home": "Inicio",
+    "offline": "Sin conexión"
+  },
+  "camera": {
+    "useImage": "Usar imagen del carrete de la cámara",
+    "noAccess": "Sin acceso a la cámara",
+    "requestingPermission": "Pidiendo permiso de cámara...",
+    "retake": "Volver a tomar la imagen",
+    "flip": "Dar la vuelta",
+    "takePicture": "Tomar la foto",
+    "done": "Hecho",
+    "sorryAlert": "Necesitamos permisos de cámara para que esto funcione"
+  },
+  "peopleModal": {
+    "title": "Administrador de personas",
+    "fname": "Primer nombre",
+    "enterFname": "Ingrese el nombre",
+    "lname": "Apellido",
+    "enterLname": "Introduzca el apellido",
+    "relationship": "Relación",
+    "remove": "Eliminar",
+    "add": "Agregar"
+  },
+  "assetCore": {
+    "newAsset": "Nuevo activo",
+    "nameOfAssets": "Nombre de los activos",
+    "addPeople": "Añadir personas",
+    "getLocation": "Obtener ubicación",
+    "communityName": "Nombre de la comunidad",
+    "province": "Provincia",
+    "country": "País",
+    "swipeAttachForm": "Toque para adjuntar formulario",
+    "tapCreateAsset": "Toque para crear un activo nuevo"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Formularios de activos suplementarios"
+  },
+  "puenteForms": {
+    "ResidentID": "Identificación de residente",
+    "EnvironmentalHealth": "Salud Ambiental",
+    "MedicalEvaluation": "Evaluación Médica",
+    "Vitals": "Partes vitales"
+  },
+  "submissionError": {
+    "error": "¡ERROR!\n\nSu formulario no ha sido enviado. Vuelva a intentarlo o comuníquese con su supervisor si el problema persiste.",
+    "geolocation": "SE ACABÓ EL TIEMPO!\n\nNo se pudo recuperar la geolocalización de tu teléfono. Inténtalo de nuevo"
+  },
+  "dataAnalysis": {
+    "welcome": "Bienvenido a la página de análisis de datos."
+  },
+  "formCounts": {
+    "surveysCollected": "Encuestas recopiladas",
+    "error": "Ha habido un error al obtener sus datos. Verifique su conexión a Internet y vuelva a intentarlo.",
+    "offline": "Actualmente estás desconectado. Vuelva a consultar cuando esté conectado a Internet.",
+    "idForms": "Formularios de identificación",
+    "envHealthForms": "Formularios de salud ambiental",
+    "vitalsForms": "Formas vitales",
+    "customForms": "Formularios personalizados",
+    "assetForms": "Formularios de activos",
+    "back": "atrás"
+  },
+  "theme": {
+    "title": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "findRecords": {
+    "viewRecordHistory": "Ver historial de registros"
+  },
+  "accessibility": {
+    "calmMode": "Modo calmado",
+    "calmModeDescription": "Reducir animaciones para enfoque clínico",
+    "on": "SÍ",
+    "off": "NO"
+  },
+  "residentHistory": {
+    "loading": "Cargando historial de registros...",
+    "noRecordsFound": "No se encontraron registros",
+    "noSubmissionsYet": "%{name} no tiene envíos de formularios todavía.",
+    "offlineNotice": "Estás sin conexión — el historial de registros se cargará cuando te reconectes.",
+    "recordHistory": "Historial de registros:",
+    "errorLoadingRecords": "Error al cargar los registros",
+    "customForm": "Formulario personalizado",
+    "identification": "Identificación",
+    "vitals": "Signos vitales",
+    "environmentalHealth": "Salud ambiental",
+    "medicalEvaluation": "Evaluación médica",
+    "customForms": "Formularios personalizados",
+    "errorBody": "No se pudieron cargar los registros. Verifica tu conexión e intenta de nuevo.",
+    "resident": "Residente",
+    "unknownDate": "Fecha desconocida"
+  },
+  "onboarding": {
+    "welcome": "El Cambio Basado en Datos Comienza Aquí",
+    "welcomeDescription": "Usa la recopilación estructurada de datos para entender las necesidades de tu comunidad e impulsar cambios significativos. Cada respuesta construye la base de evidencia para mejores decisiones.",
+    "tagline": "Conectando comunidades con datos",
+    "getStarted": "Vamos  →",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "skip": "Omitir",
+    "howToCollect": "Cómo los Equipos de Campo Capturan Impacto",
+    "textField": "Historias e Insights",
+    "numberField": "Métricas y Conteos",
+    "locationField": "Lugar y Geografía",
+    "photoField": "Evidencia Visual",
+    "collectionDescription": "Captura el panorama completo de las necesidades de tu comunidad. Las historias proporcionan contexto, los números rastrean el progreso, los datos de ubicación revelan patrones, y las fotos muestran el impacto en el mundo real.",
+    "findRecords": "Convierte Datos en Insights",
+    "findDescription": "Supervisores y tomadores de decisiones buscan datos recopilados para identificar tendencias, prioridades y tomar acciones basadas en evidencia. Nada se pierde—todos los insights permanecen accesibles.",
+    "offlineMode": "Nunca Pierdas un Momento",
+    "offlineDescription": "Trabaja en cualquier lugar, en cualquier momento. Recopila datos sin conectividad y sincroniza cuando te reconectas. Los equipos de campo permanecen productivos incluso en entornos con recursos limitados.",
+    "chooseLanguage": "Trabaja en Tu Idioma",
+    "languageDescription": "Elige el idioma que se adapte a tu comunidad. La comunicación clara garantiza datos precisos y relaciones más sólidas.",
+    "chooseTheme": "Hazlo Tuyo",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "toggleTheme": "Cambiar Tema",
+    "themeDescription": "Personaliza tu experiencia. Elige un tema que sea cómodo de usar durante sesiones largas de recopilación de datos.",
+    "privacy": "Tus Datos, Tu Control",
+    "dataEncrypted": "Los datos están encriptados de extremo a extremo",
+    "userPrivacy": "Solo las personas autorizadas acceden a los datos de la comunidad",
+    "securePlatform": "Construido con soberanía de datos en mente",
+    "privacyDescription": "Los datos de la comunidad pertenecen a la comunidad. Puente utiliza cifrado y controles de acceso estrictos para que los datos permanezcan seguros y bajo tu control.",
+    "youreIn": "Estás Listo",
+    "readyToBegin": "Comienza a recopilar datos que impulsen cambios reales en tu comunidad.",
+    "permissions": "Activa las Funciones Clave",
+    "permissionsDescription": "Puente necesita dos permisos para capturar datos de campo completos. Puedes otorgarlos ahora o más tarde en los ajustes de tu dispositivo.",
+    "cameraPermission": "Acceso a la Cámara",
+    "cameraPermissionReason": "Toma fotos como evidencia visual para documentar condiciones e impacto en el mundo real.",
+    "locationPermission": "Acceso a la Ubicación",
+    "locationPermissionReason": "Etiqueta los datos con coordenadas GPS para que los hallazgos puedan mapearse y analizarse geográficamente.",
+    "permissionGrant": "Permitir",
+    "permissionDenied": "Denegado — activa en Ajustes",
+    "permissionGranted": "Concedido",
+    "permissionSkip": "Configurar después",
+    "search": "Buscar",
+    "recordLabel": "Registro %{index}"
+  },
+  "coachmarks": {
+    "next": "Siguiente",
+    "gotIt": "Entendido",
+    "homeTitle": "Tu Panel de Impacto",
+    "homeDescription": "Consulta estadísticas en tiempo real de los datos recopilados por tu equipo de campo. Toca cualquier tarjeta para ver los detalles.",
+    "collectTitle": "Captura Datos de Campo",
+    "collectDescription": "Inicia un nuevo formulario para recopilar datos de tu comunidad incluso sin internet.",
+    "findTitle": "Busca Todos los Registros",
+    "findDescription": "Busca cualquier residente o activo. Haz clic en un residente para editar formularios anteriores.",
+    "settingsTitle": "Tus Preferencias",
+    "settingsDescription": "Cambia el idioma, activa el modo oscuro y administra tu cuenta todo en un solo lugar.",
+    "dismiss": "Cerrar consejos"
+  },
+  "offlineSync": {
+    "title": "Sincronización sin conexión",
+    "noForms": "No hay formularios en cola. ¡Estás al día!",
+    "lastSync": "Última sincronización:",
+    "queuedOne": "1 formulario está guardado en este dispositivo y todavía no ha llegado al servidor.",
+    "queuedMany": "%{count} formularios están guardados en este dispositivo y todavía no han llegado al servidor.",
+    "stillOnDevice": "Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.",
+    "failedOffline": "Estás sin conexión. Conéctate a internet e inténtalo de nuevo.",
+    "failedOnline": "El servidor no aceptó estos formularios. Inténtalo de nuevo en unos minutos y contacta con soporte si sigue ocurriendo.",
+    "queuedTitle": "Esperando sincronización",
+    "discard": "Descartar",
+    "discardTitle": "¿Descartar este formulario?",
+    "discardWarning": "%{form} no ha llegado al servidor. Descartarlo lo elimina de este dispositivo de forma permanente y no se puede recuperar.",
+    "unknownForm": "Formulario guardado",
+    "discardConfirm": "Descartar permanentemente"
+  }
+}

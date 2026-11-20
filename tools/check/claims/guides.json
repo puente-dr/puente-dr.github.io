@@ -1,0 +1,1049 @@
+{
+ "claims": {
+  "guide-org-decides-records": {
+   "claim": "The organization decides which records people see.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Your organization determines which records you can see.",
+     "line": 114
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records may be available to authorized users of the organization collecting them.",
+     "line": 391
+    }
+   ]
+  },
+  "guide-org-names-match": {
+   "claim": "Organization names match ignoring case, accents and surrounding spaces.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "value.normalize('NFD').replace(/\\p{M}/gu, '').trim().toLowerCase()",
+     "line": 43
+    }
+   ]
+  },
+  "guide-org-nicknames-staff": {
+   "claim": "Nicknames (aliases) can only be saved by Puente staff.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'editOrganizationAliases requires the master key or the puente_staff role',",
+     "line": 114
+    }
+   ]
+  },
+  "guide-org-manage-list-only": {
+   "claim": "Manage sign-up lists existing organizations; not-listed link emails staff.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"register_org_not_listed\": \"My organization isn't listed\"",
+     "line": 125
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Puente staff add organizations by hand, which is what keeps the list worth trusting.",
+     "line": 126
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/register/index.js",
+     "quote": "mailto:info@puente-dr.org?subject=Add%20my%20organization%20to%20Puente%20Manage",
+     "line": 166
+    }
+   ]
+  },
+  "guide-org-collect-creates": {
+   "claim": "A clearly new name typed in Collect creates the organization; the signer-up becomes admin.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Clearly distinct: create it, and the signer-up becomes its admin.",
+     "line": 133
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('role', 'administrator');",
+     "line": 155
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "AutoFill",
+     "line": 1
+    }
+   ]
+  },
+  "guide-org-too-close": {
+   "claim": "A name too close (containment or edit distance <= 2) is refused; the account is still created.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "containment either way  -> too close.",
+     "line": 118
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "distance <= 2           -> too close.",
+     "line": 120
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Refused. The ACCOUNT is still created",
+     "line": 119
+    }
+   ]
+  },
+  "guide-org-first-admin": {
+   "claim": "First member becomes admin, later ones contributors; nothing gates on approval.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "First member of a known organization gets admin.",
+     "line": 174
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('role', 'contributor');",
+     "line": 127
+    },
+    {
+     "file": "puente-react-nextjs-platform/docs/organization-onboarding.md",
+     "quote": "nothing in either app gates on it.",
+     "line": 173
+    }
+   ]
+  },
+  "guide-org-second-admin": {
+   "claim": "Organizations screen at /organization-admin with Make administrator; last admin cannot be demoted; no menu link.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_member_promote\": \"Make administrator\"",
+     "line": 161
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'Cannot demote the last admin of an organization. Appoint another admin '",
+     "line": 313
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "'Cannot deactivate the last admin of an organization. Appoint another '",
+     "line": 328
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/OrganizationAdmin.js",
+     "quote": ": organizations.filter((o) => adminOf.includes(o.shortCode));",
+     "line": 317
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'settings', labelKey: 'nav_settings', icon: '◌', href: '/account/management' },",
+     "line": 23
+    }
+   ]
+  },
+  "guide-org-members-can-work": {
+   "claim": "Any member can use Manage and download full (identified) exports.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "if scope and who['organization'] and any(_same(who['organization'], s) for s in scope):",
+     "line": 158
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "Every export route serves identified patient records",
+     "line": 1
+    }
+   ]
+  },
+  "guide-org-deactivate": {
+   "claim": "Deactivate signs the person out of both apps but does not stop a later sign-in (bug M13/C19).",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_member_deactivate\": \"Deactivate\"",
+     "line": 163
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
+     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
+     "line": 30
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
+     "line": 338
+    }
+   ]
+  },
+  "guide-org-signup-collect": {
+   "claim": "Collect sign-up: Sign Up!, terms must be agreed, Account Created!",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"signUpLink\": \"Sign Up!\",",
+     "line": 60
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "alert(I18n.t(\"signUp.errorTerms\")); // eslint-disable-line",
+     "line": 195
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"registrationSuccess\": \"Account Created!\",",
+     "line": 87
+    }
+   ]
+  },
+  "guide-org-readonly": {
+   "claim": "The organization on an account is read-only; email info@ to change it.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Email info@puente-dr.org to change it.",
+     "line": 115
+    }
+   ]
+  },
+  "guide-forms-reach-phones": {
+   "claim": "Custom forms reach the phone when Custom Forms is refreshed in Collect, not at sign-in.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "onPress={refreshCustomForms}",
+     "line": 195
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noCustomForms\": \"No custom forms — try refreshing\",",
+     "line": 107
+    }
+   ]
+  },
+  "guide-test-on-copy": {
+   "claim": "Form Manager has Duplicate; a form's exports include every submission sent to it.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_manager_duplicate\": \"Duplicate\"",
+     "line": 336
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "\"\"\"The research frame for one form's submissions. Pure: no network.\"\"\"",
+     "line": 90
+    }
+   ]
+  },
+  "guide-publish-silent": {
+   "claim": "Publish errors only go to the console.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "console.log(err); //eslint-disable-line",
+     "line": 170
+    }
+   ]
+  },
+  "guide-signin-internet": {
+   "claim": "Signing in to Collect needs a connection.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "Online-only mode: offline login is no longer supported",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Logging in requires an internet connection, so offline login isn't available.",
+     "line": 83
+    }
+   ]
+  },
+  "guide-tabs": {
+   "claim": "Five icon tabs: search, folder, home, cloud, gear; opens on Home.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"search-outline\"),",
+     "line": 85
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"cloud-upload-outline\"),",
+     "line": 130
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"cog-outline\"),",
+     "line": 145
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "const INITIAL_ROUTE_NAME = \"Home\";",
+     "line": 19
+    }
+   ]
+  },
+  "guide-search-offline": {
+   "claim": "Opening Find Records online stores residents for offline search.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineNotice\": \"You're offline. Showing saved records.\",",
+     "line": 480
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "storeData(records, \"residentData\").catch(() => {});",
+     "line": 101
+    }
+   ]
+  },
+  "guide-search-one-field": {
+   "claim": "Search matches the start of one field: names, nickname, cédula.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "const anchoredQuery = `^${escapeRegex(qry)}`;",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "\"cedulaNumber\",",
+     "line": 50
+    }
+   ]
+  },
+  "guide-consent": {
+   "claim": "Every form opens on consent; it needs the tick and Continue to Form.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "<GdprCompliance navigation={navigation} setConsent={setConsent} />",
+     "line": 123
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "alert(I18n.t(\"gdpr.mustConsent\")); // eslint-disable-line",
+     "line": 53
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"communityMemAgrees\": \"Community member agrees to data policy\",",
+     "line": 393
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"continueToForm\": \"Continue to Form\"",
+     "line": 394
+    }
+   ]
+  },
+  "guide-attach-resident": {
+   "claim": "Supplementary forms need a resident; the button reads Attach a Community Resident.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "disabled={!surveyee.objectId}",
+     "line": 280
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"attachResident\": \"Attach a Community Resident\"",
+     "line": 373
+    }
+   ]
+  },
+  "guide-location-button": {
+   "claim": "Location is a tapped button; on failure/20 s timeout it saves 0,0.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "onPress={handleLocation}",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "20000,",
+     "line": 29
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "setFieldValue(\"location\", { latitude: 0, longitude: 0, altitude: 0 });",
+     "line": 35
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"getLocationAgain\": \"Get Location Again\",",
+     "line": 622
+    }
+   ]
+  },
+  "guide-household-options": {
+   "claim": "Household section offers Do Nothing, Create a new household, Link to existing house.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"doNothing\": \"Do Nothing\",",
+     "line": 491
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"createHousehold\": \"Create a new household\",",
+     "line": 484
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"linkIndividual\": \"Link this individual to an existing house\",",
+     "line": 485
+    }
+   ]
+  },
+  "guide-save-messages": {
+   "claim": "Offline banner; submitted vs saved offline messages.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineBanner\": \"You're offline. Records will save and sync automatically.\"",
+     "line": 382
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"successfullySubmitted\": \"Form successfully submitted\",",
+     "line": 380
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"savedOffline\": \"Saved offline — will sync when you reconnect\",",
+     "line": 381
+    }
+   ]
+  },
+  "guide-logout-offline": {
+   "claim": "Logout blocked offline; warns about unsynced records.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/confirmLogout.js",
+     "quote": "I18n.t(\"accountSettings.logoutBlockedOfflineTitle\"),",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"logoutUnsyncedWarning\": \"%{count} records are saved on this device and have not reached the server yet.",
+     "line": 560
+    }
+   ]
+  },
+  "guide-sync-not-automatic": {
+   "claim": "Nothing is sent until Retry; NetInfo only updates status.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "if (!cancelled) setIsOnline(state.isConnected && state.details !== null);",
+     "line": 57
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "handleUpload({",
+     "line": 72
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"retry\": \"Retry\",",
+     "line": 511
+    }
+   ]
+  },
+  "guide-caught-up": {
+   "claim": "Empty queue message.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noForms\": \"No forms queued. You are all caught up!\",",
+     "line": 781
+    }
+   ]
+  },
+  "guide-households-not-listed": {
+   "claim": "Offline households are not in the discardable queue list but are posted on sync.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "\"offlineAssetSupForms\",",
+     "line": 9
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/post/index.js",
+     "quote": "households: \"offlineHouseholds\",",
+     "line": 30
+    }
+   ]
+  },
+  "guide-discard-permanent": {
+   "claim": "Discard is permanent.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Discarding deletes it from this device permanently and it cannot be recovered.",
+     "line": 791
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"discardConfirm\": \"Discard permanently\"",
+     "line": 793
+    }
+   ]
+  },
+  "guide-forgot-password": {
+   "claim": "Collect password reset asks for the email and sends a link.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"enterEmail\": \"Please enter your email to reset your password\",",
+     "line": 67
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "Parse.Cloud.run(\"forgotPassword\", params).then(",
+     "line": 82
+    }
+   ]
+  },
+  "guide-update-version": {
+   "claim": "Current Collect version is 15.7.5.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/app.json",
+     "quote": "\"version\": \"15.7.5\",",
+     "line": 8
+    },
+    {
+     "url": "https://apps.apple.com/us/app/puente-collect/id1362371696",
+     "quote": "Version 15.7.5",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "guide-storage-limit": {
+   "claim": "Record storage limit defaults to 2000.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/index.js",
+     "quote": "const FIND_RECORDS_LIMIT_DEFAULT = 2000;",
+     "line": 75
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"recordStorageLimit\": \"Record storage limit\",",
+     "line": 571
+    }
+   ]
+  },
+  "guide-still-on-device": {
+   "claim": "Failed sync messages: still on device; server refused.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"stillOnDevice\": \"Your forms are still saved on this device. Nothing has been lost.\",",
+     "line": 785
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"failedOnline\": \"The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.\",",
+     "line": 787
+    }
+   ]
+  },
+  "guide-queue-on-device": {
+   "claim": "Unsent work is stored in the app's storage on the device.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "// The four AsyncStorage keys that hold work which has not reached the server.",
+     "line": 1
+    }
+   ]
+  },
+  "guide-forms-collected": {
+   "claim": "Form Manager rows expand to Forms collected with Refresh.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/ExpandableTableRow/index.js",
+     "quote": "t('form_manager_forms_collected', { count })",
+     "line": 34
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/ExpandableTableRow/index.js",
+     "quote": "<Button text={t('action_refresh')} isSmall onClick={getCount} />",
+     "line": 36
+    }
+   ]
+  },
+  "guide-review-dashboard": {
+   "claim": "Review shows Needs attention, triage items and Community coverage.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"nav_dashboard\": \"Review\",",
+     "line": 16
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"dashboard_needs_attention\": \"Needs attention\",",
+     "line": 75
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"triage_missing_key_fields\": \"records missing key fields\",",
+     "line": 77
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"triage_unresolved_parent\": \"records with an unresolved household link\",",
+     "line": 79
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"dashboard_coverage\": \"Community coverage\",",
+     "line": 76
+    }
+   ]
+  },
+  "guide-practice-discard": {
+   "claim": "Queued forms can be discarded from Offline Sync.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "const removeQueuedForm = async (storageKey, index) => {",
+     "line": 50
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"discard\": \"Discard\",",
+     "line": 789
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"discardConfirm\": \"Discard permanently\"",
+     "line": 793
+    }
+   ]
+  },
+  "guide-dhis2-support": {
+   "claim": "DHIS2: train the IT support unit before the first end user.",
+   "evidence": [
+    {
+     "url": "https://docs.dhis2.org/en/implement/tracker-implementation/build-your-tracker-programs.html",
+     "quote": "Each member of the IT support unit should be trained before the first end user",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "guide-dhis2-devices": {
+   "claim": "DHIS2: train users on the devices they will use.",
+   "evidence": [
+    {
+     "url": "https://docs.dhis2.org/en/implement/tracker-implementation/build-your-tracker-programs.html",
+     "quote": "If possible, train users on the devices they will use in their work.",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "guide-dhis2-pilot": {
+   "claim": "DHIS2: finalize and pilot before scaling.",
+   "evidence": [
+    {
+     "url": "https://docs.dhis2.org/en/implement/tracker-implementation/build-your-tracker-programs.html",
+     "quote": "Finalize and pilot the tracker before scaling it",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "guide-who-checklist": {
+   "claim": "WHO Surgical Safety Checklist pauses the team at three critical points.",
+   "evidence": [
+    {
+     "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources",
+     "quote": "for a few moments at three critical points",
+     "seen": "2026-11-16"
+    },
+    {
+     "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources",
+     "quote": "The 19-item checklist has gone on to show significant reduction in both morbidity and mortality",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "guide-manage-signin": {
+   "claim": "Manage at puente-manage.vercel.app; same account; email or phone number.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/messaging/text-email.js",
+     "quote": "https://puente-manage.vercel.app/account/verify/redirect",
+     "line": 31
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"login_field_email\": \"Email or phone number\"",
+     "line": 41
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Collecting in the field? Open Puente Collect on your phone instead.",
+     "line": 43
+    }
+   ]
+  },
+  "guide-manage-menu": {
+   "claim": "Manage menu: Manage, Create, Clean, Market, Review, Settings; Account, Log out.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'forms', labelKey: 'nav_form_manager', icon: '⊟', href: '/forms/form-manager' },",
+     "line": 12
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'form-creator', labelKey: 'nav_form_creator', icon: '✦', href: '/forms/form-creator' },",
+     "line": 13
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'data', labelKey: 'nav_data', icon: '⊞', href: '/data/data-curation' },",
+     "line": 14
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'marketplace', labelKey: 'nav_marketplace', icon: '◇', href: '/forms/form-marketplace' },",
+     "line": 15
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'dashboard', labelKey: 'nav_dashboard', icon: '◧', href: '/quick-start' },",
+     "line": 22
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"account_settings_title\": \"Account Settings\",",
+     "line": 381
+    }
+   ]
+  },
+  "guide-builtin-names": {
+   "claim": "Manage lists the four Puente forms by class name.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "SurveyData: \"puenteForms.ResidentID\",",
+     "line": 17
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "HistoryEnvironmentalHealth: \"puenteForms.EnvironmentalHealth\",",
+     "line": 18
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "EvaluationMedical: \"puenteForms.MedicalEvaluation\",",
+     "line": 19
+    }
+   ]
+  },
+  "guide-data-curation": {
+   "claim": "Clean shows records, avg completeness, duplicates, anomalies; Community Audit groups spellings.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "{avgCompleteness}% {t('data_curation_avg')}",
+     "line": 291
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "{anomalies.size} {t('data_curation_anomalies')}",
+     "line": 293
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"data_curation_tab_community_audit\": \"Community Audit\"",
+     "line": 400
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
+     "quote": "10,439 records across six spellings",
+     "line": 50
+    }
+   ]
+  },
+  "guide-curation-permanent": {
+   "claim": "Duplicate delete and community rename cannot be undone.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"data_curation_dup_delete_confirm\": \"Permanently delete this record? This cannot be undone.\",",
+     "line": 286
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "This updates every matching record and cannot be undone.",
+     "line": 225
+    }
+   ]
+  },
+  "guide-export-csv": {
+   "claim": "Export downloads a CSV; empty message.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "type: 'text/csv;charset=utf-8'",
+     "line": 86
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_empty\": \"This form has no records to export yet.\",",
+     "line": 199
+    }
+   ]
+  },
+  "guide-export-identified": {
+   "claim": "Exports contain identified records.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "Every export route serves identified patient records",
+     "line": 1
+    }
+   ]
+  },
+  "guide-export-joined": {
+   "claim": "SurveyData is the Resident ID (people) class; custom exports join each submission to the person record.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "SurveyData: \"puenteForms.ResidentID\",",
+     "line": 17
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "A normal custom-form export joins every submission to the whole person record",
+     "line": 1
+    }
+   ]
+  },
+  "guide-accents-stripped": {
+   "claim": "Custom-form exports strip accents from headings and answers.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result.columns = [replace_spanish_characters(col) for col in result.columns]",
+     "line": 106
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result = result.map(lambda x: replace_spanish_characters(x) if isinstance(x, str) else x)",
+     "line": 108
+    }
+   ]
+  },
+  "guide-export-failed": {
+   "claim": "Export failure and expired sign-in messages.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_failed\": \"The export could not be completed. Please try again.\",",
+     "line": 200
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_signed_out\": \"Your sign-in has expired. Sign in again to export.\"",
+     "line": 421
+    }
+   ]
+  },
+  "guide-seven-blocks": {
+   "claim": "The Form Creator offers seven blocks.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "textKey: 'form_creator_type_number',",
+     "line": 23
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "textKey: 'form_creator_type_single_select',",
+     "line": 41
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "textKey: 'form_creator_type_geolocation',",
+     "line": 59
+    }
+   ]
+  },
+  "guide-research-columns": {
+   "claim": "Research file columns are an allow-list incl. age, sex, community, city, province, study_id.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "ALLOWED_COLUMNS = (",
+     "line": 23
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "'study_id',",
+     "line": 24
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "'communityname',",
+     "line": 31
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "'province',",
+     "line": 33
+    }
+   ]
+  },
+  "guide-community-spellings": {
+   "claim": "Community is entered in Collect; one community has been seen under six spellings.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"communityname\",",
+     "line": 162
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
+     "quote": "10,439 records across six spellings",
+     "line": 50
+    }
+   ]
+  },
+  "guide-research-all-rows": {
+   "claim": "The research file is built from all of a form's submissions; no consent filtering.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "\"\"\"The research frame for one form's submissions. Pure: no network.\"\"\"",
+     "line": 90
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "out['submission_id'] = flat['idSupplementary'].map(lambda v: _pseudonym('S', v, secret))",
+     "line": 110
+    }
+   ]
+  },
+  "guide-research-geolocation-out": {
+   "claim": "Geolocation questions are excluded from the research file.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "EXCLUDED_FIELD_TYPES = ('geolocation',)",
+     "line": 38
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Location questions in this form are left out of it.",
+     "line": 420
+    }
+   ]
+  },
+  "guide-research-opt-in": {
+   "claim": "Allow research export is a per-form checkbox, off unless ticked.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_creator_allow_research_export\": \"Allow research export\",",
+     "line": 419
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "and spec.get('allowResearchExport') is True",
+     "line": 135
+    }
+   ]
+  },
+  "guide-research-checked-on-export": {
+   "claim": "The research export checks the form setting at download time.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
+     "quote": "if not research.form_allows_research_export(formid):",
+     "line": 167
+    }
+   ]
+  },
+  "guide-research-buttons": {
+   "claim": "Research badge and two export buttons.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_manager_research_badge\": \"Research export on\"",
+     "line": 416
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_research_button\": \"Export research file\",",
+     "line": 414
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"export_full_records_button\": \"Export full records\"",
+     "line": 415
+    }
+   ]
+  },
+  "guide-research-contents": {
+   "claim": "Expanded row describes research file vs full records.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "This is the only file to send to a research partner.",
+     "line": 417
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Keep this file inside Puente.",
+     "line": 418
+    }
+   ]
+  },
+  "guide-research-filename": {
+   "claim": "Research file name: form - research - date.csv",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
+     "quote": "`${name} - research - ${localDate()}.csv`,",
+     "line": 125
+    }
+   ]
+  },
+  "guide-study-id-lookup": {
+   "claim": "Study IDs are keyed hashes Puente can recompute; researchers cannot reverse them.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "Puente can recompute them from the secret to answer \"which",
+     "line": 10
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "the researcher cannot reverse them.",
+     "line": 11
+    }
+   ]
+  }
+ }
+}

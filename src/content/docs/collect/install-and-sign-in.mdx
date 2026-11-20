@@ -1,0 +1,113 @@
+---
+title: Install and sign in
+description: Get Puente Collect onto a phone, take the first-launch tour, create an account for your organization and sign in.
+related:
+  - collect/getting-around
+  - organizations/organizations
+  - collect/settings
+  - help/troubleshooting
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import welcome from '@shots/en/collect-onboarding-welcome.png';
+import signIn from '@shots/en/collect-sign-in.png';
+import signUp from '@shots/en/collect-sign-up.png';
+import orgSuggest from '@shots/en/collect-02-signup-organization-suggestions.png';
+
+Puente Collect is the phone app surveyors use in the field. You install it once, create one account, and sign in with that account on any phone. The same account also opens Puente Manage on the web.
+
+Do all of this while you have a good connection. Creating an account and signing in both need the internet; collecting does not.
+
+## Install the app
+
+{/* claim: collect-stores */}
+Collect is on both phone stores:
+
+- **iPhone:** [Puente Collect on the App Store](https://apps.apple.com/us/app/puente-collect/id1362371696). It needs iOS 15.1 or later.
+- **Android:** [Puente Collect on Google Play](https://play.google.com/store/apps/details?id=puente.collect).
+
+Search the store for "Puente Collect" if the link does not open on your phone.
+
+## The first-launch tour
+
+{/* claim: collect-tour */}
+The first time you open Collect, a short tour walks you through what the app does. Along the way it asks for two permissions — the camera, for photos, and your location, for map points — and lets you choose a language (English, Español or Kreyòl) and a light or dark theme. You can grant the permissions now or later in your phone's settings.
+
+Tap <UI>Let's go</UI> to start, or <UI>Skip</UI> to go straight to sign-in. Either way the tour does not come back on its own; you can replay it from the gear later.
+
+<div class="shots">
+<Shot phone src={welcome} alt="The first screen of the Collect tour: the Puente logo, the line Bridging communities with data, and Skip and Let's go buttons at the bottom." caption="The tour's first screen. Skip goes straight to sign-in." />
+</div>
+
+## Choose your language
+
+{/* claim: collect-signin-language */}
+The sign-in screen has a language button at the top left, marked with a globe. Tap it to switch between English, Spanish and Haitian Creole before you sign in or sign up. You can change it again any time under the gear, in <UI>Language</UI>.
+
+## Create an account
+
+{/* claim: collect-signup-fields */}
+On the sign-in screen, tap <UI>Sign Up!</UI>. The form asks for:
+
+| Field | Notes |
+|---|---|
+| <UI>First Name</UI> and <UI>Last Name</UI> | Required. Your name is attached to every record you collect. |
+| <UI>Email</UI> | Required. It is how you sign in and how a password reset reaches you. |
+| <UI>Phone Number</UI> | Optional. |
+| <UI>Password</UI> and <UI>Enter Password Again</UI> | Must match. |
+| <UI>Organization</UI> | The group you collect for. See below. |
+
+<div class="shots">
+<Shot phone src={signUp} alt="The sign-up form with First Name, Last Name, Email and Phone Number fields and a Back button at the top." caption="The top of the sign-up form. Scroll down for the password, organization and terms." />
+</div>
+
+### Choose your organization
+
+{/* claim: collect-signup-org */}
+As you type in <UI>Organization</UI>, Collect suggests organizations already in Puente. Pick yours from the list so your account joins it and you see its forms and records.
+
+<div class="shots">
+<Shot phone src={orgSuggest} alt="The Organization field with Pu typed in it and one suggestion, Puente, listed underneath." caption="Pick the suggestion rather than typing the full name yourself." />
+</div>
+
+If your organization is not in the list, typing a clearly new name creates it, and you become its first administrator. A name that is too close to an existing one — one letter off, say — is refused, but your account is still created without an organization. If that happens, email info@puente-dr.org so Puente can link you. [Organizations](/docs/organizations/organizations/) explains how they work.
+
+<Aside type="caution" title="Spell it the way your organization does">
+A misspelled organization either fails or creates a second, empty organization beside the real one. Choose from the suggestions whenever yours appears.
+</Aside>
+
+### Accept the terms and finish
+
+{/* claim: collect-signup-terms */}
+Read <UI>View the Terms and Service</UI>, tick the box, and tap <UI>Submit</UI>. Without the tick the app stops you with <UI>Error, terms and service need to be agreed to.</UI> When the account is ready you see <UI>Account Created!</UI> and land back on the sign-in screen.
+
+## Sign in
+
+{/* claim: collect-signin-online */}
+Enter your email in <UI>Email or Phone Number</UI>, then your <UI>Password</UI>, and tap <UI>Log-In</UI>. Signing in needs a connection: offline, the app says <UI>You're offline. Logging in requires an internet connection, so offline login isn't available. Please connect to the internet and try again.</UI>
+
+<div class="shots">
+<Shot phone src={signIn} alt="The Collect sign-in screen: a language button reading English, the Puente logo, Email or Phone Number and Password fields, Forgot Password?, Log-In, and Sign Up! at the bottom." caption="The sign-in screen. The globe button at the top changes the language." />
+</div>
+
+Sign in before you leave for a community with no signal, and stay signed in. Once you are in, forms work without a connection.
+
+## Reset a forgotten password
+
+{/* claim: collect-forgot-password */}
+Tap <UI>Forgot Password?</UI>, type the email on your account and tap <UI>Send Reset Link</UI>. Puente emails you a link to choose a new password. If the link cannot be sent, the app asks you to check the address and offers <UI>Try Again</UI>.
+
+## FAQ
+
+{/* claim: collect-signin-online */}
+**Can I sign in without internet?**
+No. Sign in while you have signal; after that, you can collect offline.
+
+{/* claim: collect-org-change */}
+**I chose the wrong organization. Can I change it?**
+Not from the app. Email info@puente-dr.org with your name and the organization you meant.
+
+{/* claim: collect-one-account */}
+**Does the same account work in Manage?**
+Yes. Sign in at [puente-manage.vercel.app](https://puente-manage.vercel.app) with the same email and password. See [Sign in to Manage](/docs/manage/sign-in/).

@@ -1,0 +1,109 @@
+---
+title: Exportar datos
+description: Descarga los registros de un formulario desde Manage como archivo CSV — dónde están los botones de exportar, cómo se llama el archivo, qué significan los mensajes y qué cubre una exportación.
+related:
+  - data/reading-export-files
+  - data/research-exports
+  - manage/form-manager
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/es/export-01-form-manager.png';
+import noRecords from '@shots/es/export-03-no-records-yet.png';
+import failed from '@shots/es/export-04-export-failed.png';
+import expanded from '@shots/es/manage-form-manager-expanded.png';
+
+Todo lo que tu equipo recoge en Collect termina en Puente. **Exportar** hace una copia de los registros de un formulario en forma de hoja de cálculo — un archivo CSV — que puedes abrir en Excel, Google Sheets o cualquier otro programa, y usar para un informe, un donante o un analista.
+
+La exportación es una copia, no un enlace en vivo. Editar la hoja de cálculo no cambia nada en Puente, y lo que cambies en Puente después no llega a un archivo que ya descargaste. Para corregir un registro, corrígelo en Manage y vuelve a exportar.
+
+## Encontrar los botones de exportar
+
+{/* claim: data-export-buttons */}
+En Manage, abre <UI>Gestionar</UI> en el menú de la izquierda. El <UI>Gestor de formularios</UI> lista todos los formularios que tu organización puede exportar, y cada uno tiene su propio botón <UI>Exportar</UI>: los cuatro formularios de Puente arriba y tus formularios personalizados debajo. Cada exportación es un archivo CSV.
+
+<Shot src={formManager} alt="La pantalla Gestor de formularios. En Formularios de Puente, SurveyData, HistoryEnvironmentalHealth, Vitals y EvaluationMedical tienen cada uno un botón Exportar; en Formularios personalizados, dos formularios tienen Editar, Duplicar, Eliminar y Exportar." caption="Un botón de exportar por formulario. No hay un botón que descargue todos los formularios de una vez." />
+
+## Un archivo por formulario
+
+{/* claim: data-one-file-per-form */}
+Cada botón descarga un formulario, así que obtienes un archivo por formulario. Los formularios de Puente aparecen con sus nombres internos:
+
+| En Manage | En Collect | Una fila es |
+|---|---|---|
+| `SurveyData` | Identificación de residente | una persona |
+| `HistoryEnvironmentalHealth` | Salud Ambiental | una encuesta de salud ambiental |
+| `Vitals` | Partes vitales | una toma de signos vitales |
+| `EvaluationMedical` | Evaluación Médica | una evaluación médica |
+| tu formulario personalizado | tu formulario personalizado | un envío de ese formulario |
+
+Para unir dos archivos, mira [Leer los archivos exportados](/docs/es/data/reading-export-files/).
+
+## Cómo se llama el archivo
+
+{/* claim: data-file-name */}
+El archivo llega a la carpeta de descargas de tu navegador, con el nombre del formulario y el momento en que pulsaste el botón, por ejemplo `SurveyData-Fri Sep 11 2026 14:40:39 GMT-0700 (Pacific Daylight Time).csv`. El nombre es largo, pero así dos exportaciones del mismo formulario nunca se sobrescriben.
+
+{/* claim: data-excel-bom */}
+El archivo va marcado como UTF-8, así que Excel muestra bien los nombres con acentos cuando lo abres con doble clic.
+
+## Mientras se descarga
+
+{/* claim: data-export-loading */}
+Después de pulsar <UI>Exportar</UI>, el botón dice <UI>Cargando…</UI> hasta que el archivo está listo. La exportación de una organización grande puede tardar. Deja la página abierta y espera a que el botón vuelva a decir <UI>Exportar</UI>.
+
+## Vacío, fallido o sesión vencida
+
+{/* claim: data-export-messages */}
+Cuando no hay archivo que guardar, aparece un mensaje en la esquina de arriba. Los tres mensajes significan cosas distintas:
+
+| Mensaje | Qué significa | Qué hacer |
+|---|---|---|
+| <UI>Este formulario todavía no tiene registros para exportar.</UI> | No ha llegado nada a Puente en este formulario. No se guarda ningún archivo. | No hay ningún problema. Revisa que los teléfonos hayan enviado sus formularios. |
+| <UI>No se pudo completar la descarga. Por favor, inténtelo de nuevo.</UI> | Falló la descarga misma. Tus registros están bien. | Inténtalo de nuevo. Si sigue pasando, [escríbele a Puente](/docs/es/help/contact-support/). |
+| <UI>Tu sesión expiró. Inicia sesión de nuevo para exportar.</UI> | Tu sesión terminó. | Inicia sesión otra vez y exporta. Reintentar sin iniciar sesión no ayuda. |
+
+<Shot src={noRecords} alt="El Gestor de formularios con un mensaje en la esquina superior derecha que dice que el formulario todavía no tiene registros para exportar, con un enlace para cerrarlo." caption="Vacío no es fallido. Este mensaje significa que todavía no se ha recogido nada en el formulario." />
+
+<Shot src={failed} alt="El Gestor de formularios con un mensaje en la esquina superior derecha que dice que no se pudo completar la descarga y que lo intentes de nuevo." caption="Este significa que la descarga falló, no que falten tus registros." />
+
+Un archivo que abre solo con la fila de títulos es otra cosa: es una respuesta real que significa que coincidieron cero registros, y se guarda como cualquier otro archivo.
+
+## Qué cubre una exportación
+
+{/* claim: data-export-aliases */}
+La misma organización muchas veces se escribe de varias formas en el campo: su nombre completo, una abreviatura, una forma de escribirlo que alguien tecleó una vez en un teléfono. Puente guarda una lista de esas formas de escribirlo — sus [apodos](/docs/es/organizations/nicknames/) — y tu exportación incluye los registros guardados con **todas** las formas de escribir el nombre de tu organización, no solo la de tu cuenta.
+
+Si una forma de escribirlo que usa tu equipo no está en esa lista, sus registros quedan fuera de tus exportaciones. Esa es la razón más común de que una exportación se vea muy pequeña. Escribe a info@puente-dr.org con esa forma de escribirlo y el personal de Puente la agrega.
+
+## Quién puede exportar
+
+{/* claim: data-export-members */}
+Cualquier miembro de tu organización que pueda iniciar sesión en Manage puede pulsar <UI>Exportar</UI> — no hace falta ser administrador. El personal de Puente también puede descargar los registros de cualquier organización.
+
+## Las exportaciones contienen datos personales
+
+{/* claim: data-export-identified */}
+Una exportación completa contiene nombres, números de cédula, teléfonos, fechas de nacimiento y ubicaciones de las personas. Trata cada archivo como un expediente de pacientes.
+
+<Aside type="caution" title="No envíes una exportación completa fuera de tu organización">
+Guarda las exportaciones en una carpeta compartida con personas con nombre, no como adjuntos de correo, y borra las copias que ya no necesites. Para compartir datos con un socio de investigación, activa el [archivo de investigación](/docs/es/data/research-exports/) de ese formulario y envía solo ese.
+</Aside>
+
+<Shot src={expanded} alt="Una fila del Gestor de formularios para el formulario Vision exam, marcada Investigación activada, abierta para mostrar Formularios recolectados: 37, un botón Actualizar y dos notas que describen el archivo de investigación y los registros completos." caption="En un formulario con el archivo de investigación activado, Manage explica qué contiene cada archivo." />
+
+## Preguntas frecuentes
+
+**¿Puedo exportar todos los formularios de una vez?**
+No. Exporta cada formulario que necesites; cada uno es su propio archivo.
+
+**Pulsé Exportar y no se descargó nada.**
+Busca un mensaje en la esquina de arriba. Si no hay ninguno, espera a que el botón deje de decir Cargando….
+
+**La exportación tiene menos registros de los que esperaba.**
+Revisa que todos los teléfonos hayan enviado sus formularios desde la sincronización sin conexión, y luego que todas las formas de escribir el nombre de tu organización estén registradas. Mira [Solución de problemas](/docs/es/help/troubleshooting/).
+
+**¿Exportar cambia algo en Puente?**
+No. Solo lee los registros.

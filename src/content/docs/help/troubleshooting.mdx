@@ -1,0 +1,111 @@
+---
+title: Troubleshooting
+description: The common problems in Collect and Manage — what you see, why it happens and what to do about it.
+related:
+  - help/contact-support
+  - collect/offline-sync
+  - data/exporting-data
+  - collect/find-records
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/en/collect-sign-in.png';
+import gallery from '@shots/en/collect-forms-gallery.png';
+import queue from '@shots/en/collect-03-queue.png';
+import failed from '@shots/en/export-04-export-failed.png';
+
+Most problems in Puente have a short list of causes. Find what you see in the table, then read the section for the detail. If nothing here fits, [contact Puente](/docs/help/contact-support/).
+
+| What you see | Usual cause | What to do |
+|---|---|---|
+| Collect will not sign you in | No connection, or a wrong email or password | [Signing in](#signing-in) |
+| The app is empty after you sign up | Your organization name did not match | [Empty app after sign-up](#empty-app-after-sign-up) |
+| A form is missing on the phone | The phone has not refreshed its forms | [A form is not on the phone](#a-form-is-not-on-the-phone) |
+| Search finds nobody | A full name typed into a box that reads one field | [Search finds nobody](#search-finds-nobody) |
+| Forms still waiting in Offline Sync | Nobody pressed Retry, or the server refused them | [Forms stuck in Offline Sync](#forms-stuck-in-offline-sync) |
+| A message instead of an export | Empty form, failed download or expired sign-in | [Export messages](#export-messages) |
+| The export has too few records | Forms still on phones, or a spelling of your organization not on file | [Export too small](#export-too-small) |
+| You published a form and nothing changed | The publish failed silently | [Publish seemed to do nothing](#publish-seemed-to-do-nothing) |
+
+## Signing in
+
+{/* claim: help-signin-online */}
+{/* claim: help-wrong-password */}
+{/* claim: help-deactivated */}
+- **No signal.** Collect needs an internet connection to sign in; there is no offline sign-in. Connect, then try again.
+- **Wrong email, phone or password.** Collect says <UI>Your username or password may be incorrect, please try again.</UI> Check for a stray space, then use <UI>Forgot Password?</UI>: enter your email and Collect sends you a reset link.
+
+<div class="shots">
+<Shot phone src={signIn} alt="The Collect sign-in screen with Email or Phone Number and Password fields, a Forgot Password? link, a Log-In button and a Delete Credentials link." caption="Sign in while you still have signal, before you leave for the field." />
+</div>
+
+## Empty app after sign-up
+
+{/* claim: help-empty-app */}
+When you sign up in Collect, the name you type in the organization box must match an organization Puente knows. If it is too close to an existing name — one letter off, say — it is refused, but your account is still created. It is then linked to no organization, so you see none of its forms or activity, and no error.
+
+Do not sign up again. Email info@puente-dr.org with your name, the email you signed up with and the organization you meant. Puente staff will sort it out.
+
+## A form is not on the phone
+
+{/* claim: help-custom-forms-refresh */}
+Custom forms reach the phone when you refresh the <UI>Custom Forms</UI> list with the circular arrow beside its heading — not when you sign in. A new phone shows none until someone taps that arrow with a connection. If the list says <UI>No custom forms — try refreshing</UI>, connect and tap that arrow.
+
+Still missing? Check that the form was published for **your** organization, and see [Publish seemed to do nothing](#publish-seemed-to-do-nothing).
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen with Puente Forms cards, an empty Pinned Forms area, and a Custom Forms heading with a refresh arrow above the message No custom forms — try refreshing." caption="The arrow beside Custom Forms fetches the latest forms from Manage." />
+</div>
+
+## Search finds nobody
+
+{/* claim: help-search */}
+The search box matches the **start of one field** — first name, last name, nickname, cédula or household ID. A full name such as `Paciente Ejemplo` finds nothing. Search the surname alone, then the first name, then the nickname.
+
+With no signal, search reads only the residents already saved on the phone. Open Find Records once with a connection before you go out. See [Find records](/docs/collect/find-records/).
+
+## Forms stuck in Offline Sync
+
+{/* claim: help-sync-manual */}
+Forms are not sent by themselves, even though the offline banner says they will sync automatically. Nothing leaves the phone until someone opens Offline Sync — the cloud — and taps <UI>Retry</UI>.
+
+{/* claim: help-sync-failures */}
+If Retry does not empty the list, read the message:
+
+- <UI>You are offline. Reconnect to the internet and try again.</UI> — the phone never reached Puente. Find a better connection.
+- <UI>The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.</UI> — wait and retry; if the same forms keep failing on a good connection, [contact Puente](/docs/help/contact-support/).
+
+Either way, <UI>Your forms are still saved on this device. Nothing has been lost.</UI>
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen reading 1 form is saved on this device and has not reached the server yet, with one Resident ID form listed under Waiting to sync, a Discard link and a Retry button." caption="Retry sends what is waiting. Discard deletes it from the phone for good." />
+</div>
+
+{/* claim: help-household-queue */}
+A household created offline is not listed here, so the screen can say <UI>No forms queued. You are all caught up!</UI> while a household still waits. It is sent on the next Retry, so press Retry once more after you reconnect.
+
+<Aside type="caution" title="Do not discard a form to make the list go away">
+<UI>Discard</UI> deletes the form from the phone permanently and it cannot be recovered. Ask your coordinator first.
+</Aside>
+
+{/* claim: help-logout-blocked */}
+Do not log out to fix a stuck form: Collect will not let you log out while offline, and forms waiting on the phone cannot be sent until you sign back in.
+
+## Export messages
+
+{/* claim: data-export-messages */}
+<UI>This form has no records to export yet.</UI> means nothing has reached Puente on that form. <UI>The export could not be completed. Please try again.</UI> means the download broke; try again. <UI>Your sign-in has expired. Sign in again to export.</UI> means sign in again first. See [Exporting data](/docs/data/exporting-data/).
+
+<Shot src={failed} alt="The Form Manager with a message in the top corner: The export could not be completed. Please try again." caption="A failed download. Your records are fine; try again." />
+
+## Export too small
+
+{/* claim: help-export-small */}
+1. Check every phone: forms still in Offline Sync are not in Puente yet.
+2. Check the spelling. An export includes your organization's name and its nicknames. Records filed under a spelling that is not on that list are left out. Only Puente staff can add a nickname: email info@puente-dr.org with the spelling.
+
+## Publish seemed to do nothing
+
+{/* claim: help-publish-silent */}
+When <UI>Publish</UI> fails in the Form Creator, Manage does not show an error. So after publishing, always check: open <UI>Manage</UI> to see the form in the list, then refresh <UI>Custom Forms</UI> on a phone and open it. If it is not there, publish again; if it still does not appear, [contact Puente](/docs/help/contact-support/) with the form's name.

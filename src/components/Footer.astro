@@ -1,0 +1,50 @@
+---
+// Related articles (from `related:` front matter), a feedback prompt, then
+// Starlight's own last-updated date and next/previous links.
+import { getEntry } from 'astro:content';
+import Default from '@astrojs/starlight/components/Footer.astro';
+const route = Astro.locals.starlightRoute;
+const { entry, locale } = route;
+const es = locale === 'es';
+const base = `${import.meta.env.BASE_URL}${es ? 'es/' : ''}`;
+const related = [];
+for (const slug of entry.data.related || []) {
+  const found = await getEntry('docs', es ? `es/${slug}` : slug);
+  if (!found) throw new Error(`related: "${slug}" on ${entry.id} is not a page`);
+  related.push({ href: `${base}${slug}/`, title: found.data.title, description: found.data.description });
+}
+const subject = encodeURIComponent(`Docs feedback: ${entry.data.title}`);
+const isHome = entry.id === 'index' || entry.id === 'es';
+---
+{related.length > 0 && (
+  <section class="related" aria-labelledby="related-heading">
+    <h2 id="related-heading">{es ? 'Artículos relacionados' : 'Related articles'}</h2>
+    <ul>
+      {related.map((r) => (
+        <li><a href={r.href}><span class="t">{r.title}</span>{r.description && <span class="d">{r.description}</span>}</a></li>
+      ))}
+    </ul>
+  </section>
+)}
+{!isHome && (
+  <aside class="feedback" aria-label={es ? 'Comentarios' : 'Feedback'}>
+    <p>{es ? '¿Te resultó útil esta página?' : 'Was this page helpful?'}</p>
+    <a href={`mailto:info@puente-dr.org?subject=${subject}%20(${es ? 'sí' : 'yes'})`}>{es ? 'Sí' : 'Yes'}</a>
+    <a href={`mailto:info@puente-dr.org?subject=${subject}%20(no)`}>No</a>
+    <span class="still">{es ? '¿Sigues necesitando ayuda?' : 'Still need help?'} <a href={`${base}help/contact-support/`}>{es ? 'Contacta a soporte' : 'Contact support'}</a></span>
+  </aside>
+)}
+<Default />
+<style>
+  .related { margin-top: 3rem; }
+  .related h2 { font-size: var(--sl-text-h4); margin-bottom: 0.75rem; }
+  .related ul { list-style: none; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .related a { display: block; height: 100%; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem; padding: 0.75rem 1rem; text-decoration: none; }
+  .related a:hover { border-color: var(--sl-color-accent); }
+  .related .t { display: block; font-weight: 600; color: var(--sl-color-white); }
+  .related .d { display: block; font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 0.2rem; }
+  .feedback { margin-top: 2.5rem; padding: 1rem 1.25rem; border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; font-size: var(--sl-text-sm); }
+  .feedback p { margin: 0; font-weight: 600; }
+  .feedback > a { border: 1px solid var(--sl-color-gray-5); border-radius: 999px; padding: 0.1rem 0.9rem; text-decoration: none; }
+  .feedback .still { margin-inline-start: auto; color: var(--sl-color-gray-3); }
+</style>

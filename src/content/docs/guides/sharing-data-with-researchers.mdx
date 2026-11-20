@@ -1,0 +1,101 @@
+---
+title: Sharing data with researchers
+description: The steps between a clinic and a research partner — choosing the right file, checking the paperwork, removing patients who said no, checking for names, and sharing it safely.
+related:
+  - data/research-exports
+  - guides/designing-a-form-for-research
+  - guides/running-a-clinic-day
+  - privacy/protecting-data
+roles: [data-manager]
+format: guide
+minutes: 3
+thumbnail: ../../../assets/shots/en/research-00-form-manager.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/en/research-00-form-manager.png';
+import expanded from '@shots/en/manage-form-manager-expanded.png';
+import failed from '@shots/en/export-04-export-failed.png';
+
+The research file is the copy of a clinic's data that leaves Puente. This guide is the routine for sending it: which button to press, what to check in the file, and how to hand it over. What each column means, and how the study IDs work, is in [Research exports](/docs/data/research-exports/).
+
+Do these steps every time you send a file, not only the first time.
+
+## Use the research file, never the full records
+
+{/* claim: guide-research-buttons */}
+In Manage, open <UI>Manage</UI>. A form with the research file turned on is marked <UI>Research export on</UI> and has two buttons instead of one: <UI>Export research file</UI> and <UI>Export full records</UI>.
+
+<Shot src={formManager} alt="Form Manager. Under Custom forms, the Vision exam form is marked Research export on and has Export research file and Export full records buttons; the Clinic sign-in form has a single Export button." caption="Only forms with the research file turned on get two buttons." />
+
+{/* claim: guide-research-contents */}
+Expand the row with the arrow and Manage says, in plain words, what each file holds. The research file has a study ID, age, sex, community and the form's answers, with no names, ID numbers, phone numbers, birth dates or locations. The full-records file has all of those, and stays inside Puente.
+
+<Shot src={expanded} alt="The Vision exam row expanded: Forms collected: 37 with Refresh, and two sentences describing the research file and the full-records file." caption="The blue button goes out. The white button stays in." />
+
+{/* claim: guide-research-filename */}
+The research file's name has the form's name, the word `research` and the date, for example `Vision exam - research - 2026-11-10.csv`.
+
+## Check the paperwork
+
+Before you download anything, make sure you have, in writing:
+
+- the ethics approval for the study;
+- a data-sharing agreement with the research partner;
+- the names of the people at the partner who will receive the file.
+
+If any of these is missing, stop and ask the coordinator.
+
+## Remove everyone who said no
+
+{/* claim: guide-research-all-rows */}
+The research file has a row for every time the form was filled in, including patients who answered "No" to the consent question. Removing them is your job.
+
+1. Open the file in Excel or Google Sheets.
+2. Select the consent column and sort it.
+3. Delete every row where the answer is "No".
+4. Save the file.
+
+<Aside type="caution" title="Every new download includes them again">
+Each download includes every patient examined. Remove the "No" rows every time you send a file, even if you removed them from last month's.
+</Aside>
+
+## Check for names, and count
+
+Read every column heading. If any column holds a name, a phone number or a cédula, stop: it is the wrong file, or the form asked for one. See [Designing a form for research](/docs/guides/designing-a-form-for-research/).
+
+Then count the rows. The number should match the clinic's sign-in sheet, minus the patients who said no. If it is lower, a phone may still have forms waiting: see [Running a clinic day](/docs/guides/running-a-clinic-day/).
+
+## Share it safely
+
+- Share the file through a shared folder that only named people can open. Do not attach it to an email.
+- Write down what you sent, to whom and when.
+- Delete your local copy once it is shared, if you no longer need it.
+
+## When a researcher asks about a patient
+
+{/* claim: guide-study-id-lookup */}
+A study ID like `P-3fa9c01b2e` is made with a secret key that only Puente holds. Puente can work out which patient it belongs to; the researcher cannot. If a researcher asks about a study ID, send the code to [info@puente-dr.org](mailto:info@puente-dr.org). Never send an answer back with a name in it.
+
+## If something goes wrong
+
+{/* claim: guide-export-failed */}
+| What you see | What to do |
+|---|---|
+| Only one <UI>Export</UI> button | The research file is not turned on for this form. Tick <UI>Allow research export</UI> in the Form Creator and publish. |
+| <UI>The export could not be completed. Please try again.</UI> | Try once more. If it keeps happening, email info@puente-dr.org with the form's name. |
+| <UI>Your sign-in has expired. Sign in again to export.</UI> | Sign in to Manage again, then export. |
+| Fewer rows than the sign-in sheet | A phone still has forms waiting. Sync every phone and export again. |
+
+<Shot src={failed} alt="Form Manager with a notice in the top right corner reading: The export could not be completed. Please try again, with a Dismiss link." caption="Try once more before asking for help." />
+
+## FAQ
+
+{/* claim: guide-research-contents */}
+**Can I send the full-records file if the researcher has ethics approval?**
+No. Only the research file leaves Puente.
+
+{/* claim: guide-research-columns */}
+**The researcher wants another column.**
+Change the form in the Form Creator, test it on a copy, and send a new file. Columns from the patient's record that are not already in the research file are not available.

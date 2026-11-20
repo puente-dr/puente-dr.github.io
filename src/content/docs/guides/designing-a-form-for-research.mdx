@@ -1,0 +1,115 @@
+---
+title: Designing a form for research
+description: Build a Puente form whose research file is ready to use — start from the columns, one form per visit, answers from lists, consent first, nothing that identifies anyone, and a test on a copy.
+related:
+  - manage/form-creator
+  - data/research-exports
+  - guides/sharing-data-with-researchers
+  - guides/running-a-clinic-day
+roles: [data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../assets/shots/en/manage-form-creator-edit.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import blocks from '@shots/en/manage-02-blocks-palette.png';
+import creator from '@shots/en/manage-form-creator-edit.png';
+import formManager from '@shots/en/manage-form-manager-top.png';
+
+A research file is only as good as the form behind it. Every choice in this guide is cheap before the clinic and impossible to fix after it. Use it when a research partner will receive data from a form you build in Manage.
+
+When you build a form, you are really designing a spreadsheet. Each question becomes a column, with your question's words as its heading. Each time someone fills in the form, that becomes a row.
+
+| In the form | In the research file |
+|---|---|
+| a question: *Acuity, right eye, without glasses* | a column with that heading |
+| one patient's visit, filled in | one row |
+| the answer chosen: *20/200* | the value in that cell |
+
+## Start from the columns
+
+Ask the research team, in writing, for the list of columns they need. For a vision study it might be: consent; vision in each eye before glasses; the prescription measured; the glasses given; vision in each eye with the glasses.
+
+{/* claim: guide-research-columns */}
+Some things you do not need to ask. The research file brings in age, sex, community, city and province from the patient's record, next to a study ID for the patient.
+
+## One form per visit
+
+Put everything measured at one visit into one form: the test before, what was given, the test after. Then each row of the file is one complete visit.
+
+If you split a visit across two forms, someone later has to match a row in one file to a row in another, and every mismatch is a patient lost from the study.
+
+## Pick from a list; don't type
+
+{/* claim: guide-seven-blocks */}
+The Form Creator offers seven blocks. Two matter most for research:
+
+| Use | For | Example |
+|---|---|---|
+| <UI>Question - Single select</UI> | anything with standard values | a vision line (20/40), a lens power (−2.25), yes or no |
+| <UI>Question - Number response</UI> | true measurements with no fixed list | a lens axis between 0 and 180 |
+
+On a busy day a typed number can lose its minus sign or its decimal point, and nothing in the file shows that it happened. A list cannot.
+
+<Shot src={blocks} alt="The Blocks panel in the Form Creator listing the seven kinds of question." caption="The seven blocks. For research, use Single select wherever the answers come from a known list." />
+
+## Community from a list
+
+{/* claim: guide-community-spellings */}
+The community on a patient's record is entered in Collect, and the same place often ends up spelled several ways: `El Río`, `El Rio`. To a spreadsheet those are different places. If the study groups patients by community, add a single-select question listing the communities the clinic serves, spelled once, plus "Other".
+
+## Ask for consent first
+
+Make the first question a single select: has the patient agreed to their data being used for this study? Copy the wording from the ethics approval word for word.
+
+<Aside type="caution" title="The file includes the patients who said no">
+{/* claim: guide-research-all-rows */}
+The research file has a row for every time the form was filled in, whatever the consent answer. Those rows are removed before the file is sent; [Sharing data with researchers](/docs/guides/sharing-data-with-researchers/) shows how.
+</Aside>
+
+## Nothing that identifies anyone
+
+Don't ask for names, phone numbers or ID numbers inside the form. They are already on the patient's record, and the research file leaves the record's copies out. A question that asks for one would put it straight back in.
+
+{/* claim: guide-research-geolocation-out */}
+A <UI>Geolocation</UI> question is the exception: the research file leaves location questions out on its own.
+
+## Turn on the research file
+
+{/* claim: guide-research-opt-in */}
+Every form starts with the research file turned off. Someone has to decide, on purpose, that this form's answers may leave Puente.
+
+1. In Manage, open <UI>Create</UI>, or open your form with <UI>Edit</UI>.
+2. Under the name and description, tick <UI>Allow research export</UI>. Read the sentence below it.
+3. Press <UI>Publish</UI>.
+
+<Shot src={creator} alt="The Form Creator with Type of form, Form name and Description filled in, an Allow research export checkbox with its explanation below, and the Blocks panel on the right." caption="The sentence under the checkbox says exactly what turning it on adds." />
+
+## Test it with a copy
+
+{/* claim: guide-test-on-copy */}
+Test patients sent to the real form would end up in the real research file. Use a copy instead.
+
+1. In Form Manager, press <UI>Duplicate</UI> on the form.
+2. Start the copy's name with `PRUEBA -` so nobody mistakes it for the real one, tick <UI>Allow research export</UI>, and publish.
+3. On a phone, fill in the copy for two or three invented patients, and sync.
+4. Press <UI>Export research file</UI> on the copy. Open the file and read every column heading.
+5. Send that test file to the research team and ask them to confirm it has what they need.
+6. When they say yes, delete the copy.
+
+<Shot src={formManager} alt="Form Manager with custom forms listed, each with Edit, Duplicate, Delete and Export, and the Vision exam form marked Research export on with an Export research file button." caption="Duplicate makes the test copy; delete it when the test is done." />
+
+{/* claim: guide-publish-silent */}
+Manage does not show an error if publishing fails. After publishing, check that the form appears on a phone under <UI>Custom Forms</UI>.
+
+## FAQ
+
+{/* claim: guide-research-checked-on-export */}
+**Can I turn the research file on after the clinic?**
+Yes. The setting is checked when someone presses the export button, so the file includes visits collected before you turned it on.
+
+{/* claim: guide-accents-stripped */}
+**Why are the accents missing in the headings?**
+Custom-form exports remove accents from headings and answers. Write questions you can still recognize without them.

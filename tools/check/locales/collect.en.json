@@ -1,0 +1,797 @@
+{
+  "global": {
+    "yes": "Yes",
+    "no": "No",
+    "notSure": "Not Sure",
+    "other": "Other",
+    "submit": "Submit",
+    "saveRecord": "Save Record",
+    "fName": "First Name",
+    "lName": "Last Name",
+    "city": "City",
+    "commName": "Community Name",
+    "notes": "Notes",
+    "refresh": "Refresh",
+    "error": "Error",
+    "success": "Success!",
+    "ok": "Ok",
+    "emptyForm": "Empty Form",
+    "back": "Back",
+    "pleaseTryAgain": "Please, try again",
+    "loadMore": "Load More",
+    "settings": "Settings",
+    "tryAgain": "Try Again",
+    "cancel": "Cancel",
+    "recordsStoredOnDevice": "%{count} records stored on this device",
+    "done": "Done"
+  },
+  "signUp": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "password": "Password",
+    "password2": "Enter Password Again",
+    "organization": "Organization",
+    "termsOfService": {
+      "view": "View the Terms and Service",
+      "acknoledgement": "By checking this box, I acknowledge that I have read and understood the Terms and Service agreement"
+    },
+    "submit": "Submit",
+    "toEnglish": "Change language to English",
+    "toSpanish": "Change Language to Spanish",
+    "errorTerms": "Error, terms and service need to be agreed to.",
+    "errorPassword": "Error, your passwords do not match.",
+    "usernameError": "Sign up attempt failed.\n\nYou might have attempted to sign up with a username (email/phone number) that has been previously registered with another account.\n\nPlease contact your supervisor if you believe this is an error.",
+    "confirmViaEmail": "Send confirmation via email?",
+    "confirmViaText": "Send confirmation via text?",
+    "placeholders": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "johndoe@example.com",
+      "phoneNumber": "123-456-7890",
+      "password": "Password Here"
+    }
+  },
+  "signIn": {
+    "user": "Username",
+    "username": "Email or Phone Number",
+    "password": "Password",
+    "showPassword": "Show Password",
+    "login": "Log-In",
+    "signUpLink": "Sign Up!",
+    "deleteCreds": "Delete Credentials",
+    "noAccount": "Don't have an account?",
+    "puente2020": "Puente 2020 |",
+    "termsConditions": "Terms & Conditions",
+    "forgotPassword": {
+      "label": "Forgot Password?",
+      "enterEmail": "Please enter your email to reset your password",
+      "sendLink": "Send Reset Link",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up!",
+      "rememberPass": "Remember Password?",
+      "signIn": "Sign In",
+      "resetSuccess": "Your password reset link has been sent to your email. Please Check your email to change your password.",
+      "resetError": "There was an error sending the password reset link. Please ensure that you entered your email correctly. You can try again by clicking the button below. If you believe the email is correct, please contact your manager.",
+      "tryAgain": "Try Again",
+      "backToSignIn": "Back to Sign in"
+    },
+    "credentialsModal": {
+      "useCreds": "Would you like to use your saved login credentials?"
+    },
+    "unableLogin": "Unable to login",
+    "usernamePasswordIncorrect": "Your username or password may be incorrect, please try again.",
+    "offlineLoginError": "You're offline. Logging in requires an internet connection, so offline login isn't available. Please connect to the internet and try again.",
+    "invalidSessionToken": "Your session has expired. Please log in again.",
+    "credentials": "Credentials",
+    "saveLoginCreds": "Would you like to save your login credentials for future use?",
+    "registrationSuccess": "Account Created!",
+    "registrationSuccessMessage": "Your account has been successfully created. Please sign in with your credentials."
+  },
+  "pinCode": {
+    "getPinCode": {
+      "enterPinCode": "Enter Pincode",
+      "incorrect1": "Incorrect pincode, please try again. This is your last chance to enter your pincode, your credentials will be reset and pincode will be deleted on another failed attempt.",
+      "incorrect2": "Incorrect pincode, please try again."
+    },
+    "storePinCode": {
+      "enterPinCode": "Enter Pincode to use instead of username/password"
+    }
+  },
+  "formsGallery": {
+    "puenteForms": "Puente Forms",
+    "customForms": "Custom Forms",
+    "pinnedForms": "Pinned Forms",
+    "ourMarketPlace": "Our Marketplace",
+    "discoverForms": "Discover forms created by trusted companies",
+    "exploreForms": "Explore Forms",
+    "noCustomForms": "No custom forms — try refreshing",
+    "noPinnedForms": "No pinned forms yet — long-press any form to pin it",
+    "checkOutMarketplace": "Check out our marketplace to view available forms",
+    "viewMarketplace": "View Marketplace",
+    "marketPlace": "Marketplace",
+    "workflows": "Workflows",
+    "noWorflowAssigned": "No Workflow Assigned"
+  },
+  "identificationForm": {
+    "demographics": "Demographics",
+    "nickname": "Nickname",
+    "age": "Age (if their date of birth isn't available)",
+    "dob": {
+      "label": "Date of Birth",
+      "month": "Month",
+      "day": "Day",
+      "year": "Year"
+    },
+    "sex": {
+      "label": "Sex",
+      "male": "Male",
+      "female": "Female",
+      "notSay": "Prefer Not to Say"
+    },
+    "telephone": "Telephone Number",
+    "marriageStatus": {
+      "label": "Marriage Status",
+      "single": "Single",
+      "married": "Married",
+      "cohabitation": "Cohabitation",
+      "widow": "Widow"
+    },
+    "occupation": "Occupation",
+    "educationLevel": {
+      "label": "Education Level",
+      "lessPrim": "Less than Primary",
+      "prim": "Primary",
+      "someHS": "Some high school",
+      "hs": "Highschool",
+      "someCollege": "Some College",
+      "college": "College",
+      "technicalCourse": "Technical course"
+    },
+    "cedulaNumber": "License Number",
+    "location": "Location",
+    "province": "Province",
+    "insurance": "Insurance",
+    "insNumber": "Insurance Number",
+    "insProvider": "Insurance Provider",
+    "clinicProvider": "Clinic Provider",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "household": "Household",
+    "subcounty": "Sub-county",
+    "region": "Region",
+    "country": "Country",
+    "photoAssessment": "Photo Assessment"
+  },
+  "environmentalHealth": {
+    "name": "Environmental Health Form",
+    "yearsLived": {
+      "community": "Years Lived in the Community",
+      "house": "Years Lived in This House",
+      "less1": "Less than 1 Year",
+      "1_2": "1-2 years",
+      "3_4": "3-4 years",
+      "5_10": "5-10 years",
+      "moreThan10": "10+ years"
+    },
+    "biggestProblemComm": {
+      "label": "Biggest Problem of the Community",
+      "Water": "Water",
+      "Trash": "Trash",
+      "Street": "Street",
+      "AccessToBathrooms": "Access to Bathrooms",
+      "HouseRepairs": "House Repairs",
+      "education": "Education",
+      "sports": "Sports",
+      "sanitation": "Sanitation",
+      "communityAwareness": "Community Awareness"
+    },
+    "waterAccess": {
+      "label": "Water Access",
+      "everyday": "Everyday",
+      "4_6": "4-6 days a week",
+      "2_3": "2-3 days per week",
+      "1perWeek": "Less than or equal to 1 day per week",
+      "1perMonth": "1 day per month",
+      "never": "Never"
+    },
+    "typeOfWater": {
+      "label": "Type of Water Do you Drink",
+      "bottled": "Bottled",
+      "tap": "Tap",
+      "filtered": "Filtered"
+    },
+    "bathroomAccess": {
+      "label": "Bathroom Access",
+      "Bathroom": "Bathroom",
+      "Latrine": "Latrine",
+      "None": "None"
+    },
+    "latrineAccess": "Latrine Access",
+    "clinicAccess": {
+      "label": "Clinic Access",
+      "Clinic": "Clinic/Medical Center",
+      "Polyclinic": "Polyclinic",
+      "Hospital": "Hospital",
+      "None": "None"
+    },
+    "medicalProblemsGo": "Where do you go for medical problems?",
+    "dentalAccess": "Do you have access to a dentist?",
+    "timesPerWeekTrash": {
+      "label": "Times per Week Trash is Collected",
+      "Never": "Never",
+      "OnceAWeek": "Once a Week",
+      "TwiceAWeek": "Twice a Week",
+      "OnceOrTwiceAMonth": "Once or Twice a Month"
+    },
+    "trashBetweenPickups": "Where is trash left between pickups?",
+    "houseOwnership": {
+      "label": "House Ownership",
+      "Own": "Own",
+      "Rent": "Rent",
+      "Provided": "Provided"
+    },
+    "floorCondition": {
+      "label": "Condition of Floor in your house?",
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
+    },
+    "floorMaterial": {
+      "label": "Material of Floor in your house?",
+      "Dirt": "Dirt",
+      "Cement": "Cement",
+      "Wood": "Wood",
+      "Ceramic": "Ceramic"
+    },
+    "roofCondition": {
+      "label": "Condition of Roof in your house?",
+      "Poor": "Poor",
+      "Working": "Working",
+      "Excellent": "Excellent"
+    },
+    "typeStove": {
+      "label": "Type of Stove Top",
+      "charcoalStove": "Charcoal stove",
+      "stoveTop": "Gas tank stove",
+      "firewood": "Firewood Stove"
+    },
+    "houseMaterials": {
+      "label": "What material is your house made from?",
+      "zinc": "Zinc",
+      "wood": "Wood",
+      "woodAndBlock": "Cinderblock and wood",
+      "block": "Cinderblock",
+      "brick": "Brick",
+      "clay": "Clay",
+      "woodAndZinc": "Wood and Zinc"
+    },
+    "electricityAccess": {
+      "label": "How often do you have access to electricity?",
+      "never": "Never",
+      "sometimes": "Sometimes",
+      "always": "Always"
+    },
+    "foodSecurity": "In the past month, have you ever worried that you or your family did not have enough food to eat?",
+    "govAssistance": {
+      "label": "Do you have access to government assistance?",
+      "foodStamps": "Food Stamps",
+      "adultLiteracy": "Adult literacy Program",
+      "noAssistance": "No assistance",
+      "solidarityCard": "Solidarity Card"
+    },
+    "numberIndividualsHouse": "Number of Individuals Living in the House",
+    "numberChildrenUnder5": {
+      "label": "Are there any children living in the house in the following age groups?",
+      "under_5": "Less than 5",
+      "6_12": "6-12",
+      "13_18": "13-18",
+      "under_5_textQuestion": "How many children under the age of 5?",
+      "6_12_textQuestion": "How many children between the ages of 6 - 12?",
+      "13_18_textQuestion": "How many children between the ages of 13 - 18?"
+    }
+  },
+  "evaluationMedical": {
+    "name": "Medical Assessment Form",
+    "chronicHypertension": "Chronic Condition Hypertension",
+    "chronicDiabetes": "Chronic Condition Diabetes",
+    "chronicOther": "Chronic Condition Other",
+    "doctor": "Have you seen a doctor for this problem?",
+    "statusOfHealth": {
+      "label": "Status of Health",
+      "receivingNoSupport": "Receiving Treatment or Follow-up Care | No Support Needed",
+      "receivingSupport": "Receiving Treatment or Follow-up Care | Support Needed",
+      "awaitingNoSupport": "Awaiting Treatment or Follow-up Care |  No Support Needed",
+      "noTreatmentSupport": "No Treatment | Support Needed"
+    },
+    "partOfBody": {
+      "label": "Part of Body",
+      "bonesJoints": "Bones or Joints",
+      "eyes": "Eyes",
+      "earsNoseThroat": "Ears, Nose or Throat",
+      "skin": "Skin",
+      "headMental": "Head or Mental Issues",
+      "stomachIntestines": "Stomach, Intestines",
+      "bladderUrinary": "Bladder, Urinary tract",
+      "reproductiveOrgans": "Reproductive Organs",
+      "nutritionIssues": "Nutrition Issue",
+      "---": "---"
+    },
+    "partOfBodyDescription": "Part of Body Description",
+    "duration": {
+      "label": "Duration",
+      "lastMonth": "Within Last Month",
+      "lastYear": "Within Last Year",
+      "last5Years": "Within Last 5 Years",
+      "past5Years": "Past 5 Years"
+    },
+    "problemSuddenness": {
+      "label": "Problem Suddenness",
+      "suddenTrauma": "Sudden and due to trauma",
+      "suddenNoTrauma": "Sudden but not to trauma",
+      "gradually": "Gradually"
+    },
+    "progressionOfCondition": {
+      "label": "Progression of Condition",
+      "improving": "Improving",
+      "worsening": "Worsening",
+      "constant": "Constant"
+    },
+    "generalHealthConsult": "General Health Consult Required?",
+    "surgicalRequired": "Surgical Need Required?",
+    "yourGuess": "Your Guess",
+    "immediateFollowupRequired": "Immediate Follow Up Required?",
+    "plan": "Plan"
+  },
+  "vitals": {
+    "name": "Vitals",
+    "height": "Height",
+    "inches": "Inches",
+    "weight": "Weight",
+    "pounds": "Pounds",
+    "bmi": "Body Mass Index",
+    "temp": "Body Temperature",
+    "celsius": "°Celsius",
+    "pulse": "Pulse",
+    "bpm": "Beats Per Minute",
+    "respRate": "Respiratory Rate",
+    "breathspm": "Breaths Per Minute",
+    "bloodPressure": {
+      "label": "Blood Pressure",
+      "systolic": "Systolic",
+      "diastolic": "Diastolic"
+    },
+    "bloodOxygen": "Blood Oxygen",
+    "mmHg": "mm Hg",
+    "bloodSugar": "Fasting Blood Glucose",
+    "mgdL": "mg/dL",
+    "hemoglobinLevels": "Hemoglobin Levels (Hb)",
+    "hemoglobinA1c": "Hemoglobin A1c (HbA1c)",
+    "gdL": "g/dL",
+    "pain": "Pain"
+  },
+  "supplementaryForms": {
+    "attachResident": "Attach a Community Resident"
+  },
+  "assetForms": {
+    "attachForm": "Attach a form and an asset",
+    "createAsset": "Create an Asset"
+  },
+  "forms": {
+    "successfullySubmitted": "Form successfully submitted",
+    "savedOffline": "Saved offline — will sync when you reconnect",
+    "offlineBanner": "You're offline. Records will save and sync automatically.",
+    "grabCoffee": "Great job, grab yourself a coffee",
+    "suggestedForms": "Suggested next forms",
+    "viewGallery": "View Forms Gallery",
+    "returnHome": "Return Home"
+  },
+  "gdpr": {
+    "consentForm": "Consent Form",
+    "mustConsent": "Community member must consent before you can continue.",
+    "policy": "Puente Collect stores information submitted by authorized users—including contact details, demographics, household and location information, precise GPS coordinates, photographs, health information, form responses, and account identifiers—to provide app functionality. Records may be available to authorized users of the organization collecting them. Puente does not use this app data for advertising, product personalization, or tracking. The current Privacy Policy was updated September 24, 2026.",
+    "viewFullPolicy": "View Full Policy",
+    "communityMemAgrees": "Community member agrees to data policy",
+    "continueToForm": "Continue to Form"
+  },
+  "dataCollection": {
+    "collectData": "Collect Data",
+    "manageAssets": "Manage Assets",
+    "newRecord": "New Record",
+    "newAsset": "New Asset",
+    "findRecord": "Find Record",
+    "viewAll": "View All Forms",
+    "viewAssets": "View All Assets",
+    "back": "Back"
+  },
+  "home": {
+    "myTasks": "My Tasks",
+    "comingSoon": "Coming Soon",
+    "tasks": "Tasks",
+    "logOut": "Log Out",
+    "title": "Home",
+    "loading": "Loading...",
+    "offlineCached": "Showing cached data",
+    "today": "Today",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "allTime": "All Time",
+    "welcomeBack": "Welcome back, %{name}",
+    "recentActivity": "Recent Activity",
+    "orgActivity": "Activity across the Organization",
+    "myEnvHealth": "My Environmental Health",
+    "orgEnvHealth": "Org Environmental Health",
+    "mySurveys": "My Surveys",
+    "orgSurveys": "Org Surveys",
+    "myVitals": "My Vitals",
+    "orgVitals": "Org Vitals"
+  },
+  "components": {
+    "autofill": {
+      "placeholder": "Enter the",
+      "placeholder_end": "here"
+    }
+  },
+  "cards": {
+    "smallCards": {
+      "residentID": "Resident ID",
+      "environmental": "Environment",
+      "history": "History",
+      "medical": "Medical",
+      "evaluation": "Evaluation",
+      "vitals": "Vitals"
+    }
+  },
+  "findResident": {
+    "searchIndividual": "Search Individual",
+    "typeHere": "Search by name or ID",
+    "residentCard": {
+      "city": "City",
+      "community": "Community",
+      "sex": "Sex",
+      "educationLevel": "Education"
+    },
+    "residentPage": {
+      "demographics": {
+        "dob": "Date of Birth:",
+        "city": "City:",
+        "community": "Community:",
+        "province": "Province:",
+        "license": "License Number:"
+      },
+      "forms": {
+        "completedForms": "Completed Forms",
+        "formCategory": "Form Category",
+        "comingSoon": "Coming Soon",
+        "suggestedForms": "Suggested Forms"
+      },
+      "household": {
+        "editProfile": "Edit Profile",
+        "demographics": "Demographics",
+        "forms": "Forms",
+        "household": "Household",
+        "goBack": "Go back to find records"
+      },
+      "viewRecordHistory": "View Record History"
+    },
+    "emptyState": {
+      "title": "No records found",
+      "body": "Try a different name, or check that the record was saved."
+    },
+    "offlineNotice": "You're offline. Showing saved records.",
+    "searching": "Searching records…"
+  },
+  "householdManager": {
+    "createHousehold": "Create a new household",
+    "linkIndividual": "Link this individual to an existing house",
+    "household": "Household",
+    "householdManager": "Household Manager",
+    "relationshipHousehold": "What is their role/relationship in the household?",
+    "linked": "Linked",
+    "useSearchBar": "Please use the searchbar to find and select the correct Household.",
+    "doNothing": "Do Nothing",
+    "successCreateHousehold": "You have successfully created a new household.",
+    "noHousehold": "You have chosen not to link a household.",
+    "addCreateHousehold": "Add or Create a Household"
+  },
+  "header": {
+    "puente": "PUENTE",
+    "surveysCollected": "Surveys Collected",
+    "submitOffline": "Submit Offline Forms",
+    "populateOffline": "Populate Resident's Cache",
+    "settingsPage": "Settings Page",
+    "failedAttempt": "Failed Attempt Submitting Offline Forms.",
+    "tryAgain": "Please ensure that you are connected to the internet and try again.",
+    "ok": "Ok",
+    "success": "Success!",
+    "justSubmitted": "You have just submitted",
+    "form": "form!",
+    "forms": "forms!",
+    "offline": "Offline",
+    "online": "Online",
+    "retry": "Retry",
+    "sessionExpired": "Session expired. Please sign in again."
+  },
+  "languagePicker": {
+    "english": "English",
+    "spanish": "Spanish",
+    "creole": "Haitian Creole"
+  },
+  "residentIdSearchbar": {
+    "searchIndividual": "Search Individual"
+  },
+  "assetSearchbar": {
+    "searchIndividual": "Search Assets",
+    "placeholder": "Type Here..."
+  },
+  "termsModal": {
+    "termsService": "Privacy Policy",
+    "viewCurrentPolicy": "Open Current Policy",
+    "ok": "Ok"
+  },
+  "errorPicker": {
+    "invalidFields": "Invalid Fields:"
+  },
+  "accountSettings": {
+    "settings": "Settings",
+    "support": "Support",
+    "accountSettings": "Account Settings",
+    "namePhoneEmail": "Name, Phone, Email",
+    "changePassword": "Change Password",
+    "findRecords": "Find Records",
+    "offlineData": "Offline Records",
+    "language": "Language",
+    "back": "Back",
+    "logout": "Log out",
+    "deleteUser": "Delete user?",
+    "populateIdForms": "Download records for offline use",
+    "clearCachedIdForms": "Clear downloaded records",
+    "resetOnboarding": "Reset Onboarding",
+    "clearCacheTitle": "Clear cached records?",
+    "clearCacheWarning": "This deletes %{count} resident records saved on this device. Offline search will be empty until you rebuild the cache, which needs an internet connection.",
+    "clearCacheConfirm": "Clear cache",
+    "clearCacheDone": "Cached records cleared.",
+    "resetOnboardingTitle": "Reset onboarding?",
+    "resetOnboardingWarning": "The tutorial will show again next time you open the app. Your saved records are not affected.",
+    "resetOnboardingConfirm": "Reset",
+    "logoutTitle": "Log out?",
+    "logoutMessage": "You will need your username and password to log back in.",
+    "logoutBlockedOfflineTitle": "Can't log out right now",
+    "logoutBlockedOfflineMessage": "You're offline, and logging in requires an internet connection. If you log out now, you won't be able to get back in until this device reconnects. Please connect to the internet before logging out.",
+    "logoutUnsyncedWarning": "%{count} records are saved on this device and have not reached the server yet. They will stay on the device, but you cannot sync them until you log back in.",
+    "logoutConfirm": "Log out",
+    "deleteUserTitle": "Delete your account?",
+    "deleteUserWarning": "This opens the account management page in your browser, where you can request deletion. Records you have already submitted belong to your organization and are not removed by this.",
+    "deleteUserConfirm": "Continue",
+    "unsyncedOnDevice": "%{count} records are saved on this device and have not reached the server yet",
+    "versionLabel": "Version %{version} (%{build})",
+    "offlineDataExplainer": "Download resident records to this device so you can search them without a connection. Records are usually downloaded automatically when you search."
+  },
+  "findRecordSettings": {
+    "currentReccordsStored": "Current records stored",
+    "recordStorageLimit": "Record storage limit",
+    "errorMessage": "There was an error processing your request. Please ensure you are connected to the internet and try again.",
+    "successMessage": "You have updated your storage limit. You may experience app related issues if your phone cannot handle the new limit. If this occurs, your experience may be better if you reduce the limit.",
+    "findRecords": "Find Records",
+    "edit": "Edit",
+    "invalidParams": "Invalid edit parameters. Missing editMode, existingRecord, or formType."
+  },
+  "languageSettings": {
+    "chooseLanguage": "Choose Language"
+  },
+  "namePhoneEmailSettings": {
+    "errorMessage": "We could not save your changes. Please try again, and contact your supervisor if the problem continues.",
+    "successMessage": "You have updated your account.",
+    "userInformation": {
+      "fname": "First Name",
+      "lname": "Last Name",
+      "phoneNumber": "Phone Number",
+      "email": "Email"
+    },
+    "namePhoneEmail": "Name, Phone, Email",
+    "offlineMessage": "You are offline. This change needs an internet connection, and has not been saved."
+  },
+  "passwordSettings": {
+    "wrongCreds": "Your current password is incorrect. Please try again.",
+    "errorMessage": "We could not change your password. Please try again, and contact your supervisor if the problem continues.",
+    "successMessage": "You have updated your password.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "offlineMessage": "You are offline. This change needs an internet connection, and has not been saved.",
+    "confirmPassword": "Confirm New Password",
+    "tooShort": "Your new password must be at least 8 characters.",
+    "mismatch": "The two new passwords do not match."
+  },
+  "supportHome": {
+    "feedback": "Contact us / Feedback",
+    "rateApp": "Rate our app",
+    "helpCenter": "Help Center",
+    "back": "Back"
+  },
+  "feedback": {
+    "feedback": "Feedback",
+    "enterFeedback": "Please enter your feedback in the input below and press the \"Send Feedback\" button. This will redirect you to your email where you can send your feedback.",
+    "sendMail": "Send Mail",
+    "typeFeedback": "Type your feedback here..."
+  },
+  "pushNotifications": {
+    "updateApp": "Please update in the App Store. Your application is out of date."
+  },
+  "paperButton": {
+    "getLocation": "Get Location",
+    "getLocationAgain": "Get Location Again",
+    "takePhoto": "Take Photo",
+    "addAdditional": "Add Additional ",
+    "removePrevious": "Remove Previous "
+  },
+  "bottomTab": {
+    "dataCollection": "Data Collection",
+    "home": "Home",
+    "offline": "Offline"
+  },
+  "camera": {
+    "useImage": "Use image from camera roll",
+    "noAccess": "No access to camera",
+    "requestingPermission": "Requesting camera permission...",
+    "retake": "Retake Picture",
+    "flip": "Flip",
+    "takePicture": "Take Picture",
+    "done": "Done",
+    "sorryAlert": "Sorry, we need camera roll permissions to make this work!"
+  },
+  "peopleModal": {
+    "title": "People Manager",
+    "fname": "First Name",
+    "enterFname": "Enter First Name",
+    "lname": "Last Name",
+    "enterLname": "Enter Last Name",
+    "relationship": "Relationship",
+    "remove": "Remove",
+    "add": "Add"
+  },
+  "assetCore": {
+    "newAsset": "New Asset",
+    "nameOfAssets": "Name of Assets",
+    "addPeople": "Add People",
+    "getLocation": "Get Location",
+    "communityName": "Community Name",
+    "province": "Province",
+    "country": "Country",
+    "swipeAttachForm": "Tap to Attach Form",
+    "tapCreateAsset": "Tap to Create New Asset"
+  },
+  "assetFormSelect": {
+    "supAssetForms": "Supplementary Asset Forms"
+  },
+  "puenteForms": {
+    "ResidentID": "Resident ID",
+    "EnvironmentalHealth": "Environmental Health",
+    "MedicalEvaluation": "Medical Evaluation",
+    "Vitals": "Vitals"
+  },
+  "submissionError": {
+    "error": "ERROR!\n\nYour form has not been submitted. Please try again or contact your supervisor if the issue persists.",
+    "geolocation": "TIMEOUT!\n\nYour phone's geolocation wasn't able to be retrieved from your device. Please try again"
+  },
+  "dataAnalysis": {
+    "welcome": "Welcome to the data analysis page."
+  },
+  "formCounts": {
+    "surveysCollected": "Surveys Collected",
+    "error": "There has been an error getting your data. Check your internet connection and try again.",
+    "offline": "You are currently offline. Please check back when you are connected to the internet.",
+    "idForms": "ID Forms",
+    "envHealthForms": "Environmental Health Forms",
+    "vitalsForms": "Vitals Forms",
+    "customForms": "Custom Forms",
+    "assetForms": "Asset Forms",
+    "back": "Back"
+  },
+  "theme": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "findRecords": {
+    "viewRecordHistory": "View Record History"
+  },
+  "accessibility": {
+    "calmMode": "Calm Mode",
+    "calmModeDescription": "Reduce animations for clinical focus",
+    "on": "ON",
+    "off": "OFF"
+  },
+  "residentHistory": {
+    "loading": "Loading record history...",
+    "noRecordsFound": "No records found",
+    "noSubmissionsYet": "%{name} has no form submissions yet.",
+    "offlineNotice": "You're offline — record history will load when you reconnect.",
+    "recordHistory": "Record History:",
+    "errorLoadingRecords": "Error loading records",
+    "customForm": "Custom Form",
+    "identification": "Identification",
+    "vitals": "Vitals",
+    "environmentalHealth": "Environmental Health",
+    "medicalEvaluation": "Medical Evaluation",
+    "customForms": "Custom Forms",
+    "errorBody": "Couldn't load records — check your connection and try again.",
+    "resident": "Resident",
+    "unknownDate": "Unknown date"
+  },
+  "onboarding": {
+    "welcome": "Data-Driven Change Starts Here",
+    "welcomeDescription": "Use structured data collection to understand your community's needs and drive meaningful change. Every response builds the evidence base for better decisions.",
+    "tagline": "Bridging communities with data",
+    "getStarted": "Let's go  →",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "howToCollect": "How Field Teams Capture Impact",
+    "textField": "Stories & Insights",
+    "numberField": "Metrics & Counts",
+    "locationField": "Place & Geography",
+    "photoField": "Visual Evidence",
+    "collectionDescription": "Capture the full picture of community needs. Stories provide context, numbers track progress, location data reveals patterns, and photos show real-world impact.",
+    "findRecords": "Turn Data Into Insights",
+    "findDescription": "Supervisors and decision-makers search collected data to spot trends, identify priorities, and take action based on evidence. Nothing gets lost—all insights stay accessible.",
+    "offlineMode": "Never Miss a Moment",
+    "offlineDescription": "Work anywhere, anytime. Collect data without connectivity and sync when you reconnect. Field teams stay productive even in resource-constrained settings.",
+    "chooseLanguage": "Work in Your Language",
+    "languageDescription": "Choose the language that fits your community. Clear communication ensures accurate data and stronger relationships.",
+    "chooseTheme": "Make It Yours",
+    "light": "Light",
+    "dark": "Dark",
+    "toggleTheme": "Toggle Theme",
+    "themeDescription": "Personalize your experience. Choose a theme that's comfortable to use during long data collection sessions.",
+    "privacy": "Your Data, Your Control",
+    "dataEncrypted": "Data is encrypted end-to-end",
+    "userPrivacy": "Only authorized people access community data",
+    "securePlatform": "Built with data sovereignty in mind",
+    "privacyDescription": "Community data belongs to the community. Puente uses encryption and strict access controls so data remains secure and under your control.",
+    "youreIn": "You're Ready",
+    "readyToBegin": "Start collecting data that drives real change in your community.",
+    "permissions": "Enable Key Features",
+    "permissionsDescription": "Puente needs two permissions to capture complete field data. You can grant them now or later in your device settings.",
+    "cameraPermission": "Camera Access",
+    "cameraPermissionReason": "Take photos as visual evidence to document real-world conditions and impact.",
+    "locationPermission": "Location Access",
+    "locationPermissionReason": "Tag data points with GPS coordinates so findings can be mapped and analyzed geographically.",
+    "permissionGrant": "Allow",
+    "permissionDenied": "Denied — enable in Settings",
+    "permissionGranted": "Granted",
+    "permissionSkip": "Set up later",
+    "search": "Search",
+    "recordLabel": "Record %{index}"
+  },
+  "coachmarks": {
+    "next": "Next",
+    "gotIt": "Got it",
+    "homeTitle": "Your Impact Dashboard",
+    "homeDescription": "See real-time stats on data collected by your field team. Tap any card to drill into the details.",
+    "collectTitle": "Capture Field Data",
+    "collectDescription": "Start a new form to collect data on your community even without internet.",
+    "findTitle": "Search All Records",
+    "findDescription": "Look up any resident or asset. Click on a resident in order to edit previous forms.",
+    "settingsTitle": "Your Preferences",
+    "settingsDescription": "Switch language, toggle dark mode, and manage your account all in one place.",
+    "dismiss": "Dismiss tips"
+  },
+  "offlineSync": {
+    "title": "Offline Sync",
+    "noForms": "No forms queued. You are all caught up!",
+    "lastSync": "Last synced:",
+    "queuedOne": "1 form is saved on this device and has not reached the server yet.",
+    "queuedMany": "%{count} forms are saved on this device and have not reached the server yet.",
+    "stillOnDevice": "Your forms are still saved on this device. Nothing has been lost.",
+    "failedOffline": "You are offline. Reconnect to the internet and try again.",
+    "failedOnline": "The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.",
+    "queuedTitle": "Waiting to sync",
+    "discard": "Discard",
+    "discardTitle": "Discard this form?",
+    "discardWarning": "%{form} has not reached the server. Discarding deletes it from this device permanently and it cannot be recovered.",
+    "unknownForm": "Saved form",
+    "discardConfirm": "Discard permanently"
+  }
+}

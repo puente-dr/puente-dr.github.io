@@ -1,0 +1,115 @@
+---
+title: Diseñar un formulario para investigación
+description: Crea un formulario de Puente cuyo archivo de investigación sirva desde el primer día — empezar por las columnas, un formulario por visita, respuestas de una lista, el consentimiento primero, nada que identifique a nadie y una prueba en una copia.
+related:
+  - manage/form-creator
+  - data/research-exports
+  - guides/sharing-data-with-researchers
+  - guides/running-a-clinic-day
+roles: [data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../../assets/shots/es/manage-form-creator-edit.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import blocks from '@shots/es/manage-02-blocks-palette.png';
+import creator from '@shots/es/manage-form-creator-edit.png';
+import formManager from '@shots/es/manage-form-manager-top.png';
+
+Un archivo de investigación solo es tan bueno como el formulario detrás. Cada decisión de esta guía es barata antes de la clínica e imposible de arreglar después. Úsala cuando un socio de investigación vaya a recibir datos de un formulario que creas en Manage.
+
+Cuando creas un formulario, en realidad estás diseñando una hoja de cálculo. Cada pregunta se vuelve una columna, con las palabras de tu pregunta como título. Cada vez que alguien llena el formulario, eso se vuelve una fila.
+
+| En el formulario | En el archivo de investigación |
+|---|---|
+| una pregunta: *Agudeza, ojo derecho, sin lentes* | una columna con ese título |
+| la visita de un paciente, llenada | una fila |
+| la respuesta elegida: *20/200* | el valor en esa celda |
+
+## Empieza por las columnas
+
+Pide por escrito al equipo de investigación la lista de columnas que necesita. Para un estudio de la vista podría ser: consentimiento; visión de cada ojo antes de los lentes; la graduación medida; los lentes entregados; visión de cada ojo con los lentes.
+
+{/* claim: guide-research-columns */}
+Algunas cosas no hace falta preguntarlas. El archivo de investigación trae la edad, el sexo, la comunidad, la ciudad y la provincia del registro del paciente, junto a un ID de estudio para el paciente.
+
+## Un formulario por visita
+
+Pon todo lo que se mide en una visita en un solo formulario: la prueba antes, lo que se entregó, la prueba después. Así cada fila del archivo es una visita completa.
+
+Si divides una visita en dos formularios, alguien después tiene que emparejar una fila de un archivo con una de otro, y cada error es un paciente perdido para el estudio.
+
+## Elige de una lista; no escribas
+
+{/* claim: guide-seven-blocks */}
+El Creador de formularios ofrece siete bloques. Para investigación importan sobre todo dos:
+
+| Usa | Para | Ejemplo |
+|---|---|---|
+| <UI>Pregunta: selección única</UI> | todo lo que tenga valores estándar | una línea de visión (20/40), una graduación (−2.25), sí o no |
+| <UI>Pregunta: respuesta numérica</UI> | medidas reales sin lista fija | el eje de un lente entre 0 y 180 |
+
+En un día con mucho trabajo, un número escrito puede perder el signo menos o el punto decimal, y nada en el archivo muestra que pasó. Una lista no.
+
+<Shot src={blocks} alt="El panel Bloques del Creador de formularios con los siete tipos de pregunta." caption="Los siete bloques. Para investigación, usa selección única siempre que las respuestas vengan de una lista conocida." />
+
+## La comunidad, de una lista
+
+{/* claim: guide-community-spellings */}
+La comunidad del registro del paciente se escribe en Collect, y el mismo lugar muchas veces termina escrito de varias maneras: `El Río`, `El Rio`. Para una hoja de cálculo son lugares distintos. Si el estudio agrupa a los pacientes por comunidad, agrega una pregunta de selección única con las comunidades que atiende la clínica, escritas una vez, más «Otra».
+
+## Pide primero el consentimiento
+
+Haz que la primera pregunta sea de selección única: ¿el paciente aceptó que sus datos se usen en este estudio? Copia el texto de la aprobación ética palabra por palabra.
+
+<Aside type="caution" title="El archivo incluye a los pacientes que dijeron que no">
+{/* claim: guide-research-all-rows */}
+El archivo de investigación tiene una fila por cada vez que se llenó el formulario, sea cual sea la respuesta de consentimiento. Esas filas se quitan antes de enviar el archivo; [Compartir datos con investigadores](/docs/es/guides/sharing-data-with-researchers/) explica cómo.
+</Aside>
+
+## Nada que identifique a nadie
+
+No pidas nombres, teléfonos ni números de cédula dentro del formulario. Ya están en el registro del paciente, y el archivo de investigación deja fuera esas copias. Una pregunta que los pida los volvería a meter.
+
+{/* claim: guide-research-geolocation-out */}
+Una pregunta de <UI>Geolocalización</UI> es la excepción: el archivo de investigación deja fuera por sí solo las preguntas de ubicación.
+
+## Activa el archivo de investigación
+
+{/* claim: guide-research-opt-in */}
+Todo formulario empieza con el archivo de investigación desactivado. Alguien tiene que decidir, a propósito, que las respuestas de este formulario pueden salir de Puente.
+
+1. En Manage, abre <UI>Crear</UI>, o abre tu formulario con <UI>Editar</UI>.
+2. Debajo del nombre y la descripción, marca <UI>Permitir exportación para investigación</UI>. Lee la frase de abajo.
+3. Pulsa <UI>Publicar</UI>.
+
+<Shot src={creator} alt="El Creador de formularios con el tipo, el nombre y la descripción llenos, la casilla Permitir exportación para investigación con su explicación debajo y el panel de bloques a la derecha." caption="La frase debajo de la casilla dice exactamente qué agrega activarla." />
+
+## Pruébalo con una copia
+
+{/* claim: guide-test-on-copy */}
+Los pacientes de prueba enviados al formulario real terminarían en el archivo de investigación real. Usa una copia.
+
+1. En el Gestor de formularios, pulsa <UI>Duplicar</UI> en el formulario.
+2. Empieza el nombre de la copia con `PRUEBA -` para que nadie la confunda con el real, marca <UI>Permitir exportación para investigación</UI> y publica.
+3. En un teléfono, llena la copia para dos o tres pacientes inventados, y sincroniza.
+4. Pulsa <UI>Exportar archivo de investigación</UI> en la copia. Abre el archivo y lee cada título de columna.
+5. Envía ese archivo de prueba al equipo de investigación y pide que confirme que tiene lo que necesita.
+6. Cuando diga que sí, elimina la copia.
+
+<Shot src={formManager} alt="El Gestor de formularios con los formularios personalizados, cada uno con Editar, Duplicar, Eliminar y Exportar, y el formulario Vision exam marcado Investigación activada con el botón Exportar archivo de investigación." caption="Duplicar crea la copia de prueba; elimínala cuando termine la prueba." />
+
+{/* claim: guide-publish-silent */}
+Manage no muestra ningún error si la publicación falla. Después de publicar, comprueba que el formulario aparece en un teléfono en <UI>Formularios personalizados</UI>.
+
+## Preguntas frecuentes
+
+{/* claim: guide-research-checked-on-export */}
+**¿Puedo activar el archivo de investigación después de la clínica?**
+Sí. La opción se revisa cuando alguien pulsa el botón de exportar, así que el archivo incluye las visitas recogidas antes de activarla.
+
+{/* claim: guide-accents-stripped */}
+**¿Por qué faltan los acentos en los títulos?**
+Las exportaciones de formularios personalizados quitan los acentos de títulos y respuestas. Escribe preguntas que se reconozcan sin ellos.

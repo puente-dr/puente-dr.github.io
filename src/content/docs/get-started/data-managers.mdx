@@ -1,0 +1,94 @@
+---
+title: "Start here: data managers"
+description: The essentials for coordinators using Puente Manage — sign in, set up your organization and a second administrator, build forms, check what arrived, clean and export.
+related:
+  - manage/sign-in
+  - guides/set-up-your-organization
+  - guides/your-first-week-in-manage
+  - data/exporting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import orgs from '@shots/en/manage-organizations.png';
+import creator from '@shots/en/manage-form-creator-edit.png';
+import review from '@shots/en/manage-review.png';
+import expanded from '@shots/en/manage-form-manager-expanded.png';
+
+This page is for the people who run Puente from a computer: program coordinators, clinic managers, data managers. It covers the jobs you will do in **Puente Manage**, in the order you usually meet them. Each step links to the full article.
+
+If you collect data on a phone, see [Start here: data collectors](/docs/get-started/data-collectors/).
+
+## Sign in to Manage
+
+{/* claim: start-manage-register */}
+Open [puente-manage.vercel.app](https://puente-manage.vercel.app) and sign in with the same account you use in Collect. To make a new account, use <UI>Create account</UI>. The sign-up page only lists organizations already in Puente; if yours is missing, use <UI>My organization isn't listed</UI> instead of picking a close match. See [Sign in to Manage](/docs/manage/sign-in/).
+
+## Find your way around
+
+{/* claim: start-manage-menu */}
+The menu on the left has six places:
+
+| Menu item | Opens | Use it to |
+|---|---|---|
+| <UI>Manage</UI> | Form Manager | See forms, open their counts, export |
+| <UI>Create</UI> | Form Creator | Build and publish your own forms |
+| <UI>Clean</UI> | Data Curation | Find and fix incomplete or duplicate records |
+| <UI>Market</UI> | Form Marketplace | Copy a ready-made form |
+| <UI>Review</UI> | Dashboard | See what arrived and what needs attention |
+| <UI>Settings</UI> | Account Settings | Change your name, phone, email or password |
+
+## Set up your organization and a second administrator
+
+{/* claim: start-org-first-admin */}
+The first person to sign up for an organization becomes its administrator. Everyone after is a member, and can collect and use Manage straight away.
+
+{/* claim: start-admin-screen */}
+Administrators manage people on the Organizations screen. There is no menu link to it yet: type `/organization-admin` after the Manage address. There you can press <UI>Make administrator</UI> beside a colleague's name — do it now, so the organization never depends on one person. The last administrator cannot be removed, so a second one is how you hand over. See [Members and administrators](/docs/organizations/members-and-administrators/).
+
+<Shot src={orgs} alt="The Organizations screen for Example Health Trust, with its spellings and a list of four people, each with Make administrator and either Deactivate or Reactivate buttons." caption="Make a second administrator on day one. Deactivate people when they leave." />
+
+{/* claim: start-nicknames */}
+If your team writes the organization's name several ways, email info@puente-dr.org with each spelling. Only Puente staff can add them, and every spelling not on file is missing from your exports. See [Nicknames](/docs/organizations/nicknames/).
+
+## Build and publish forms
+
+{/* claim: start-forms */}
+Your team already has Puente's four built-in forms. For anything else, open <UI>Create</UI>, give the form a name, add questions from the seven blocks, then <UI>Publish</UI>. Or start from a ready-made form in <UI>Market</UI>.
+
+<Aside type="caution" title="Check the phone after you publish">
+If publishing fails, Manage does not show an error. After every publish, refresh Custom Forms on a phone and open the form before you send the team out.
+</Aside>
+
+<Shot src={creator} alt="The Form Creator with Type of form, Form name and Description, an Allow research export checkbox, a Single select question on the canvas, the Blocks palette on the right, and Reset form, Preview form and Publish buttons at the top." caption="Name the form, add blocks, publish — then check it on a phone." />
+
+See [Form Creator](/docs/manage/form-creator/).
+
+## Check what arrived
+
+{/* claim: start-check-arrived */}
+<UI>Review</UI> is the dashboard: <UI>Needs attention</UI> lists problems such as records missing key fields, and the footer shows the <UI>records synced in total</UI>. In <UI>Manage</UI>, the arrow beside each form opens a count of forms collected, with <UI>Refresh</UI>.
+
+Low numbers usually mean forms are still waiting on phones. Ask surveyors to open Offline Sync and press Retry.
+
+<Shot src={review} alt="The Manage dashboard with a Needs attention list of two problems marked Needs repair and Fixable, a Community coverage list, and 48 records synced in total." caption="Start each day here: what synced, and what needs fixing." />
+
+## Clean the records
+
+{/* claim: start-clean */}
+<UI>Clean</UI> opens Data Curation: how many records, their average completeness, duplicates and anomalies, and a table you can filter. Some actions — deleting a duplicate, renaming a community — cannot be undone. See [Data Curation](/docs/manage/data-curation/).
+
+## Export
+
+{/* claim: data-export-buttons */}
+In <UI>Manage</UI>, each form has its own <UI>Export</UI> button that downloads a CSV file. Full exports contain names, ID numbers and locations; keep them inside your organization. To share with a research partner, use the research file.
+
+<Shot src={expanded} alt="The Form Manager with a Vision exam form marked Research export on, expanded to show Forms collected: 37, a Refresh button, and Export research file and Export full records buttons." caption="One export per form. Forms with the research file turned on get two buttons." />
+
+See [Exporting data](/docs/data/exporting-data/), [Reading export files](/docs/data/reading-export-files/) and [Research exports](/docs/data/research-exports/).
+
+## Next steps
+
+- [Set up your organization](/docs/guides/set-up-your-organization/) — the first hour, step by step.
+- [Your first week in Manage](/docs/guides/your-first-week-in-manage/) — a routine for the first days.
+- [Protecting people's data](/docs/privacy/protecting-data/) — habits for the whole team.

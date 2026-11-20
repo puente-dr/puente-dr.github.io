@@ -1,0 +1,111 @@
+---
+title: Solución de problemas
+description: Los problemas comunes en Collect y Manage — qué ves, por qué pasa y qué hacer.
+related:
+  - help/contact-support
+  - collect/offline-sync
+  - data/exporting-data
+  - collect/find-records
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/es/collect-sign-in.png';
+import gallery from '@shots/es/collect-forms-gallery.png';
+import queue from '@shots/es/collect-03-queue.png';
+import failed from '@shots/es/export-04-export-failed.png';
+
+La mayoría de los problemas en Puente tienen pocas causas. Busca lo que ves en la tabla y lee la sección con el detalle. Si nada de esto aplica, [escríbele a Puente](/docs/es/help/contact-support/).
+
+| Lo que ves | Causa habitual | Qué hacer |
+|---|---|---|
+| Collect no te deja iniciar sesión | Sin conexión, o correo o contraseña equivocados | [Iniciar sesión](#iniciar-sesión) |
+| La app sale vacía después de registrarte | El nombre de tu organización no coincidió | [La app sale vacía](#la-app-sale-vacía-después-de-registrarte) |
+| Falta un formulario en el teléfono | El teléfono no ha actualizado sus formularios | [Un formulario no está en el teléfono](#un-formulario-no-está-en-el-teléfono) |
+| La búsqueda no encuentra a nadie | Un nombre completo en un cuadro que lee un solo dato | [La búsqueda no encuentra a nadie](#la-búsqueda-no-encuentra-a-nadie) |
+| Formularios que siguen esperando en la sincronización | Nadie pulsó Reintentar, o el servidor los rechazó | [Formularios atascados](#formularios-atascados-en-la-sincronización) |
+| Un mensaje en vez de una exportación | Formulario vacío, descarga fallida o sesión vencida | [Mensajes al exportar](#mensajes-al-exportar) |
+| La exportación tiene muy pocos registros | Formularios todavía en los teléfonos, o una forma de escribir el nombre de tu organización que no está registrada | [Exportación demasiado pequeña](#exportación-demasiado-pequeña) |
+| Publicaste un formulario y no cambió nada | La publicación falló sin avisar | [Publicar pareció no hacer nada](#publicar-pareció-no-hacer-nada) |
+
+## Iniciar sesión
+
+{/* claim: help-signin-online */}
+{/* claim: help-wrong-password */}
+{/* claim: help-deactivated */}
+- **Sin señal.** Collect necesita conexión a internet para iniciar sesión; no se puede iniciar sesión sin conexión. Conéctate e inténtalo de nuevo.
+- **Correo, teléfono o contraseña equivocados.** Collect dice <UI>Su nombre de usuario o contraseña pueden ser incorrectos. Vuelva a intentarlo.</UI> Revisa que no haya un espacio de más y luego usa <UI>¿olvidado tu contraseña?</UI>: escribe tu correo y Collect te envía un enlace para restablecerla.
+
+<div class="shots">
+<Shot phone src={signIn} alt="La pantalla de inicio de sesión de Collect con los campos de usuario y contraseña, el enlace para recuperar la contraseña, el botón para iniciar sesión y un enlace para borrar el usuario guardado." caption="Inicia sesión mientras todavía tienes señal, antes de salir al campo." />
+</div>
+
+## La app sale vacía después de registrarte
+
+{/* claim: help-empty-app */}
+Cuando te registras en Collect, el nombre que escribes en el cuadro de organización tiene que coincidir con una organización que Puente conozca. Si se parece demasiado a un nombre que ya existe — una letra de diferencia, por ejemplo — se rechaza, pero tu cuenta se crea igual. Queda sin organización, así que no ves sus formularios ni su actividad, y no aparece ningún error.
+
+No te registres otra vez. Escribe a info@puente-dr.org con tu nombre, el correo con que te registraste y la organización a la que querías unirte. El personal de Puente lo resuelve.
+
+## Un formulario no está en el teléfono
+
+{/* claim: help-custom-forms-refresh */}
+Los formularios personalizados llegan al teléfono cuando actualizas la lista <UI>Formularios personalizados</UI> con la flecha circular junto al título — no al iniciar sesión. Un teléfono nuevo no muestra ninguno hasta que alguien toca esa flecha con conexión. Si la lista dice <UI>Sin formularios personalizados — intenta actualizar</UI>, conéctate y toca esa flecha.
+
+¿Sigue sin aparecer? Revisa que el formulario se haya publicado para **tu** organización, y mira [Publicar pareció no hacer nada](#publicar-pareció-no-hacer-nada).
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla de recolección de datos con las tarjetas de los formularios de Puente, el área de formularios favoritos vacía y el título de formularios personalizados con una flecha para actualizar sobre un mensaje que dice que no hay formularios personalizados." caption="La flecha junto a los formularios personalizados trae los formularios más recientes de Manage." />
+</div>
+
+## La búsqueda no encuentra a nadie
+
+{/* claim: help-search */}
+El cuadro de búsqueda compara con **el comienzo de un solo dato** — nombre, apellido, apodo, cédula o ID del hogar. Un nombre completo como `Paciente Ejemplo` no encuentra nada. Busca solo el apellido, luego solo el nombre, luego el apodo.
+
+Sin señal, la búsqueda lee solo los residentes ya guardados en el teléfono. Abre Buscar registro una vez con conexión antes de salir. Mira [Buscar registros](/docs/es/collect/find-records/).
+
+## Formularios atascados en la sincronización
+
+{/* claim: help-sync-manual */}
+Los formularios no se envían solos, aunque el aviso sin conexión diga que se sincronizarán automáticamente. Nada sale del teléfono hasta que alguien abre la sincronización sin conexión — la nube — y toca <UI>Reintentar</UI>.
+
+{/* claim: help-sync-failures */}
+Si Reintentar no vacía la lista, lee el mensaje:
+
+- <UI>Estás sin conexión. Conéctate a internet e inténtalo de nuevo.</UI> — el teléfono nunca llegó a Puente. Busca una mejor conexión.
+- <UI>El servidor no aceptó estos formularios. Inténtalo de nuevo en unos minutos y contacta con soporte si sigue ocurriendo.</UI> — espera y reintenta; si los mismos formularios siguen fallando con buena conexión, [escríbele a Puente](/docs/es/help/contact-support/).
+
+En los dos casos, <UI>Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.</UI>
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de sincronización sin conexión con un formulario guardado en el dispositivo que todavía no ha llegado al servidor, una Identificación de residente en la lista de espera, un enlace Descartar y un botón Reintentar." caption="Reintentar envía lo que espera. Descartar lo borra del teléfono para siempre." />
+</div>
+
+{/* claim: help-household-queue */}
+Un hogar creado sin conexión no aparece en esta lista, así que la pantalla puede decir <UI>No hay formularios en cola. ¡Estás al día!</UI> mientras un hogar todavía espera. Se envía con el próximo Reintentar, así que pulsa Reintentar una vez más después de reconectarte.
+
+<Aside type="caution" title="No descartes un formulario para que desaparezca de la lista">
+<UI>Descartar</UI> borra el formulario del teléfono de forma permanente y no se puede recuperar. Pregúntale primero a tu coordinación.
+</Aside>
+
+{/* claim: help-logout-blocked */}
+No cierres sesión para arreglar un formulario atascado: Collect no te deja cerrar sesión sin conexión, y los formularios que esperan en el teléfono no se pueden enviar hasta que vuelvas a iniciar sesión.
+
+## Mensajes al exportar
+
+{/* claim: data-export-messages */}
+<UI>Este formulario todavía no tiene registros para exportar.</UI> significa que no ha llegado nada a Puente en ese formulario. <UI>No se pudo completar la descarga. Por favor, inténtelo de nuevo.</UI> significa que falló la descarga; inténtalo de nuevo. <UI>Tu sesión expiró. Inicia sesión de nuevo para exportar.</UI> significa que primero inicies sesión otra vez. Mira [Exportar datos](/docs/es/data/exporting-data/).
+
+<Shot src={failed} alt="El Gestor de formularios con un mensaje en la esquina de arriba que dice que no se pudo completar la descarga." caption="Una descarga fallida. Tus registros están bien; inténtalo de nuevo." />
+
+## Exportación demasiado pequeña
+
+{/* claim: help-export-small */}
+1. Revisa cada teléfono: los formularios que siguen en la sincronización sin conexión todavía no están en Puente.
+2. Revisa cómo se escribe el nombre. Una exportación incluye el nombre de tu organización y sus apodos. Los registros guardados con una forma de escribirlo que no está en esa lista quedan fuera. Solo el personal de Puente puede agregar un apodo: escribe a info@puente-dr.org con esa forma de escribirlo.
+
+## Publicar pareció no hacer nada
+
+{/* claim: help-publish-silent */}
+Cuando <UI>Publicar</UI> falla en el Creador de formularios, Manage no muestra ningún error. Así que después de publicar, revisa siempre: abre <UI>Gestionar</UI> para ver el formulario en la lista, luego actualiza <UI>Formularios personalizados</UI> en un teléfono y ábrelo. Si no está, publica otra vez; si sigue sin aparecer, [escríbele a Puente](/docs/es/help/contact-support/) con el nombre del formulario.

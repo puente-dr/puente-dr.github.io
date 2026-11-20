@@ -1,0 +1,116 @@
+---
+title: Your first day collecting
+description: A surveyor's first day with Puente Collect from start to finish — signing in, finding people, consent, filling in forms with no signal, and sending everything in the evening.
+related:
+  - collect/getting-around
+  - collect/find-records
+  - collect/offline-sync
+  - guides/field-day-checklist
+roles: [data-collector]
+format: guide
+minutes: 3
+thumbnail: ../../../assets/shots/en/collect-home.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/en/collect-sign-in.png';
+import home from '@shots/en/collect-home.png';
+import consent from '@shots/en/collect-consent.png';
+import household from '@shots/en/collect-household.png';
+import banner from '@shots/en/collect-01-offline-banner.png';
+import caughtUp from '@shots/en/collect-04-all-caught-up.png';
+
+This is a walk through one ordinary field day with Puente Collect, in the order things happen: getting ready with signal, visiting households, and sending the day's work in the evening. Your coordinator has already set up your organization and told you which forms to use.
+
+## Sign in before you leave
+
+{/* claim: guide-signin-internet */}
+Signing in needs an internet connection, so do it at home or at the office, never in the community. Enter your email or phone number and your password, and tap <UI>Log-In</UI>.
+
+<div class="shots">
+<Shot phone src={signIn} alt="The Collect sign-in screen with Email or Phone Number and Password fields, a Forgot Password? link and a blue Log-In button." caption="Sign in while you have signal. You stay signed in for the day." />
+<Shot phone src={home} alt="The Collect Home screen with activity counts and the five-icon bar at the bottom, the house highlighted." caption="Home. The bar at the bottom has five icons and no words." />
+</div>
+
+{/* claim: guide-tabs */}
+The bar at the bottom has five icons: the magnifying glass (find people), the folder (forms), the house (Home), the cloud (sending saved work) and the gear (settings). Collect opens on the house.
+
+{/* claim: guide-search-offline */}
+While you still have signal, open the magnifying glass once. That saves the community's residents on the phone so you can search for them later with no signal.
+
+## Find the person first
+
+Most people you visit are already in Puente. Before you register anyone, search for them under the magnifying glass.
+
+{/* claim: guide-search-one-field */}
+The search reads one field at a time, from the start: a first name, a last name, a nickname, or the first digits of a cédula. A full name typed together finds nobody. Try the surname alone, then the first name, then the nickname.
+
+If they really are new, register them with the <UI>Resident ID</UI> form under the folder.
+
+## Ask for consent
+
+{/* claim: guide-consent */}
+Every form you open from the folder starts on a consent screen. Read the summary to the person, or let them read it. The form only opens after you tick <UI>Community member agrees to data policy</UI> and tap <UI>Continue to Form</UI>.
+
+<div class="shots">
+<Shot phone src={consent} alt="The Consent Form screen with the privacy summary, a View Full Policy button, an unticked Community member agrees to data policy box and a Continue to Form button." caption="Tick the box only when the person has agreed." />
+</div>
+
+## Fill in the forms
+
+{/* claim: guide-attach-resident */}
+<UI>Environmental Health</UI>, <UI>Medical Evaluation</UI> and <UI>Vitals</UI> belong to a person. The button reads <UI>Attach a Community Resident</UI> until you choose who the form is about.
+
+{/* claim: guide-location-button */}
+Location is not automatic. Tap <UI>Get Location</UI> while you stand at the home, and check the numbers it shows. If it shows `(0.00, 0.00)`, the phone did not find a position: tap <UI>Get Location Again</UI>.
+
+{/* claim: guide-household-options */}
+The Resident ID form ends with a household section: <UI>Do Nothing</UI>, <UI>Create a new household</UI>, or <UI>Link this individual to an existing house</UI>. Ask your coordinator which one your team uses.
+
+<div class="shots">
+<Shot phone src={household} alt="The end of the Resident ID form: a Get Location Again button above (0.00, 0.00), photo options, and the Household section with Do Nothing, Create a new household and Link this individual to an existing house." caption="The household choices. (0.00, 0.00) means no location was found yet." />
+</div>
+
+## Work with no signal
+
+{/* claim: guide-save-messages */}
+When there is no signal, a banner reads <UI>You're offline. Records will save and sync automatically.</UI> Keep working. When you submit, the message tells you what happened: <UI>Form successfully submitted</UI> means it reached Puente; <UI>Saved offline — will sync when you reconnect</UI> means it is waiting on this phone.
+
+<div class="shots">
+<Shot phone src={banner} alt="A form on a phone with an amber banner across the top reading: You're offline. Records will save and sync automatically." caption="Being offline is normal. Nothing is lost." />
+</div>
+
+<Aside type="caution" title="Until it is sent, the phone holds the only copy">
+{/* claim: guide-logout-offline */}
+Do not log out, clear the app's data or uninstall it while forms are waiting. Collect will not let you log out with no signal, and it warns you if forms are still on the phone.
+</Aside>
+
+## Send everything in the evening
+
+{/* claim: guide-sync-not-automatic */}
+Despite what the banner says, nothing is sent by itself. Each evening, connect to a reliable wifi network, tap the cloud to open <UI>Offline Sync</UI>, and tap <UI>Retry</UI>.
+
+{/* claim: guide-caught-up */}
+Stay on the network until the screen reads <UI>No forms queued. You are all caught up!</UI>
+
+<div class="shots">
+<Shot phone src={caughtUp} alt="The Offline Sync screen with an empty queue, reading: No forms queued. You are all caught up!" caption="This is the only finished state. Anything else is still on the phone." />
+</div>
+
+{/* claim: guide-households-not-listed */}
+Households you created with no signal are not listed on this screen, but they are sent when you tap <UI>Retry</UI>. Always tap it, even if the screen says nothing is queued.
+
+## FAQ
+
+{/* claim: guide-discard-permanent */}
+**A form will not send. Should I discard it?**
+No. Try again on a better connection and tell your coordinator. Discarding deletes it from the phone for good.
+
+{/* claim: guide-forgot-password */}
+**I forgot my password in the field.**
+Tap <UI>Forgot Password?</UI> when you have signal: Collect asks for your email and sends a reset link. Keep working on paper until then.
+
+{/* claim: guide-forms-reach-phones */}
+**The form my coordinator mentioned is not in the folder.**
+With signal, tap the refresh arrow beside <UI>Custom Forms</UI>. If it says <UI>No custom forms — try refreshing</UI>, tell your coordinator.

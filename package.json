@@ -1,0 +1,22 @@
+{
+  "name": "puente-docs",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node tools/assemble-pages.mjs",
+    "preview": "node tools/serve.mjs",
+    "check": "node tools/check/content.mjs",
+    "floor:crawl": "node tools/floor/crawl.mjs",
+    "floor:check": "node tools/floor/check.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.8",
+    "astro": "7.4.4",
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}

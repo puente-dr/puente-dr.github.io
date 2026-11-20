@@ -1,0 +1,11 @@
+---
+// A screenshot with a caption. `phone` keeps tall phone captures to a sensible
+// height. Images live in src/assets/shots/<lang>/ so each language shows its
+// own interface.
+import { Image } from 'astro:assets';
+const { src, alt, caption, phone = false } = Astro.props;
+---
+<figure class:list={['shot', { phone }]}>
+  <Image src={src} alt={alt} widths={[480, 900, 1400]} sizes="(max-width: 800px) 100vw, 800px" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

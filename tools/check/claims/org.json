@@ -1,0 +1,434 @@
+{
+ "claims": {
+  "org-what": {
+   "claim": "The organization decides which records you see.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Your organization determines which records you can see.",
+     "line": 114
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/_utils/formRecordsQuery.js",
+     "quote": "Scoped to every `surveyingOrganization` string the organization goes by",
+     "line": 9
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records may be available to authorized users of the organization collecting them.",
+     "line": 391
+    }
+   ]
+  },
+  "org-nickname-what": {
+   "claim": "One official name plus spellings; the official name always matches.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_alias_implicit\": \"always matches\",",
+     "line": 142
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "The organization name always matches, so it does not need to be listed.",
+     "line": 156
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "Canonical names participate as implicit aliases",
+     "line": 183
+    }
+   ]
+  },
+  "org-collect-creates": {
+   "claim": "Collect: pick to join; a clearly new name creates the org with the signer as admin.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "AutoFill",
+     "line": 1
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Clearly distinct: create it, and the signer-up becomes its admin.",
+     "line": 133
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('role', 'administrator');",
+     "line": 155
+    }
+   ]
+  },
+  "org-too-close": {
+   "claim": "Near-duplicate check: exact normalized match joins; containment or distance<=2 refused; accents/case ignored.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "exact normalized match  -> null.",
+     "line": 116
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "containment either way  -> too close.",
+     "line": 118
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "distance <= 2           -> too close.",
+     "line": 120
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "Accents are folded because these names are frequently Spanish and are typed",
+     "line": 24
+    }
+   ]
+  },
+  "org-refused-effect": {
+   "claim": "A refused or unmatched name still gets an account; empty Manage; Collect still works; email to fix.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Refused. The ACCOUNT is still created",
+     "line": 119
+    },
+    {
+     "file": "puente-react-nextjs-platform/docs/organization-onboarding.md",
+     "quote": "In Manage they see an empty app, because record queries filter on",
+     "line": 106
+    },
+    {
+     "file": "puente-react-nextjs-platform/docs/organization-onboarding.md",
+     "quote": "In Collect they can still collect and sync — nothing there gates on",
+     "line": 108
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Email info@puente-dr.org to change it.",
+     "line": 115
+    }
+   ]
+  },
+  "org-staff-create": {
+   "claim": "Staff create organizations with name, permanent short code and spellings; clashes refused.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'createOrganization requires the master key or the puente_staff role',",
+     "line": 51
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_create_shortcode_hint\": \"Short, lowercase, and permanent. Used in exports.\",",
+     "line": 154
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_create_aliases\": \"Other spellings, separated by commas\",",
+     "line": 155
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "is already taken`);",
+     "line": 65
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "createOrganization: alias",
+     "line": 78
+    }
+   ]
+  },
+  "org-retire": {
+   "claim": "Organizations are retired, not deleted; retiring releases names; merge = retire + alias.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "RELEASE its names so the surviving organization can take them over.",
+     "line": 194
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "Deactivate-then-re-alias is now the merge procedure, and it is",
+     "line": 200
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "non-destructive: the retired row stays, and resolve() keeps pointing its",
+     "line": 201
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "is the identical rule the registration pickers already",
+     "line": 76
+    }
+   ]
+  },
+  "org-first-admin": {
+   "claim": "First member becomes administrator; later members are contributors.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "First member of a known organization gets admin.",
+     "line": 174
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "applies to a staff-created organization exactly as it does to a",
+     "line": 177
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('role', 'contributor');",
+     "line": 127
+    }
+   ]
+  },
+  "org-no-approval": {
+   "claim": "No approval step.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/docs/organization-onboarding.md",
+     "quote": "Nobody approves accounts.",
+     "line": 172
+    },
+    {
+     "file": "puente-react-nextjs-platform/docs/organization-onboarding.md",
+     "quote": "the registrant themselves, and nothing in either app gates on it.",
+     "line": 173
+    }
+   ]
+  },
+  "org-member-exports": {
+   "claim": "Any member can use Manage and export identified records.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "Every export route serves identified patient records: names, phone numbers,",
+     "line": 1
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "an organization-scoped route serves only that organization's members;",
+     "line": 9
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "if scope and who['organization'] and any(_same(who['organization'], s) for s in scope):",
+     "line": 158
+    }
+   ]
+  },
+  "org-admin-screen": {
+   "claim": "/organization-admin for staff and org admins; others redirected; no menu link.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/organization-admin/index.js",
+     "quote": "router.replace('/quick-start');",
+     "line": 97
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/organization-admin/index.js",
+     "quote": "Two audiences on one surface: Puente staff administer every organization,",
+     "line": 19
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/OrganizationAdmin.js",
+     "quote": ": organizations.filter((o) => adminOf.includes(o.shortCode));",
+     "line": 317
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
+     "quote": "{ id: 'settings', labelKey: 'nav_settings', icon: '◌', href: '/account/management' },",
+     "line": 23
+    }
+   ]
+  },
+  "org-admin-actions": {
+   "claim": "Make/Remove administrator, Deactivate/Reactivate, own organization only.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_member_promote\": \"Make administrator\",",
+     "line": 161
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_member_reactivate\": \"Reactivate\",",
+     "line": 164
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'setOrgAdmin requires the master key, the puente_staff role, or the '",
+     "line": 299
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Authorization is scoped to the TARGET's organization, not the caller's, so",
+     "line": 294
+    }
+   ]
+  },
+  "org-last-admin": {
+   "claim": "Last admin cannot be demoted or deactivated; error shown under the row.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'Cannot demote the last admin of an organization. Appoint another admin '",
+     "line": 313
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "'Cannot deactivate the last admin of an organization. Appoint another '",
+     "line": 328
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/MembersPanel.js",
+     "quote": "data-testid={`member-error-${member.objectId}`}",
+     "line": 80
+    }
+   ]
+  },
+  "org-deactivate-signout": {
+   "claim": "Deactivating destroys the person's sessions; both apps sign in with Parse.User.logIn, which never runs the server's deactivated check, so they can sign in again (bug M13/C19).",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
+     "line": 338
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
+     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
+     "line": 30
+    }
+   ]
+  },
+  "org-staff-every": {
+   "claim": "Staff see every organization, the unmatched list and the create form.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/OrganizationAdmin.js",
+     "quote": "const visible = isStaff",
+     "line": 315
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/OrganizationAdmin.js",
+     "quote": "{isStaff && (",
+     "line": 340
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_unresolved_title\": \"Accounts that do not match an organization\",",
+     "line": 145
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_create_title\": \"Add a partner organization\",",
+     "line": 151
+    }
+   ]
+  },
+  "org-nickname-staff": {
+   "claim": "Only staff can save spellings; others see the server error.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "'editOrganizationAliases requires the master key or the puente_staff role',",
+     "line": 114
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/OrganizationAdmin/OrganizationAdmin.js",
+     "quote": "setError(e.message);",
+     "line": 43
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_aliases_save\": \"Save spellings\",",
+     "line": 144
+    }
+   ]
+  },
+  "org-nickname-matching": {
+   "claim": "Name matching ignores accents, case and surrounding spaces.",
+   "evidence": [
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "trimmed, lowercased. Manage picks the short code with it",
+     "line": 122
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "Accents are folded because these names are frequently Spanish and are typed",
+     "line": 24
+    }
+   ]
+  },
+  "org-nickname-exports": {
+   "claim": "Record scope and exports use the official name and aliases as exact strings.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/modules/organization/index.js",
+     "quote": "return Array.from(new Set([org.name, ...(org.aliases || [])].filter(Boolean)));",
+     "line": 235
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/organization/index.js",
+     "quote": "Use with `containedIn`, never `equalTo`.",
+     "line": 210
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/organization.py",
+     "quote": "values = [org.get('name')] + list(org.get('aliases') or [])",
+     "line": 51
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Store the CANONICAL name, not what was typed.",
+     "line": 161
+    }
+   ]
+  },
+  "org-nickname-unique": {
+   "claim": "A spelling belongs to one live organization; clashes refused naming the owner; names count; retired release.",
+   "evidence": [
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "Canonical names participate as implicit aliases",
+     "line": 183
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/organization.definer.js",
+     "quote": "editOrganizationAliases: alias",
+     "line": 123
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/organization/organization.js",
+     "quote": "DEACTIVATED organizations do not own anything here.",
+     "line": 192
+    }
+   ]
+  },
+  "org-unmatched-list": {
+   "claim": "Staff see unmatched accounts; adding an alias resolves them.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_unresolved_title\": \"Accounts that do not match an organization\",",
+     "line": 145
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/organization-admin/index.js",
+     "quote": "a new alias can resolve accounts that were in",
+     "line": 105
+    }
+   ]
+  }
+ }
+}

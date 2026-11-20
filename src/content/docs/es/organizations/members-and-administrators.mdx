@@ -1,0 +1,100 @@
+---
+title: Miembros y administradores
+description: Quién queda como administrador, qué puede hacer cada miembro y cada administrador, y cómo los administradores gestionan a su gente en la pantalla Organizaciones.
+related:
+  - organizations/organizations
+  - organizations/nicknames
+  - manage/account-settings
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import orgs from '@shots/es/manage-organizations.png';
+import oneOrg from '@shots/es/admin-03-one-organization.png';
+import staffView from '@shots/es/admin-01-organizations-screen.png';
+
+Cada persona de una organización es miembro o administrador. Los dos hacen el trabajo de todos los días: recolectar en Collect, y revisar, crear formularios y exportar en Manage. Quienes administran además cuidan a la gente de su organización: les dan o les quitan el rol de administrador, y los desactivan o reactivan.
+
+## Quién queda como administrador
+
+{/* claim: org-first-admin */}
+La primera persona que se registra en una organización queda como su administradora. Eso pasa tanto si creó la organización escribiendo un nombre nuevo en Collect como si la creó el personal de Puente y esa persona fue la primera en entrar. Quien se registra después es miembro.
+
+{/* claim: org-no-approval */}
+No hay paso de aprobación. Un miembro nuevo puede recolectar y usar Manage enseguida; nadie tiene que aceptar su cuenta primero.
+
+## Qué puede hacer cada uno
+
+{/* claim: org-member-exports */}
+| | Miembro | Administrador |
+|---|---|---|
+| Recolectar y sincronizar en Collect | Sí | Sí |
+| Usar Manage: revisar, curar, crear y publicar formularios | Sí | Sí |
+| Exportar registros completos, con datos que identifican a las personas | Sí | Sí |
+| Dar o quitar el rol de administrador, desactivar personas | No | Sí, en su propia organización |
+
+<Aside type="caution" title="Cualquier miembro puede descargar datos que identifican a las personas">
+Las exportaciones tienen nombres, números de cédula, teléfonos, fechas de nacimiento y ubicaciones, y cualquier miembro puede descargarlas. Da cuentas solo a quien deba ver eso, y desactiva a las personas cuando se vayan.
+</Aside>
+
+## Abrir la pantalla Organizaciones
+
+{/* claim: org-admin-screen */}
+La pantalla está en `/organization-admin` dentro de Manage, por ejemplo `https://puente-manage.vercel.app/organization-admin`. Hoy no hay un enlace en el menú, así que escribe la dirección. Solo la pueden usar administradores y el personal de Puente; a cualquier otra persona la manda al panel.
+
+<Shot src={orgs} alt="La pantalla Organizaciones como la ve un administrador: el panel de organizaciones asociadas con Example Health Trust y sus formas de escribirlo, y cuatro personas, cada una con los botones Hacer administrador y Desactivar o Reactivar; Dani Modelo está marcada como desactivada." caption="Un administrador solo ve su propia organización." />
+
+## Dar el rol de administrador
+
+{/* claim: org-admin-actions */}
+Cada persona de tu organización aparece con botones:
+
+- <UI>Hacer administrador</UI> le da los mismos poderes que tú. Un administrador queda marcado <UI>Administrador</UI>, y el botón pasa a ser <UI>Quitar administrador</UI>.
+- <UI>Desactivar</UI> cierra sus sesiones, así que las aplicaciones le cierran la sesión. Queda marcado <UI>Desactivado</UI>, y el botón pasa a ser <UI>Reactivar</UI>.
+
+Estos botones solo funcionan con la gente de tu propia organización. Quien administra una organización no puede tocar otra.
+
+<Shot src={oneOrg} alt="La gente de una organización: Ada Example marcada como administradora con Quitar administrador y Desactivar; Beto Muestra con Hacer administrador y Desactivar; Fran Prueba marcada como desactivada con Hacer administrador y Reactivar." caption="El estado de cada persona aparece al lado de sus botones." />
+
+{/* claim: org-last-admin */}
+No puedes quitar el rol ni desactivar al último administrador de una organización: no quedaría nadie para gestionarla. Primero da el rol a otra persona. Si un cambio se rechaza, el motivo aparece debajo de la fila de esa persona.
+
+<Aside type="tip">
+Ten al menos dos administradores, para que uno pueda cubrir cuando el otro no esté o se vaya.
+</Aside>
+
+## Cuando alguien se va
+
+{/* claim: org-deactivate-signout */}
+Desactiva su cuenta. Desactivar cierra sus sesiones, así que Collect y Manage la sacan y su teléfono deja de sincronizar con esa cuenta. Hoy no impide que vuelvan a entrar con su contraseña — ninguna de las dos aplicaciones revisa todavía si la cuenta está desactivada al iniciar sesión —, así que avísale también a Puente en info@puente-dr.org.
+
+Sus registros se quedan con tu organización. Si la persona vuelve, pulsa <UI>Reactivar</UI>.
+
+## Lo que ve el personal de Puente
+
+{/* claim: org-staff-every */}
+El personal de Puente ve todas las organizaciones en esta pantalla, más una lista de <UI>Cuentas que no coinciden con ninguna organización</UI> y el formulario para <UI>Agregar una organización asociada</UI>. Quien administra solo ve su propia organización.
+
+<Shot src={staffView} alt="La vista del personal en la pantalla Organizaciones: varias organizaciones con su gente, una lista de cuentas que no coinciden con ninguna organización con dos nombres escritos y sus correos, y el comienzo del formulario para agregar una organización." caption="La vista del personal. Todos los nombres y personas son inventados." />
+
+{/* claim: org-nickname-staff */}
+También verás un cuadro con el botón <UI>Guardar formas de escribirlo</UI> para tu organización. Guardar solo funciona para el personal de Puente; para agregar una forma de escribir el nombre, escribe a info@puente-dr.org. Mira [Apodos](/docs/es/organizations/nicknames/).
+
+## Preguntas frecuentes
+
+**¿Cómo llego a ser administrador si entré en segundo lugar?**
+Pide a quien administra ahora que pulse Hacer administrador para ti.
+
+**Nuestro único administrador se fue.**
+Escribe a info@puente-dr.org. El personal de Puente puede nombrar a otra persona.
+
+{/* claim: org-admin-screen */}
+**Escribí la dirección y terminé en el panel.**
+Tu cuenta no tiene el rol de administrador. Pide a quien administra que te lo dé, o que haga el cambio por ti.
+
+**¿Puedo ver a la gente de otra organización?**
+No. Quien administra solo ve su propia organización; solo el personal de Puente ve todas.
+
+**¿Desactivar a alguien borra sus registros?**
+No. Los registros pertenecen a la organización.

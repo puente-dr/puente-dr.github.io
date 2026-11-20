@@ -1,0 +1,102 @@
+---
+title: Reading export files
+description: What a row means in each export, how to join files on objectId, and the places where the spreadsheet differs from what you saw in the app.
+related:
+  - data/exporting-data
+  - data/research-exports
+  - manage/data-curation
+  - manage/form-creator
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/en/export-01-form-manager.png';
+import creator from '@shots/en/manage-form-creator-edit.png';
+import curation from '@shots/en/manage-data-curation.png';
+
+An export is one CSV file per form. This page is for whoever opens those files: the coordinator making a report, or the analyst who receives them months later. Most of the file is exactly what the surveyors typed. A few things are shaped differently from the app, and each one confuses someone who is not expecting it.
+
+If you have not downloaded a file yet, start with [Exporting data](/docs/data/exporting-data/).
+
+## One row per record, not per person
+
+The `SurveyData` file — Resident ID in Collect — has one row per person. Every other file has one row per form filled in.
+
+{/* claim: data-row-per-record */}
+If you take vitals from the same person three times, the `Vitals` file has three rows for them. Each row already carries that person's details — name, community, organization — copied in from their Resident ID, so you can filter or pivot on them without joining anything.
+
+<Aside type="tip" title="Count people in the people file">
+The number of rows in a Vitals file is the number of readings taken, not the number of people seen. To count people, count the rows of `SurveyData`, or the distinct values of `objectId` in another file.
+</Aside>
+
+<Shot src={formManager} alt="The Form Manager listing the four Puente forms — SurveyData, HistoryEnvironmentalHealth, Vitals and EvaluationMedical — each with an Export button, and two custom forms below." caption="Each Export button gives you one of these files. SurveyData is the people file; the others are visits." />
+
+## Join files on objectId
+
+{/* claim: data-join-objectid */}
+When you do need to combine two files, join on the `objectId` column. It means the same thing in every file: **which person this row is about**. In the Vitals, Environmental Health, Medical Evaluation and custom-form files, the id of the form itself is in a separate column, `idSupplementary`, so the two never get mixed up.
+
+Never join on a name or a community. Names are spelled several ways, and community names lose their accents in some files (see below).
+
+## Records without a person
+
+{/* claim: data-orphans */}
+A form whose person record is missing still exports. It arrives with the person columns blank instead of being left out, so collected work never silently disappears from a download. If you see rows like this, tell your coordinator; they need repairing in Puente, not in the spreadsheet.
+
+## Identical people collapse into one row
+
+{/* claim: data-dedupe */}
+The `SurveyData` export removes rows that are identical to each other. If two Resident IDs agree on every detail — name, nickname, sex, date of birth, phone, education, occupation, community, city, province, cédula, surveyor, organization, coordinates and photo — they leave as **one** row.
+
+That hides exact duplicates, such as a form sent twice. It also means the row count of the people file is not always the number of records in Puente: the two duplicates are still two separate people in the app, each with their own history. People who differ in any detail stay as two rows.
+
+{/* claim: data-clean-duplicates */}
+To fix duplicates at the source, use <UI>Clean</UI> in Manage, which shows how many duplicates it found. See [Data Curation](/docs/manage/data-curation/).
+
+<Shot src={curation} alt="The Data Curation screen with Records and Community Audit tabs, a summary reading 48 records, 92% avg completeness, 0 duplicates and 0 anomalies, and a table of records by name, community, surveyor and date." caption="Fix duplicates in Puente, then export again. Editing the spreadsheet fixes nothing for the next export." />
+
+## Age is a subtraction
+
+{/* claim: data-age-subtraction */}
+The `age` column in the people file is **this year minus the birth year**, nothing more. Anyone whose birthday falls later in the year reads one year too old. For counting a community into age bands this is usually fine. When a single year matters — a pediatric cut-off, an eligibility rule — calculate the age yourself from `dob`.
+
+If the surveyor typed an age because the birth date was unknown, that typed number is kept. If a birth date cannot be read at all, `age` is left blank rather than guessed.
+
+## Accents in custom-form files
+
+{/* claim: data-accents-stripped */}
+In the four Puente files, text keeps its accents: `Peña`, `Baní`. In an export of a **custom** form, accents are removed from both the answers and the column headings — `Peña` becomes `Pena`, and `¿` and `¡` disappear.
+
+<Aside type="caution">
+The same community can therefore be spelled two ways across two files. A lookup or pivot that matches on community name will quietly miss rows. Join on `objectId` instead.
+</Aside>
+
+## Your questions become columns
+
+{/* claim: data-question-columns */}
+In a custom-form export, each question becomes one column, headed by the question's label. Whatever you type as the question in the Form Creator is what an analyst reads at the top of the column, so write it to be read on its own.
+
+If you rename a question after people have answered it, the old and new answers still land in one column, under the current label.
+
+<Shot src={creator} alt="The Form Creator with a form named Water access — Example Community, and a Single select question titled Water source with options tap and well." caption="The question text you type here becomes the column heading in the export." />
+
+{/* claim: data-column-collision */}
+If a question has the same name as a built-in column — `communityname`, say — your column is renamed `communityname_from_custom_form`. Both columns are in the file.
+
+## What is not in the file
+
+{/* claim: data-not-in-file */}
+- **Photos and signatures.** The people file has a `pictureURL` column: a link, not the image. Custom-form files carry neither.
+- **The phone's own ids.** Ids a phone creates while offline help Puente recognise a form sent twice. They mean nothing in a spreadsheet, so they are left out.
+- **Other organizations' records.** An export covers your organization only.
+
+## FAQ
+
+**Why does the Vitals file repeat the same name?**
+One row per reading. The person's details repeat on each one.
+
+**Which column tells me who a row is about?**
+`objectId`, in every file.
+
+**Can I fix mistakes in the spreadsheet?**
+You can, but Puente will not know. Fix records in Manage, then export again.

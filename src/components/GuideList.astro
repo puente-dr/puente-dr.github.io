@@ -1,0 +1,107 @@
+---
+// The guides list, Notion-style: every guide with its picture, format, reading
+// time and roles, and chips that filter by role and format. Without JavaScript
+// every guide is shown; with it, ?role= and ?format= filter in place, so a
+// filtered list can be linked to.
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const prefix = es ? 'es/guides/' : 'guides/';
+const guides = (await getCollection('docs', (e) => e.id.startsWith(prefix) && e.id !== prefix.slice(0, -1)))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title, lang));
+const base = `${import.meta.env.BASE_URL}${es ? 'es/' : ''}`;
+const ROLE = { 'data-collector': es ? 'Recolector de datos' : 'Data collector', 'data-manager': es ? 'Responsable de datos' : 'Data manager' };
+const FORMAT = { guide: es ? 'Guía' : 'Guide', checklist: es ? 'Lista de verificación' : 'Checklist' };
+const t = es
+  ? { all: 'Todas', role: 'Función', format: 'Formato', count: (n) => `${n} guías`, min: 'min de lectura' }
+  : { all: 'All', role: 'Role', format: 'Format', count: (n) => `${n} guides`, min: 'min read' };
+---
+<div class="guide-filters" data-guide-filters>
+  <div class="group" role="group" aria-label={t.role}>
+    <span class="label">{t.role}</span>
+    <a href="?" data-role="" aria-pressed="true">{t.all}</a>
+    {Object.entries(ROLE).map(([k, v]) => <a href={`?role=${k}`} data-role={k} aria-pressed="false">{v}</a>)}
+  </div>
+  <div class="group" role="group" aria-label={t.format}>
+    <span class="label">{t.format}</span>
+    <a href="?" data-format="" aria-pressed="true">{t.all}</a>
+    {Object.entries(FORMAT).map(([k, v]) => <a href={`?format=${k}`} data-format={k} aria-pressed="false">{v}</a>)}
+  </div>
+  <p class="count" aria-live="polite" data-count>{t.count(guides.length)}</p>
+</div>
+<ul class="guide-list">
+  {guides.map((g) => {
+    const slug = g.id.replace(/^es\//, '');
+    return (
+      <li data-roles={(g.data.roles || []).join(' ')} data-format={g.data.format || 'guide'}>
+        <a href={`${base}${slug}/`}>
+          <span class="text">
+            <span class="kind">{FORMAT[g.data.format || 'guide']}</span>
+            <span class="title">{g.data.title}</span>
+            {g.data.description && <span class="desc">{g.data.description}</span>}
+            <span class="meta">
+              {g.data.minutes && <span>{g.data.minutes} {t.min}</span>}
+              {(g.data.roles || []).map((r) => <span class="tag">{ROLE[r]}</span>)}
+            </span>
+          </span>
+          {g.data.thumbnail && <Image src={g.data.thumbnail} alt="" width={320} class="thumb" />}
+        </a>
+      </li>
+    );
+  })}
+</ul>
+<script>
+  const root = document.querySelector('[data-guide-filters]');
+  if (root) {
+    const items = [...document.querySelectorAll('.guide-list > li')];
+    const counter = root.querySelector('[data-count]');
+    const template = counter.textContent.replace(/\d+/, '{n}');
+    const apply = () => {
+      const q = new URLSearchParams(location.search);
+      const role = q.get('role') || '';
+      const format = q.get('format') || '';
+      let shown = 0;
+      for (const li of items) {
+        const ok = (!role || li.dataset.roles.split(' ').includes(role)) && (!format || li.dataset.format === format);
+        li.hidden = !ok;
+        if (ok) shown += 1;
+      }
+      root.querySelectorAll('[data-role]').forEach((a) => a.setAttribute('aria-pressed', String(a.dataset.role === role)));
+      root.querySelectorAll('[data-format]').forEach((a) => a.setAttribute('aria-pressed', String(a.dataset.format === format)));
+      counter.textContent = template.replace('{n}', shown);
+    };
+    root.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-role], a[data-format]');
+      if (!a) return;
+      e.preventDefault();
+      const q = new URLSearchParams(location.search);
+      const key = a.dataset.role !== undefined ? 'role' : 'format';
+      const val = a.dataset[key];
+      if (val) q.set(key, val); else q.delete(key);
+      history.replaceState(null, '', `${location.pathname}${q.toString() ? `?${q}` : ''}`);
+      apply();
+    });
+    apply();
+  }
+</script>
+<style>
+  .guide-filters { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: center; margin: 1.5rem 0 1rem; }
+  .group { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+  .label { font-size: var(--sl-text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--sl-color-gray-3); margin-inline-end: 0.25rem; }
+  .group a { border: 1px solid var(--sl-color-gray-5); border-radius: 999px; padding: 0.2rem 0.8rem; font-size: var(--sl-text-sm); text-decoration: none; color: var(--sl-color-white); }
+  .group a[aria-pressed='true'] { background: var(--sl-color-white); color: var(--sl-color-black); border-color: var(--sl-color-white); }
+  .count { margin: 0 0 0 auto; font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); }
+  .guide-list { list-style: none; padding: 0; margin: 0; }
+  .guide-list > li { border-top: 1px solid var(--sl-color-gray-5); margin: 0; }
+  .guide-list > li[hidden] { display: none; }
+  .guide-list a { display: grid; grid-template-columns: 1fr auto; gap: 1.25rem; align-items: center; padding: 1.25rem 0; text-decoration: none; color: inherit; }
+  .guide-list .kind { display: block; font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); }
+  .guide-list .title { display: block; font-size: var(--sl-text-h4); font-weight: 600; color: var(--sl-color-white); line-height: 1.3; margin: 0.15rem 0; }
+  .guide-list a:hover .title { text-decoration: underline; }
+  .guide-list .desc { display: block; color: var(--sl-color-gray-2); font-size: var(--sl-text-sm); }
+  .guide-list .meta { display: flex; flex-wrap: wrap; gap: 0.4rem 0.75rem; margin-top: 0.5rem; font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); align-items: center; }
+  .guide-list .tag { background: var(--sl-color-gray-6); border-radius: 0.25rem; padding: 0.05rem 0.45rem; color: var(--sl-color-gray-2); }
+  .guide-list :global(.thumb) { width: 9rem; height: 6rem; object-fit: cover; object-position: top; border-radius: 0.4rem; border: 1px solid var(--sl-color-gray-5); }
+  @media (max-width: 40rem) { .guide-list a { grid-template-columns: 1fr; } .guide-list :global(.thumb) { display: none; } }
+</style>

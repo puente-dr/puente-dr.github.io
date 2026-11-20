@@ -1,0 +1,109 @@
+---
+title: Exporting data
+description: Download a form's records from Manage as a CSV file — where the Export buttons are, what the file is called, what the messages mean and what one export covers.
+related:
+  - data/reading-export-files
+  - data/research-exports
+  - manage/form-manager
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import formManager from '@shots/en/export-01-form-manager.png';
+import noRecords from '@shots/en/export-03-no-records-yet.png';
+import failed from '@shots/en/export-04-export-failed.png';
+import expanded from '@shots/en/manage-form-manager-expanded.png';
+
+Everything your team collects in Collect ends up in Puente. **Export** makes a copy of one form's records as a spreadsheet file — a CSV — that you can open in Excel, Google Sheets or any other spreadsheet program, and use for a report, a funder or an analyst.
+
+The export is a copy, not a live link. Editing the spreadsheet changes nothing in Puente, and changes made in Puente afterwards do not reach a file you already downloaded. To fix a record, fix it in Manage and export again.
+
+## Find the Export buttons
+
+{/* claim: data-export-buttons */}
+In Manage, open <UI>Manage</UI> in the left menu. The <UI>Form Manager</UI> lists every form your organization can export, and each form has its own <UI>Export</UI> button: the four Puente forms at the top, then your custom forms. Every export is a CSV file.
+
+<Shot src={formManager} alt="The Form Manager screen. Under Puente Forms, SurveyData, HistoryEnvironmentalHealth, Vitals and EvaluationMedical each have an Export button; under Custom Forms, two forms have Edit, Duplicate, Delete and Export." caption="One Export button per form. There is no button that downloads every form at once." />
+
+## One file per form
+
+{/* claim: data-one-file-per-form */}
+Each button downloads one form, so you get one file per form. The Puente forms appear under their internal names:
+
+| In Manage | In Collect | One row is |
+|---|---|---|
+| `SurveyData` | Resident ID | a person |
+| `HistoryEnvironmentalHealth` | Environmental Health | one environmental health survey |
+| `Vitals` | Vitals | one set of vitals |
+| `EvaluationMedical` | Medical Evaluation | one medical evaluation |
+| your custom form | your custom form | one submission of that form |
+
+To put two files together, see [Reading export files](/docs/data/reading-export-files/).
+
+## What the file is called
+
+{/* claim: data-file-name */}
+The file lands in your browser's downloads folder, named after the form and the moment you pressed the button, for example `SurveyData-Fri Sep 11 2026 14:40:39 GMT-0700 (Pacific Daylight Time).csv`. The name is long, but two exports of the same form never overwrite each other.
+
+{/* claim: data-excel-bom */}
+The file is marked as UTF-8, so Excel shows accented names correctly when you open it with a double-click.
+
+## While it downloads
+
+{/* claim: data-export-loading */}
+After you press <UI>Export</UI>, the button reads <UI>Loading…</UI> until the file is ready. A large organization's export can take a while. Leave the page open and wait for the button to go back to <UI>Export</UI>.
+
+## Empty, failed or signed out
+
+{/* claim: data-export-messages */}
+When there is no file to save, a message appears in the top corner. The three messages mean different things:
+
+| Message | What it means | What to do |
+|---|---|---|
+| <UI>This form has no records to export yet.</UI> | Nothing has reached Puente on this form. No file is saved. | Nothing is wrong. Check that phones have sent their forms. |
+| <UI>The export could not be completed. Please try again.</UI> | The download itself broke. Your records are fine. | Try again. If it keeps happening, [contact Puente](/docs/help/contact-support/). |
+| <UI>Your sign-in has expired. Sign in again to export.</UI> | Your session ended. | Sign in again, then export. Retrying without signing in will not help. |
+
+<Shot src={noRecords} alt="The Form Manager with a message in the top right corner reading: This form has no records to export yet. A Dismiss link sits beside it." caption="Empty is not failed. This message means nothing has been collected on the form yet." />
+
+<Shot src={failed} alt="The Form Manager with a message in the top right corner reading: The export could not be completed. Please try again." caption="This one means the download broke, not that your records are missing." />
+
+A file that opens with only a heading row is different again: it is a real answer meaning zero records matched, and it saves like any other file.
+
+## What one export covers
+
+{/* claim: data-export-aliases */}
+The same organization is often written several ways in the field: its full name, an abbreviation, a spelling someone typed once on a phone. Puente keeps a list of those spellings — its [nicknames](/docs/organizations/nicknames/) — and your export includes the records filed under **every** spelling of your organization, not only the one on your account.
+
+If a spelling your team uses is not on that list, its records are left out of your exports. That is the most common reason an export looks too small. Email info@puente-dr.org with the spelling and Puente staff will add it.
+
+## Who can export
+
+{/* claim: data-export-members */}
+Any member of your organization who can sign in to Manage can press <UI>Export</UI> — you do not have to be an administrator. Puente staff can also download any organization's records.
+
+## Exports contain identified data
+
+{/* claim: data-export-identified */}
+A full export contains people's names, ID numbers, phone numbers, birth dates and locations. Treat every file as a patient record.
+
+<Aside type="caution" title="Do not send a full export outside your organization">
+Keep exports in a shared folder with named people, not as email attachments, and delete copies you no longer need. To share data with a research partner, turn on the [research file](/docs/data/research-exports/) for that form and send only that.
+</Aside>
+
+<Shot src={expanded} alt="A Form Manager row for the Vision exam form, marked Research export on, expanded to show Forms collected: 37, a Refresh button, and two notes describing the research file and the full records." caption="On a form with the research file turned on, Manage spells out what each file contains." />
+
+## FAQ
+
+**Can I export every form at once?**
+No. Export each form you need; each one is its own file.
+
+**I pressed Export and nothing downloaded.**
+Look for a message in the top corner. If there is none, wait for the button to stop reading Loading….
+
+**The export has fewer records than I expected.**
+Check that every phone has sent its forms from Offline Sync, then check that your organization's spellings are all on file. See [Troubleshooting](/docs/help/troubleshooting/).
+
+**Does exporting change anything in Puente?**
+No. It only reads the records.

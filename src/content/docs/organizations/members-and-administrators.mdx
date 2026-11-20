@@ -1,0 +1,100 @@
+---
+title: Members and administrators
+description: Who becomes an administrator, what members and administrators can each do, and how administrators manage their people on the Organizations screen.
+related:
+  - organizations/organizations
+  - organizations/nicknames
+  - manage/account-settings
+  - privacy/protecting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import orgs from '@shots/en/manage-organizations.png';
+import oneOrg from '@shots/en/admin-03-one-organization.png';
+import staffView from '@shots/en/admin-01-organizations-screen.png';
+
+Everyone in an organization is either a member or an administrator. Both can do the everyday work — collecting in Collect, reviewing, building forms and exporting in Manage. Administrators can also look after their organization's people: promote, demote, deactivate and reactivate them.
+
+## Who becomes an administrator
+
+{/* claim: org-first-admin */}
+The first person to register in an organization becomes its administrator. That is true whether they created the organization by typing a new name in Collect, or Puente staff created it and they were the first to join. Everyone who registers after them is a member.
+
+{/* claim: org-no-approval */}
+There is no approval step. A new member can collect and use Manage straight away; nobody has to accept them first.
+
+## What members and administrators can do
+
+{/* claim: org-member-exports */}
+| | Member | Administrator |
+|---|---|---|
+| Collect and sync records in Collect | Yes | Yes |
+| Use Manage: review, curate, build and publish forms | Yes | Yes |
+| Export full, identified records | Yes | Yes |
+| Make or remove administrators, deactivate people | No | Yes, in their own organization |
+
+<Aside type="caution" title="Every member can download identified data">
+Exports contain names, ID numbers, phone numbers, birth dates and locations, and any member can download them. Only give accounts to people who should see that, and deactivate people when they leave.
+</Aside>
+
+## Open the Organizations screen
+
+{/* claim: org-admin-screen */}
+The screen lives at `/organization-admin` in Manage — for example `https://puente-manage.vercel.app/organization-admin`. There is no menu link to it today, so type the address. Only administrators and Puente staff can use it; anyone else is sent to the dashboard.
+
+<Shot src={orgs} alt="The Organizations screen as an administrator sees it: a Partner organizations panel for Example Health Trust with its spellings, and four people, each with Make administrator, and Deactivate or Reactivate buttons; Dani Modelo is marked Deactivated." caption="An administrator sees only their own organization." />
+
+## Make someone an administrator
+
+{/* claim: org-admin-actions */}
+Each person in your organization is listed with buttons:
+
+- <UI>Make administrator</UI> gives them the same powers as you. An administrator is marked <UI>Administrator</UI>, and the button becomes <UI>Remove administrator</UI>.
+- <UI>Deactivate</UI> ends their sessions, so the apps sign them out. They are marked <UI>Deactivated</UI>, and the button becomes <UI>Reactivate</UI>.
+
+These buttons only work on your own organization's people. An administrator of one organization cannot reach another.
+
+<Shot src={oneOrg} alt="One organization's people: Ada Example marked Administrator with Remove administrator and Deactivate; Beto Muestra with Make administrator and Deactivate; Fran Prueba marked Deactivated with Make administrator and Reactivate." caption="Each person's status is shown beside their buttons." />
+
+{/* claim: org-last-admin */}
+You cannot remove or deactivate the last administrator of an organization — that would leave nobody to manage it. Make someone else administrator first. If a change is refused, the reason appears under that person's row.
+
+<Aside type="tip">
+Keep at least two administrators, so one can step in when the other is away or leaves.
+</Aside>
+
+## When someone leaves
+
+{/* claim: org-deactivate-signout */}
+Deactivate them. Deactivating ends their sessions, so Collect and Manage sign them out and their phone stops syncing under that account. Today it does not stop them signing in again with their password — neither app checks for a deactivated account at sign-in yet — so also tell Puente at info@puente-dr.org.
+
+Their records stay with your organization. If they come back, press <UI>Reactivate</UI>.
+
+## What Puente staff see
+
+{/* claim: org-staff-every */}
+Puente staff see every organization on this screen, plus a list of <UI>Accounts that do not match an organization</UI> and the form to <UI>Add a partner organization</UI>. Administrators see only their own organization.
+
+<Shot src={staffView} alt="The staff view of the Organizations screen: several organizations with their people, an Accounts that do not match an organization list with two typed names and emails, and the start of an Add a partner organization form." caption="The staff view. Every name and person here is invented." />
+
+{/* claim: org-nickname-staff */}
+You will also see a <UI>Save spellings</UI> box for your organization. Saving works only for Puente staff; to add a spelling, email info@puente-dr.org. See [Nicknames](/docs/organizations/nicknames/).
+
+## FAQ
+
+**How do I become an administrator if I joined second?**
+Ask your current administrator to press Make administrator for you.
+
+**Our only administrator left.**
+Email info@puente-dr.org. Puente staff can appoint a new one.
+
+{/* claim: org-admin-screen */}
+**I typed the address and landed on the dashboard.**
+Your account is not an administrator. Ask your administrator to make you one, or to make the change for you.
+
+**Can I see the people in another organization?**
+No. An administrator sees only their own organization; only Puente staff see every organization.
+
+**Does deactivating delete the person's records?**
+No. Records belong to the organization.

@@ -1,0 +1,124 @@
+---
+title: Un día de clínica
+description: Para quien coordina y para el responsable técnico en el lugar — preparar los teléfonos, buscar antes de registrar, la sincronización de la noche, revisar el conteo en Manage y qué hacer cuando algo falla.
+related:
+  - collect/offline-sync
+  - guides/field-day-checklist
+  - guides/designing-a-form-for-research
+  - guides/sharing-data-with-researchers
+roles: [data-collector, data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../../assets/shots/es/research-04-forms-collected.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/es/collect-01-offline-banner.png';
+import queue from '@shots/es/collect-03-queue.png';
+import byName from '@shots/es/find-01-search-by-name.png';
+import caughtUp from '@shots/es/collect-04-all-caught-up.png';
+import collected from '@shots/es/research-04-forms-collected.png';
+
+Una clínica muchas veces no tiene señal. Está bien: Collect guarda cada formulario en el teléfono y lo envía después. Pero entre guardar y enviar, el formulario existe en un solo lugar: ese teléfono. Casi toda esta guía protege ese intervalo. Está escrita para quien coordina y para el responsable técnico; los encuestadores deben leer las partes marcadas para ellos.
+
+## Quién hace qué
+
+| Persona | Tarea |
+|---|---|
+| **Coordinación** | Es dueña del formulario, la hoja de registro en papel y el conteo final. Habla con el equipo de investigación. |
+| **Responsable técnico** | Prepara cada teléfono, hace la sincronización de la noche y es la primera persona a quien se pregunta por la aplicación. |
+| **Encuestadores** | Buscan, registran y llenan el formulario del examen. Nunca cierran sesión. |
+
+## Dos días antes
+
+Haz esto en cada teléfono que va a recoger datos, en un lugar con internet.
+
+{/* claim: guide-update-version */}
+1. **Actualiza Puente Collect** desde la App Store o Google Play. La versión actual es la 15.7.5.
+
+{/* claim: guide-signin-internet */}
+2. **Inicia sesión** con la cuenta propia de cada encuestador. Iniciar sesión necesita internet, así que hazlo ahora, no en la clínica.
+
+{/* claim: guide-forms-reach-phones */}
+3. **Comprueba que está el formulario del examen.** En la carpeta, toca la flecha de actualizar junto a <UI>Formularios personalizados</UI>.
+
+{/* claim: guide-practice-discard */}
+4. **Prueba sin señal.** Activa el modo avión, llena el formulario de un paciente inventado y envíalo. Abre la nube (<UI>Sincronización sin conexión</UI>), toca <UI>Descartar</UI> y luego <UI>Descartar permanentemente</UI>, para que el paciente inventado nunca llegue a los datos.
+5. **Anota el teléfono en una lista:** quién lo lleva y si pasó la prueba.
+
+Lleva cargadores y una batería externa por cada dos teléfonos. Un teléfono sin batería guarda sus formularios, pero no puede recoger nuevos.
+
+## Busca antes de registrar
+
+Para encuestadores. El error más común en una clínica es registrar a alguien que ya está en Puente. La aplicación no avisa: el paciente termina siendo dos personas, con sus visitas divididas entre las dos.
+
+{/* claim: guide-search-one-field */}
+Busca solo por el apellido, o por los primeros dígitos de la cédula. Un nombre completo escrito junto no encuentra a nadie. Más formas de buscar: [Buscar registros](/docs/es/collect/find-records/).
+
+<div class="shots">
+<Shot phone src={byName} alt="La pantalla Buscar individuo con Ejemplo escrito en el cuadro y dos tarjetas de residentes coincidentes debajo." caption="Un apellido encuentra a todos los que lo tienen." />
+</div>
+
+## Durante la clínica
+
+Para encuestadores.
+
+- **Un formulario de examen por visita.** Todo lo que se mide en esa visita va en el mismo formulario.
+
+{/* claim: guide-save-messages */}
+- **El aviso sin conexión es normal.** <UI>Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente.</UI> Sigue trabajando.
+
+{/* claim: guide-queue-on-device */}
+- **Nunca cierres sesión, borres los datos de la aplicación ni la desinstales.** Los formularios que no se han enviado se guardan dentro de la aplicación.
+- **Si un paciente no da su consentimiento,** responde «No» a la pregunta de consentimiento y sigue el proceso en papel de la clínica para su atención.
+- **Anota a cada paciente en la hoja de registro en papel.** Así quien coordina comprueba después que no se perdió nadie.
+
+<div class="shots">
+<Shot phone src={banner} alt="Un formulario en un teléfono con un aviso ámbar arriba que dice: Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente." caption="Aunque lo diga, nada se envía hasta que alguien toca Reintentar." />
+</div>
+
+## Cada noche
+
+{/* claim: guide-sync-not-automatic */}
+1. Conecta cada teléfono a una red wifi confiable.
+2. Abre la nube (<UI>Sincronización sin conexión</UI>) y toca <UI>Reintentar</UI>. Nada se envía hasta que lo haces.
+
+{/* claim: guide-caught-up */}
+3. Espera hasta que la pantalla diga <UI>No hay formularios en cola. ¡Estás al día!</UI>
+4. El responsable técnico marca el teléfono como listo en la lista. Un teléfono sin marcar no ha terminado el día.
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de Sincronización sin conexión con un formulario de identificación en cola, un enlace Descartar y un botón Reintentar." caption="Todavía queda un formulario en este teléfono. Toca Reintentar, no Descartar." />
+<Shot phone src={caughtUp} alt="La pantalla de Sincronización sin conexión con la cola vacía: No hay formularios en cola. ¡Estás al día!" caption="Listo por hoy." />
+</div>
+
+{/* claim: guide-forms-collected */}
+Luego, en una computadora, revisa el total. En Manage, abre <UI>Gestionar</UI>, expande la fila del formulario del examen con la flecha y pulsa <UI>Actualizar</UI>. Compara <UI>Formularios recolectados</UI> con la hoja de registro.
+
+<Shot src={collected} alt="El Gestor de formularios con la fila del examen de la vista expandida, mostrando Formularios recolectados: 37." caption="Si es menor que la hoja de registro, a algún teléfono todavía le quedan formularios." />
+
+## Cuando algo falla
+
+{/* claim: guide-still-on-device */}
+{/* claim: guide-logout-offline */}
+| Qué pasó | Qué hacer |
+|---|---|
+| Un formulario sigue en la lista después de Reintentar. | Sigue en el teléfono: <UI>Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.</UI> Inténtalo de nuevo con mejor conexión. No lo descartes. |
+| <UI>El servidor no aceptó estos formularios. Inténtalo de nuevo en unos minutos y contacta con soporte si sigue ocurriendo.</UI> | Espera e inténtalo otra vez. Si los mismos formularios siguen fallando con buen wifi, repórtalo. |
+| Un teléfono se quedó sin batería. | Cárgalo y abre la aplicación otra vez. Sus formularios siguen ahí. No la reinstales. |
+| Alguien quiere cerrar sesión con formularios pendientes. | La aplicación avisa, y sin señal no lo permite. Primero sincroniza, con wifi. |
+| Un paciente se registró dos veces. | Escribe los dos nombres en la hoja de registro y sigue. Quien coordina lo corrige después de la clínica. |
+
+<Aside type="caution" title="Descartar es permanente">
+{/* claim: guide-discard-permanent */}
+Descartar borra un formulario del teléfono y no se puede recuperar. Úsalo para el paciente de prueba antes de la clínica, nunca para uno real.
+</Aside>
+
+## Después de la clínica
+
+1. Haz la sincronización de la noche una última vez en cada teléfono.
+2. Compara el total del Gestor de formularios con la hoja de registro. Si no coinciden, averigua por qué antes de enviar nada.
+3. Luego sigue [Compartir datos con investigadores](/docs/es/guides/sharing-data-with-researchers/).
+
+Escribe a [info@puente-dr.org](mailto:info@puente-dr.org) solo si ningún teléfono puede guardar formularios, o si una sincronización parece haber perdido formularios. Di qué teléfono, a qué hora, y adjunta una foto de la pantalla.

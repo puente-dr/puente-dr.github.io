@@ -1,0 +1,115 @@
+---
+title: Puente forms
+description: The four forms built into every copy of Collect — what each one records, and how to attach the three follow-up forms to a resident.
+related:
+  - collect/resident-id-and-households
+  - collect/custom-forms
+  - collect/find-records
+  - data/reading-export-files
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/en/collect-forms-gallery.png';
+import vitals from '@shots/en/collect-vitals.png';
+import attach from '@shots/en/collect-attach-resident.png';
+
+Every organization's copy of Collect comes with the same four forms, listed under <UI>Puente Forms</UI> when you tap the folder. One registers a person; the other three add to that person's record. Your organization can add its own forms beside them; see [Custom forms](/docs/collect/custom-forms/).
+
+## The four forms
+
+{/* claim: collect-builtin-forms */}
+| Form in Collect | What it is for | Name in Manage and exports |
+|---|---|---|
+| <UI>Resident ID</UI> | Registers a person: who they are, where they live, their household. | SurveyData |
+| <UI>Environmental Health</UI> | The home and its surroundings. | HistoryEnvironmentalHealth |
+| <UI>Medical Evaluation</UI> | A health complaint and the plan for it. | EvaluationMedical |
+| <UI>Vitals</UI> | Measurements: height, weight, blood pressure and more. | Vitals |
+
+Manage lists these forms by their internal names, shown in the last column. Knowing both names saves confusion when you look for your records in [Form Manager](/docs/manage/form-manager/).
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen showing Resident ID and Environmental Health cards under Puente Forms, with a third card cut off at the right edge." caption="Swipe the Puente Forms row sideways to reach Medical Evaluation and Vitals." />
+</div>
+
+## Resident ID
+
+Resident ID creates the person. Fill it in once, the first time you meet someone, and use the other three forms on every visit after. [Resident ID and households](/docs/collect/resident-id-and-households/) covers every field.
+
+## Environmental Health
+
+{/* claim: collect-env-fields */}
+Questions about the household's living conditions:
+
+- How long the person has lived in the community and in this house, and the community's biggest problem.
+- Water: how often they have access, and what kind they drink.
+- Bathroom, latrine, clinic and dental access, and how often trash is collected.
+- The house itself: ownership, floor and roof condition, what the floor and the house are made of, type of stove, and access to electricity.
+- Whether the family worried about having enough food in the past month, and any government assistance.
+- How many people live in the house, and how many children by age group.
+
+The number of people living in the house is required; the rest is optional.
+
+## Medical Evaluation
+
+{/* claim: collect-med-fields */}
+A clinical note about one health problem:
+
+- Chronic conditions: hypertension, diabetes, other.
+- Whether they have seen a doctor, and the status of their care.
+- The part of the body affected, how long it has lasted, whether it began suddenly or gradually, and whether it is getting better or worse.
+- The evaluator's assessment: whether a general consult or surgery is needed, whether immediate follow-up is required, and the plan.
+
+No field is required.
+
+## Vitals
+
+{/* claim: collect-vitals-fields */}
+Measurements, each with its unit beside the box: <UI>Height</UI> (inches), <UI>Weight</UI> (pounds), <UI>Body Mass Index</UI>, <UI>Body Temperature</UI> (°Celsius), <UI>Pulse</UI>, <UI>Respiratory Rate</UI>, <UI>Blood Pressure</UI> (systolic over diastolic), <UI>Blood Oxygen</UI>, fasting blood glucose, hemoglobin, hemoglobin A1c, and <UI>Pain</UI>. No field is required, so record what you measured and leave the rest blank.
+
+<div class="shots">
+<Shot phone src={vitals} alt="The Vitals form: a Search by name or ID box at the top, then Height in inches, Weight in pounds, Body Mass Index, Body Temperature in degrees Celsius, Pulse in beats per minute and Respiratory Rate in breaths per minute." caption="Vitals opens with the resident search box above the first question." />
+</div>
+
+<Aside type="caution" title="Check the units">
+Height is in inches and weight in pounds. If you measured in centimeters or kilograms, convert before you type.
+</Aside>
+
+## Attach the form to a resident
+
+{/* claim: collect-attach-resident */}
+Environmental Health, Medical Evaluation and Vitals all belong to a person. Each opens with a <UI>Search by name or ID</UI> box above the questions. Search for the person, tap their card, then fill in the form.
+
+Until you choose someone, the button at the bottom reads <UI>Attach a Community Resident</UI> and does nothing. Once a resident is attached it changes to <UI>Save Record</UI>.
+
+<div class="shots">
+<Shot phone src={attach} alt="The bottom of the Vitals form: Blood Pressure, Blood Oxygen, blood glucose, hemoglobin and Pain fields, with the words Attach a Community Resident where the save button would be." caption="No resident chosen yet, so the form cannot be saved." />
+</div>
+
+There are quicker ways in that skip the search:
+
+{/* claim: collect-suggested-next */}
+- **Right after a Resident ID.** The <UI>Suggested next forms</UI> screen shows your pinned forms; tap one and it opens for the person you just registered.
+
+<Aside type="caution" title="Suggested next forms do not ask again">
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+</Aside>
+- **From the person's record.** Open them under the magnifying glass and start a form from there. See [Find records](/docs/collect/find-records/).
+
+## When you save
+
+{/* claim: collect-supp-saved */}
+The message tells you where the form went: <UI>Form successfully submitted</UI> means it reached Puente; <UI>Saved offline — will sync when you reconnect</UI> means it is waiting on the phone. Send waiting forms from the cloud; see [Offline and sync](/docs/collect/offline-sync/).
+
+## FAQ
+
+{/* claim: collect-attach-resident */}
+**Why can't I save Vitals?**
+No resident is attached. Search for the person at the top of the form and tap their card.
+
+{/* claim: collect-builtin-fixed */}
+**Can I change the questions on these forms?**
+No. The four Puente forms are the same for every organization. To ask your own questions, build a custom form in Manage; see [Form Creator](/docs/manage/form-creator/).
+
+**The person isn't found when I search. What do I do?**
+Search by surname alone, then nickname. If they really are new, register them with Resident ID first.

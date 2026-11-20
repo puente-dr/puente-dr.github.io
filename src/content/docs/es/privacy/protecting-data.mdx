@@ -1,0 +1,100 @@
+---
+title: Proteger los datos de las personas
+description: Qué guarda Collect, quién puede verlo y descargarlo, cómo funciona el consentimiento y los hábitos de todos los días que protegen a las personas que encuestas.
+related:
+  - collect/consent
+  - data/exporting-data
+  - organizations/members-and-administrators
+  - privacy/delete-your-account
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import consent from '@shots/es/collect-consent.png';
+import orgs from '@shots/es/manage-organizations.png';
+import expanded from '@shots/es/research-04-forms-collected.png';
+
+Las personas que encuestas te confían su nombre, su casa y su salud. Las apps de Puente guardan esa información para que tu organización pueda atenderlas; el cuidado con que se maneja depende de quienes usan las apps cada día.
+
+Esta página dice qué guardan las apps y quién puede llegar a esos datos, y luego enumera los hábitos que más importan. No describe funciones de seguridad. Para los términos legales, lee la [Política de privacidad de Puente](https://www.puente-dr.org/privacy-policy/).
+
+## Qué guarda Collect
+
+{/* claim: privacy-what-stored */}
+Cada formulario que abres desde la carpeta de Collect abre en una pantalla de consentimiento con un resumen corto de privacidad. Dice que Collect guarda la información que envían los usuarios autorizados, incluidos:
+
+- datos de contacto y datos demográficos
+- información del hogar y de ubicación, incluidas coordenadas GPS precisas
+- fotografías
+- información de salud y respuestas de formularios
+- identificadores de cuenta
+
+El mismo resumen dice que Puente no usa estos datos para publicidad, personalización de productos ni seguimiento. <UI>Ver política completa</UI> abre la política entera.
+
+<div class="shots">
+<Shot phone src={consent} alt="La pantalla de formulario de consentimiento en Collect: un párrafo con el resumen de privacidad, un botón para ver la política completa, una casilla vacía de acuerdo con la política de datos y un botón para continuar con el formulario." caption="El resumen de privacidad que escucha cada persona antes de abrir un formulario. Explícaselo con sus propias palabras si hace falta." />
+</div>
+
+## Quién puede ver y descargar los registros
+
+{/* claim: privacy-who-sees */}
+Tu organización decide qué registros ves: las apps le muestran a cada organización sus propios registros. El resumen de privacidad lo dice así: los registros <UI>pueden estar disponibles para los usuarios autorizados de la organización que los recopila</UI>.
+
+En la práctica, eso significa:
+
+- **Cada miembro de tu organización** puede usar Manage y descargar exportaciones completas, con nombres, cédulas, teléfonos, fechas de nacimiento y ubicaciones. No solo los administradores.
+- **El personal de Puente** puede llegar a los registros de todas las organizaciones, para apoyarte y resolver problemas.
+
+Así que la pregunta «¿quién puede ver esto?» se responde sobre todo con **quién tiene cuenta en tu organización**. Mantén esa lista corta y al día.
+
+## Consentimiento antes del formulario
+
+{/* claim: privacy-consent */}
+Un formulario no abre hasta que el encuestador marca <UI>El miembro de la comunidad acepta la política de datos</UI> y toca <UI>Continuar con el formulario</UI>. Sin la marca, Collect se detiene y avisa que el miembro de la comunidad debe dar su consentimiento primero.
+
+La marca registra que la persona aceptó; no le explica la política por ti. Dile a la persona, con palabras sencillas, qué vas a recoger y para qué, y déjale decir que no. Un no significa que no llenas el formulario. Mira [Consentimiento](/docs/es/collect/consent/).
+
+## Recoge menos
+
+Cada pregunta que agregas a un formulario es algo que se puede filtrar. Antes de publicar un formulario en Manage, pregúntate de cada pregunta: ¿alguien va a usar esta respuesta? Si no, quítala. No pidas cédula, teléfono ni una ubicación precisa a menos que el programa lo necesite.
+
+## Una persona, una cuenta
+
+{/* claim: privacy-one-account */}
+Cada registro lleva la cuenta que lo recogió. Cuando dos personas comparten un usuario, después nadie sabe quién recogió qué, y no puedes quitarle el acceso a una sin dejar fuera a la otra. Dale a cada encuestador su propia cuenta y nunca compartan contraseñas.
+
+## Quita a quien se va
+
+{/* claim: privacy-deactivate */}
+Cuando alguien deja el equipo, un administrador abre la pantalla de organizaciones en Manage y pulsa <UI>Desactivar</UI> junto a su nombre. Eso cierra sus sesiones, así que sale de Collect y de Manage. Hoy no impide que vuelvan a entrar con su contraseña — ninguna de las dos aplicaciones revisa todavía si la cuenta está desactivada al iniciar sesión —, así que avísale también a Puente en info@puente-dr.org. Mira [Miembros y administradores](/docs/es/organizations/members-and-administrators/).
+
+<Shot src={orgs} alt="La pantalla de organizaciones de Example Health Trust con cuatro personas. Tres tienen los botones Hacer administrador y Desactivar; una aparece desactivada y tiene un botón Reactivar." caption="Desactiva a quien se va el mismo día. Reactivar devuelve la cuenta si hace falta." />
+
+## Bloquea el teléfono
+
+Un teléfono guarda formularios que todavía no se han enviado y los residentes guardados para buscar sin conexión. Pon un código o huella en cada teléfono que se use con Collect, y envía los formularios pendientes desde la sincronización sin conexión cada día, para que quede menos en el teléfono.
+
+## Trata las exportaciones como expedientes de pacientes
+
+{/* claim: privacy-research-only */}
+Una exportación completa es una lista de pacientes. Guárdala en una carpeta compartida con personas con nombre, no en adjuntos de correo ni en grupos de chat, y borra las copias que ya no necesites. Solo el [archivo de investigación](/docs/es/data/research-exports/) debe salir de Puente; Manage lo dice al lado de los botones.
+
+<Shot src={expanded} alt="Una fila abierta del Gestor de formularios con notas que dicen que el archivo de investigación no tiene nombres, cédulas, teléfonos, fechas de nacimiento ni ubicaciones y es el único que se envía a un socio de investigación, y que los registros completos no salen de Puente." caption="Las propias notas de Manage: el archivo de investigación sale; los registros completos se quedan." />
+
+<Aside type="caution" title="Nunca pegues datos de pacientes en un correo a soporte">
+Cuando le escribas a Puente sobre un problema, descríbelo sin nombres, cédulas ni exportaciones adjuntas. Mira [Contactar a soporte](/docs/es/help/contact-support/).
+</Aside>
+
+## Para leer más
+
+- [The Responsible Data Handbook](https://responsibledata.io/resources/handbook/), de The Engine Room — guía práctica para manejar con responsabilidad los datos sobre personas (en inglés).
+- [Manual sobre protección de datos en la acción humanitaria del CICR](https://www.icrc.org/en/data-protection-humanitarian-action-handbook) — orientación detallada para programas de salud y humanitarios.
+- [Política de privacidad de Puente](https://www.puente-dr.org/privacy-policy/)
+
+## Preguntas frecuentes
+
+**¿Los miembros de otras organizaciones pueden ver nuestros registros?**
+Las apps le muestran a cada organización sus propios registros. El personal de Puente puede ver los registros de todas las organizaciones.
+
+**¿Borrar la cuenta de un encuestador borra sus registros?**
+No. Los registros pertenecen a la organización. Mira [Eliminar tu cuenta](/docs/es/privacy/delete-your-account/).

@@ -1,0 +1,86 @@
+---
+title: Nicknames
+description: The other spellings an organization answers to — how Puente matches them, why one nickname can belong to only one organization, and how to get one added.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - data/exporting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import oneOrg from '@shots/en/admin-03-one-organization.png';
+import unmatched from '@shots/en/admin-04-waiting-room.png';
+import create from '@shots/en/admin-05-create-organization.png';
+
+Every organization has one official name and a list of nicknames: other spellings it also answers to. If the official name is "Example Health Trust" and "EHT" is a nickname, people who sign up as "EHT" join the right organization, and records filed under "EHT" show up with the rest.
+
+Adding a nickname is the most useful repair Puente has for an organization whose records seem to be missing. It changes nothing in the records themselves.
+
+## Where you see them
+
+{/* claim: org-nickname-what */}
+On the Organizations screen, each organization shows its official name followed by <UI>always matches</UI>, then its nicknames. The official name always counts, so it never needs adding as a nickname. In Manage the nicknames are called spellings.
+
+<Shot src={oneOrg} alt="Example Health Trust with its short code, the official name marked always matches, the nicknames EHT and Example Health, and a Spellings, separated by commas box with a Save spellings button." caption="The official name, then two nicknames." />
+
+## How names are matched
+
+{/* claim: org-nickname-matching */}
+When Puente decides which organization a typed name belongs to — at sign-up, or when it reads an account's organization — it ignores:
+
+- capital letters: `EHT` and `eht` match;
+- accents: `Clínica` and `Clinica` match;
+- spaces at the start or end: `EHT ` and `EHT` match.
+
+It does not ignore spaces or punctuation inside a name: `E.H.T.` and `EHT` are different spellings.
+
+{/* claim: org-nickname-exports */}
+When Puente gathers an organization's records — for Manage and for every export — it uses the official name and each nickname exactly as written, because records keep the exact spelling they were collected under. So when you send a nickname, copy it exactly as it appears in the records.
+
+## One nickname, one organization
+
+{/* claim: org-nickname-unique */}
+A nickname can belong to only one organization. If a spelling is already used by another organization, Puente refuses it and names the organization that has it. Two groups claiming one name would make it impossible to tell whose records are whose.
+
+That includes official names: one organization's official name cannot be another's nickname. The exception is a retired organization, whose names are free to reuse — that is how a merge works. See [Organizations](/docs/organizations/organizations/).
+
+## Get a nickname added
+
+{/* claim: org-nickname-staff */}
+Puente staff add nicknames. Email info@puente-dr.org with:
+
+1. your organization's official name;
+2. each spelling you have seen, exactly as written;
+3. if you can, an example: a person who signed up with it, or a community whose records seem to be missing.
+
+Administrators see a <UI>Spellings, separated by commas</UI> box and a <UI>Save spellings</UI> button on the Organizations screen, but saving works only for Puente staff. Anyone else gets an error message under the box.
+
+<Aside type="tip">
+Collect every spelling you meet in the field — abbreviations, old names, a missing accent — and send them together. One email can bring back months of records.
+</Aside>
+
+## Accounts that match no organization
+
+{/* claim: org-unmatched-list */}
+Puente staff see a list of <UI>Accounts that do not match an organization</UI>: the name each person typed, beside their email. The usual fix is to add that spelling as a nickname of the right organization, and the account is matched from then on.
+
+<Shot src={unmatched} alt="Two rows: Water Project South next to eli@example.org, and Exampel Health Trust next to dani@example.org." caption="What people typed, and who they are." />
+
+## When staff create an organization
+
+{/* claim: org-staff-create */}
+Staff can add nicknames when they first create an organization, in <UI>Other spellings, separated by commas</UI>. The hint reads <UI>Every spelling seen in the field. The organization name always matches, so it does not need to be listed.</UI>
+
+<Shot src={create} alt="The Add a partner organization form: Organization name, Short code, Other spellings separated by commas, and an Add organization button." caption="Listing spellings up front saves a repair later." />
+
+## FAQ
+
+**Half our records are missing from exports.**
+They were probably collected under another spelling of your organization's name. Email every spelling you have seen to info@puente-dr.org.
+
+**Does a nickname change the records?**
+No. Records keep their spelling; the nickname makes Puente find them.
+
+**Can our nickname be the same as another organization's?**
+No. Each spelling belongs to one organization.

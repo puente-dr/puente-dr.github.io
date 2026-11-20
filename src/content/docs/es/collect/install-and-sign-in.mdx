@@ -1,0 +1,113 @@
+---
+title: Instalar e iniciar sesión
+description: Pon Puente Collect en un teléfono, recorre la guía de bienvenida, crea una cuenta para tu organización e inicia sesión.
+related:
+  - collect/getting-around
+  - organizations/organizations
+  - collect/settings
+  - help/troubleshooting
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import welcome from '@shots/es/collect-onboarding-welcome.png';
+import signIn from '@shots/es/collect-sign-in.png';
+import signUp from '@shots/es/collect-sign-up.png';
+import orgSuggest from '@shots/es/collect-02-signup-organization-suggestions.png';
+
+Puente Collect es la aplicación de teléfono que usan los encuestadores en el campo. La instalas una vez, creas una sola cuenta e inicias sesión con esa cuenta en cualquier teléfono. La misma cuenta abre también Puente Manage en la web.
+
+Haz todo esto mientras tengas buena conexión. Crear una cuenta e iniciar sesión necesitan internet; recolectar, no.
+
+## Instalar la aplicación
+
+{/* claim: collect-stores */}
+Collect está en las dos tiendas de aplicaciones:
+
+- **iPhone:** [Puente Collect en la App Store](https://apps.apple.com/us/app/puente-collect/id1362371696). Necesita iOS 15.1 o posterior.
+- **Android:** [Puente Collect en Google Play](https://play.google.com/store/apps/details?id=puente.collect).
+
+Si el enlace no abre en tu teléfono, busca "Puente Collect" en la tienda.
+
+## La guía de bienvenida
+
+{/* claim: collect-tour */}
+La primera vez que abres Collect, una guía corta te muestra lo que hace la aplicación. En el camino te pide dos permisos — la cámara, para las fotos, y tu ubicación, para los puntos en el mapa — y te deja elegir el idioma (English, Español o Kreyòl) y un tema claro u oscuro. Puedes dar los permisos ahora o después en la configuración del teléfono.
+
+Toca <UI>Vamos</UI> para empezar, u <UI>Omitir</UI> para ir directo a iniciar sesión. En los dos casos la guía no vuelve sola; puedes repetirla después desde el engranaje.
+
+<div class="shots">
+<Shot phone src={welcome} alt="La primera pantalla de la guía de Collect: el logo de Puente, una frase de bienvenida y los botones Omitir y Vamos abajo." caption="La primera pantalla de la guía. Omitir te lleva directo a iniciar sesión." />
+</div>
+
+## Elegir el idioma
+
+{/* claim: collect-signin-language */}
+La pantalla de inicio de sesión tiene un botón de idioma arriba a la izquierda, marcado con un globo. Tócalo para cambiar entre inglés, español y criollo haitiano antes de iniciar sesión o registrarte. Puedes volver a cambiarlo cuando quieras en el engranaje, en <UI>Idioma</UI>.
+
+## Crear una cuenta
+
+{/* claim: collect-signup-fields */}
+En la pantalla de inicio de sesión, toca <UI>Regístrate!</UI>. El formulario pide:
+
+| Campo | Notas |
+|---|---|
+| <UI>Nombre de verdadero</UI> y <UI>Apellido</UI> | Obligatorios. Tu nombre va en cada registro que recolectas. |
+| <UI>Correo electronico</UI> | Obligatorio. Con él inicias sesión y te llega el enlace para cambiar la contraseña. |
+| <UI>Número de teléfono</UI> | Opcional. |
+| <UI>Contraseña</UI> y <UI>Entra contraseña de nuevo</UI> | Tienen que coincidir. |
+| <UI>Organización</UI> | El grupo para el que recolectas. Mira abajo. |
+
+<div class="shots">
+<Shot phone src={signUp} alt="El formulario de registro con los campos de nombre, apellido, correo electrónico y teléfono, y un botón Atrás arriba." caption="La parte de arriba del formulario de registro. Baja para ver la contraseña, la organización y los términos." />
+</div>
+
+### Elegir tu organización
+
+{/* claim: collect-signup-org */}
+Mientras escribes en <UI>Organización</UI>, Collect te sugiere organizaciones que ya están en Puente. Elige la tuya de la lista para que tu cuenta se una a ella y veas sus formularios y registros.
+
+<div class="shots">
+<Shot phone src={orgSuggest} alt="El campo de organización con Pu escrito y una sugerencia debajo: Puente." caption="Elige la sugerencia en vez de escribir tú el nombre completo." />
+</div>
+
+Si tu organización no está en la lista, escribir un nombre claramente nuevo la crea, y tú quedas como su primera persona administradora. Un nombre demasiado parecido a uno que ya existe — con una letra distinta, por ejemplo — se rechaza, pero tu cuenta se crea igual, sin organización. Si te pasa, escribe a info@puente-dr.org para que Puente te vincule. [Organizaciones](/docs/es/organizations/organizations/) explica cómo funcionan.
+
+<Aside type="caution" title="Escríbela como la escribe tu organización">
+Una organización mal escrita, o falla, o crea una segunda organización vacía al lado de la real. Elige de las sugerencias siempre que aparezca la tuya.
+</Aside>
+
+### Aceptar los términos y terminar
+
+{/* claim: collect-signup-terms */}
+Lee <UI>Ver los términos y el servicio</UI>, marca la casilla y toca <UI>Enviar</UI>. Sin la marca, la aplicación te detiene con <UI>Error, se deben acordar los términos y el servicio</UI>. Cuando la cuenta está lista ves <UI>¡Cuenta creada!</UI> y vuelves a la pantalla de inicio de sesión.
+
+## Iniciar sesión
+
+{/* claim: collect-signin-online */}
+Escribe tu correo en <UI>Número de teléfono o Correo electronico</UI>, luego tu <UI>Contraseña</UI>, y toca <UI>Iniciar sesión</UI>. Iniciar sesión necesita conexión: sin ella, la aplicación dice <UI>Está sin conexión. Iniciar sesión requiere conexión a internet, por lo que no se puede iniciar sesión sin conexión.</UI>
+
+<div class="shots">
+<Shot phone src={signIn} alt="La pantalla de inicio de sesión de Collect: un botón de idioma, el logo de Puente, los campos de usuario y contraseña, el enlace para la contraseña olvidada, el botón para iniciar sesión y el enlace para registrarse abajo." caption="La pantalla de inicio de sesión. El botón con el globo, arriba, cambia el idioma." />
+</div>
+
+Inicia sesión antes de salir hacia una comunidad sin señal, y no cierres la sesión. Una vez dentro, los formularios funcionan sin conexión.
+
+## Si olvidaste la contraseña
+
+{/* claim: collect-forgot-password */}
+Toca <UI>¿olvidado tu contraseña?</UI>, escribe el correo de tu cuenta y toca <UI>Enviar enlace de restablecimiento</UI>. Puente te manda por correo un enlace para elegir una contraseña nueva. Si el enlace no se puede enviar, la aplicación te pide revisar el correo y ofrece <UI>Intentar de nuevo</UI>.
+
+## Preguntas frecuentes
+
+{/* claim: collect-signin-online */}
+**¿Puedo iniciar sesión sin internet?**
+No. Inicia sesión mientras tengas señal; después puedes recolectar sin conexión.
+
+{/* claim: collect-org-change */}
+**Elegí la organización equivocada. ¿La puedo cambiar?**
+No desde la aplicación. Escribe a info@puente-dr.org con tu nombre y la organización que querías.
+
+{/* claim: collect-one-account */}
+**¿La misma cuenta sirve en Manage?**
+Sí. Inicia sesión en [puente-manage.vercel.app](https://puente-manage.vercel.app) con el mismo correo y la misma contraseña. Mira [Iniciar sesión en Manage](/docs/es/manage/sign-in/).

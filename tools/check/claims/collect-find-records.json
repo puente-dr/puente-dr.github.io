@@ -1,0 +1,99 @@
+{
+ "claims": {
+  "find-tab": {
+   "claim": "Find Record is the magnifying-glass tab; the screen is Search Individual with a Search by name or ID box.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"search-outline\"),",
+     "line": 85
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"searchIndividual\": \"Search Individual\",",
+     "line": 445
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"typeHere\": \"Search by name or ID\",",
+     "line": 446
+    }
+   ]
+  },
+  "search-fields": {
+   "claim": "Search reads first name, last name, nickname, cédula and household ID.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "const SEARCHABLE_FIELDS = [",
+     "line": 46
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "\"cedulaNumber\",",
+     "line": 50
+    }
+   ]
+  },
+  "search-prefix": {
+   "claim": "Each field is matched from its start, case-insensitively.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "const anchoredQuery = `^${escapeRegex(qry)}`;",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "q.matches(field, anchoredQuery, \"i\");",
+     "line": 78
+    }
+   ]
+  },
+  "record-history": {
+   "claim": "A resident page has View Record History.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"viewRecordHistory\": \"View Record History\"",
+     "line": 474
+    }
+   ]
+  },
+  "search-offline": {
+   "claim": "Offline, search uses the stored residents; opening Find Records online refreshes the store; queued residents are searched too.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineNotice\": \"You're offline. Showing saved records.\",",
+     "line": 480
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "storeData(records, \"residentData\").catch(() => {});",
+     "line": 101
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "await getData(\"offlineIDForms\").then((offlineResidentData) => {",
+     "line": 106
+    }
+   ]
+  },
+  "storage-limit": {
+   "claim": "Settings > Find Records has Record storage limit, default 2000.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/index.js",
+     "quote": "const FIND_RECORDS_LIMIT_DEFAULT = 2000;",
+     "line": 75
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"recordStorageLimit\": \"Record storage limit\",",
+     "line": 571
+    }
+   ]
+  }
+ }
+}

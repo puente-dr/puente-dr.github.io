@@ -1,0 +1,100 @@
+---
+title: "Empieza aquí: recolección de datos"
+description: Lo esencial para quienes encuestan con Puente Collect — instalar, iniciar sesión, buscar personas, llenar un formulario con consentimiento y enviarlo.
+related:
+  - collect/install-and-sign-in
+  - collect/offline-sync
+  - guides/your-first-day-collecting
+  - guides/field-day-checklist
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/es/collect-sign-in.png';
+import tabs from '@shots/es/collect-tab-bar.png';
+import consent from '@shots/es/collect-consent.png';
+import queue from '@shots/es/collect-03-queue.png';
+
+Esta página es para quienes recogen datos con **Puente Collect** en un teléfono: promotores, encuestadores, voluntarios de clínica. Cubre, en orden, lo poco que necesitas el primer día. Cada paso enlaza al artículo completo.
+
+Si coordinas el trabajo desde una computadora, mira [Empieza aquí: gestión de datos](/docs/es/get-started/data-managers/).
+
+## Instalar Collect
+
+{/* claim: start-platforms */}
+Instala **Puente Collect** desde la [App Store](https://apps.apple.com/us/app/puente-collect/id1362371696) en un iPhone (iOS 15.1 o posterior) o desde [Google Play](https://play.google.com/store/apps/details?id=puente.collect) en Android. La primera vez que la abras, escoge tu idioma.
+
+Usa el teléfono que de verdad vas a llevar al campo, para practicar en la pantalla que vas a usar.
+
+## Iniciar sesión
+
+{/* claim: start-signin-online */}
+Inicia sesión con tu correo o teléfono y tu contraseña, y toca <UI>Iniciar sesión</UI>. Iniciar sesión **necesita conexión a internet** — hazlo antes de quedarte sin señal, no en la comunidad.
+
+¿Todavía no tienes cuenta? Toca <UI>Regístrate!</UI> y escribe el nombre de tu organización tal como lo escribe tu equipo; escógelo de las sugerencias si aparece. Mira [Instalar e iniciar sesión](/docs/es/collect/install-and-sign-in/).
+
+<div class="shots">
+<Shot phone src={signIn} alt="La pantalla de inicio de sesión de Collect con los campos de usuario y contraseña, el enlace para recuperar la contraseña, el botón para iniciar sesión y el enlace para registrarse abajo." caption="Inicia sesión mientras tienes señal. No se puede iniciar sesión sin conexión." />
+</div>
+
+## Conocer los cinco íconos
+
+{/* claim: start-tabs */}
+La barra de abajo de Collect tiene cinco íconos y ninguna palabra. De izquierda a derecha:
+
+| Ícono | Qué abre |
+|---|---|
+| Lupa | Buscar personas que ya están en Puente |
+| Carpeta | Los formularios que puedes llenar |
+| Casa | Inicio: tu actividad y la de tu organización (Collect abre aquí) |
+| Nube | Sincronización sin conexión: formularios que esperan para enviarse |
+| Engranaje | Ajustes, ayuda y apoyo |
+
+<Shot src={tabs} alt="La barra de pestañas de Collect: una lupa, una carpeta, una casa, una nube con una flecha hacia arriba resaltada y un engranaje." caption="Cinco íconos, sin texto. El resaltado es la pantalla en la que estás." />
+
+Mira [Moverte por Collect](/docs/es/collect/getting-around/).
+
+## Buscar antes de registrar
+
+La mayoría de las personas que visitas ya están en Puente. Antes de crear a alguien, toca la lupa y busca — un nombre a la vez: el apellido, luego el nombre, luego el apodo. Un nombre completo en una sola búsqueda no encuentra nada. Mira [Buscar registros](/docs/es/collect/find-records/).
+
+## Llenar un formulario, empezando por el consentimiento
+
+{/* claim: privacy-consent */}
+Toca la carpeta y escoge un formulario. Cada formulario que abres ahí empieza en una pantalla de consentimiento: explícale la política de datos a la persona, marca <UI>El miembro de la comunidad acepta la política de datos</UI> solo si acepta, y toca <UI>Continuar con el formulario</UI>.
+
+{/* claim: start-attach-resident */}
+<UI>Identificación de residente</UI> registra a una persona nueva. <UI>Partes vitales</UI>, <UI>Salud Ambiental</UI> y <UI>Evaluación Médica</UI> se adjuntan a alguien ya registrado — el botón dice <UI>Adjuntar una residente de la comunidad</UI> hasta que lo escoges. Mira [Formularios de Puente](/docs/es/collect/puente-forms/) y [Consentimiento](/docs/es/collect/consent/).
+
+<div class="shots">
+<Shot phone src={consent} alt="La pantalla del formulario de consentimiento: un resumen de privacidad, un botón para ver la política completa, una casilla sin marcar de acuerdo con la política de datos y un botón para continuar con el formulario." caption="Sin marca no hay formulario. Primero va el sí de la persona." />
+</div>
+
+## Enviar lo que recogiste
+
+{/* claim: start-survey-path */}
+Sin señal, un formulario que terminas dice <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI>. Ahora está solo en tu teléfono.
+
+**Enviar no es automático.** Cuando vuelvas a tener señal — cada día — toca la nube y pulsa <UI>Reintentar</UI>. Terminaste cuando la pantalla dice <UI>No hay formularios en cola. ¡Estás al día!</UI> Mira [Trabajar sin conexión](/docs/es/collect/offline-sync/).
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de sincronización sin conexión con un formulario esperando, un enlace Descartar y un botón Reintentar." caption="Reintenta cada día que tengas señal. Cero formularios esperando es la única forma de haber terminado." />
+</div>
+
+## Tres cosas que nunca debes hacer
+
+{/* claim: start-three-nevers */}
+1. **Nunca cierres sesión con formularios esperando.** Collect no te deja cerrar sesión sin conexión, y te avisa cuando hay conexión. Los formularios que quedan en el teléfono no se pueden enviar hasta que vuelvas a iniciar sesión.
+2. **Nunca borres la app ni sus datos con formularios esperando.** Los formularios sin enviar viven solo dentro de la app en este teléfono.
+3. **Nunca toques Descartar en un formulario que todavía puedes enviar.** <UI>Descartar</UI> lo borra del teléfono de forma permanente, y nadie lo puede recuperar.
+
+<Aside type="caution" title="Si un formulario no se envía">
+Prueba Reintentar otra vez con mejor conexión. Si sigue fallando, avísale a tu coordinación antes de hacer cualquier otra cosa.
+</Aside>
+
+## Próximos pasos
+
+- [Tu primer día recogiendo datos](/docs/es/guides/your-first-day-collecting/) — un primer día guiado.
+- [Lista para el día de campo](/docs/es/guides/field-day-checklist/) — qué revisar antes y después de salir.
+- [Ajustes](/docs/es/collect/settings/) — idioma, contraseña y búsqueda sin conexión.
+- [Solución de problemas](/docs/es/help/troubleshooting/) — cuando algo sale mal.

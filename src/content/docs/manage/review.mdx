@@ -1,0 +1,104 @@
+---
+title: Review dashboard
+description: What the Review dashboard tells you — whether today's data has arrived, which records need work, and which communities have gone quiet.
+related:
+  - manage/data-curation
+  - manage/form-manager
+  - collect/offline-sync
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import review from '@shots/en/manage-review.png';
+import sidebar from '@shots/en/manage-sidebar.png';
+import curation from '@shots/en/manage-data-curation.png';
+
+The dashboard is the first screen Manage shows after you sign in. It answers three questions: has the field's data arrived, what needs fixing, and where has nobody been heard from lately. It is a to-do list, not a report — each problem it lists is a link to the screen where you fix it.
+
+## Open the dashboard
+
+{/* claim: manage-review-menu */}
+In the menu on the left, press <UI>Review</UI>. The page is titled <UI>Dashboard</UI> at the top.
+
+<div class="shots">
+<Shot phone src={sidebar} alt="The Manage left menu: Manage, Create, Clean and Market at the top, Review highlighted and Settings below, and Account and Log out at the bottom." caption="Review sits under the organization's section of the menu." />
+</div>
+
+<Shot src={review} alt="The dashboard: a line reading Synced 2h ago, 48 records in the last 24h; a Needs attention list with two rows marked Needs repair and Fixable; a Community coverage list of six communities; and totals along the bottom." caption="Three bands: whether data arrived (top), what needs work (left), and where it came from (right)." />
+
+## Check that today's data arrived
+
+{/* claim: manage-sync-ribbon */}
+The line across the top reads like <UI>Synced</UI> **2h ago** · **48** <UI>records in the last 24h</UI>. "Synced" means the moment Puente received a record from a phone — not when the survey was done. A form filled in offline last week shows up as synced today.
+
+If nothing has arrived in a while, the line says so instead:
+
+| Message | Meaning |
+|---|---|
+| <UI>No sync in over a day</UI> | Nothing received in more than 24 hours |
+| <UI>No sync in over three days</UI> | Nothing received in more than 72 hours |
+| <UI>Nothing has synced yet</UI> | Your organization has no records at all |
+| <UI>Last sync time unavailable</UI> | Manage could not check |
+
+{/* claim: manage-sync-manual */}
+Sending is not automatic on the phone: a surveyor has to open Offline Sync (the cloud) and tap Retry. A quiet dashboard often means phones still holding forms. See [Offline sync](/docs/collect/offline-sync/).
+
+## Needs attention
+
+{/* claim: manage-needs-attention */}
+This list runs four quality checks over your organization's records and shows only the ones that found something. The most damaging comes first, whatever its count.
+
+| Row | Label | What it means |
+|---|---|---|
+| <UI>form renamed since its answers were collected</UI> | <UI>Blocks exports</UI> | A custom form has answers saved under a question it no longer has, so a column can export empty |
+| <UI>records with an unresolved household link</UI> | <UI>Needs repair</UI> | A record saved offline with a household that never got linked on the server |
+| <UI>possible duplicate households</UI> | <UI>Fixable</UI> | The same household recorded twice on the same day |
+| <UI>records missing key fields</UI> | <UI>Fixable</UI> | At least one key field is blank |
+
+{/* claim: manage-key-fields */}
+The key fields are first name, last name, date of birth, sex, household ID, community, surveyor and phone number.
+
+{/* claim: manage-estimated */}
+A count such as **5 of 48** is measured against all your organization's records. A count marked <UI>estimated</UI> comes from a sample of recent records, so treat it as a rough size.
+
+## Fix what the list shows
+
+{/* claim: manage-needs-attention-links */}
+Press a row to go where you fix it:
+
+- **Missing key fields** and **unresolved household link** open [Data Curation](/docs/manage/data-curation/) showing only those records. A note above the counts says the view is filtered.
+- **Possible duplicates** opens Data Curation, where you compare the pair side by side.
+- **Form renamed** opens the [Form Manager](/docs/manage/form-manager/). Export the form and check its columns before you send the file anywhere.
+
+<Shot src={curation} alt="The Data Curation screen showing People Records, a summary of 48 records, 92% average completeness, 0 duplicates and 0 anomalies, filters, and a table of names." caption="Where most rows lead: Data Curation, filtered to the records the row counted." />
+
+{/* claim: manage-attention-empty */}
+When every check passes, the list reads <UI>Nothing needs attention</UI>. If a check could not run, it reads <UI>Nothing found — but not everything could be checked</UI> and names what it skipped. Do not treat that as a clean result; reload later.
+
+## Community coverage
+
+{/* claim: manage-coverage */}
+The right-hand list counts recent records by community and shows when each one last synced. The communities nobody has heard from in longest come first. After two weeks of silence a community reads <UI>quiet</UI> with the number of days, months or years.
+
+Use it to decide where to send a team next. Remember it measures syncing: a community can look quiet because a phone that visited it has not sent its forms yet.
+
+<Aside type="tip">
+The heading under <UI>Community coverage</UI> says how many records the counts come from, for example "of the 48 most recently synced records". Read the numbers against that, not against all time.
+</Aside>
+
+## Totals
+
+{/* claim: manage-context-totals */}
+Along the bottom: <UI>records synced in total</UI> for your organization, and the number of accounts seen in the most recent records. The second figure counts accounts that synced, not people who collected — one shared phone can carry a whole team's work.
+
+## FAQ
+
+**The dashboard says nothing synced, but my team worked all week. Why?**
+The forms are probably still on the phones. Someone has to open Offline Sync and tap Retry with a connection.
+
+**Why does a community I visited yesterday look quiet?**
+Coverage counts when records reached Puente, not when they were collected.
+
+{/* claim: manage-needs-attention */}
+**Can I dismiss a row?**
+No. A row disappears when the records behind it are fixed.

@@ -1,0 +1,125 @@
+---
+title: Offline and sync
+description: How Collect saves forms with no signal, how to send them from Offline Sync, and what every message on that screen means.
+related:
+  - collect/getting-around
+  - collect/settings
+  - guides/field-day-checklist
+  - help/troubleshooting
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/en/collect-01-offline-banner.png';
+import queue from '@shots/en/collect-03-queue.png';
+import caughtUp from '@shots/en/collect-04-all-caught-up.png';
+import discard from '@shots/en/collect-05-discard-confirm.png';
+
+Collect works where there is no signal. You can open a form, fill it in and save it with no connection at all. The form waits on the phone, and you send it to Puente later from **Offline Sync**, the cloud icon at the bottom of the screen.
+
+One fact shapes everything on this page: **until a form reaches Puente, the phone holds the only copy.** A form saved on a phone that is lost, wiped or reset is gone.
+
+## Know when you are offline
+
+{/* claim: collect-offline-banner */}
+When the phone has no connection, the forms screen and every open form show an orange banner: <UI>You're offline. Records will save and sync automatically.</UI> Home shows <UI>Showing cached data</UI>.
+
+<div class="shots">
+<Shot phone src={banner} alt="The Resident ID form with an orange banner across the top reading: You're offline. Records will save and sync automatically." caption="The offline banner sits above the form while you work." />
+</div>
+
+{/* claim: collect-sync-manual */}
+<Aside type="caution" title="Sync is not automatic">
+Despite what the banner says, Collect does not send waiting forms by itself when the signal comes back. Nothing leaves the phone until you open the cloud and tap <UI>Retry</UI>.
+</Aside>
+
+## Save a form with no signal
+
+{/* claim: collect-save-messages */}
+Fill in and save the form exactly as you would online. The message after saving tells you where it went:
+
+| Message | Meaning |
+|---|---|
+| <UI>Form successfully submitted</UI> | It reached Puente. Done. |
+| <UI>Saved offline — will sync when you reconnect</UI> | It is on the phone only, waiting for you to send it. |
+
+The two look alike when you are in a hurry. Only the first one is finished.
+
+## See what is waiting
+
+{/* claim: collect-queue-screen */}
+Tap the cloud. **Offline Sync** shows whether the phone is <UI>Online</UI> or <UI>Offline</UI>, then a count — for example <UI>1 form is saved on this device and has not reached the server yet.</UI> Under <UI>Waiting to sync</UI>, each form is listed by its name and the person it is about, with a <UI>Discard</UI> link beside it. <UI>Last synced:</UI> shows the last time this phone sent anything.
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen, marked Online, saying 1 form is saved on this device and has not reached the server yet, listing Resident ID — Ejemplo Ramirez under Waiting to sync with a red Discard link, above a blue Retry button." caption="One form waiting, named so you can tell which it is." />
+<Shot phone src={caughtUp} alt="The Offline Sync screen with an empty queue, reading No forms queued. You are all caught up!" caption="The only state in which the phone no longer matters." />
+</div>
+
+When nothing is waiting, the screen reads <UI>No forms queued. You are all caught up!</UI>
+
+## Send waiting forms
+
+{/* claim: collect-retry */}
+When you have a connection, open the cloud and tap <UI>Retry</UI>. The button sends everything waiting, even on your first attempt. When it works you see <UI>Success!</UI> <UI>You have just submitted</UI> and the number sent, and the list empties.
+
+Send from a connection you trust and stay on it until the count reaches zero.
+
+## When only some forms go
+
+{/* claim: collect-partial-sync */}
+If some forms reach Puente and others do not, Collect removes the ones that arrived and keeps the rest waiting. The count goes **down but not to zero**. Tapping <UI>Retry</UI> again sends only what is still waiting, so nothing that arrived is sent twice. If the count stops above zero, find a better connection and tap <UI>Retry</UI> again.
+
+## When nothing goes
+
+{/* claim: collect-sync-failures */}
+A failed send shows <UI>Failed Attempt Submitting Offline Forms.</UI> and reassures you: <UI>Your forms are still saved on this device. Nothing has been lost.</UI> The next line says which problem it was:
+
+- <UI>You are offline. Reconnect to the internet and try again.</UI> — the phone never reached Puente. Find a connection.
+- <UI>The server did not accept these forms. Try again in a few minutes, and contact support if it keeps happening.</UI> — Puente refused them. Waiting often fixes it; if the same forms keep failing on a good connection, report it.
+
+If your sign-in has expired, the screen says <UI>Session expired. Please sign in again.</UI> Your forms stay on the phone; read the logging-out section below before you do anything.
+
+## Discard a form that will not send
+
+{/* claim: collect-discard */}
+A form Puente keeps refusing can hold up the others. <UI>Discard</UI> removes it so the rest can go. The app asks first — <UI>Discard this form?</UI> — and says the form has not reached the server and that discarding deletes it permanently. Confirm with <UI>Discard permanently</UI>, or tap <UI>Cancel</UI>.
+
+<div class="shots">
+<Shot phone src={discard} alt="A dialog over Offline Sync titled Discard this form? saying Resident ID — Ejemplo Ramirez has not reached the server and that discarding deletes it from this device permanently and it cannot be recovered, with Discard permanently and Cancel." caption="Read it literally: there is no undo." />
+</div>
+
+<Aside type="danger" title="Discarding cannot be undone">
+The form exists nowhere else. No one — not Puente, not support — can bring it back. Write the answers on paper first if you can, and ask your coordinator before discarding anything you are unsure about.
+</Aside>
+
+## Households saved offline
+
+{/* claim: collect-households-not-listed */}
+A household you create offline (with <UI>Create a new household</UI> or by linking a person) is not listed in Offline Sync and cannot be discarded there. It is still sent when you tap <UI>Retry</UI>. So the screen can say <UI>No forms queued. You are all caught up!</UI> while a household is still waiting: after creating households offline, tap <UI>Retry</UI> once you have a connection anyway.
+
+## Before you log out or hand over the phone
+
+{/* claim: collect-logout-guard */}
+Logging out is where forms are most often stranded.
+
+- **Offline**, Collect will not let you log out. It says <UI>Can't log out right now</UI>, because signing back in needs a connection.
+- **Online**, if forms are waiting, the log-out question warns how many records are saved on this device and have not reached the server yet. They stay on the phone, but you cannot send them until you sign back in.
+
+{/* claim: collect-settings-unsynced */}
+The gear screen also shows the count of records waiting, near the top, whenever there are any.
+
+Send everything — count at zero — before you log out and before you give the phone to anyone else.
+
+## FAQ
+
+{/* claim: collect-sync-manual */}
+**I got signal back. Did my forms send?**
+Not by themselves. Open the cloud and tap Retry.
+
+{/* claim: collect-partial-sync */}
+**Is it safe to tap Retry more than once?**
+Yes. It sends only what is still waiting.
+
+{/* claim: collect-signin-online */}
+**Can I sign in again while offline to reach my forms?**
+No. Signing in needs a connection, which is why Collect blocks logging out offline.

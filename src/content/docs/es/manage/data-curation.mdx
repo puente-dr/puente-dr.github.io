@@ -1,0 +1,105 @@
+---
+title: Curación de datos
+description: Encuentra registros incompletos, corrige un registro a mano, resuelve hogares duplicados y une los nombres de comunidad que se escribieron de varias formas.
+related:
+  - manage/review
+  - collect/find-records
+  - data/exporting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import records from '@shots/es/manage-data-curation.png';
+import inspector from '@shots/es/manage-record-inspector.png';
+import audit from '@shots/es/manage-community-audit.png';
+
+Curación de datos es donde limpias lo que recolectó el campo antes de exportarlo: encuentras registros con espacios vacíos, corriges un nombre mal escrito, decides cuál de dos registros duplicados conservar, y juntas «El Río» y «El Rio» bajo una sola forma de escribirlo. Casi todas las filas del [panel de Revisar](/docs/es/manage/review/) llevan aquí.
+
+Los cambios que haces aquí se hacen en los registros mismos, para todas las personas de tu organización. Algunos no se pueden deshacer.
+
+## Abrir Curación de datos
+
+{/* claim: manage-dc-open */}
+Pulsa <UI>Limpiar</UI> en el menú de la izquierda. La página se llama <UI>Curación de datos</UI> y tiene dos pestañas: <UI>Registros</UI> y <UI>Auditoría de comunidades</UI>.
+
+<Shot src={records} alt="La pestaña Registros de Curación de datos: la fuente de datos en Registros de personas; un resumen de 48 registros, 92 % de completitud promedio, 0 duplicados y 0 anomalías; una barra de filtros; y una tabla con nombre, comunidad, encuestador, fecha de envío y una barra de completitud por registro." caption="La pestaña Registros. Las barras verdes y amarillas muestran qué tan completo está cada registro." />
+
+## Elegir una fuente de datos
+
+{/* claim: manage-dc-sources */}
+<UI>Fuente de datos</UI> elige qué registros muestra la tabla. En <UI>Registros del sistema</UI>: <UI>Registros de personas</UI> (los residentes), <UI>Salud ambiental</UI>, <UI>Evaluación médica</UI> y <UI>Signos vitales</UI>. En <UI>Formularios personalizados</UI>: cada formulario que creó tu organización. Al cambiar de fuente se borran los filtros.
+
+## Leer las cuatro cifras
+
+{/* claim: manage-dc-metrics */}
+La barra encima de la tabla describe los registros de la página que estás viendo (hasta 50, del más nuevo al más viejo), no toda tu organización.
+
+| Cifra | Qué significa |
+|---|---|
+| <UI>registros</UI> | Registros en esta página |
+| <UI>completitud promedio</UI> | Cuánta de la información esperada tienen, en promedio |
+| <UI>duplicados</UI> | Registros que comparten hogar y día con otro registro de la página |
+| <UI>anomalías</UI> | Registros con menos del 60 % de completitud |
+
+{/* claim: manage-dc-completeness */}
+En Registros de personas, la completitud cuenta ocho campos: nombre, apellido, fecha de nacimiento, sexo, ID del hogar, comunidad, encuestador y teléfono. Signos vitales, Salud ambiental y Evaluación médica cuentan cada uno sus propias mediciones. En un formulario personalizado pesan sobre todo las preguntas respondidas, y además quién lo recolectó y cuándo.
+
+## Filtrar la tabla
+
+{/* claim: manage-dc-filters */}
+- <UI>Todos los encuestadores</UI> y <UI>Todas las comunidades</UI> dejan un solo encuestador o una sola comunidad.
+- <UI>Todos</UI>, <UI>Duplicados</UI>, <UI>Anomalías</UI> y <UI>Limpios</UI> muestran solo los registros con esa señal, o sin ninguna.
+- <UI>≥ 80 %</UI> y <UI>{"< 60 %"}</UI> filtran por completitud.
+
+Los filtros de señal y de completitud actúan sobre la página que estás viendo. Usa <UI>Siguiente →</UI> para recorrer el resto.
+
+{/* claim: manage-needs-attention-links */}
+Si llegaste desde el panel, una línea encima de las cifras, como <UI>Mostrando solo los registros a los que les faltan campos clave.</UI>, te avisa que la vista está filtrada.
+
+## Editar un registro
+
+{/* claim: manage-dc-inspector */}
+Haz clic en una fila. A la derecha se abre un panel con los campos del registro, agrupados en <UI>Identidad</UI>, <UI>Contacto</UI>, <UI>Ubicación</UI> y otros. Corrige lo que esté mal y pulsa <UI>Guardar</UI>.
+
+<Shot src={inspector} alt="Un registro abierto en un panel lateral con el nombre de la persona arriba, campos de Identidad (nombre, apellido, apodo, fecha de nacimiento, edad, sexo), de Contacto (teléfono, Cédula / ID) y de Ubicación (comunidad), y los botones Guardar y Cancelar abajo." caption="El inspector de registros. Lo que guardas aquí reemplaza el registro para todo el mundo." />
+
+{/* claim: manage-dc-edit-everyone */}
+Guardar cambia el registro mismo, así que todas las personas de tu organización, y cada exportación posterior, ven la versión corregida. Si cierras el panel con cambios sin guardar, Manage pregunta <UI>¿Descartar los cambios sin guardar?</UI> Si no se puede guardar, dice <UI>No se pudo guardar. Inténtalo de nuevo.</UI>
+
+## Resolver duplicados
+
+{/* claim: manage-dc-duplicates */}
+Un registro marcado <UI>Dup</UI> comparte hogar y día con otro registro. Pulsa la señal para comparar los dos lado a lado, como <UI>Registro A</UI> y <UI>Registro B</UI>; los campos que difieren se marcan.
+
+- <UI>Conservar A, descartar B</UI> (o al revés) elimina el otro registro.
+- <UI>Ambos son únicos: descartar</UI> conserva los dos y cierra la comparación.
+
+<Aside type="caution" title="Eliminar un duplicado es permanente">
+Manage pregunta <UI>¿Eliminar este registro de forma permanente? No se puede deshacer.</UI> Al pulsar <UI>Eliminar registro</UI> se borra para siempre. Antes, abre los dos registros y revisa nombres, fechas y hogar.
+</Aside>
+
+## Unir las formas de escribir una comunidad
+
+{/* claim: manage-dc-audit */}
+La pestaña <UI>Auditoría de comunidades</UI> agrupa los nombres de comunidad que se diferencian en dos letras o menos, como «El Río» y «El Rio». En cada grupo:
+
+1. Elige la forma de escribirlo que quieres conservar.
+2. Pulsa <UI>Aplicar</UI>.
+3. Confirma con <UI>Cambiar nombre</UI>.
+
+Cada registro de personas, Salud ambiental, Evaluación médica y Signos vitales que tenga las otras formas recibe el nombre elegido. Manage avisa que esto <UI>No se puede deshacer</UI>: después no hay forma de saber qué registro tenía qué nombre.
+
+<Shot src={audit} alt="La pestaña Auditoría de comunidades con un grupo de dos opciones, El Río seleccionado y El Rio, y un botón Aplicar." caption="Dos formas de escribir un mismo lugar. Elige la que se queda y pulsa Aplicar." />
+
+Si no hay nada que unir, la pestaña dice <UI>No se detectaron nombres de comunidad similares.</UI>
+
+## Preguntas frecuentes
+
+**¿Por qué el resumen dice 48 registros si tenemos miles?**
+Las cifras describen la página actual, de hasta 50 registros.
+
+**Agrupó dos comunidades que son distintas. ¿Qué hago?**
+Déjalas así. Nada cambia hasta que pulsas Aplicar.
+
+**¿Puedo deshacer un cambio de nombre o un duplicado eliminado?**
+No. Los dos son permanentes.

@@ -1,0 +1,1514 @@
+{
+ "claims": {
+  "collect-stores": {
+   "claim": "Collect is on the App Store (id1362371696, iOS 15.1+) and Google Play (puente.collect).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/app.json",
+     "quote": "\"appStoreUrl\": \"https://apps.apple.com/us/app/puente-collect/id1362371696\",",
+     "line": 31
+    },
+    {
+     "file": "puente-reactnative-collect/app.json",
+     "quote": "\"package\": \"puente.collect\",",
+     "line": 46
+    },
+    {
+     "url": "https://apps.apple.com/us/app/puente-collect/id1362371696",
+     "quote": "Requires iOS 15.1 or later",
+     "seen": "2026-11-16"
+    }
+   ]
+  },
+  "collect-tour": {
+   "claim": "First launch shows a tour with permissions, language, theme; Skip goes to sign-in; it is shown once; replayable via Reset Onboarding.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Onboarding/index.js",
+     "quote": "<StepPermissions onNext={goNext} onBack={goBack} />",
+     "line": 1027
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Onboarding/index.js",
+     "quote": "<StepLanguage onNext={goNext} onBack={goBack} />",
+     "line": 1039
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Onboarding/index.js",
+     "quote": "{ code: \"hk\", label: \"Kreyòl\", flag: \"🇭🇹\" },",
+     "line": 621
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Onboarding/index.js",
+     "quote": "const targetRoute = route?.params?.returnTo || \"Sign In\";",
+     "line": 994
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/index.js",
+     "quote": "setOnboardingRouteName(seen ? \"Sign In\" : \"Onboarding\");",
+     "line": 48
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"permissionsDescription\": \"Puente needs two permissions to capture complete field data. You can grant them now or later in your device settings.\",",
+     "line": 754
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"resetOnboarding\": \"Reset Onboarding\",",
+     "line": 548
+    }
+   ]
+  },
+  "collect-signin-language": {
+   "claim": "The sign-in screen has a language picker with English, Spanish, Haitian Creole; Settings > Language too.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignIn/index.js",
+     "quote": "<LanguagePicker",
+     "line": 232
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/LanguagePicker/index.js",
+     "quote": "{ key: \"hk\", label: \"languagePicker.creole\" },",
+     "line": 9
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"language\": \"Language\",",
+     "line": 542
+    }
+   ]
+  },
+  "collect-signup-fields": {
+   "claim": "Sign-up asks for first/last name, email (required), optional phone, password twice; records carry the surveyor name.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "firstname: yup.string().label(\"First Name\").required(),",
+     "line": 40
+    },
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "if (!params.firstname?.trim() || !params.lastname?.trim() || !params.email?.trim() || !params.password?.trim() || !params.organization?.trim()) {",
+     "line": 91
+    },
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "phonenumber: params.phonenumber?.trim() || \"\",",
+     "line": 109
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "alert(I18n.t(\"signUp.errorPassword\")); // eslint-disable-line",
+     "line": 198
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "formObject.surveyingUser = await surveyingUserFailsafe(",
+     "line": 180
+    }
+   ]
+  },
+  "collect-signup-org": {
+   "claim": "Organization field suggests existing organizations; a clearly new name creates it with you as admin; too-close names are refused but the account is created.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "loadSelectableOrganizations().then((names) => {",
+     "line": 72
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "an empty list and the field degrades to free text, which the server still",
+     "line": 67
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Clearly distinct: create it, and the signer-up becomes its admin.",
+     "line": 133
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "Refused. The ACCOUNT is still created",
+     "line": 119
+    }
+   ]
+  },
+  "collect-signup-terms": {
+   "claim": "Terms box must be ticked; then Account Created! and back to sign-in.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "alert(I18n.t(\"signUp.errorTerms\")); // eslint-disable-line",
+     "line": 195
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
+     "quote": "routes: [{ name: \"Sign In\", params: { registered: true } }],",
+     "line": 208
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"registrationSuccess\": \"Account Created!\",",
+     "line": 87
+    }
+   ]
+  },
+  "collect-signin-online": {
+   "claim": "Signing in needs a connection; once signed in, forms save offline.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "Online-only mode: offline login is no longer supported",
+     "line": 74
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Logging in requires an internet connection, so offline login isn't available.",
+     "line": 83
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"savedOffline\": \"Saved offline — will sync when you reconnect\",",
+     "line": 381
+    }
+   ]
+  },
+  "collect-forgot-password": {
+   "claim": "Forgot Password asks for the email and sends a reset link.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"enterEmail\": \"Please enter your email to reset your password\",",
+     "line": 67
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"sendLink\": \"Send Reset Link\",",
+     "line": 68
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "Parse.Cloud.run(\"forgotPassword\", params).then(",
+     "line": 82
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"tryAgain\": \"Try Again\",",
+     "line": 21
+    }
+   ]
+  },
+  "collect-org-change": {
+   "claim": "The organization cannot be changed in the app; email info@puente-dr.org.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/NamePhoneEmail/index.js",
+     "quote": "label: I18n.t(\"namePhoneEmailSettings.userInformation.email\"),",
+     "line": 58
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Email info@puente-dr.org to change it.",
+     "line": 115
+    }
+   ]
+  },
+  "collect-one-account": {
+   "claim": "One account (email + password) works in Collect and Manage.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"login_field_email\": \"Email or phone number\"",
+     "line": 41
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"username\": \"Email or Phone Number\",",
+     "line": 56
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/login/index.js",
+     "quote": "{t('login_collect_hint')}",
+     "line": 128
+    }
+   ]
+  },
+  "collect-tabs": {
+   "claim": "Five icon-only tabs: search, folder, home, cloud-upload, cog; screen readers read their titles.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"search-outline\"),",
+     "line": 85
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"folder-outline\"),",
+     "line": 100
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"home-outline\"),",
+     "line": 115
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"cloud-upload-outline\"),",
+     "line": 130
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "tabBarIcon: tabIcon(\"cog-outline\"),",
+     "line": 145
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/AnimatedTabBar.js",
+     "quote": "accessibilityLabel={options.tabBarAccessibilityLabel ?? options.title ?? route.name}",
+     "line": 145
+    }
+   ]
+  },
+  "collect-home-default": {
+   "claim": "Home is the first tab shown; it greets by name and shows the organization.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/MainNavigation/BottomTabNavigator/index.js",
+     "quote": "const INITIAL_ROUTE_NAME = \"Home\";",
+     "line": 19
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "{I18n.t('home.welcomeBack', { name: user.firstname })}",
+     "line": 148
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "{user.organization || ''}",
+     "line": 156
+    }
+   ]
+  },
+  "collect-home-cards": {
+   "claim": "Home cards count forms (org activity and My Surveys across all form types); 7/30/all filters; tap for details; offline shows cached data.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "{ value: 'last7', label: I18n.t('home.last7Days') },",
+     "line": 175
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "onPress={() => setSelectedCard('recentActivity')}",
+     "line": 192
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/stats/stats.service.js",
+     "quote": "count: mySurveysCurrent + myVitalsCurrent + myEnvHealthCurrent + myMedEvalCurrent + myCustomFormsCurrent,",
+     "line": 350
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/stats/stats.service.js",
+     "quote": "// recentActivity mirrors orgSurveys — org-wide activity across all form types",
+     "line": 365
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "{I18n.t('home.offlineCached')}",
+     "line": 164
+    }
+   ]
+  },
+  "collect-forms-tab": {
+   "claim": "The folder opens Collect Data with Puente Forms, Pinned Forms, Custom Forms, Workflows.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionGalleryScreen.js",
+     "quote": "{I18n.t(\"dataCollection.collectData\")}",
+     "line": 97
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<Text style={styles.header}>{I18n.t(\"formsGallery.puenteForms\")}</Text>",
+     "line": 134
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<Text style={styles.header}>{I18n.t(\"formsGallery.pinnedForms\")}</Text>",
+     "line": 143
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "{I18n.t(\"formsGallery.customForms\")}",
+     "line": 187
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<Text style={styles.header}>{I18n.t(\"formsGallery.workflows\")}</Text>",
+     "line": 209
+    }
+   ]
+  },
+  "collect-sync-manual": {
+   "claim": "Sync is manual: the Offline screen only tracks status; sending happens on Retry.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "NetInfo.addEventListener((state) => {",
+     "line": 62
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "if (!cancelled) setIsOnline(state.isConnected && state.details !== null);",
+     "line": 57
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "onPress={upload}",
+     "line": 281
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineBanner\": \"You're offline. Records will save and sync automatically.\"",
+     "line": 382
+    }
+   ]
+  },
+  "collect-coachmarks": {
+   "claim": "Home, forms, Find and Settings each show a one-time tip; Got it closes it.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/components/CoachmarkOverlay/index.js",
+     "quote": "The overlay automatically handles AsyncStorage persistence and won't show twice",
+     "line": 197
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/components/CoachmarkOverlay/index.js",
+     "quote": "@param {string} [props.seenKey] - Unique key for single-tip mode (\"home\"|\"collect\"|\"find\"|\"settings\").",
+     "line": 141
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"gotIt\": \"Got it\",",
+     "line": 768
+    }
+   ]
+  },
+  "collect-reset-onboarding": {
+   "claim": "Reset Onboarding brings back the tour and tips; records unaffected.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/index.js",
+     "quote": "await deleteData(coachmarkKey(\"home\"));",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"resetOnboardingWarning\": \"The tutorial will show again next time you open the app. Your saved records are not affected.\",",
+     "line": 554
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "{I18n.t(\"accountSettings.resetOnboarding\")}",
+     "line": 376
+    }
+   ]
+  },
+  "collect-rid-start": {
+   "claim": "Resident ID is the first Puente form; forms open on consent first.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/formsConfig.js",
+     "quote": "name: \"puenteForms.ResidentID\",",
+     "line": 2
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "<GdprCompliance navigation={navigation} setConsent={setConsent} />",
+     "line": 123
+    }
+   ]
+  },
+  "collect-rid-fields": {
+   "claim": "Resident ID fields; required: first, last name, sex, marriage status, education level.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"fname\",",
+     "line": 7
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"sex\",",
+     "line": 59
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"marriageStatus\",",
+     "line": 87
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"educationLevel\",",
+     "line": 119
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"communityname\",",
+     "line": 162
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "fieldType: \"autofill\",",
+     "line": 164
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/YupValidation/index.js",
+     "quote": "if (validation) {",
+     "line": 6
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "retrievePuenteAutofillData(\"all\").then(",
+     "line": 21
+    }
+   ]
+  },
+  "collect-rid-save": {
+   "claim": "Button reads Empty Form / Save Record; missing required fields listed; saved-offline vs submitted messages.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "? I18n.t(\"global.emptyForm\")",
+     "line": 87
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": ": I18n.t(\"global.saveRecord\")",
+     "line": 88
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/ErrorPicker/index.js",
+     "quote": "label = label.concat([I18n.t(input.label)]);",
+     "line": 27
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "alert(I18n.t(\"forms.savedOffline\"));",
+     "line": 248
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "alert(`${fname} ${lname} ${I18n.t(\"forms.successfullySubmitted\")}`.trim());",
+     "line": 226
+    }
+   ]
+  },
+  "collect-suggested-next": {
+   "claim": "After Resident ID, Suggested next forms lists pinned forms; tapping keeps the same resident; forms can also start from a resident record.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{I18n.t(\"forms.suggestedForms\")}",
+     "line": 143
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{pinnedForms?.length > 0 ? (",
+     "line": 145
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionFormsScreen.js",
+     "quote": "setSurveyee(surveyeePerson || surveyee);",
+     "line": 101
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"suggestedForms\": \"Suggested Forms\"",
+     "line": 465
+    }
+   ]
+  },
+  "collect-rid-location": {
+   "claim": "Location is a tapped button; 20 s timeout saves 0,0 and shows an error.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "buttonText={I18n.t(\"paperButton.getLocationAgain\")}",
+     "line": 57
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "20000,",
+     "line": 29
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "setFieldValue(\"location\", { latitude: 0, longitude: 0, altitude: 0 });",
+     "line": 35
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "errorMessage=\"submissionError.geolocation\"",
+     "line": 85
+    }
+   ]
+  },
+  "collect-rid-photo": {
+   "claim": "Photo Assessment: take a photo or use the camera roll; optional.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "fieldType: \"photo\",",
+     "line": 217
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"useImage\": \"Use image from camera roll\",",
+     "line": 633
+    }
+   ]
+  },
+  "collect-household-options": {
+   "claim": "Household offers Do Nothing, Create a new household, Link to an existing house.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "label={I18n.t(\"householdManager.doNothing\")}",
+     "line": 134
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "label={I18n.t(\"householdManager.createHousehold\")}",
+     "line": 138
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "label={I18n.t(\"householdManager.linkIndividual\")}",
+     "line": 152
+    }
+   ]
+  },
+  "collect-household-nothing": {
+   "claim": "Do Nothing shows a message and an Add or Create a Household button.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "<Text>{I18n.t(\"householdManager.noHousehold\")}</Text>",
+     "line": 162
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "{I18n.t(\"householdManager.addCreateHousehold\")}",
+     "line": 167
+    }
+   ]
+  },
+  "collect-household-create": {
+   "claim": "Create: tap the Household button; success message.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "onPress={createNewHousehold}",
+     "line": 146
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "<Text>{I18n.t(\"householdManager.successCreateHousehold\")}</Text>",
+     "line": 158
+    }
+   ]
+  },
+  "collect-household-link": {
+   "claim": "Link: search a person in the household, choose a relationship, submit; shows Linked.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "alert(\"You must search and select an individual.\"); //eslint-disable-line",
+     "line": 54
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "\"Grand-Parent\",",
+     "line": 29
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "selectPerson.householdId || \"No Household Id Found\"",
+     "line": 68
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "label={I18n.t(\"householdManager.linked\")}",
+     "line": 264
+    }
+   ]
+  },
+  "collect-households-not-listed": {
+   "claim": "Offline households are not in the Offline Sync list but are posted on Retry.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "\"offlineAssetSupForms\",",
+     "line": 9
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/post/index.js",
+     "quote": "households: \"offlineHouseholds\",",
+     "line": 30
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/post/index.js",
+     "quote": "getData(\"offlineHouseholds\"),",
+     "line": 128
+    }
+   ]
+  },
+  "collect-duplicates": {
+   "claim": "Duplicates can be deleted in Manage Data Curation.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"data_curation_dup_delete_confirm\": \"Permanently delete this record? This cannot be undone.\",",
+     "line": 286
+    }
+   ]
+  },
+  "collect-builtin-forms": {
+   "claim": "Four Puente forms; Manage names them by class.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/formsConfig.js",
+     "quote": "tag: \"vitals\",",
+     "line": 22
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "SurveyData: \"puenteForms.ResidentID\",",
+     "line": 17
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "HistoryEnvironmentalHealth: \"puenteForms.EnvironmentalHealth\",",
+     "line": 18
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "EvaluationMedical: \"puenteForms.MedicalEvaluation\",",
+     "line": 19
+    }
+   ]
+  },
+  "collect-builtin-fixed": {
+   "claim": "The Puente forms are defined in the app itself, the same everywhere.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/formsConfig.js",
+     "quote": "export const puenteForms = [",
+     "line": 1
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "if (selectedForm === \"env\") {",
+     "line": 70
+    }
+   ]
+  },
+  "collect-env-fields": {
+   "claim": "Environmental Health questions; number of people in the house required.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/envhealth.config.js",
+     "quote": "class: \"HistoryEnvironmentalHealth\",",
+     "line": 1
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/envhealth.config.js",
+     "quote": "label: \"environmentalHealth.waterAccess.label\",",
+     "line": 114
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/envhealth.config.js",
+     "quote": "label: \"environmentalHealth.foodSecurity\",",
+     "line": 458
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/envhealth.config.js",
+     "quote": "formikKey: \"numberofIndividualsLivingintheHouse\",",
+     "line": 511
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/envhealth.config.js",
+     "quote": "label: \"environmentalHealth.numberChildrenUnder5.label\",",
+     "line": 517
+    }
+   ]
+  },
+  "collect-med-fields": {
+   "claim": "Medical Evaluation questions; none required.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/medical-evaluation.config.js",
+     "quote": "class: \"EvaluationMedical\",",
+     "line": 1
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/medical-evaluation.config.js",
+     "quote": "label: \"evaluationMedical.partOfBody.label\",",
+     "line": 109
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/medical-evaluation.config.js",
+     "quote": "label: \"evaluationMedical.immediateFollowupRequired\",",
+     "line": 280
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/medical-evaluation.config.js",
+     "quote": "label: \"evaluationMedical.plan\",",
+     "line": 297
+    }
+   ]
+  },
+  "collect-vitals-fields": {
+   "claim": "Vitals measurements with units; none required.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/vitals.config.js",
+     "quote": "label: \"vitals.height\",",
+     "line": 10
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/configs/vitals.config.js",
+     "quote": "label: \"vitals.hemoglobinA1c\",",
+     "line": 101
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"inches\": \"Inches\",",
+     "line": 348
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"pounds\": \"Pounds\",",
+     "line": 350
+    }
+   ]
+  },
+  "collect-attach-resident": {
+   "claim": "Supplementary forms need an attached resident; search box above; button reads Attach a Community Resident.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "<ResidentIdSearchbar",
+     "line": 103
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "disabled={!surveyee.objectId}",
+     "line": 280
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"attachResident\": \"Attach a Community Resident\"",
+     "line": 373
+    }
+   ]
+  },
+  "collect-supp-saved": {
+   "claim": "Supplementary and custom forms show submitted or saved-offline messages; queued custom forms listed by title.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "alert(I18n.t(\"forms.savedOffline\"));",
+     "line": 236
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "alert(I18n.t(\"forms.successfullySubmitted\"));",
+     "line": 205
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "entry.customTitle ||",
+     "line": 173
+    }
+   ]
+  },
+  "collect-custom-source": {
+   "claim": "Custom forms are built in Form Creator (type Custom), published, and Collect lists the organization's Custom forms under every spelling.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_creator_type_of_form\": \"Type of form\",",
+     "line": 317
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_creator_publish\": \"Publish\",",
+     "line": 58
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "typeOfForm: \"Custom\",",
+     "line": 109
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "const organizationValues = await loadOrganizationScope(surveyingOrganization);",
+     "line": 107
+    }
+   ]
+  },
+  "collect-publish-silent": {
+   "claim": "Manage does not show publish failures.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "console.log(err); //eslint-disable-line",
+     "line": 170
+    }
+   ]
+  },
+  "collect-custom-refresh": {
+   "claim": "The phone keeps saved custom forms; the refresh arrow fetches them; offline keeps the stored list; Download records for offline use also fetches them.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "getData(\"customForms\").then((forms) => {",
+     "line": 57
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "onPress={refreshCustomForms}",
+     "line": 195
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "await storeData(activeForms, \"customForms\");",
+     "line": 126
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "return getData(\"customForms\").then(",
+     "line": 129
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/populate-cache.js",
+     "quote": "customFormsQuery(enteredUsrOrg),",
+     "line": 19
+    },
+    {
+     "file": "puente-reactnative-collect/context/offline.context.js",
+     "quote": "await populateCache(user);",
+     "line": 54
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noCustomForms\": \"No custom forms — try refreshing\",",
+     "line": 107
+    }
+   ]
+  },
+  "collect-custom-attach": {
+   "claim": "Custom forms open on consent, then the resident search; need an attached resident.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionFormsScreen.js",
+     "quote": "setSelectedForm(\"custom\");",
+     "line": 106
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{consent === true && selectedForm !== \"id\" && selectedForm !== \"\" && (",
+     "line": 95
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "disabled={!surveyee.objectId}",
+     "line": 280
+    }
+   ]
+  },
+  "collect-pin": {
+   "claim": "Long-press pins a form; long-press a pinned one unpins; stored on the phone.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/FormsHorizontalView/index.js",
+     "quote": "onLongPress={pinForm ? () => pinForm(form) : undefined}",
+     "line": 61
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "onLongPress={() => removePinnedForm(form)}",
+     "line": 159
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "await storeData(newPinnedForms, \"pinnedForms\");",
+     "line": 120
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noPinnedForms\": \"No pinned forms yet — long-press any form to pin it\"",
+     "line": 108
+    }
+   ]
+  },
+  "collect-pin-cleared": {
+   "claim": "Delete Credentials on the sign-in screen clears pinned forms.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignIn/index.js",
+     "quote": "deleteData(\"pinnedForms\");",
+     "line": 199
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"deleteCreds\": \"Delete Credentials\",",
+     "line": 61
+    }
+   ]
+  },
+  "collect-workflows": {
+   "claim": "Workflows groups custom forms; Form Creator publishes no workflow, so they appear under No Workflow Assigned.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "tableDataByCategory[\"No Workflow Assigned\"] = [record];",
+     "line": 72
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "header={I18n.t(\"formsGallery.noWorflowAssigned\")}",
+     "line": 235
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "const newWorkflowsToAdd = [];",
+     "line": 138
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "formObject.workflows = newWorkflowsToAdd;",
+     "line": 144
+    }
+   ]
+  },
+  "collect-custom-manage": {
+   "claim": "Custom form records appear under the form in Form Manager, with Export.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"page_form_manager_title\": \"Form Manager\",",
+     "line": 361
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/index.js",
+     "quote": "<CSVButton form={row} surveyingOrganization={organization} shortCode={shortCode} />",
+     "line": 149
+    }
+   ]
+  },
+  "collect-consent-screen": {
+   "claim": "Every form opens on the Consent Form screen with summary, View Full Policy, checkbox, Continue to Form.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{consent === false && (",
+     "line": 122
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "<GdprCompliance navigation={navigation} setConsent={setConsent} />",
+     "line": 123
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "<Title style={{ marginLeft: 15 }}>{I18n.t(\"gdpr.consentForm\")}</Title>",
+     "line": 58
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "{I18n.t(\"gdpr.viewFullPolicy\")}",
+     "line": 66
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "{I18n.t(\"gdpr.communityMemAgrees\")}",
+     "line": 86
+    }
+   ]
+  },
+  "collect-consent-summary": {
+   "claim": "The summary lists what Collect stores, who may see it, no advertising use, policy date.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "<Text style={{ flex: 2, padding: 10 }}>{I18n.t(\"gdpr.policy\")}</Text>",
+     "line": 60
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "including contact details, demographics, household and location information, precise GPS coordinates, photographs, health information, form responses, and account identifiers",
+     "line": 391
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records may be available to authorized users of the organization collecting them.",
+     "line": 391
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Puente does not use this app data for advertising, product personalization, or tracking.",
+     "line": 391
+    }
+   ]
+  },
+  "collect-consent-full-policy": {
+   "claim": "View Full Policy opens a window with Open Current Policy linking the Privacy Policy, and Ok.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/TermsModal/index.js",
+     "quote": "onPress={() => WebBrowser.openBrowserAsync(PRIVACY_POLICY_URL)}",
+     "line": 44
+    },
+    {
+     "file": "puente-reactnative-collect/modules/legal/index.js",
+     "quote": "export const PRIVACY_POLICY_URL = \"https://www.puente-dr.org/privacy-policy/\";",
+     "line": 1
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"viewCurrentPolicy\": \"Open Current Policy\",",
+     "line": 528
+    }
+   ]
+  },
+  "collect-consent-required": {
+   "claim": "Without the tick, Continue shows Community member must consent; the box starts unticked every time.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "alert(I18n.t(\"gdpr.mustConsent\")); // eslint-disable-line",
+     "line": 53
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "const [checked, setChecked] = React.useState(false);",
+     "line": 8
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "const [consent, setConsent] = useState(false);",
+     "line": 78
+    }
+   ]
+  },
+  "collect-consent-back": {
+   "claim": "A Back button above the form leaves it.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionFormsScreen.js",
+     "quote": "<Text>{I18n.t(\"dataCollection.back\")}</Text>",
+     "line": 142
+    }
+   ]
+  },
+  "collect-consent-org-scope": {
+   "claim": "Each organization's apps show its own records.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "const organizationValues = await loadOrganizationScope(surveyingOrganization);",
+     "line": 107
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/_utils/formRecordsQuery.js",
+     "quote": "Scoped to every `surveyingOrganization` string the organization goes by",
+     "line": 9
+    }
+   ]
+  },
+  "collect-offline-banner": {
+   "claim": "Offline banner on the forms screen and forms; Home shows cached data.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionGalleryScreen.js",
+     "quote": "{I18n.t(\"forms.offlineBanner\")}",
+     "line": 86
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionFormsScreen.js",
+     "quote": "{I18n.t(\"forms.offlineBanner\")}",
+     "line": 127
+    },
+    {
+     "file": "puente-reactnative-collect/domains/HomeScreen/index.js",
+     "quote": "{I18n.t('home.offlineCached')}",
+     "line": 164
+    }
+   ]
+  },
+  "collect-save-messages": {
+   "claim": "Saved offline vs successfully submitted messages.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"successfullySubmitted\": \"Form successfully submitted\",",
+     "line": 380
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"savedOffline\": \"Saved offline — will sync when you reconnect\",",
+     "line": 381
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "if (surveyee?.isOfflineLocal === true) {",
+     "line": 247
+    }
+   ]
+  },
+  "collect-queue-screen": {
+   "claim": "Offline Sync shows status, count, Waiting to sync list with Discard, Last synced, all-caught-up message.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{isOnline ? I18n.t(\"header.online\") : I18n.t(\"header.offline\")}",
+     "line": 231
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"queuedOne\": \"1 form is saved on this device and has not reached the server yet.\",",
+     "line": 783
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"offlineSync.queuedTitle\")}",
+     "line": 240
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"offlineSync.lastSync\")}{\" \"}",
+     "line": 294
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"noForms\": \"No forms queued. You are all caught up!\",",
+     "line": 781
+    }
+   ]
+  },
+  "collect-retry": {
+   "claim": "Retry sends the queue; success shows Success! You have just submitted N.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"header.retry\")}",
+     "line": 285
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"header.success\")} {I18n.t(\"header.justSubmitted\")}{\" \"}",
+     "line": 344
+    }
+   ]
+  },
+  "collect-partial-sync": {
+   "claim": "Partial failure keeps unsent forms queued and does not resend the saved ones.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "Some records reached Parse and some did not.",
+     "line": 40
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "re-sending it whole duplicates the ones that did. So prune by the server's",
+     "line": 42
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "`saved` map and leave the rest queued for a retry.",
+     "line": 43
+    }
+   ]
+  },
+  "collect-sync-failures": {
+   "claim": "Failure messages: failed attempt, still on device, offline vs server refused, session expired.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"header.failedAttempt\")}",
+     "line": 309
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"offlineSync.stillOnDevice\")}",
+     "line": 312
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "? I18n.t(\"offlineSync.failedOnline\")",
+     "line": 321
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{I18n.t(\"header.sessionExpired\")}",
+     "line": 335
+    }
+   ]
+  },
+  "collect-discard": {
+   "claim": "Discard asks first, warns it is permanent; Discard permanently confirms.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "I18n.t(\"offlineSync.discardTitle\"),",
+     "line": 187
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Discarding deletes it from this device permanently and it cannot be recovered.",
+     "line": 791
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"discardConfirm\": \"Discard permanently\"",
+     "line": 793
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "const removeQueuedForm = async (storageKey, index) => {",
+     "line": 50
+    }
+   ]
+  },
+  "collect-logout-guard": {
+   "claim": "Logout is blocked offline and warns about unsynced records online.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/confirmLogout.js",
+     "quote": "I18n.t(\"accountSettings.logoutBlockedOfflineTitle\"),",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/modules/settings/confirmLogout.js",
+     "quote": "I18n.t(\"accountSettings.logoutUnsyncedWarning\", { count: unsyncedCount })",
+     "line": 45
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"logoutMessage\": \"You will need your username and password to log back in.\",",
+     "line": 557
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "{I18n.t(\"accountSettings.logout\")}",
+     "line": 164
+    }
+   ]
+  },
+  "collect-settings-unsynced": {
+   "claim": "Settings shows the number of records waiting.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "{I18n.t(\"accountSettings.unsyncedOnDevice\", {",
+     "line": 263
+    }
+   ]
+  },
+  "collect-settings-list": {
+   "claim": "Settings tab list: Name/Phone/Email, Change Password, Find Records, Language, Offline Records, Theme, Calm Mode, Reset Onboarding.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "label: I18n.t(\"accountSettings.namePhoneEmail\"),",
+     "line": 204
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "label: I18n.t(\"accountSettings.offlineData\"),",
+     "line": 220
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "label: I18n.t(\"theme.title\"),",
+     "line": 224
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "{I18n.t(\"accessibility.calmMode\")}",
+     "line": 334
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/Password/index.js",
+     "quote": "{I18n.t(\"passwordSettings.currentPassword\")}",
+     "line": 129
+    }
+   ]
+  },
+  "collect-settings-online-only": {
+   "claim": "Account changes need a connection; new password at least 8 characters, confirmed.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"offlineMessage\": \"You are offline. This change needs an internet connection, and has not been saved.\"",
+     "line": 591
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"tooShort\": \"Your new password must be at least 8 characters.\",",
+     "line": 602
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/Password/index.js",
+     "quote": "{I18n.t(\"passwordSettings.confirmPassword\")}",
+     "line": 155
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Email info@puente-dr.org to change it.",
+     "line": 115
+    }
+   ]
+  },
+  "collect-language-settings": {
+   "claim": "Language opens Choose Language with English, Spanish, Haitian Creole.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/Language/index.js",
+     "quote": "{ code: \"hk\", label: I18n.t(\"languagePicker.creole\") },",
+     "line": 32
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"creole\": \"Haitian Creole\"",
+     "line": 517
+    }
+   ]
+  },
+  "collect-settings-storage-limit": {
+   "claim": "Find Records shows stored count and Record storage limit, default 2000.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/settings/index.js",
+     "quote": "const FIND_RECORDS_LIMIT_DEFAULT = 2000;",
+     "line": 75
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"recordStorageLimit\": \"Record storage limit\",",
+     "line": 571
+    }
+   ]
+  },
+  "collect-offline-records": {
+   "claim": "Offline Records: download or clear resident records; clearing does not touch the sync queue.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/OfflineData/index.js",
+     "quote": "buttonText={I18n.t(\"accountSettings.populateIdForms\")}",
+     "line": 105
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/OfflineData/index.js",
+     "quote": "buttonText={I18n.t(\"accountSettings.clearCachedIdForms\")}",
+     "line": 116
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Offline search will be empty until you rebuild the cache, which needs an internet connection.",
+     "line": 550
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "it (offline-clear-button empties the resident CACHE, not this queue). This",
+     "line": 182
+    }
+   ]
+  },
+  "collect-theme-calm": {
+   "claim": "Theme Light/Dark; Calm Mode reduces animations with ON/OFF.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "label: I18n.t(\"theme.light\"),",
+     "line": 287
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"calmModeDescription\": \"Reduce animations for clinical focus\",",
+     "line": 700
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "? I18n.t(\"accessibility.on\")",
+     "line": 349
+    }
+   ]
+  },
+  "collect-support": {
+   "claim": "Support: Help Center; Contact us/Feedback emails info@; Rate our app; Delete user? opens account page.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "{I18n.t(\"supportHome.helpCenter\")}",
+     "line": 95
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/SupportSettings/Feedback/index.js",
+     "quote": "recipients: [\"info@puente-dr.org\"],",
+     "line": 15
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "StoreReview.requestReview();",
+     "line": 43
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "`${PUENTE_MANAGE_URL}/account/management?objectId=${id}`",
+     "line": 50
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records you have already submitted belong to your organization and are not removed by this.",
+     "line": 563
+    }
+   ]
+  },
+  "collect-version-label": {
+   "claim": "Settings shows Version X (build).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/index.js",
+     "quote": "version: Application.nativeApplicationVersion ?? \"—\",",
+     "line": 413
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"versionLabel\": \"Version %{version} (%{build})\",",
+     "line": 566
+    }
+   ]
+  },
+  "collect-consent-suggested": {
+   "claim": "Forms opened from Suggested next forms after a Resident ID skip the consent screen: consent is screen state set once and not reset when the suggested form opens (bug C16).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "const [consent, setConsent] = useState(false);",
+     "line": 78
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "return navigateToNewRecord(tag);",
+     "line": 161
+    }
+   ]
+  }
+ }
+}

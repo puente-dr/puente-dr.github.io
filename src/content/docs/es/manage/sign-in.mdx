@@ -1,0 +1,104 @@
+---
+title: Iniciar sesión en Manage
+description: Abre Puente Manage en un navegador, crea una cuenta en tu organización y vuelve a entrar cuando olvides tu contraseña.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - manage/review
+  - collect/install-and-sign-in
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import login from '@shots/es/manage-login.png';
+import register from '@shots/es/manage-register.png';
+import picker from '@shots/es/register-02-picker-synthetic.png';
+import notListed from '@shots/es/manage-register-not-listed.png';
+
+{/* claim: manage-one-account */}
+Puente Manage es la aplicación web donde los coordinadores revisan lo que llegó del campo, crean formularios y exportan datos. Funciona en cualquier navegador, en [puente-manage.vercel.app](https://puente-manage.vercel.app). Usas la misma cuenta que en Puente Collect, la aplicación del teléfono.
+
+Esta página explica la pantalla de inicio de sesión, cómo crear una cuenta y cómo restablecer una contraseña olvidada.
+
+## Iniciar sesión
+
+{/* claim: manage-signin-page */}
+Abre Manage. La pantalla dice **Puente Manage** arriba y tiene dos casillas: <UI>Correo electrónico o número de teléfono</UI> y <UI>Contraseña</UI>. Escribe el correo con el que te registraste y tu contraseña, y pulsa <UI>Iniciar sesión →</UI> (o Enter).
+
+{/* claim: manage-signin-dashboard */}
+Manage se abre en <UI>Revisar</UI>, el panel. Si seguiste un enlace a otra página sin haber iniciado sesión, te lleva a esa página.
+
+<Shot src={login} alt="La página de inicio de sesión de Manage: casillas de correo o teléfono y contraseña, un botón azul para iniciar sesión, los enlaces ¿Olvidaste tu contraseña? y Crear cuenta, una nota amarilla sobre Collect y una fila de idiomas debajo." caption="La página de inicio de sesión. La fila de idiomas de abajo funciona antes de entrar." />
+
+{/* claim: manage-collect-hint */}
+La nota amarilla dice <UI>¿Estás recolectando datos en el campo? Abre Puente Collect en tu teléfono.</UI> Manage es para la oficina. Las encuestas se llenan en el teléfono, en [Collect](/docs/es/collect/install-and-sign-in/).
+
+{/* claim: manage-signin-language */}
+Para cambiar el idioma antes de entrar, usa la fila de abajo de la tarjeta: **English**, **Español** o **Kreyòl Ayisyen**.
+
+## Crear una cuenta
+
+Pulsa <UI>Crear cuenta</UI> en la página de inicio de sesión.
+
+{/* claim: manage-register-fields */}
+| Campo | ¿Obligatorio? |
+|---|---|
+| <UI>Nombre</UI>, <UI>Apellido</UI> | No, pero llénalos para que tu equipo sepa quién eres |
+| <UI>Organización</UI> | Sí |
+| <UI>Correo electrónico</UI> | Sí |
+| <UI>Número de teléfono</UI> | No |
+| <UI>Contraseña</UI>, <UI>Confirmar contraseña</UI> | Sí, y las dos deben coincidir |
+
+<Shot src={register} alt="El formulario Crear una cuenta: Nombre, Apellido, un selector de Organización, el enlace Mi organización no aparece, Correo electrónico, Número de teléfono, Contraseña, Confirmar contraseña y los botones Registrarse y Cancelar." caption="Los campos obligatorios llevan un asterisco." />
+
+{/* claim: manage-register-email-confirm */}
+Pulsa <UI>Registrarse</UI>. Manage envía una confirmación a tu correo y abre el panel.
+
+{/* claim: org-first-admin */}
+La primera persona que se registra en una organización queda como su administradora; las que llegan después son miembros. Mira [Miembros y administradores](/docs/es/organizations/members-and-administrators/).
+
+## Elegir tu organización
+
+{/* claim: manage-register-org-list */}
+<UI>Organización</UI> es una lista de las organizaciones que ya están en Puente. Escribe unas letras para acortarla y elige la tuya. Si la lista no cargó, el formulario dice <UI>No pudimos cargar la lista de organizaciones. Revise su conexión y vuelva a cargar la página.</UI>
+
+<Shot src={picker} alt="El campo Organización con Exam escrito y una sola sugerencia debajo, Example Health Trust." caption="Al escribir, la lista se acorta. Elige el nombre exacto, no uno parecido." />
+
+<Aside type="caution" title="No elijas una organización que casi es la tuya">
+Tu organización decide qué registros puedes ver y dónde se archiva tu trabajo. Una opción «parecida» te pone en el grupo de otras personas. Después no puedes cambiarla por tu cuenta.
+</Aside>
+
+## Cuando tu organización no aparece
+
+{/* claim: manage-register-not-listed */}
+Pulsa <UI>Mi organización no aparece</UI>. Manage explica que el personal de Puente agrega las organizaciones a mano y ofrece un enlace, <UI>Envíenos por correo el nombre de su organización</UI>. Abre un correo a info@puente-dr.org con el asunto «Add my organization to Puente Manage». Cuando tu organización aparezca en la lista, vuelve y termina el registro.
+
+<Shot src={notListed} alt="Detalle del formulario de registro después de pulsar Mi organización no aparece: un párrafo que dice que el personal de Puente agrega las organizaciones a mano y termina con el enlace para enviar el nombre por correo." caption="La ayuda aparece justo debajo del campo Organización." />
+
+{/* claim: org-collect-creates */}
+Collect funciona distinto: ahí puedes escribir el nombre de una organización nueva y Puente la crea. [Organizaciones](/docs/es/organizations/organizations/) explica las dos formas de entrar.
+
+## Restablecer una contraseña olvidada
+
+{/* claim: manage-forgot-password */}
+1. Pulsa <UI>¿Olvidaste tu contraseña?</UI> en la página de inicio de sesión. La pantalla dice <UI>Restablece tu cuenta</UI>.
+2. Escribe tu correo en <UI>Número de teléfono o correo electrónico</UI>.
+3. Deja marcado <UI>¿Enviar el correo de restablecimiento?</UI> y pulsa <UI>Enviar el correo de restablecimiento</UI>.
+4. Cuando aparezca <UI>¡Solicitud enviada!</UI>, abre el correo y sigue el enlace.
+
+<Aside type="tip">
+Usa la opción de correo. La pantalla también ofrece un mensaje de texto, pero Puente ya no envía mensajes de texto para confirmar cuentas, y no está comprobado que esa opción funcione.
+</Aside>
+
+## Preguntas frecuentes
+
+**¿Necesito una cuenta aparte para Manage?**
+No. La cuenta que usas en Collect funciona aquí, y al revés.
+
+{/* claim: org-refused-effect */}
+**Entré y el panel está vacío. ¿Por qué?**
+Casi siempre es porque el nombre de tu organización no coincide con ninguna que Puente conozca, o porque todavía no se ha sincronizado nada. Mira [Organizaciones](/docs/es/organizations/organizations/).
+
+{/* claim: manage-as-org-readonly */}
+**¿Puedo cambiar mi organización después?**
+No por tu cuenta. [Configuración de la cuenta](/docs/es/manage/account-settings/) la muestra sin opción de editar; escribe a info@puente-dr.org para cambiarla.

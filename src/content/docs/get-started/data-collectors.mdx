@@ -1,0 +1,100 @@
+---
+title: "Start here: data collectors"
+description: The essentials for surveyors using Puente Collect — install, sign in, find people, fill in a form with consent and send it.
+related:
+  - collect/install-and-sign-in
+  - collect/offline-sync
+  - guides/your-first-day-collecting
+  - guides/field-day-checklist
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import signIn from '@shots/en/collect-sign-in.png';
+import tabs from '@shots/en/collect-tab-bar.png';
+import consent from '@shots/en/collect-consent.png';
+import queue from '@shots/en/collect-03-queue.png';
+
+This page is for people who collect data with **Puente Collect** on a phone: promotores, surveyors, clinic volunteers. It covers the few things you need on your first day, in order. Each step links to the full article.
+
+If you coordinate the work from a computer instead, see [Start here: data managers](/docs/get-started/data-managers/).
+
+## Install Collect
+
+{/* claim: start-platforms */}
+Install **Puente Collect** from the [App Store](https://apps.apple.com/us/app/puente-collect/id1362371696) on an iPhone (iOS 15.1 or later) or from [Google Play](https://play.google.com/store/apps/details?id=puente.collect) on Android. The first time you open it, choose your language.
+
+Use the phone you will actually carry in the field, so you practise on the screen you will use.
+
+## Sign in
+
+{/* claim: start-signin-online */}
+Sign in with your email or phone number and password, then <UI>Log-In</UI>. Signing in **needs an internet connection** — do it before you leave signal, not in the community.
+
+New to Puente? Tap <UI>Sign Up!</UI> and type your organization's name exactly as your team writes it; pick it from the suggestions if it appears. See [Install and sign in](/docs/collect/install-and-sign-in/).
+
+<div class="shots">
+<Shot phone src={signIn} alt="The Collect sign-in screen with Email or Phone Number and Password fields, Forgot Password?, a Log-In button and a Sign Up! link at the bottom." caption="Sign in while you have signal. There is no offline sign-in." />
+</div>
+
+## Learn the five icons
+
+{/* claim: start-tabs */}
+The bar at the bottom of Collect has five icons and no words. From left to right:
+
+| Icon | What it opens |
+|---|---|
+| Magnifying glass | Find people already in Puente |
+| Folder | The forms you can fill in |
+| House | Home: your activity and your organization's (Collect opens here) |
+| Cloud | Offline Sync: forms waiting to be sent |
+| Gear | Settings, help and support |
+
+<Shot src={tabs} alt="The Collect tab bar: a magnifying glass, a folder, a house, a cloud with an upward arrow highlighted, and a gear." caption="Five icons, no labels. The highlighted one is the screen you are on." />
+
+See [Getting around Collect](/docs/collect/getting-around/).
+
+## Search before you register
+
+Most people you visit are already in Puente. Before you create anyone, tap the magnifying glass and search — one name at a time: the surname, then the first name, then the nickname. A full name in one search finds nothing. See [Find records](/docs/collect/find-records/).
+
+## Fill in a form, starting with consent
+
+{/* claim: privacy-consent */}
+Tap the folder and pick a form. Every form opened there starts on a consent screen: explain the data policy to the person, tick <UI>Community member agrees to data policy</UI> only if they agree, then tap <UI>Continue to Form</UI>.
+
+{/* claim: start-attach-resident */}
+<UI>Resident ID</UI> registers a new person. <UI>Vitals</UI>, <UI>Environmental Health</UI> and <UI>Medical Evaluation</UI> are attached to someone already registered — the button reads <UI>Attach a Community Resident</UI> until you choose them. See [Puente forms](/docs/collect/puente-forms/) and [Consent](/docs/collect/consent/).
+
+<div class="shots">
+<Shot phone src={consent} alt="The Consent Form screen: a privacy summary, View Full Policy, an unticked Community member agrees to data policy box and a Continue to Form button." caption="No tick, no form. The person's yes comes first." />
+</div>
+
+## Send what you collected
+
+{/* claim: start-survey-path */}
+With no signal, a form you finish says <UI>Saved offline — will sync when you reconnect</UI>. It is now only on your phone.
+
+**Sending is not automatic.** When you have signal again — every day — tap the cloud and press <UI>Retry</UI>. You are done when the screen says <UI>No forms queued. You are all caught up!</UI> See [Working offline](/docs/collect/offline-sync/).
+
+<div class="shots">
+<Shot phone src={queue} alt="The Offline Sync screen with one form waiting to sync, a Discard link and a Retry button." caption="Retry every day you have signal. Zero waiting is the only finished state." />
+</div>
+
+## Three things never to do
+
+{/* claim: start-three-nevers */}
+1. **Never log out with forms waiting.** Collect will not let you log out offline, and warns you online. Forms left on the phone cannot be sent until you sign back in.
+2. **Never delete the app or clear its storage with forms waiting.** Unsent forms live only inside the app on this phone.
+3. **Never tap Discard on a form you can still send.** <UI>Discard</UI> deletes it from the phone permanently, and nobody can recover it.
+
+<Aside type="caution" title="If a form will not send">
+Try Retry again on a better connection. If it still fails, tell your coordinator before you do anything else.
+</Aside>
+
+## Next steps
+
+- [Your first day collecting](/docs/guides/your-first-day-collecting/) — a guided first day.
+- [Field day checklist](/docs/guides/field-day-checklist/) — what to check before and after going out.
+- [Settings](/docs/collect/settings/) — language, password and offline search.
+- [Troubleshooting](/docs/help/troubleshooting/) — when something goes wrong.

@@ -1,0 +1,117 @@
+---
+title: Lista para el día de campo
+description: Una lista de pausas para encuestadores y para quien coordina — el día antes, antes de salir, durante las visitas, cada noche y después de la ronda.
+related:
+  - collect/offline-sync
+  - collect/find-records
+  - guides/your-first-day-collecting
+  - guides/running-a-clinic-day
+roles: [data-collector, data-manager]
+format: checklist
+minutes: 3
+thumbnail: ../../../../assets/shots/es/collect-04-all-caught-up.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import storage from '@shots/es/find-05-storage-limit.png';
+import queue from '@shots/es/collect-03-queue.png';
+import caughtUp from '@shots/es/collect-04-all-caught-up.png';
+import collected from '@shots/es/manage-form-manager-expanded.png';
+
+Usa esta lista en cada día de campo. Está hecha de pausas: momentos en que el equipo se detiene un minuto y revisa unas cuantas cosas antes de seguir. Casi toda protege un intervalo: entre guardar un formulario en un teléfono y que llegue a Puente, cuando el teléfono tiene la única copia.
+
+Los encuestadores hacen las tareas del teléfono. Quien coordina hace las de Manage y comprueba que cada teléfono terminó. Marca las casillas a medida que avanzas.
+
+## El día antes, con internet
+
+Estas necesitan conexión, así que hazlas en la oficina o en tu casa.
+
+{/* claim: guide-update-version */}
+- [ ] Actualizar Puente Collect desde la App Store o Google Play (la versión actual es la 15.7.5)
+
+{/* claim: guide-signin-internet */}
+- [ ] Iniciar sesión en cada teléfono que va a recoger datos — iniciar sesión necesita internet
+
+{/* claim: guide-forms-reach-phones */}
+- [ ] En la carpeta, tocar la flecha de actualizar junto a <UI>Formularios personalizados</UI> y comprobar que están los formularios del día
+
+{/* claim: guide-search-offline */}
+- [ ] Abrir la lupa una vez, para que el teléfono guarde a los residentes y se puedan buscar sin conexión
+
+{/* claim: guide-storage-limit */}
+- [ ] Si la comunidad es grande, revisar en el engranaje → <UI>Buscar registros</UI> → <UI>Límite de almacenamiento de registros</UI> (empieza en 2.000)
+- [ ] Cargar cada teléfono; llevar cargadores y baterías externas
+- [ ] Imprimir la hoja de registro en papel y formularios de papel de repuesto por si falla un teléfono
+
+<div class="shots">
+<Shot phone src={storage} alt="Una pantalla de configuración llamada Buscar registros, con los registros guardados actualmente y el límite de almacenamiento de 2000 con un enlace Editar." caption="Cuántos residentes puede buscar el teléfono sin señal." />
+</div>
+
+## Antes de salir
+
+- [ ] Cada teléfono tiene la sesión abierta con la cuenta propia de la persona que lo lleva
+- [ ] Cada teléfono muestra los formularios del día
+- [ ] Todo el equipo sabe a quién llamar si un teléfono deja de funcionar
+- [ ] Todo el equipo sabe qué hacer en la sección del hogar del formulario de identificación
+
+## Durante las visitas
+
+{/* claim: guide-search-one-field */}
+- [ ] Buscar antes de registrar: solo el apellido, luego el nombre, luego el apodo, luego los primeros dígitos de la cédula
+
+{/* claim: guide-consent */}
+- [ ] Marcar <UI>El miembro de la comunidad acepta la política de datos</UI> solo cuando la persona haya aceptado
+
+{/* claim: guide-location-button */}
+- [ ] Tocar <UI>Obtener ubicación</UI> en la casa, y otra vez si muestra `(0.00, 0.00)`
+
+{/* claim: guide-save-messages */}
+- [ ] Leer el mensaje después de cada envío: <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> quiere decir que el formulario sigue en el teléfono
+- [ ] Anotar a cada persona en la hoja de registro en papel
+
+<Aside type="caution" title="Tres cosas que nunca se hacen en el campo">
+{/* claim: guide-logout-offline */}
+Nunca cerrar sesión, nunca borrar los datos de la aplicación, nunca desinstalarla. Los formularios que no se han enviado viven dentro de la aplicación, y volver a iniciar sesión necesita conexión.
+</Aside>
+
+## Cada noche
+
+{/* claim: guide-sync-not-automatic */}
+- [ ] Conectar cada teléfono a una red wifi confiable, abrir la nube (<UI>Sincronización sin conexión</UI>) y tocar <UI>Reintentar</UI> — el envío no es automático
+
+{/* claim: guide-caught-up */}
+- [ ] Esperar hasta que diga <UI>No hay formularios en cola. ¡Estás al día!</UI>
+
+{/* claim: guide-households-not-listed */}
+- [ ] Tocar <UI>Reintentar</UI> aunque no aparezca nada: los hogares creados sin conexión no se muestran ahí, pero sí se envían
+
+{/* claim: guide-still-on-device */}
+- [ ] Si un formulario sigue en la lista, déjalo — <UI>Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.</UI> Inténtalo de nuevo con mejor conexión
+- [ ] Quien coordina marca cada teléfono como listo
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de Sincronización sin conexión con un formulario de identificación en cola, un enlace Descartar al lado y un botón Reintentar." caption="No terminado: todavía queda un formulario en este teléfono." />
+<Shot phone src={caughtUp} alt="La pantalla de Sincronización sin conexión con la cola vacía: No hay formularios en cola. ¡Estás al día!" caption="Listo por hoy." />
+</div>
+
+## Después de la ronda, en Manage
+
+{/* claim: guide-forms-collected */}
+- [ ] En <UI>Gestionar</UI>, expandir la fila de cada formulario y pulsar <UI>Actualizar</UI>; comparar <UI>Formularios recolectados</UI> con la hoja de registro
+
+{/* claim: guide-review-dashboard */}
+- [ ] Abrir <UI>Revisar</UI> y mirar <UI>Requiere atención</UI>
+- [ ] Anotar a cualquier persona registrada dos veces, para que quien coordina lo corrija
+- [ ] Escribir qué salió mal y qué cambiar la próxima vez
+
+<Shot src={collected} alt="El Gestor de formularios con la fila Vision exam expandida, mostrando Formularios recolectados: 37 y un botón Actualizar." caption="Si este número es menor que la hoja de registro, a algún teléfono todavía le quedan formularios." />
+
+## Preguntas frecuentes
+
+**¿Hace falta cada punto todos los días?**
+La sincronización de la noche, sí, todos los días. La lista del día antes importa sobre todo antes del primer día de una ronda.
+
+{/* claim: guide-discard-permanent */}
+**Un formulario sigue fallando. ¿Lo podemos descartar?**
+Solo con quien coordina, y solo después de copiar sus respuestas en papel. Descartar lo borra del teléfono de forma permanente.

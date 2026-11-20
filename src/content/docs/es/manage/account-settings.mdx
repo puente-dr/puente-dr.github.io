@@ -1,0 +1,98 @@
+---
+title: Configuración de la cuenta
+description: Cambia en Manage tu nombre, teléfono, correo, contraseña e idioma — y por qué tu organización es lo único que no puedes cambiar aquí.
+related:
+  - manage/sign-in
+  - organizations/organizations
+  - privacy/delete-your-account
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/es/manage-account-settings.png';
+import sidebar from '@shots/es/manage-sidebar.png';
+import login from '@shots/es/manage-login.png';
+
+Configuración de la cuenta es tu propio perfil en Manage: el nombre que ve tu equipo, cómo te contacta Puente, tu contraseña y el idioma en que te habla Manage. Es la misma cuenta que usas en Collect, así que un cambio aquí también cuenta cuando entras en el teléfono.
+
+## Abrir Configuración de la cuenta
+
+{/* claim: manage-as-open */}
+Pulsa <UI>Configuración</UI> en el menú de la izquierda, o <UI>Cuenta</UI> al final del menú. Los dos abren <UI>Configuración de la cuenta</UI>. También la abre el círculo con tus iniciales, arriba a la derecha de cada página.
+
+<div class="shots">
+<Shot phone src={sidebar} alt="El menú izquierdo de Manage, con Configuración debajo de Revisar, y Cuenta y Cerrar sesión al final." caption="Configuración y Cuenta llevan a la misma página." />
+</div>
+
+## Cambiar tus datos
+
+{/* claim: manage-as-fields */}
+Los nombres de los campos aparecen en inglés, también en la versión en español:
+
+| Campo | Notas |
+|---|---|
+| <UI>First Name</UI>, <UI>Last Name</UI> (nombre y apellido) | Obligatorios |
+| <UI>Email Address</UI> (correo) | Obligatorio. También es con lo que inicias sesión |
+| <UI>Phone Number</UI> (teléfono) | Opcional |
+| <UI>Password</UI> (contraseña) | Déjala vacía para conservar la actual; escribe una nueva para cambiarla |
+
+Pulsa <UI>Actualizar usuario</UI>. Manage guarda tus datos, vuelve a iniciar tu sesión con ellos y te lleva al panel.
+
+<Shot src={settings} alt="La página Configuración de la cuenta: nombre Ada, apellido Ejemplo, la organización Example Health Trust como texto con una nota debajo, teléfono, correo, una casilla de contraseña vacía, y los botones Actualizar usuario y Eliminar usuario." caption="Todo se puede editar menos la organización." />
+
+{/* claim: manage-one-account */}
+Como Collect usa la misma cuenta, desde ese momento entra en el teléfono con tu correo o contraseña nuevos.
+
+## Tu organización no se puede editar
+
+{/* claim: manage-as-org-readonly */}
+Tu organización aparece como texto, no como casilla, con la nota (en inglés) <UI>Your organization determines which records you can see. Email info@puente-dr.org to change it.</UI> Es decir: tu organización decide qué registros puedes ver, y para cambiarla hay que escribir a info@puente-dr.org.
+
+Es a propósito. Pasar una cuenta a otra organización cambia de quién son los registros que puede ver, así que lo hace el personal de Puente, no la persona dueña de la cuenta. Escribe a info@puente-dr.org con tu nombre, tu organización actual y la organización a la que perteneces. Mira [Organizaciones](/docs/es/organizations/organizations/).
+
+## Cambiar el idioma
+
+{/* claim: manage-as-language */}
+Debajo del formulario hay una fila de <UI>Idioma</UI>: **English**, **Español** y **Kreyòl Ayisyen**. Cada idioma está escrito en sí mismo, así que encuentras el tuyo aunque no puedas leer el actual. Manage cambia en el momento y recuerda la elección en este navegador por un año.
+
+{/* claim: manage-signin-language */}
+La misma fila está en la página de inicio de sesión, así que puedes cambiar el idioma antes de entrar.
+
+<Shot src={login} alt="La página de inicio de sesión de Manage con una fila de idiomas debajo de la tarjeta: English, Español, Kreyòl Ayisyen." caption="La fila de idiomas en la página de inicio de sesión." />
+
+El idioma se guarda por navegador, no por cuenta. En una computadora compartida de la oficina, la próxima persona ve el idioma que elegiste hasta que elija el suyo. Collect tiene su propio ajuste de idioma en el engranaje; mira [Configuración](/docs/es/collect/settings/).
+
+## Cerrar sesión
+
+{/* claim: manage-as-logout */}
+Pulsa <UI>Cerrar sesión</UI> al final del menú de la izquierda. Manage cierra tu sesión y vuelve a la página de inicio de sesión. En una computadora compartida de la oficina, cierra sesión siempre al terminar: si no, cualquier persona frente al teclado puede abrir los registros y las exportaciones de tu organización.
+
+## Eliminar usuario
+
+{/* claim: manage-as-delete */}
+<UI>Eliminar usuario</UI> marca tu cuenta como inactiva y te devuelve a la página de inicio de sesión. No borra la cuenta, y hoy tampoco impide volver a entrar. Para que se elimine una cuenta, escribe a info@puente-dr.org; para alguien que se fue, quien administra usa <UI>Desactivar</UI>, que le cierra la sesión (mira [Miembros y administradores](/docs/es/organizations/members-and-administrators/)).
+
+<Aside type="caution" title="No pide confirmación">
+<UI>Eliminar usuario</UI> actúa con el primer clic. Está justo debajo de <UI>Actualizar usuario</UI>, así que ten cuidado al guardar cambios.
+</Aside>
+
+{/* claim: manage-as-delete-records */}
+Los registros que recolectaste no se borran. Pertenecen a tu organización y se quedan con ella.
+
+Para pedir que se borren tu cuenta y tus datos personales, sigue [Eliminar tu cuenta](/docs/es/privacy/delete-your-account/).
+
+## Preguntas frecuentes
+
+**Cambié mi contraseña. ¿Tengo que cambiarla en el teléfono?**
+Sí. La próxima vez que Collect te pida iniciar sesión, usa la contraseña nueva.
+
+{/* claim: manage-as-language */}
+**En otra computadora Manage volvió a estar en inglés. ¿Por qué?**
+El idioma se guarda en cada navegador, no en tu cuenta. Elige tu idioma otra vez en esa computadora, y ahí se queda por un año.
+
+**¿Cómo me paso a otra organización?**
+Escribe a info@puente-dr.org. No puedes cambiarla por tu cuenta.
+
+{/* claim: org-admin-actions */}
+**Alguien dejó nuestro equipo. ¿Usa Eliminar usuario?**
+No. Quien administra la organización lo desactiva en la pantalla Organizaciones. Mira [Miembros y administradores](/docs/es/organizations/members-and-administrators/).

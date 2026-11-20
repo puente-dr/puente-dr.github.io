@@ -1,0 +1,122 @@
+---
+title: Preparar tu organización
+description: De las primeras decisiones a un equipo que trabaja — el nombre oficial, cómo entra la organización a Puente, una segunda persona administradora, las cuentas del equipo, un primer formulario probado en una copia y un plan de dos semanas.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - organizations/nicknames
+  - guides/training-and-pilot
+roles: [data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../../assets/shots/es/manage-organizations.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import suggestions from '@shots/es/collect-02-signup-organization-suggestions.png';
+import notListed from '@shots/es/manage-register-not-listed.png';
+import orgs from '@shots/es/manage-organizations.png';
+import formManager from '@shots/es/manage-form-manager-expanded.png';
+
+Esta guía es para quien empieza Puente en una organización nueva: la persona que coordina, que dirige el proyecto o que va a cuidar los datos. Te lleva de las primeras decisiones a un equipo que recoge datos en sus teléfonos y a un formulario ya probado. Calcula unas dos semanas.
+
+{/* claim: guide-org-decides-records */}
+Todo depende de la **organización**. Es el nombre bajo el que se archiva cada cuenta y cada registro, y decide qué registros ve cada persona en Collect y en Manage.
+
+## Elige el nombre oficial y los apodos
+
+Antes de que nadie se registre, acuerden un nombre oficial, escrito completo, y úsenlo igual en todas partes. Luego anota las otras formas de escribirlo que usa tu equipo: una sigla, una forma corta, una versión en inglés. Esos son sus apodos.
+
+{/* claim: guide-org-names-match */}
+Cuando Puente compara nombres, no importan las mayúsculas, los acentos ni los espacios al principio o al final: `Clínica`, `clinica` y `Clinica ` son la misma palabra. Una sigla, en cambio, es otra palabra, así que tiene que ser un apodo.
+
+{/* claim: guide-org-nicknames-staff */}
+Los apodos los agrega el personal de Puente. Escribe a [info@puente-dr.org](mailto:info@puente-dr.org) con el nombre oficial y todas las formas de escribirlo que conozcas.
+
+## Haz que la organización entre a Puente
+
+{/* claim: guide-org-manage-list-only */}
+El registro de Manage solo muestra organizaciones que ya existen. Si la tuya no está, usa <UI>Mi organización no aparece</UI>: abre un correo al personal de Puente, que agrega las organizaciones a mano.
+
+<Shot src={notListed} alt="El formulario de registro de Manage con la lista de organizaciones sin elegir y, debajo, el enlace Mi organización no aparece con su explicación y un enlace para enviar el nombre por correo." caption="No elijas un nombre que casi es el tuyo. Decide de quién son los registros que ves." />
+
+{/* claim: guide-org-collect-creates */}
+La otra entrada es el teléfono. En el registro de Collect, el campo de organización sugiere nombres mientras escribes. Si escribes un nombre claramente nuevo, se crea la organización y tú quedas como su administrador.
+
+{/* claim: guide-org-too-close */}
+Un nombre demasiado parecido a uno que ya existe —una letra de diferencia, o un nombre dentro del otro— se rechaza. La cuenta se crea igual, pero sin organización. Si te pasa, escribe a [info@puente-dr.org](mailto:info@puente-dr.org).
+
+<div class="shots">
+<Shot phone src={suggestions} alt="El registro de Collect con Pu escrito en el campo de organización y la sugerencia Puente debajo." caption="Si tu organización aparece como sugerencia, elígela en vez de volver a escribirla." />
+</div>
+
+## Sé la primera persona en registrarte
+
+{/* claim: guide-org-first-admin */}
+La primera persona que se registra en una organización queda como su administradora. Todas las demás quedan como miembros. No hay paso de aprobación: los miembros pueden empezar a trabajar en cuanto tienen cuenta.
+
+Así que regístrate tú antes de invitar a nadie. Usa tu propio correo: una persona, una cuenta.
+
+## Nombra a una segunda persona administradora
+
+{/* claim: guide-org-second-admin */}
+Quien administra gestiona a las personas de la organización en la pantalla **Organizaciones** de Manage. Hoy no hay un enlace en el menú: escribe `https://puente-manage.vercel.app/organization-admin` en la barra de direcciones. Junto a cada persona están <UI>Hacer administrador</UI> y <UI>Desactivar</UI>.
+
+<Shot src={orgs} alt="La pantalla Organizaciones de Example Health Trust con sus apodos y cuatro personas, cada una con los botones Hacer administrador y Desactivar; una aparece como Desactivado con un botón Reactivar." caption="Las personas de tu organización. La última persona administradora no se puede quitar, así que nombra una segunda pronto." />
+
+Haz administradora a una segunda persona en cuanto tenga cuenta. A la última persona administradora de una organización no se le puede quitar el rol ni desactivar, y una sola persona de vacaciones no debería frenar a todo el equipo.
+
+## Suma al equipo
+
+{/* claim: guide-org-members-can-work */}
+Cualquier miembro puede usar Manage, crear formularios y descargar las exportaciones completas de la organización, que incluyen nombres y números de cédula. Invita a quien deba ver esos datos, y a nadie más.
+
+{/* claim: guide-org-signup-collect */}
+Cada encuestador instala Puente Collect y toca <UI>Regístrate!</UI>. Dile la forma exacta de escribir el nombre que debe elegir entre las sugerencias. Marca la casilla de los términos, ve <UI>¡Cuenta creada!</UI> e inicia sesión.
+
+{/* claim: guide-org-deactivate */}
+Cuando alguien deja el equipo, usa <UI>Desactivar</UI>: cierra su sesión en las dos aplicaciones. Hoy no impide que vuelvan a entrar con su contraseña — ninguna de las dos aplicaciones revisa todavía si la cuenta está desactivada al iniciar sesión —, así que avísale también a Puente en info@puente-dr.org.
+
+## Prueba tu primer formulario en una copia
+
+{/* claim: guide-forms-reach-phones */}
+Crea tu primer formulario en Manage con <UI>Crear</UI>, o copia uno listo desde <UI>Mercado</UI>. Los teléfonos reciben los formularios nuevos cuando alguien toca la flecha de actualizar junto a <UI>Formularios personalizados</UI> en Collect, con conexión. Iniciar sesión no basta para traerlos.
+
+{/* claim: guide-test-on-copy */}
+Prueba en una copia, nunca en el formulario real. En el Gestor de formularios, pulsa <UI>Duplicar</UI>, empieza el nombre de la copia con `PRUEBA -` y publícala. Llénala en un teléfono para dos o tres personas inventadas, sincroniza y exporta. Cuando el archivo se vea bien, elimina la copia.
+
+<Shot src={formManager} alt="El Gestor de formularios con los formularios personalizados, cada uno con Editar, Duplicar, Eliminar y Exportar; la fila Vision exam está expandida con Formularios recolectados: 37 y un botón Actualizar." caption="Duplicar crea la copia de prueba. Expande una fila para ver cuántos formularios han llegado." />
+
+<Aside type="caution" title="Revisa el teléfono después de publicar">
+{/* claim: guide-publish-silent */}
+Si la publicación falla, Manage no te avisa. Después de publicar, toca la flecha de actualizar junto a <UI>Formularios personalizados</UI> en un teléfono y comprueba que el formulario está ahí.
+</Aside>
+
+## Un plan de dos semanas
+
+**Semana 1**
+
+- [ ] Acordar el nombre oficial y cada apodo; enviarlos a Puente
+- [ ] Hacer que la organización aparezca en la lista, o crearla desde Collect
+- [ ] Registrarte primero y nombrar a una segunda persona administradora
+- [ ] Crear o duplicar el primer formulario; probarlo en una copia `PRUEBA -`
+- [ ] Leer [Capacitación y una prueba piloto](/docs/es/guides/training-and-pilot/)
+
+**Semana 2**
+
+- [ ] Capacitar al equipo en sus propios teléfonos
+- [ ] Hacer una prueba piloto pequeña y revisar cada registro en Manage
+- [ ] Corregir el formulario, eliminar la copia de prueba y empezar la primera ronda real
+
+## Preguntas frecuentes
+
+{/* claim: guide-org-readonly */}
+**Alguien del equipo se registró en la organización equivocada. ¿Se puede cambiar?**
+No por su cuenta: el campo de organización es de solo lectura. Escribe a info@puente-dr.org.
+
+**¿Los miembros nuevos necesitan mi aprobación?**
+No. Pueden recoger datos en cuanto se registran. Desactiva a quien no deba estar.
+
+**¿Puedo agregar un apodo yo misma o yo mismo?**
+Todavía no. Envía la forma de escribirlo a info@puente-dr.org.

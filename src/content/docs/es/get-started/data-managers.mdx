@@ -1,0 +1,94 @@
+---
+title: "Empieza aquí: gestión de datos"
+description: Lo esencial para la coordinación que usa Puente Manage — iniciar sesión, preparar tu organización y un segundo administrador, crear formularios, revisar lo que llegó, limpiar y exportar.
+related:
+  - manage/sign-in
+  - guides/set-up-your-organization
+  - guides/your-first-week-in-manage
+  - data/exporting-data
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import orgs from '@shots/es/manage-organizations.png';
+import creator from '@shots/es/manage-form-creator-edit.png';
+import review from '@shots/es/manage-review.png';
+import expanded from '@shots/es/manage-form-manager-expanded.png';
+
+Esta página es para quienes manejan Puente desde una computadora: coordinación de programas, dirección de clínicas, gestión de datos. Cubre las tareas que vas a hacer en **Puente Manage**, en el orden en que normalmente aparecen. Cada paso enlaza al artículo completo.
+
+Si recoges datos en un teléfono, mira [Empieza aquí: recolección de datos](/docs/es/get-started/data-collectors/).
+
+## Iniciar sesión en Manage
+
+{/* claim: start-manage-register */}
+Abre [puente-manage.vercel.app](https://puente-manage.vercel.app) e inicia sesión con la misma cuenta que usas en Collect. Para hacer una cuenta nueva, usa <UI>Crear cuenta</UI>. La página de registro solo muestra organizaciones que ya están en Puente; si la tuya no aparece, usa <UI>Mi organización no aparece</UI> en vez de escoger una parecida. Mira [Iniciar sesión en Manage](/docs/es/manage/sign-in/).
+
+## Moverte por Manage
+
+{/* claim: start-manage-menu */}
+El menú de la izquierda tiene seis lugares:
+
+| Opción del menú | Abre | Para qué |
+|---|---|---|
+| <UI>Gestionar</UI> | Gestor de formularios | Ver formularios, sus conteos y exportar |
+| <UI>Crear</UI> | Creador de formularios | Crear y publicar tus propios formularios |
+| <UI>Limpiar</UI> | Curación de datos | Encontrar y corregir registros incompletos o duplicados |
+| <UI>Mercado</UI> | Mercado de formularios | Copiar un formulario ya hecho |
+| <UI>Revisar</UI> | Panel | Ver lo que llegó y lo que requiere atención |
+| <UI>Configuración</UI> | Configuración de la cuenta | Cambiar tu nombre, teléfono, correo o contraseña |
+
+## Preparar tu organización y un segundo administrador
+
+{/* claim: start-org-first-admin */}
+La primera persona que se registra en una organización se vuelve su administrador. Todas las que llegan después son miembros, y pueden recoger datos y usar Manage enseguida.
+
+{/* claim: start-admin-screen */}
+Los administradores manejan a las personas en la pantalla de organizaciones. Todavía no hay un enlace en el menú: escribe `/organization-admin` después de la dirección de Manage. Ahí puedes pulsar <UI>Hacer administrador</UI> junto al nombre de un colega — hazlo ahora, para que la organización nunca dependa de una sola persona. El último administrador no se puede quitar, así que un segundo administrador es la forma de pasar el mando. Mira [Miembros y administradores](/docs/es/organizations/members-and-administrators/).
+
+<Shot src={orgs} alt="La pantalla de organizaciones de Example Health Trust, con sus formas de escribir el nombre y una lista de cuatro personas, cada una con los botones Hacer administrador y Desactivar o Reactivar." caption="Nombra un segundo administrador el primer día. Desactiva a las personas cuando se van." />
+
+{/* claim: start-nicknames */}
+Si tu equipo escribe el nombre de la organización de varias formas, escribe a info@puente-dr.org con cada una. Solo el personal de Puente puede agregarlas, y cada forma de escribirlo que no esté registrada falta en tus exportaciones. Mira [Apodos](/docs/es/organizations/nicknames/).
+
+## Crear y publicar formularios
+
+{/* claim: start-forms */}
+Tu equipo ya tiene los cuatro formularios de Puente. Para cualquier otra cosa, abre <UI>Crear</UI>, ponle nombre al formulario, agrega preguntas con los siete bloques y luego pulsa <UI>Publicar</UI>. O empieza desde un formulario ya hecho en <UI>Mercado</UI>.
+
+<Aside type="caution" title="Revisa el teléfono después de publicar">
+Si la publicación falla, Manage no muestra ningún error. Después de cada publicación, actualiza los formularios personalizados en un teléfono y abre el formulario antes de mandar al equipo al campo.
+</Aside>
+
+<Shot src={creator} alt="El Creador de formularios con el tipo, el nombre y la descripción del formulario, una casilla para permitir la exportación para investigación, una pregunta de selección única en el lienzo, la paleta de bloques a la derecha y los botones para reiniciar, previsualizar y publicar arriba." caption="Ponle nombre, agrega bloques, publica — y luego revísalo en un teléfono." />
+
+Mira [Creador de formularios](/docs/es/manage/form-creator/).
+
+## Revisar lo que llegó
+
+{/* claim: start-check-arrived */}
+<UI>Revisar</UI> es el panel: <UI>Requiere atención</UI> enumera problemas como registros a los que les faltan campos clave, y abajo aparecen los <UI>registros sincronizados en total</UI>. En <UI>Gestionar</UI>, la flecha junto a cada formulario abre un conteo de formularios recolectados, con <UI>Actualizar</UI>.
+
+Los números bajos casi siempre significan que hay formularios esperando en los teléfonos. Pídeles a los encuestadores que abran la sincronización sin conexión y pulsen Reintentar.
+
+<Shot src={review} alt="El panel de Manage con una lista de lo que requiere atención, con dos problemas marcados por gravedad, una lista de cobertura comunitaria y el total de registros sincronizados." caption="Empieza cada día aquí: qué se sincronizó y qué hay que corregir." />
+
+## Limpiar los registros
+
+{/* claim: start-clean */}
+<UI>Limpiar</UI> abre Curación de datos: cuántos registros hay, su completitud promedio, los duplicados y las anomalías, y una tabla que puedes filtrar. Algunas acciones — borrar un duplicado, renombrar una comunidad — no se pueden deshacer. Mira [Curación de datos](/docs/es/manage/data-curation/).
+
+## Exportar
+
+{/* claim: data-export-buttons */}
+En <UI>Gestionar</UI>, cada formulario tiene su propio botón <UI>Exportar</UI> que descarga un archivo CSV. Las exportaciones completas contienen nombres, cédulas y ubicaciones; mantenlas dentro de tu organización. Para compartir con un socio de investigación, usa el archivo de investigación.
+
+<Shot src={expanded} alt="El Gestor de formularios con un formulario de examen de la vista con la investigación activada, abierto para mostrar el conteo de formularios recolectados, un botón Actualizar y los botones para exportar el archivo de investigación y los registros completos." caption="Una exportación por formulario. Los formularios con el archivo de investigación activado tienen dos botones." />
+
+Mira [Exportar datos](/docs/es/data/exporting-data/), [Leer los archivos exportados](/docs/es/data/reading-export-files/) y [Exportaciones para investigación](/docs/es/data/research-exports/).
+
+## Próximos pasos
+
+- [Preparar tu organización](/docs/es/guides/set-up-your-organization/) — la primera hora, paso a paso.
+- [Tu primera semana en Manage](/docs/es/guides/your-first-week-in-manage/) — una rutina para los primeros días.
+- [Proteger los datos de las personas](/docs/es/privacy/protecting-data/) — hábitos para todo el equipo.

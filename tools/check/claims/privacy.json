@@ -1,0 +1,264 @@
+{
+ "claims": {
+  "privacy-what-stored": {
+   "claim": "The consent screen privacy summary lists what Collect stores and says it is not used for advertising.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "including contact details, demographics, household and location information, precise GPS coordinates, photographs, health information, form responses, and account identifiers",
+     "line": 391
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Puente does not use this app data for advertising, product personalization, or tracking.",
+     "line": 391
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "{I18n.t(\"gdpr.policy\")}",
+     "line": 60
+    }
+   ]
+  },
+  "privacy-who-sees": {
+   "claim": "Records may be available to authorized users of the organization; any member can download; staff reach every organization.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records may be available to authorized users of the organization collecting them.",
+     "line": 391
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "Your organization determines which records you can see.",
+     "line": 114
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "an organization-scoped route serves only that organization's members;",
+     "line": 9
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "if who['isStaff']:",
+     "line": 155
+    }
+   ]
+  },
+  "privacy-consent": {
+   "claim": "Every form opens on a consent screen and will not continue without the tick.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "<GdprCompliance navigation={navigation} setConsent={setConsent} />",
+     "line": 123
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
+     "quote": "alert(I18n.t(\"gdpr.mustConsent\")); // eslint-disable-line",
+     "line": 53
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"communityMemAgrees\": \"Community member agrees to data policy\",",
+     "line": 393
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"continueToForm\": \"Continue to Form\"",
+     "line": 394
+    }
+   ]
+  },
+  "privacy-one-account": {
+   "claim": "Every record carries the account that collected it.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/README.md",
+     "quote": "`SurveyData` — Form submissions with `surveyingOrganization`, `surveyingUser`, `createdAt`",
+     "line": 113
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "'surveyingUser', 'surveyingOrganization', 'client', 'appVersion', 'editedBy', 'editedAt',",
+     "line": 41
+    }
+   ]
+  },
+  "privacy-deactivate": {
+   "claim": "Administrators can deactivate a member, which ends their sessions; it does not stop a later sign-in (bug M13/C19).",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"org_admin_member_deactivate\": \"Deactivate\",",
+     "line": 163
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "'setUserActive requires the master key, the puente_staff role, or the '",
+     "line": 311
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
+     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
+     "line": 30
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
+     "line": 338
+    }
+   ]
+  },
+  "privacy-research-only": {
+   "claim": "Only the research file is meant to leave; full records stay inside Puente.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "This is the only file to send to a research partner.",
+     "line": 417
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "Keep this file inside Puente.",
+     "line": 418
+    }
+   ]
+  },
+  "privacy-delete-email": {
+   "claim": "Deletion is requested by email to info@puente-dr.org with set subjects, no sign-in needed (current public page).",
+   "evidence": [
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "You do not need to sign in",
+     "line": 30
+    },
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Puente Collect account deletion request",
+     "line": 35
+    },
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Puente Collect data deletion request",
+     "line": 35
+    }
+   ]
+  },
+  "privacy-delete-include": {
+   "claim": "What to include and not include in the request; Puente may verify identity.",
+   "evidence": [
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Do not send your password, identity documents, health records, or sensitive survey answers in the initial email.",
+     "line": 37
+    },
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Puente may need to verify your identity and clarify the request before acting.",
+     "line": 37
+    }
+   ]
+  },
+  "privacy-delete-scope": {
+   "claim": "Deleting a surveyor account does not remove records submitted for the organization.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "Records you have already submitted belong to your organization and are not removed by this.",
+     "line": 563
+    },
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Deleting a surveyor account is not the same as deleting every resident record submitted for an organization.",
+     "line": 45
+    },
+    {
+     "file": "git:b243b09:guides/delete-your-account/index.html",
+     "quote": "Applicable legal obligations may limit deletion or require some information to be retained",
+     "line": 45
+    }
+   ]
+  },
+  "privacy-delete-in-collect": {
+   "claim": "Collect: Support tab, Delete user?, a warning, Continue opens the account page in the browser.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "{I18n.t(\"accountSettings.deleteUser\")}",
+     "line": 172
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SupportHome/index.js",
+     "quote": "`${PUENTE_MANAGE_URL}/account/management?objectId=${id}`",
+     "line": 50
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"deleteUserTitle\": \"Delete your account?\",",
+     "line": 562
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"deleteUserConfirm\": \"Continue\",",
+     "line": 564
+    }
+   ]
+  },
+  "privacy-delete-credentials": {
+   "claim": "Delete Credentials on the Collect sign-in screen only clears the saved user and pinned forms on the phone.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/domains/Auth/SignIn/index.js",
+     "quote": "deleteData(\"currentUser\");",
+     "line": 198
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"deleteCreds\": \"Delete Credentials\",",
+     "line": 61
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/spanish/es.json",
+     "quote": "\"deleteCreds\": \"Eliminar usuario\",",
+     "line": 61
+    }
+   ]
+  },
+  "privacy-delete-user-manage": {
+   "claim": "Delete user in Manage Account Settings marks the account inactive, with no confirmation step. It does not stop sign-in: sign-in refuses only accounts with deactivated=true (confirmed bug M12).",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "active: false,",
+     "line": 72
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "onClick={handleSubmit(onDelete)}",
+     "line": 141
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"account_delete_user\": \"Delete user\",",
+     "line": 384
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
+     "quote": "router.push('/account/login')",
+     "line": 76
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "if (result.get('deactivated') !== true) return result;",
+     "line": 272
+    }
+   ]
+  }
+ }
+}

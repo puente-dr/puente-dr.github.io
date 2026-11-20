@@ -1,0 +1,107 @@
+---
+title: Moverse por Collect
+description: Los cinco íconos de la parte de abajo de Collect, para qué sirve cada pantalla y cómo leer las tarjetas de actividad de Inicio.
+related:
+  - collect/install-and-sign-in
+  - collect/find-records
+  - collect/offline-sync
+  - collect/settings
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import tabBar from '@shots/es/collect-tab-bar.png';
+import home from '@shots/es/collect-home.png';
+import gallery from '@shots/es/collect-forms-gallery.png';
+
+Todo en Collect sale de una barra de cinco íconos en la parte de abajo de la pantalla. Los íconos no tienen palabras debajo, así que esta página los nombra por su dibujo. Cuando conoces los cinco, conoces la aplicación.
+
+Después de iniciar sesión, Collect abre en Inicio, el ícono del medio.
+
+## Los cinco íconos
+
+{/* claim: collect-tabs */}
+De izquierda a derecha:
+
+| Ícono | Abre | Úsalo para |
+|---|---|---|
+| Lupa | **Buscar registro** | Encontrar a un residente que ya está en Puente y agregar a su registro. |
+| Carpeta | **Recopilar datos** | Empezar un formulario: los de Puente, tus favoritos y los de tu organización. |
+| Casa | **Inicio** | Ver cuánto han recolectado tú y tu organización. |
+| Nube con flecha | **Sincronización sin conexión** | Ver los formularios guardados en el teléfono y enviarlos. |
+| Engranaje | **Configuraciones de la cuenta** | Tu cuenta, idioma, tema, registros sin conexión y soporte. |
+
+El ícono de la pantalla en la que estás se ve relleno, sobre una píldora sombreada. Los lectores de pantalla anuncian cada ícono por su nombre (Buscar registro, Recopilación de datos, Inicio, Sin conexión, Configuración).
+
+<div class="shots">
+<Shot src={tabBar} alt="La barra de Collect: una lupa, una carpeta, una casa, una nube con una flecha hacia arriba resaltada sobre una píldora sombreada, y un engranaje." caption="Los cinco íconos. Aquí está seleccionada la nube, así que está abierta la Sincronización sin conexión." />
+</div>
+
+## Inicio
+
+{/* claim: collect-home-default */}
+Inicio es la pantalla a la que llegas después de iniciar sesión. Te saluda por tu nombre y muestra tu organización debajo.
+
+{/* claim: collect-home-cards */}
+Más abajo, unas tarjetas cuentan los registros recolectados:
+
+- <UI>Actividad de la Organización</UI> — todos los formularios que recolectó tu organización, de cualquier tipo.
+- <UI>Mis Encuestas</UI> — todos los formularios que recolectaste tú, de cualquier tipo.
+- <UI>Mis Signos Vitales</UI> y <UI>Signos Vitales de la Org</UI> — formularios de Partes vitales, tuyos y de tu organización.
+- <UI>Mi Salud Ambiental</UI> y <UI>Salud Ambiental de la Org</UI> — formularios de Salud Ambiental, tuyos y de tu organización.
+
+Los botones encima de las tarjetas eligen el período: <UI>Últimos 7 Días</UI>, <UI>Últimos 30 Días</UI> o <UI>Todo el Tiempo</UI>. Toca cualquier tarjeta para ver sus detalles.
+
+<div class="shots">
+<Shot phone src={home} alt="La pantalla de Inicio: un saludo con el nombre de la persona, los botones de período y las tarjetas de actividad de la organización, mis encuestas y signos vitales, todas en 0." caption="Inicio en una cuenta nueva. Los números crecen a medida que los registros llegan a Puente." />
+</div>
+
+Cuando el teléfono no tiene conexión, Inicio dice <UI>Mostrando datos en caché</UI>: los números son los últimos que vio el teléfono, no los de hoy.
+
+<Aside type="note" title="Inicio cuenta lo que llegó a Puente">
+Un formulario que todavía espera en el teléfono aún no está en estos números. Para ver lo que espera, abre la nube.
+</Aside>
+
+## Recopilar datos (la carpeta)
+
+{/* claim: collect-forms-tab */}
+La carpeta abre la pantalla de formularios, con el título <UI>Recopilar datos</UI>. Tiene cuatro secciones:
+
+- <UI>Formularios Puente</UI> — Identificación de residente, Salud Ambiental, Evaluación Médica y Partes vitales. Mira [Formularios de Puente](/docs/es/collect/puente-forms/).
+- <UI>Formularios favoritos</UI> — los que más usas, siempre arriba. Mantén presionado un formulario para fijarlo.
+- <UI>Formularios personalizados</UI> — los que tu organización creó en Manage. Mira [Formularios personalizados](/docs/es/collect/custom-forms/).
+- <UI>Flujos de trabajo</UI> — los mismos formularios personalizados, agrupados.
+
+<div class="shots">
+<Shot phone src={gallery} alt="La pantalla Recopilar datos con las tarjetas de los formularios de Puente, una tarjeta vacía de favoritos, una tarjeta vacía de formularios personalizados con un botón para actualizar, y el título de flujos de trabajo." caption="La pantalla de formularios. La fila de Formularios Puente se desliza de lado para mostrar los cuatro." />
+</div>
+
+Todo formulario que abres desde la carpeta empieza en una pantalla de consentimiento; mira [Consentimiento](/docs/es/collect/consent/).
+
+## Buscar registro (la lupa)
+
+Busca a un residente por nombre, apodo, cédula o ID del hogar, abre su registro y agrégale un formulario. [Buscar registros](/docs/es/collect/find-records/) explica la búsqueda en detalle.
+
+## Sincronización sin conexión (la nube)
+
+{/* claim: collect-sync-manual */}
+Los formularios que guardas sin conexión esperan en el teléfono hasta que los envías desde aquí. El envío no es automático: abre la nube y toca <UI>Reintentar</UI> cuando tengas señal. [Sin conexión y sincronización](/docs/es/collect/offline-sync/) explica cada mensaje de esta pantalla.
+
+## Configuraciones de la cuenta (el engranaje)
+
+Tu nombre, teléfono y correo, contraseña, idioma, tema, registros sin conexión, soporte y <UI>Cerrar sesión</UI>. Mira [Configuración](/docs/es/collect/settings/).
+
+## Consejos de la primera visita
+
+{/* claim: collect-coachmarks */}
+La primera vez que abres Inicio, la pantalla de formularios, Buscar registro y el engranaje, una tarjeta corta explica la pantalla. Toca <UI>Entendido</UI> para cerrarla. Cada consejo sale una sola vez en ese teléfono.
+
+## Preguntas frecuentes
+
+{/* claim: collect-home-cards */}
+**¿Por qué Inicio muestra 0 si acabo de recolectar un formulario?**
+O el formulario todavía espera en el teléfono, o la tarjeta tiene un período que no lo incluye. Revisa la nube y luego prueba <UI>Todo el Tiempo</UI>.
+
+{/* claim: collect-reset-onboarding */}
+**¿Cómo vuelvo a ver la guía de bienvenida y los consejos?**
+En el engranaje, toca <UI>Reiniciar incorporación</UI>. Vuelven la guía y todos los consejos; tus registros guardados no se tocan.

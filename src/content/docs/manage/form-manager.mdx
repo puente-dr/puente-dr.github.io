@@ -1,0 +1,113 @@
+---
+title: Form Manager
+description: Every form your organization collects with, in one list — Puente's four built-in forms, your own custom forms, and the buttons that edit, copy, delete and export them.
+related:
+  - manage/form-creator
+  - data/exporting-data
+  - data/research-exports
+  - collect/custom-forms
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import manager from '@shots/en/manage-form-manager.png';
+import expanded from '@shots/en/manage-form-manager-expanded.png';
+import noRecords from '@shots/en/export-03-no-records-yet.png';
+
+The Form Manager lists every form your organization collects with. It is where you start an export, open a form to edit it, copy one as the start of a new form, or retire one you no longer use.
+
+## Open the Form Manager
+
+{/* claim: manage-fm-open */}
+In the left menu, press <UI>Manage</UI>. The page is titled <UI>Form Manager</UI>. It has two lists: <UI>Puente Forms</UI> at the top and your <UI>Custom forms</UI> below.
+
+<Shot src={manager} alt="The Form Manager: a Create form button and a Search forms box, a Puente Forms table listing SurveyData, HistoryEnvironmentalHealth, Vitals and EvaluationMedical with an Export button each, and a Custom Forms table whose rows have Edit, Duplicate, Delete and Export." caption="Puente's forms have only Export. Your own forms can also be edited, copied and deleted." />
+
+{/* claim: manage-fm-search-create */}
+<UI>+ Create form</UI> opens an empty [Form Creator](/docs/manage/form-creator/). <UI>Search forms…</UI> narrows both lists to forms whose name contains what you type.
+
+## Puente's forms and their names in Collect
+
+{/* claim: manage-fm-puente-forms */}
+Manage shows Puente's four built-in forms by their internal names. On the phone they have friendlier names:
+
+| In Manage | In Collect |
+|---|---|
+| SurveyData | Resident ID |
+| HistoryEnvironmentalHealth | Environmental Health |
+| Vitals | Vitals |
+| EvaluationMedical | Medical Evaluation |
+
+SurveyData holds the people themselves — one row per resident. The other three are visits attached to a resident. See [Puente forms](/docs/collect/puente-forms/).
+
+{/* claim: manage-fm-custom-actions */}
+These four can only be exported. You cannot edit, copy or delete them here.
+
+## Custom forms and their buttons
+
+Custom forms are the ones your organization built. Each row has four buttons:
+
+{/* claim: manage-fm-edit-dup */}
+- <UI>Edit</UI> opens the form in the Form Creator. Publishing saves your changes to the same form.
+- <UI>Duplicate</UI> opens a copy in the Form Creator. Publishing saves it as a new form; the original is untouched.
+- <UI>Delete</UI> retires the form (see below).
+- <UI>Export</UI> downloads its answers as a spreadsheet.
+
+{/* claim: manage-fm-records-view */}
+Press a form's name to see its records in a table. <UI>← Back</UI> returns to the list.
+
+## See how many forms were collected
+
+{/* claim: manage-fm-expand */}
+Press the arrow at the start of a row to open it. The row shows <UI>Forms collected</UI> with a number, and a <UI>Refresh</UI> button.
+
+<Aside type="caution" title="The count starts at 0">
+The number reads 0 until you press <UI>Refresh</UI> — it is not fetched when the row opens. Press <UI>Refresh</UI> before you read it. If the count fails to load, the row says <UI>These records did not load.</UI> instead of showing a false zero.
+</Aside>
+
+<Shot src={expanded} alt="The Vision exam row expanded: Forms collected 37 with a Refresh button, two sentences describing the research file and the full records, and Export research file and Export full records buttons on the row." caption="An expanded row. This form allows research export, so it has two export buttons and explains the difference." />
+
+## Research forms: two export buttons
+
+{/* claim: manage-fm-research */}
+A custom form built with <UI>Allow research export</UI> ticked shows the badge <UI>Research export on</UI> under its name, and two buttons in place of <UI>Export</UI>:
+
+- <UI>Export research file</UI> — a study ID, age, sex, community and the form's answers. No names, ID numbers, phone numbers, birth dates or locations. This is the only file to send to a research partner.
+- <UI>Export full records</UI> — every answer with the person's name, ID number, phone number, birth date and location. Keep it inside Puente.
+
+The expanded row repeats both descriptions. Puente's four built-in forms never have a research file. See [Research exports](/docs/data/research-exports/).
+
+## Export a form
+
+{/* claim: manage-fm-export-csv */}
+Press <UI>Export</UI>. Your browser downloads a CSV file named after the form. A research file has "research" and the date in its name, so the two files are hard to mix up. The file opens with accents intact in Excel.
+
+{/* claim: org-member-exports */}
+Any member of your organization can download the full, identified records — not only administrators. Treat every export as private. [Exporting data](/docs/data/exporting-data/) explains what each file contains.
+
+{/* claim: manage-fm-export-messages */}
+If nothing downloads, a message in the top corner says why:
+
+| Message | What to do |
+|---|---|
+| <UI>This form has no records to export yet.</UI> | Nothing has synced for this form. Check the phones. |
+| <UI>The export could not be completed. Please try again.</UI> | Try again. The download failed; your records are not missing. |
+| <UI>Your sign-in has expired. Sign in again to export.</UI> | Sign out, sign back in, and export again. |
+
+<Shot src={noRecords} alt="The Form Manager with a message in the top right corner reading This form has no records to export yet, and a Dismiss button." caption="An empty form says so, instead of downloading an empty file." />
+
+## Delete a form
+
+{/* claim: manage-fm-delete */}
+Press <UI>Delete</UI>, then confirm <UI>Delete form</UI> when asked <UI>Do you want to remove this form?</UI> The form leaves the Form Manager, and phones stop listing it the next time they refresh their custom forms. Its answers are not erased — delete marks the form retired.
+
+## FAQ
+
+**Why does a form I built not appear?**
+If the list could not load, the page says <UI>Your custom forms did not load.</UI> with a <UI>Try again</UI> button. Otherwise, check that the Form Creator really published it.
+
+**Why can't I edit SurveyData?**
+Puente's four built-in forms have only an Export button. Edit, Duplicate and Delete belong to custom forms.
+
+**Who can export full records?**
+Any member of your organization.

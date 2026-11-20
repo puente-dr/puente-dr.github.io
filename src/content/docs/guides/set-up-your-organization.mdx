@@ -1,0 +1,122 @@
+---
+title: Set up your organization
+description: From the first decisions to a working team — the official name, getting the organization into Puente, a second administrator, the team's accounts, a first form tested on a copy, and a two-week plan.
+related:
+  - organizations/organizations
+  - organizations/members-and-administrators
+  - organizations/nicknames
+  - guides/training-and-pilot
+roles: [data-manager]
+format: guide
+minutes: 4
+thumbnail: ../../../assets/shots/en/manage-organizations.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import suggestions from '@shots/en/collect-02-signup-organization-suggestions.png';
+import notListed from '@shots/en/manage-register-not-listed.png';
+import orgs from '@shots/en/manage-organizations.png';
+import formManager from '@shots/en/manage-form-manager-expanded.png';
+
+This guide is for the person starting Puente in a new organization: a coordinator, a project lead, the one who will look after the data. It takes you from the first decisions to a team that collects on phones and a form that has been tested. Plan on about two weeks.
+
+{/* claim: guide-org-decides-records */}
+Everything hangs on the **organization**. It is the name every account and every record is filed under, and it decides which records people see in Collect and Manage.
+
+## Choose the official name and nicknames
+
+Before anyone signs up, agree on one official name, written out in full, and say it the same way everywhere. Then list the other ways your team writes it — an abbreviation, a short form, a Spanish version. Those are its nicknames.
+
+{/* claim: guide-org-names-match */}
+When Puente matches a name, capital letters, accents and spaces at either end do not matter: `Clínica`, `clinica` and `Clinica ` are the same word. An abbreviation is a different word, though, so it needs to be a nickname.
+
+{/* claim: guide-org-nicknames-staff */}
+Nicknames are added by Puente staff. Email [info@puente-dr.org](mailto:info@puente-dr.org) with the official name and every spelling you know.
+
+## Get the organization into Puente
+
+{/* claim: guide-org-manage-list-only */}
+The Manage sign-up page only lists organizations that already exist. If yours is not there, use <UI>My organization isn't listed</UI>: it opens an email to Puente staff, who add organizations by hand.
+
+<Shot src={notListed} alt="The Manage registration form with the Organization list set to Please Select, and below it the link My organization isn't listed with its explanation and an Email us your organization's name link." caption="Do not choose a name that is nearly right. It decides whose records you see." />
+
+{/* claim: guide-org-collect-creates */}
+The other way in is the phone. In the Collect sign-up, the organization field suggests names as you type. Typing a clearly new name creates the organization, and you become its administrator.
+
+{/* claim: guide-org-too-close */}
+A name too close to an existing one — one letter off, or one name inside the other — is refused. The account is still created, but it is not linked to any organization. If that happens, email [info@puente-dr.org](mailto:info@puente-dr.org).
+
+<div class="shots">
+<Shot phone src={suggestions} alt="The Collect sign-up form with Pu typed in the organization field and the suggestion Puente listed below it." caption="If your organization appears as a suggestion, pick it rather than typing it again." />
+</div>
+
+## Be the first to sign up
+
+{/* claim: guide-org-first-admin */}
+The first person to sign up in an organization becomes its administrator. Everyone after that is a member. There is no approval step: members can start work as soon as they have an account.
+
+So sign up yourself before you invite anyone. Use your own email address — one person, one account.
+
+## Name a second administrator
+
+{/* claim: guide-org-second-admin */}
+Administrators manage the organization's people on the **Organizations** screen in Manage. There is no menu link to it today: type `https://puente-manage.vercel.app/organization-admin` into the address bar. Next to each person are <UI>Make administrator</UI> and <UI>Deactivate</UI>.
+
+<Shot src={orgs} alt="The Organizations screen for Example Health Trust, showing its nicknames and four people, each with Make administrator and Deactivate buttons; one is marked Deactivated with a Reactivate button." caption="Your organization's people. The last administrator cannot be removed, so appoint a second one early." />
+
+Make a second person administrator as soon as they have an account. The last administrator of an organization cannot be demoted or deactivated, and one person on leave should not stall the whole team.
+
+## Bring in the team
+
+{/* claim: guide-org-members-can-work */}
+Every member can use Manage, build forms and download the organization's full exports, which include names and ID numbers. Invite people who should see that data, and nobody else.
+
+{/* claim: guide-org-signup-collect */}
+Each surveyor installs Puente Collect and taps <UI>Sign Up!</UI>. Tell them the exact spelling to pick from the suggestions. They tick the terms box, see <UI>Account Created!</UI>, and sign in.
+
+{/* claim: guide-org-deactivate */}
+When someone leaves, <UI>Deactivate</UI> them: it signs them out of both apps. Today it does not stop them signing in again with their password — neither app checks for a deactivated account at sign-in yet — so also tell Puente at info@puente-dr.org.
+
+## Test your first form on a copy
+
+{/* claim: guide-forms-reach-phones */}
+Build your first form in Manage under <UI>Create</UI>, or copy a ready-made one from <UI>Market</UI>. Phones pick up new forms when someone taps the refresh arrow beside <UI>Custom Forms</UI> in Collect, with a connection. Signing in alone does not fetch them.
+
+{/* claim: guide-test-on-copy */}
+Test on a copy, never on the real form. In Form Manager, press <UI>Duplicate</UI>, start the copy's name with `PRUEBA -`, and publish it. Fill it in on a phone for two or three invented people, sync, and export it. When the file looks right, delete the copy.
+
+<Shot src={formManager} alt="Form Manager listing custom forms, each with Edit, Duplicate, Delete and Export buttons; the Vision exam row is expanded to show Forms collected: 37 and a Refresh button." caption="Duplicate makes the test copy. Expand a row to see how many forms have arrived." />
+
+<Aside type="caution" title="Check the phone after you publish">
+{/* claim: guide-publish-silent */}
+If publishing fails, Manage does not tell you. After you publish, tap the refresh arrow beside <UI>Custom Forms</UI> on a phone and make sure the form is there.
+</Aside>
+
+## A two-week plan
+
+**Week 1**
+
+- [ ] Agree the official name and every nickname; email them to Puente
+- [ ] Get the organization listed, or create it from Collect
+- [ ] Sign up first, then make a second administrator
+- [ ] Build or duplicate the first form; test it on a `PRUEBA -` copy
+- [ ] Read [Training and a small pilot](/docs/guides/training-and-pilot/)
+
+**Week 2**
+
+- [ ] Train the team on their own phones
+- [ ] Run a small pilot and check every record in Manage
+- [ ] Fix the form, delete the test copy, and start the first real round
+
+## FAQ
+
+{/* claim: guide-org-readonly */}
+**Someone on the team signed up under the wrong organization. Can they move?**
+Not by themselves — the organization field is read-only. Email info@puente-dr.org.
+
+**Do new members need my approval?**
+No. They can collect as soon as they sign up. Deactivate anyone who should not be there.
+
+**Can I add a nickname myself?**
+Not yet. Email the spelling to info@puente-dr.org.

@@ -1,0 +1,111 @@
+---
+title: Configuración
+description: Todo lo que hay en el engranaje de Collect — tu cuenta, el idioma, los registros sin conexión, el tema, el Modo calmado, el soporte y cómo cerrar sesión sin perder nada.
+related:
+  - collect/offline-sync
+  - collect/find-records
+  - privacy/delete-your-account
+  - help/contact-support
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import settings from '@shots/es/collect-settings.png';
+import language from '@shots/es/collect-language.png';
+import storage from '@shots/es/find-05-storage-limit.png';
+
+El engranaje, el último ícono de la parte de abajo de Collect, abre **Configuraciones de la cuenta**. Ahí están los datos de tu cuenta, cómo se ve y se comporta la aplicación en este teléfono, las opciones de ayuda y el botón para cerrar sesión.
+
+La pantalla tiene dos pestañas arriba: <UI>Ajustes</UI> y <UI>Apoyo</UI>.
+
+## La pestaña Ajustes
+
+{/* claim: collect-settings-list */}
+De arriba a abajo:
+
+| Opción | Qué hace |
+|---|---|
+| <UI>Nombre, teléfono, correo electrónico</UI> | Editar tu nombre y apellido, teléfono y correo. |
+| <UI>Cambiar la contraseña</UI> | Poner una contraseña nueva. Primero escribes la actual. |
+| <UI>Buscar registros</UI> | Cuántos residentes guarda el teléfono para buscar sin conexión. |
+| <UI>Idioma</UI> | Cambiar la aplicación entre inglés, español y criollo haitiano. |
+| <UI>Registros sin conexión</UI> | Descargar registros de residentes para buscar sin conexión, o borrarlos. |
+| <UI>Tema</UI> | <UI>Claro</UI> u <UI>Oscuro</UI>. |
+| <UI>Modo calmado</UI> | <UI>Reducir animaciones para enfoque clínico</UI>. |
+| <UI>Reiniciar incorporación</UI> | Volver a mostrar la guía de bienvenida y los consejos. |
+
+<div class="shots">
+<Shot phone src={settings} alt="La lista de configuración de Collect: nombre, teléfono y correo; cambiar la contraseña; buscar registros; idioma; registros sin conexión." caption="La lista de configuración. Cada fila abre su propia pantalla." />
+</div>
+
+## Tu nombre, teléfono, correo y contraseña
+
+{/* claim: collect-settings-online-only */}
+Los cambios en tu cuenta necesitan conexión. Sin ella, la aplicación dice <UI>Está sin conexión. Este cambio necesita conexión a Internet y no se ha guardado.</UI> Una contraseña nueva debe tener al menos 8 caracteres y se escribe dos veces. Tu organización no está en esta pantalla; para cambiarla, escribe a info@puente-dr.org.
+
+## Idioma
+
+{/* claim: collect-language-settings */}
+<UI>Idioma</UI> abre <UI>Elige lengua</UI> con tres botones: <UI>Ingles</UI>, <UI>Español</UI> y <UI>Kreyòl</UI>. Cambia toda la aplicación, incluida la pantalla de consentimiento.
+
+<div class="shots">
+<Shot phone src={language} alt="La pantalla para elegir el idioma con tres botones, uno por idioma, y un enlace para volver." caption="Elige el idioma que mejor lee la persona que tienes enfrente." />
+</div>
+
+## Registros guardados para buscar sin conexión
+
+{/* claim: collect-settings-storage-limit */}
+<UI>Buscar registros</UI> muestra cuántos residentes hay guardados en el teléfono y el <UI>Límite de almacenamiento de registros</UI>, que empieza en 2.000. Súbelo antes de viajar a una comunidad con más residentes que eso. [Buscar registros](/docs/es/collect/find-records/) explica la búsqueda.
+
+<div class="shots">
+<Shot phone src={storage} alt="La pantalla de configuración de Buscar registros con los registros guardados actualmente y el límite de almacenamiento, con un enlace para editarlo." caption="Los registros guardados actualmente son las personas que puedes buscar sin conexión ahora mismo." />
+</div>
+
+{/* claim: collect-offline-records */}
+<UI>Registros sin conexión</UI> tiene dos botones:
+
+- <UI>Descargar registros para usar sin conexión</UI> — trae los registros de residentes ahora, mientras tienes señal.
+- <UI>Borrar registros descargados</UI> — borra los residentes guardados para la búsqueda. La aplicación pregunta primero y avisa que la búsqueda sin conexión quedará vacía hasta que vuelvas a descargar.
+
+Borrar los registros descargados no toca los formularios que esperan en la Sincronización sin conexión. Son una lista aparte.
+
+## Tema y Modo calmado
+
+{/* claim: collect-theme-calm */}
+<UI>Tema</UI> cambia entre <UI>Claro</UI> y <UI>Oscuro</UI>. <UI>Modo calmado</UI> baja las animaciones de la aplicación; el interruptor muestra <UI>SÍ</UI> o <UI>NO</UI>.
+
+## Apoyo
+
+{/* claim: collect-support */}
+La pestaña <UI>Apoyo</UI>, con el título <UI>Centro de ayuda</UI>, tiene:
+
+- <UI>Contáctenos / Comentarios</UI> — escribe un mensaje y toca <UI>Enviar correo</UI>; se abre un correo a info@puente-dr.org en tu aplicación de correo.
+- <UI>Califica nuestra aplicación</UI> — abre la ventana de calificación de la tienda.
+- <UI>¿Eliminar usuario?</UI> — explica que los registros que ya enviaste pertenecen a tu organización y no se borran, y luego abre la página de tu cuenta en el navegador, donde puedes pedir que se elimine. Mira [Eliminar tu cuenta](/docs/es/privacy/delete-your-account/).
+
+## Cerrar sesión
+
+{/* claim: collect-logout-guard */}
+<UI>Cerrar sesión</UI> está cerca del final de las dos pestañas. Pregunta <UI>¿Cerrar sesión?</UI> y te recuerda que necesitarás tu usuario y contraseña para volver a entrar.
+
+- Si hay formularios esperando, la pregunta dice cuántos, y que no los podrás sincronizar hasta que vuelvas a iniciar sesión.
+- Sin conexión, Collect no lo permite y dice <UI>No puede cerrar sesión ahora</UI>, porque volver a iniciar sesión necesita conexión.
+
+<Aside type="caution" title="Envía todo primero">
+Abre la nube y envía tus formularios hasta que diga <UI>No hay formularios en cola. ¡Estás al día!</UI> antes de cerrar sesión o prestar el teléfono. Mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
+</Aside>
+
+## Versión
+
+{/* claim: collect-version-label */}
+La última línea de la pestaña Ajustes muestra la versión de la aplicación y la compilación, por ejemplo "Versión 15.7.5" seguida del número de compilación entre paréntesis. Inclúyela siempre que reportes un problema.
+
+## Preguntas frecuentes
+
+{/* claim: collect-org-change */}
+**¿Dónde cambio mi organización?**
+No se puede desde la aplicación. Escribe a info@puente-dr.org.
+
+{/* claim: collect-offline-records */}
+**¿Borrar registros descargados borra mis formularios sin enviar?**
+No. Solo borra los residentes guardados para buscar sin conexión.

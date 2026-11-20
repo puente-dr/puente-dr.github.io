@@ -1,0 +1,61 @@
+---
+title: Inicio
+description: Cómo usar Puente Collect en el teléfono y Puente Manage en la web — configurar tu organización, recolectar en el campo y sacar tus datos.
+template: splash
+hero:
+  title: Documentación de Puente
+  tagline: Cómo usar Puente Collect en el campo y Puente Manage en la oficina — desde configurar tu organización hasta sacar tus datos.
+  actions:
+    - text: Empieza aquí — recolectores de datos
+      link: /docs/es/get-started/data-collectors/
+      icon: right-arrow
+    - text: Empieza aquí — responsables de datos
+      link: /docs/es/get-started/data-managers/
+      icon: right-arrow
+      variant: secondary
+---
+import { CardGrid, LinkCard, Card } from '@astrojs/starlight/components';
+
+## Lo más visto
+
+<CardGrid>
+  <LinkCard title="Bienvenida a Puente" description="Las dos aplicaciones, una cuenta, y cómo viaja una encuesta del teléfono a una hoja de cálculo." href="/docs/es/get-started/welcome/" />
+  <LinkCard title="Buscar registros" description="Busca a alguien antes de volver a registrarlo." href="/docs/es/collect/find-records/" />
+  <LinkCard title="Trabajar sin conexión" description="Qué pasa con un formulario sin señal, y cómo enviarlo." href="/docs/es/collect/offline-sync/" />
+  <LinkCard title="Creador de formularios" description="Crea tu propio formulario y publícalo en los teléfonos de tu equipo." href="/docs/es/manage/form-creator/" />
+  <LinkCard title="Exportar datos" description="Descarga los registros de un formulario como hoja de cálculo." href="/docs/es/data/exporting-data/" />
+  <LinkCard title="Miembros y administradores" description="Quién puede hacer qué, y cómo nombrar a un segundo administrador." href="/docs/es/organizations/members-and-administrators/" />
+</CardGrid>
+
+## Explora Puente
+
+<CardGrid>
+  <Card title="Puente Collect" icon="phone">
+    La aplicación del teléfono, para el campo.
+    [Instalar y entrar](/docs/es/collect/install-and-sign-in/) · [Cómo moverte en la aplicación](/docs/es/collect/getting-around/) · [Identificación de residente y hogares](/docs/es/collect/resident-id-and-households/) · [Formularios de Puente](/docs/es/collect/puente-forms/) · [Formularios personalizados](/docs/es/collect/custom-forms/) · [Consentimiento](/docs/es/collect/consent/) · [Configuración](/docs/es/collect/settings/)
+  </Card>
+  <Card title="Puente Manage" icon="laptop">
+    La aplicación web, para la oficina.
+    [Entrar](/docs/es/manage/sign-in/) · [Panel Revisar](/docs/es/manage/review/) · [Gestor de formularios](/docs/es/manage/form-manager/) · [Curación de datos](/docs/es/manage/data-curation/) · [Mercado de formularios](/docs/es/manage/form-marketplace/) · [Configuración de la cuenta](/docs/es/manage/account-settings/)
+  </Card>
+  <Card title="Organizaciones y personas" icon="puzzle">
+    Quién pertenece a dónde, y quién puede cambiarlo.
+    [Organizaciones](/docs/es/organizations/organizations/) · [Miembros y administradores](/docs/es/organizations/members-and-administrators/) · [Apodos](/docs/es/organizations/nicknames/)
+  </Card>
+  <Card title="Datos y exportaciones" icon="document">
+    Sacar tus datos, y leerlos bien.
+    [Exportar datos](/docs/es/data/exporting-data/) · [Leer los archivos exportados](/docs/es/data/reading-export-files/) · [Exportaciones para investigación](/docs/es/data/research-exports/)
+  </Card>
+  <Card title="Privacidad y seguridad" icon="approve-check">
+    Cuidar a las personas que están en tus registros.
+    [Proteger los datos de las personas](/docs/es/privacy/protecting-data/) · [Eliminar tu cuenta o tus datos](/docs/es/privacy/delete-your-account/)
+  </Card>
+  <Card title="Guías" icon="open-book">
+    Recorridos de un trabajo completo, de principio a fin.
+    [Todas las guías](/docs/es/guides/) · [Configura tu organización](/docs/es/guides/set-up-your-organization/) · [Lista para el día de campo](/docs/es/guides/field-day-checklist/)
+  </Card>
+</CardGrid>
+
+## ¿Necesitas ayuda?
+
+Prueba primero [Solución de problemas](/docs/es/help/troubleshooting/). Para todo lo demás: [Contactar a soporte](/docs/es/help/contact-support/), o escribe a [info@puente-dr.org](mailto:info@puente-dr.org).

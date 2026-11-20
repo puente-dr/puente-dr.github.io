@@ -1,0 +1,36 @@
+/* Puente brand on Starlight. Colours come from the apps' dlite theme:
+   ink #161616, mark yellow #ffe680, action blue #3d80fc / #0a46b6. */
+:root {
+  --sl-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+:root[data-theme='light'], :root:not([data-theme]) {
+  --sl-color-accent-low: #e8f0ff;
+  --sl-color-accent: #0a46b6;
+  --sl-color-accent-high: #072f7a;
+  --sl-color-white: #161616;
+  --sl-color-black: #ffffff;
+}
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #1b2a4a;
+  --sl-color-accent: #7aa7ff;
+  --sl-color-accent-high: #d6e4ff;
+}
+.site-title img { width: 1.75rem; height: 1.75rem; }
+
+/* Interface labels quoted from the apps. */
+strong.ui { font-weight: 600; }
+
+/* Screenshots */
+figure.shot { margin: 1.5rem 0; }
+figure.shot img { border: 1px solid var(--sl-color-gray-5); border-radius: 0.5rem; background: var(--sl-color-gray-7, #f6f6f6); }
+figure.shot.phone img { max-height: 34rem; width: auto; margin-inline: auto; display: block; }
+figure.shot figcaption { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 0.5rem; }
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1rem; align-items: start; }
+.shots figure.shot { margin: 0; }
+
+/* Breadcrumbs */
+nav.crumbs { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 1rem; }
+nav.crumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; }
+nav.crumbs li + li::before { content: '/'; margin-inline-end: 0.5rem; color: var(--sl-color-gray-4); }
+nav.crumbs a { color: var(--sl-color-gray-3); text-decoration: none; }
+nav.crumbs a:hover { color: var(--sl-color-white); text-decoration: underline; }

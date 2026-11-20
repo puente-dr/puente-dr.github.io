@@ -1,0 +1,103 @@
+---
+title: Training and a small pilot
+description: How to train a team on Puente Collect — who trains, practising in airplane mode without leaving test data behind, a 90-minute session, a small pilot and what to check after it.
+related:
+  - guides/set-up-your-organization
+  - guides/field-day-checklist
+  - collect/offline-sync
+  - manage/review
+roles: [data-manager]
+format: guide
+minutes: 3
+thumbnail: ../../../assets/shots/en/collect-05-discard-confirm.png
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/en/collect-01-offline-banner.png';
+import discard from '@shots/en/collect-05-discard-confirm.png';
+import household from '@shots/en/collect-household.png';
+import review from '@shots/en/manage-review.png';
+
+Training is where a team learns the two habits that keep data safe: search before you register, and sync every evening. This guide covers who trains, how to practise without leaving invented people in your data, a session plan, and a small pilot before the first real round.
+
+## Who trains
+
+Pick one person to be the team's tech lead: the first one anyone asks about the app. Train that person first, on their own, before the rest of the team. They prepare the phones, run the evening sync and answer questions in the field.
+
+{/* claim: guide-dhis2-support */}
+That order follows the DHIS2 implementation guidance, which says the IT support unit should be trained before the first end user.
+
+{/* claim: guide-dhis2-devices */}
+Train on the phones people will carry. DHIS2's guidance says the same: "If possible, train users on the devices they will use in their work". Each person signs up with their own account, on their own phone, during the session.
+
+## Practise in airplane mode
+
+Practising with signal sends invented people straight into your organization's records. Practise with no signal instead, and throw the practice forms away before anyone syncs.
+
+{/* claim: guide-practice-discard */}
+1. Turn on airplane mode.
+2. Fill in a form for an invented person and submit. The banner and <UI>Saved offline — will sync when you reconnect</UI> appear.
+3. Open the cloud (<UI>Offline Sync</UI>). The practice form is listed there.
+4. Tap <UI>Discard</UI>, then <UI>Discard permanently</UI>.
+5. Only then turn airplane mode off.
+
+<div class="shots">
+<Shot phone src={banner} alt="A form on a phone with an amber banner reading: You're offline. Records will save and sync automatically." caption="Airplane mode shows the offline banner. This is what working in a community without signal looks like." />
+<Shot phone src={discard} alt="A dialog titled Discard this form? warning that the form has not reached the server and that discarding deletes it permanently, with Discard permanently and Cancel." caption="Right for a practice form. Wrong for any real one." />
+</div>
+
+<Aside type="caution" title="Choose Do Nothing in the household section">
+{/* claim: guide-households-not-listed */}
+A household created with no signal is not listed in Offline Sync, so it cannot be discarded — and it is sent the next time anyone taps <UI>Retry</UI>. When practising the Resident ID form, choose <UI>Do Nothing</UI> in the household section.
+</Aside>
+
+<div class="shots">
+<Shot phone src={household} alt="The household section of the Resident ID form with three choices: Do Nothing, Create a new household, Link this individual to an existing house." caption="In practice, always Do Nothing." />
+</div>
+
+## A 90-minute session
+
+| Time | What | How |
+|---|---|---|
+| 0–10 min | Why it matters | One form, one person, one phone: until it is sent, the phone is the only copy |
+| 10–25 min | Sign up and sign in | Everyone, on their own phone, with signal; pick the organization from the suggestions |
+| 25–40 min | Find before you register | Pairs search for each other's invented people by surname, nickname and cédula |
+| 40–65 min | A full visit offline | Airplane mode on: consent, Resident ID with Do Nothing, one more form, then discard |
+| 65–80 min | The evening sync | With signal: open the cloud, tap Retry, read the result |
+| 80–90 min | Questions | Go through the field day checklist together |
+
+{/* claim: guide-search-one-field */}
+Spend real time on searching. The search matches the start of one field, so a full name typed together finds nobody — the most common reason people register someone twice.
+
+## Run a small pilot
+
+{/* claim: guide-dhis2-pilot */}
+Before the whole team goes out, send two or three trained people for one short day with the real form. DHIS2's advice is to "Finalize and pilot the tracker before scaling it"; the same holds for a Puente form.
+
+The pilot's data is real, so the people visited must consent and the records stay.
+
+## What to check after the pilot
+
+{/* claim: guide-forms-collected */}
+- In Form Manager (<UI>Manage</UI>), expand the form's row, press <UI>Refresh</UI>, and compare <UI>Forms collected</UI> with the paper sign-in sheet.
+
+{/* claim: guide-review-dashboard */}
+- Open <UI>Review</UI>. Read <UI>Needs attention</UI>, such as <UI>records missing key fields</UI>.
+- Export the form and read the file. Is every question a column you can use?
+- Ask the pilot team what confused them, and fix the form before the round.
+
+<Shot src={review} alt="The Review dashboard: Needs attention lists records with an unresolved household link and records missing key fields; Community coverage lists six communities." caption="After the pilot, Needs attention shows what the training missed." />
+
+## Keep a trained list
+
+Keep a simple list: name, phone, date trained, whether they passed the airplane-mode practice, and whether they have done a pilot day. Only people on the list go out alone.
+
+{/* claim: guide-org-deactivate */}
+When someone leaves the team, take them off the list and <UI>Deactivate</UI> them on the Organizations screen. That signs them out of both apps. Today it does not stop them signing in again with their password — neither app checks for a deactivated account at sign-in yet — so also tell Puente at info@puente-dr.org.
+
+## Further reading
+
+{/* claim: guide-who-checklist */}
+- [DHIS2: Build your tracker programs](https://docs.dhis2.org/en/implement/tracker-implementation/build-your-tracker-programs.html) — implementation guidance on training and piloting.
+- [WHO Surgical Safety Checklist](https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery/tool-and-resources) — the model for pause-point checklists like the [field day checklist](/docs/guides/field-day-checklist/): the team stops "for a few moments at three critical points".

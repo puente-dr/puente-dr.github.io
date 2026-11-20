@@ -1,0 +1,49 @@
+---
+// Breadcrumbs above the title, built from the sidebar so they can never drift
+// from the navigation. Guides also show their format, reading time and roles.
+// Starlight's own page-title id (dist/constants.js), which its TOC links to.
+const PAGE_TITLE_ID = '_top';
+const route = Astro.locals.starlightRoute;
+const { entry, sidebar, locale } = route;
+const es = locale === 'es';
+const home = `${import.meta.env.BASE_URL}${es ? 'es/' : ''}`;
+
+function trail(entries, path = []) {
+  for (const e of entries) {
+    if (e.type === 'link' && e.isCurrent) return path;
+    if (e.type === 'group') {
+      const found = trail(e.entries, [...path, e.label]);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+const isGuide = entry.id.replace(/^es\//, '').startsWith('guides/') && !entry.id.endsWith('guides');
+const groups = isGuide ? [] : (trail(sidebar) || []);
+const d = entry.data;
+const roleLabel = { 'data-collector': es ? 'Recolector de datos' : 'Data collector', 'data-manager': es ? 'Responsable de datos' : 'Data manager' };
+const formatLabel = { guide: es ? 'Guía' : 'Guide', checklist: es ? 'Lista de verificación' : 'Checklist' };
+const isHome = entry.id === 'index' || entry.id === 'es';
+---
+{!isHome && (
+  <nav class="crumbs" aria-label={es ? 'Ruta de navegación' : 'Breadcrumb'}>
+    <ol>
+      <li><a href={home}>{es ? 'Documentación' : 'Docs'}</a></li>
+      {isGuide && <li><a href={`${home}guides/`}>{es ? 'Guías' : 'Guides'}</a></li>}
+      {groups.map((g) => <li>{g}</li>)}
+    </ol>
+  </nav>
+)}
+<h1 id={PAGE_TITLE_ID}>{d.title}</h1>
+{isGuide && (
+  <p class="guide-meta">
+    {d.format && <span>{formatLabel[d.format]}</span>}
+    {d.minutes && <span>{d.minutes} {es ? 'min de lectura' : 'min read'}</span>}
+    {(d.roles || []).map((r) => <span class="tag">{roleLabel[r]}</span>)}
+  </p>
+)}
+<style>
+  h1 { margin-top: 0.5rem; font-size: var(--sl-text-h1); line-height: var(--sl-line-height-headings); font-weight: 600; color: var(--sl-color-white); }
+  .guide-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); margin-top: 0.5rem; }
+  .tag { background: var(--sl-color-accent-low); color: var(--sl-color-accent-high); border-radius: 999px; padding: 0.05rem 0.6rem; }
+</style>

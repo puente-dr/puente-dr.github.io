@@ -1,0 +1,61 @@
+---
+title: Home
+description: How to use Puente Collect on the phone and Puente Manage on the web — setting up your organization, collecting in the field, and getting your data out.
+template: splash
+hero:
+  title: Puente Docs
+  tagline: How to use Puente Collect in the field and Puente Manage in the office — from setting up your organization to getting your data out.
+  actions:
+    - text: Start here — data collectors
+      link: /docs/get-started/data-collectors/
+      icon: right-arrow
+    - text: Start here — data managers
+      link: /docs/get-started/data-managers/
+      icon: right-arrow
+      variant: secondary
+---
+import { CardGrid, LinkCard, Card } from '@astrojs/starlight/components';
+
+## Popular
+
+<CardGrid>
+  <LinkCard title="Welcome to Puente" description="The two apps, one account, and how a survey travels from a phone to a spreadsheet." href="/docs/get-started/welcome/" />
+  <LinkCard title="Find records" description="Look someone up before you register them again." href="/docs/collect/find-records/" />
+  <LinkCard title="Working offline" description="What happens to a form with no signal, and how to send it." href="/docs/collect/offline-sync/" />
+  <LinkCard title="Form Creator" description="Build your own form and publish it to your team's phones." href="/docs/manage/form-creator/" />
+  <LinkCard title="Exporting data" description="Download a form's records as a spreadsheet." href="/docs/data/exporting-data/" />
+  <LinkCard title="Members and administrators" description="Who can do what, and how to name a second administrator." href="/docs/organizations/members-and-administrators/" />
+</CardGrid>
+
+## Explore Puente
+
+<CardGrid>
+  <Card title="Puente Collect" icon="phone">
+    The phone app for the field.
+    [Install and sign in](/docs/collect/install-and-sign-in/) · [Getting around](/docs/collect/getting-around/) · [Resident ID and households](/docs/collect/resident-id-and-households/) · [Puente forms](/docs/collect/puente-forms/) · [Custom forms](/docs/collect/custom-forms/) · [Consent](/docs/collect/consent/) · [Settings](/docs/collect/settings/)
+  </Card>
+  <Card title="Puente Manage" icon="laptop">
+    The web app for the office.
+    [Sign in](/docs/manage/sign-in/) · [Review dashboard](/docs/manage/review/) · [Form Manager](/docs/manage/form-manager/) · [Data Curation](/docs/manage/data-curation/) · [Form Marketplace](/docs/manage/form-marketplace/) · [Account settings](/docs/manage/account-settings/)
+  </Card>
+  <Card title="Organizations and people" icon="puzzle">
+    Who belongs where, and who can change it.
+    [Organizations](/docs/organizations/organizations/) · [Members and administrators](/docs/organizations/members-and-administrators/) · [Nicknames](/docs/organizations/nicknames/)
+  </Card>
+  <Card title="Data and exports" icon="document">
+    Getting your data out, and reading it right.
+    [Exporting data](/docs/data/exporting-data/) · [Reading export files](/docs/data/reading-export-files/) · [Research exports](/docs/data/research-exports/)
+  </Card>
+  <Card title="Privacy and security" icon="approve-check">
+    Looking after the people in your records.
+    [Protecting people's data](/docs/privacy/protecting-data/) · [Delete your account or data](/docs/privacy/delete-your-account/)
+  </Card>
+  <Card title="Guides" icon="open-book">
+    Walkthroughs for a whole job, start to finish.
+    [All guides](/docs/guides/) · [Set up your organization](/docs/guides/set-up-your-organization/) · [Field-day checklist](/docs/guides/field-day-checklist/)
+  </Card>
+</CardGrid>
+
+## Need help?
+
+Try [Troubleshooting](/docs/help/troubleshooting/) first. Anything else: [Contact support](/docs/help/contact-support/), or write to [info@puente-dr.org](mailto:info@puente-dr.org).

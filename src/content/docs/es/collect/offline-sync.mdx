@@ -1,0 +1,125 @@
+---
+title: Sin conexión y sincronización
+description: Cómo guarda Collect los formularios sin señal, cómo enviarlos desde la Sincronización sin conexión y qué significa cada mensaje de esa pantalla.
+related:
+  - collect/getting-around
+  - collect/settings
+  - guides/field-day-checklist
+  - help/troubleshooting
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import banner from '@shots/es/collect-01-offline-banner.png';
+import queue from '@shots/es/collect-03-queue.png';
+import caughtUp from '@shots/es/collect-04-all-caught-up.png';
+import discard from '@shots/es/collect-05-discard-confirm.png';
+
+Collect funciona donde no hay señal. Puedes abrir un formulario, llenarlo y guardarlo sin ninguna conexión. El formulario espera en el teléfono, y después lo envías a Puente desde la **Sincronización sin conexión**, el ícono de la nube en la parte de abajo de la pantalla.
+
+Hay un hecho que define todo lo de esta página: **hasta que un formulario llega a Puente, el teléfono tiene la única copia.** Un formulario guardado en un teléfono que se pierde, se borra o se restablece, se perdió.
+
+## Saber que estás sin conexión
+
+{/* claim: collect-offline-banner */}
+Cuando el teléfono no tiene conexión, la pantalla de formularios y cada formulario abierto muestran un aviso anaranjado: <UI>Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente.</UI> Inicio muestra <UI>Mostrando datos en caché</UI>.
+
+<div class="shots">
+<Shot phone src={banner} alt="El formulario de identificación de residente con un aviso anaranjado arriba que dice: Estás sin conexión. Los registros se guardarán y sincronizarán automáticamente." caption="El aviso de sin conexión queda encima del formulario mientras trabajas." />
+</div>
+
+{/* claim: collect-sync-manual */}
+<Aside type="caution" title="La sincronización no es automática">
+Aunque el aviso diga otra cosa, Collect no envía solo los formularios pendientes cuando vuelve la señal. Nada sale del teléfono hasta que abres la nube y tocas <UI>Reintentar</UI>.
+</Aside>
+
+## Guardar un formulario sin señal
+
+{/* claim: collect-save-messages */}
+Llena y guarda el formulario igual que con conexión. El mensaje después de guardar te dice adónde fue:
+
+| Mensaje | Qué quiere decir |
+|---|---|
+| <UI>Formulario entregado satisfactoriamente</UI> | Llegó a Puente. Listo. |
+| <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> | Está solo en el teléfono, esperando a que lo envíes. |
+
+Los dos se parecen cuando vas con prisa. Solo el primero está terminado.
+
+## Ver lo que espera
+
+{/* claim: collect-queue-screen */}
+Toca la nube. La **Sincronización sin conexión** muestra si el teléfono está <UI>En línea</UI> o <UI>Sin conexión</UI>, y luego un conteo — por ejemplo <UI>1 formulario está guardado en este dispositivo y todavía no ha llegado al servidor.</UI> En <UI>Esperando sincronización</UI> aparece cada formulario con su nombre y la persona de quien trata, con un enlace <UI>Descartar</UI> al lado. <UI>Última sincronización:</UI> muestra la última vez que este teléfono envió algo.
+
+<div class="shots">
+<Shot phone src={queue} alt="La pantalla de Sincronización sin conexión, en línea, con un formulario guardado que no ha llegado al servidor: una identificación de residente esperando sincronización, con un enlace rojo para descartar, encima de un botón azul para reintentar." caption="Un formulario esperando, con nombre para que sepas cuál es." />
+<Shot phone src={caughtUp} alt="La pantalla de Sincronización sin conexión con la cola vacía: No hay formularios en cola. ¡Estás al día!" caption="El único estado en el que el teléfono ya no importa." />
+</div>
+
+Cuando no hay nada esperando, la pantalla dice <UI>No hay formularios en cola. ¡Estás al día!</UI>
+
+## Enviar los formularios pendientes
+
+{/* claim: collect-retry */}
+Cuando tengas conexión, abre la nube y toca <UI>Reintentar</UI>. El botón envía todo lo que espera, aunque sea tu primer intento. Cuando funciona ves <UI>¡Éxito!</UI> <UI>Usted acaba de enviar</UI> y el número enviado, y la lista se vacía.
+
+Envía desde una conexión confiable y quédate en ella hasta que el conteo llegue a cero.
+
+## Cuando solo salen algunos
+
+{/* claim: collect-partial-sync */}
+Si algunos formularios llegan a Puente y otros no, Collect quita los que llegaron y deja los demás esperando. El conteo **baja pero no llega a cero**. Volver a tocar <UI>Reintentar</UI> envía solo lo que sigue esperando, así que nada de lo que llegó se envía dos veces. Si el conteo se queda arriba de cero, busca mejor conexión y toca <UI>Reintentar</UI> otra vez.
+
+## Cuando no sale ninguno
+
+{/* claim: collect-sync-failures */}
+Un envío fallido muestra <UI>Intento fallido de envío de formularios sin conexión.</UI> y te tranquiliza: <UI>Tus formularios siguen guardados en este dispositivo. No se ha perdido nada.</UI> La línea siguiente dice cuál fue el problema:
+
+- <UI>Estás sin conexión. Conéctate a internet e inténtalo de nuevo.</UI> — el teléfono nunca llegó a Puente. Busca conexión.
+- <UI>El servidor no aceptó estos formularios. Inténtalo de nuevo en unos minutos y contacta con soporte si sigue ocurriendo.</UI> — Puente los rechazó. Muchas veces se arregla esperando; si los mismos formularios siguen fallando con buena conexión, repórtalo.
+
+Si tu sesión venció, la pantalla dice <UI>Sesión expirada. Por favor inicie sesión de nuevo.</UI> Tus formularios se quedan en el teléfono; lee la sección sobre cerrar sesión antes de hacer nada.
+
+## Descartar un formulario que no sale
+
+{/* claim: collect-discard */}
+Un formulario que Puente sigue rechazando puede frenar a los demás. <UI>Descartar</UI> lo quita para que los otros puedan salir. La aplicación pregunta primero — <UI>¿Descartar este formulario?</UI> — y dice que el formulario no ha llegado al servidor y que descartarlo lo borra para siempre. Confirma con <UI>Descartar permanentemente</UI>, o toca <UI>Cancelar</UI>.
+
+<div class="shots">
+<Shot phone src={discard} alt="Un cuadro sobre la Sincronización sin conexión que pregunta si descartar el formulario, explica que no ha llegado al servidor y que descartarlo lo elimina del dispositivo de forma permanente, con las opciones de descartar permanentemente y cancelar." caption="Tómalo al pie de la letra: no se puede deshacer." />
+</div>
+
+<Aside type="danger" title="Descartar no se puede deshacer">
+El formulario no existe en ningún otro lado. Nadie — ni Puente, ni soporte — lo puede recuperar. Si puedes, anota las respuestas en papel primero, y pregúntale a tu coordinador antes de descartar algo sobre lo que tengas dudas.
+</Aside>
+
+## Hogares guardados sin conexión
+
+{/* claim: collect-households-not-listed */}
+Un hogar que creas sin conexión (con <UI>Crear un nuevo hogar</UI> o al vincular a una persona) no aparece en la Sincronización sin conexión y no se puede descartar ahí. Igual se envía cuando tocas <UI>Reintentar</UI>. Por eso la pantalla puede decir <UI>No hay formularios en cola. ¡Estás al día!</UI> mientras un hogar sigue esperando: después de crear hogares sin conexión, toca <UI>Reintentar</UI> de todos modos cuando tengas conexión.
+
+## Antes de cerrar sesión o entregar el teléfono
+
+{/* claim: collect-logout-guard */}
+Cerrar sesión es donde más se quedan varados los formularios.
+
+- **Sin conexión**, Collect no te deja cerrar sesión. Dice <UI>No puede cerrar sesión ahora</UI>, porque volver a iniciar sesión necesita conexión.
+- **Con conexión**, si hay formularios esperando, la pregunta para cerrar sesión avisa cuántos registros están guardados en el dispositivo y aún no han llegado al servidor. Se quedan en el teléfono, pero no los puedes enviar hasta que vuelvas a iniciar sesión.
+
+{/* claim: collect-settings-unsynced */}
+La pantalla del engranaje también muestra, arriba, cuántos registros esperan, cuando hay alguno.
+
+Envía todo — conteo en cero — antes de cerrar sesión y antes de darle el teléfono a otra persona.
+
+## Preguntas frecuentes
+
+{/* claim: collect-sync-manual */}
+**Me volvió la señal. ¿Se enviaron mis formularios?**
+No solos. Abre la nube y toca Reintentar.
+
+{/* claim: collect-partial-sync */}
+**¿Es seguro tocar Reintentar más de una vez?**
+Sí. Solo envía lo que sigue esperando.
+
+{/* claim: collect-signin-online */}
+**¿Puedo volver a iniciar sesión sin conexión para llegar a mis formularios?**
+No. Iniciar sesión necesita conexión; por eso Collect no deja cerrar sesión sin conexión.

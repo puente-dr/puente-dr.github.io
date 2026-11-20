@@ -1,0 +1,104 @@
+---
+title: Panel de revisión
+description: Lo que te dice el panel de Revisar — si llegaron los datos de hoy, qué registros necesitan trabajo y qué comunidades llevan tiempo sin noticias.
+related:
+  - manage/data-curation
+  - manage/form-manager
+  - collect/offline-sync
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import review from '@shots/es/manage-review.png';
+import sidebar from '@shots/es/manage-sidebar.png';
+import curation from '@shots/es/manage-data-curation.png';
+
+El panel es la primera pantalla que muestra Manage después de iniciar sesión. Responde tres preguntas: ¿llegaron los datos del campo?, ¿qué hay que corregir?, y ¿de dónde no se sabe nada hace tiempo? Es una lista de pendientes, no un informe: cada problema que muestra es un enlace a la pantalla donde se corrige.
+
+## Abrir el panel
+
+{/* claim: manage-review-menu */}
+En el menú de la izquierda, pulsa <UI>Revisar</UI>. Arriba, la página se llama <UI>Panel</UI>.
+
+<div class="shots">
+<Shot phone src={sidebar} alt="El menú izquierdo de Manage: Gestionar, Crear, Limpiar y Mercado arriba, Revisar resaltado y Configuración debajo, y Cuenta y Cerrar sesión al final." caption="Revisar está en la sección de la organización del menú." />
+</div>
+
+<Shot src={review} alt="El panel: una línea que dice Sincronizado hace 2 h, 48 registros en las últimas 24 h; una lista Requiere atención con dos filas marcadas Necesita reparación y Corregible; una lista de Cobertura comunitaria con seis comunidades; y totales abajo." caption="Tres franjas: si llegaron los datos (arriba), qué necesita trabajo (izquierda) y de dónde vinieron (derecha)." />
+
+## Comprobar que llegaron los datos de hoy
+
+{/* claim: manage-sync-ribbon */}
+La línea de arriba se lee así: <UI>Sincronizado</UI> **hace 2 h** · **48** <UI>registros en las últimas 24 h</UI>. «Sincronizado» es el momento en que Puente recibió el registro desde un teléfono, no cuándo se hizo la encuesta. Un formulario llenado sin conexión la semana pasada aparece como sincronizado hoy.
+
+Si hace tiempo que no llega nada, la línea lo dice:
+
+| Mensaje | Qué significa |
+|---|---|
+| <UI>Sin sincronizar por más de un día</UI> | No llegó nada en más de 24 horas |
+| <UI>Sin sincronizar por más de tres días</UI> | No llegó nada en más de 72 horas |
+| <UI>Todavía no se ha sincronizado nada</UI> | Tu organización no tiene ningún registro |
+| <UI>Hora de la última sincronización no disponible</UI> | Manage no pudo comprobarlo |
+
+{/* claim: manage-sync-manual */}
+En el teléfono, el envío no es automático: alguien tiene que abrir Sincronización sin conexión (la nube) y tocar Reintentar. Un panel callado muchas veces significa teléfonos que todavía guardan formularios. Mira [Sincronización sin conexión](/docs/es/collect/offline-sync/).
+
+## Requiere atención
+
+{/* claim: manage-needs-attention */}
+Esta lista hace cuatro revisiones de calidad sobre los registros de tu organización y solo muestra las que encontraron algo. Primero va la más dañina, sea cual sea su número.
+
+| Fila | Etiqueta | Qué significa |
+|---|---|---|
+| <UI>formulario renombrado desde que se recolectaron sus respuestas</UI> | <UI>Bloquea las exportaciones</UI> | Un formulario personalizado tiene respuestas guardadas bajo una pregunta que ya no tiene, así que una columna puede exportarse vacía |
+| <UI>registros con un vínculo de hogar sin resolver</UI> | <UI>Necesita reparación</UI> | Un registro guardado sin conexión con un hogar que nunca quedó vinculado en el servidor |
+| <UI>posibles hogares duplicados</UI> | <UI>Corregible</UI> | El mismo hogar registrado dos veces el mismo día |
+| <UI>registros a los que les faltan campos clave</UI> | <UI>Corregible</UI> | Al menos un campo clave está vacío |
+
+{/* claim: manage-key-fields */}
+Los campos clave son nombre, apellido, fecha de nacimiento, sexo, ID del hogar, comunidad, encuestador y número de teléfono.
+
+{/* claim: manage-estimated */}
+Una cifra como **5 de 48** se mide contra todos los registros de tu organización. Una cifra marcada <UI>estimado</UI> sale de una muestra de registros recientes; tómala como un tamaño aproximado.
+
+## Corregir lo que muestra la lista
+
+{/* claim: manage-needs-attention-links */}
+Pulsa una fila para ir a donde se corrige:
+
+- **Campos clave faltantes** y **vínculo de hogar sin resolver** abren [Curación de datos](/docs/es/manage/data-curation/) mostrando solo esos registros. Una nota encima de las cifras avisa que la vista está filtrada.
+- **Posibles duplicados** abre Curación de datos, donde comparas el par lado a lado.
+- **Formulario renombrado** abre el [Gestor de formularios](/docs/es/manage/form-manager/). Exporta el formulario y revisa sus columnas antes de enviar el archivo a nadie.
+
+<Shot src={curation} alt="La pantalla Curación de datos con Registros de personas, un resumen de 48 registros, 92 % de completitud promedio, 0 duplicados y 0 anomalías, filtros y una tabla de nombres." caption="A donde llevan casi todas las filas: Curación de datos, filtrada a los registros que contó la fila." />
+
+{/* claim: manage-attention-empty */}
+Cuando todas las revisiones pasan, la lista dice <UI>No hay nada que requiera atención</UI>. Si una revisión no pudo hacerse, dice <UI>No se encontró nada, pero no se pudo verificar todo</UI> y nombra lo que faltó. No lo tomes como un resultado limpio; vuelve a cargar más tarde.
+
+## Cobertura comunitaria
+
+{/* claim: manage-coverage */}
+La lista de la derecha cuenta los registros recientes por comunidad y muestra cuándo sincronizó cada una por última vez. Primero van las comunidades de las que hace más tiempo no se sabe nada. Después de dos semanas sin noticias, una comunidad aparece como <UI>inactiva</UI> con los días, meses o años.
+
+Úsala para decidir a dónde mandar un equipo. Recuerda que mide la sincronización: una comunidad puede verse inactiva porque un teléfono que la visitó todavía no ha enviado sus formularios.
+
+<Aside type="tip">
+Debajo de <UI>Cobertura comunitaria</UI> se dice de cuántos registros salen las cifras, por ejemplo «de los 48 registros sincronizados más recientes». Lee los números contra eso, no contra todo el historial.
+</Aside>
+
+## Totales
+
+{/* claim: manage-context-totals */}
+Abajo: los <UI>registros sincronizados en total</UI> de tu organización, y el número de cuentas que aparecen en los registros más recientes. La segunda cifra cuenta cuentas que sincronizaron, no personas que recolectaron: un teléfono compartido puede llevar el trabajo de todo un equipo.
+
+## Preguntas frecuentes
+
+**El panel dice que no se sincronizó nada, pero mi equipo trabajó toda la semana. ¿Por qué?**
+Lo más probable es que los formularios sigan en los teléfonos. Alguien tiene que abrir Sincronización sin conexión y tocar Reintentar con conexión.
+
+**¿Por qué una comunidad que visitamos ayer se ve inactiva?**
+La cobertura cuenta cuándo llegaron los registros a Puente, no cuándo se recolectaron.
+
+{/* claim: manage-needs-attention */}
+**¿Puedo descartar una fila?**
+No. Una fila desaparece cuando se corrigen los registros que la causan.

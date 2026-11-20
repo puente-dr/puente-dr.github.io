@@ -1,0 +1,109 @@
+---
+title: Buscar registros
+description: Busca a alguien antes de volver a registrarlo — qué lee la búsqueda, por qué un nombre completo no encuentra nada y cómo funciona sin señal.
+related:
+  - collect/resident-id-and-households
+  - collect/offline-sync
+  - collect/settings
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import byName from '@shots/es/find-01-search-by-name.png';
+import byId from '@shots/es/find-02-search-by-id.png';
+import resident from '@shots/es/find-03-resident.png';
+import history from '@shots/es/find-04-record-history.png';
+import storage from '@shots/es/find-05-storage-limit.png';
+
+La mayoría de las personas que visitas ya están en Puente: las encuestaron en una ronda anterior, tú o un colega. **Buscar registro** — la lupa en la parte de abajo de Collect — es como encuentras su registro y le agregas información, en vez de crear un segundo registro al lado.
+
+## Abrir Buscar registro
+
+{/* claim: find-tab */}
+Toca la lupa, el primer ícono de la barra de abajo. La pantalla se llama <UI>Buscar individuo</UI> y tiene un cuadro de búsqueda que dice <UI>Buscar por nombre o ID</UI>.
+
+<div class="shots">
+<Shot phone src={byName} alt="La pantalla Buscar individuo con Ejemplo escrito en el cuadro y dos tarjetas de residentes coincidentes debajo." caption="Un apellido encuentra a todos los que lo comparten. Cada tarjeta muestra el apodo entre comillas, además de ciudad, comunidad, sexo y educación." />
+</div>
+
+## Qué lee la búsqueda
+
+{/* claim: search-fields */}
+El cuadro mira cinco datos de cada residente:
+
+- Nombre
+- Apellido
+- Apodo — como la gente realmente le dice
+- Número de cédula
+- ID del hogar
+
+Las mayúsculas no importan: `paciente`, `Paciente` y `PACIENTE` encuentran a la misma persona.
+
+## Busca un nombre a la vez
+
+{/* claim: search-prefix */}
+La búsqueda coincide con **el principio de un campo**. Encuentra un nombre, o un apellido, o un apodo — no busca en dos campos a la vez ni dentro de una palabra. Para un residente registrado como **Paciente Ejemplo**:
+
+| Escribes | Resultado |
+|---|---|
+| `Paciente` | Encontrado — es el nombre |
+| `Ejemplo` | Encontrado — es el apellido |
+| `Paciente Ejemplo` | **Nada.** Ningún campo empieza con el nombre completo |
+| `ciente` | **Nada.** Es el medio de una palabra |
+
+<Aside type="caution" title="Que no salga nadie no prueba que la persona sea nueva">
+Casi siempre es un nombre completo escrito en un cuadro que lee un campo a la vez. Prueba solo el apellido, luego solo el nombre, luego el apodo, antes de crear a nadie.
+</Aside>
+
+## Buscar por cédula
+
+Si la persona tiene su cédula, es la forma más segura de encontrarla: los nombres se escriben de varias maneras, una cédula no. Escribe solo los primeros dígitos.
+
+<div class="shots">
+<Shot phone src={byId} alt="El cuadro de búsqueda con 00167 y una sola tarjeta de residente debajo, para Paciente Ejemplo, apodo Fulano, en Constanza." caption="Los primeros cinco dígitos de una cédula suelen bastar para llegar a una sola persona." />
+</div>
+
+## Abrir a un residente y su historial
+
+Toca una tarjeta para abrir a la persona. Un formulario que empiezas desde ahí se agrega al registro que ya tiene.
+
+{/* claim: record-history */}
+<UI>Ver historial de registros</UI> muestra todo lo que ya se recolectó sobre esa persona, y cuándo. Revísalo antes de agregar nada: así sabes que es la persona correcta y no alguien con el mismo nombre.
+
+<div class="shots">
+<Shot phone src={resident} alt="La página de un residente con su nombre, sus datos y un botón Ver historial de registros." caption="La página del residente. Compara los datos con la persona que tienes enfrente." />
+<Shot phone src={history} alt="Una pantalla de historial con el nombre del residente y un registro de identificación." caption="El historial: qué se recolectó, y cuándo." />
+</div>
+
+## Buscar sin señal
+
+{/* claim: search-offline */}
+La búsqueda funciona sin conexión, pero solo sobre los residentes ya guardados en el teléfono. Sin conexión, la pantalla dice <UI>Estás sin conexión. Mostrando registros guardados.</UI>
+
+El teléfono llena ese almacén cuando abres Buscar registro con conexión — así que **abre Buscar registro una vez mientras todavía tengas señal**, antes de salir. Sin conexión, la búsqueda también encuentra a las personas que siguen esperando en tu cola de sincronización, así que alguien que encuestaste hace una hora sigue apareciendo.
+
+## Cuántos residentes guarda el teléfono
+
+{/* claim: storage-limit */}
+En el engranaje, abre <UI>Buscar registros</UI>. <UI>Límite de almacenamiento de registros</UI> es la mayor cantidad de residentes que el teléfono guarda para buscar sin conexión; empieza en 2.000.
+
+<div class="shots">
+<Shot phone src={storage} alt="Una pantalla de configuración llamada Buscar registros, con los registros guardados actualmente y el límite de almacenamiento." caption="Los registros guardados actualmente son las personas que puedes buscar sin conexión ahora mismo." />
+</div>
+
+Si una comunidad tiene más residentes que el límite, súbelo antes de viajar. Un almacén más grande tarda más en descargarse y ocupa más espacio, así que súbelo a la medida de la comunidad y no al máximo.
+
+## Si registras a alguien dos veces
+
+No se rompe nada y la aplicación no avisa — por eso importa. El historial de la persona se parte en dos, cada total la cuenta dos veces y alguien tiene que desenredarlo a mano meses después. Dile a tu coordinador los dos nombres y la fecha: dos registros que se conocen son mucho más fáciles de unir que dos que nadie notó.
+
+## Preguntas frecuentes
+
+**Escribí el nombre completo y no salió nada. ¿La persona es nueva?**
+Probablemente no. Busca solo el apellido, luego el nombre, luego el apodo, luego el inicio de la cédula.
+
+**¿Puedo buscar sin conexión?**
+Sí, entre los residentes guardados en este teléfono. Abre Buscar registro una vez con conexión antes de salir.
+
+**La búsqueda encontró a dos personas con el mismo nombre. ¿Cuál es?**
+Compara el apodo, la comunidad y el sexo en las tarjetas, y luego abre el historial de cada una.

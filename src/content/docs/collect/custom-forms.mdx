@@ -1,0 +1,99 @@
+---
+title: Custom forms
+description: Where your organization's own forms appear in Collect, how to refresh them, pin the ones you use most, and attach them to a resident.
+related:
+  - manage/form-creator
+  - manage/form-manager
+  - collect/puente-forms
+  - collect/offline-sync
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import gallery from '@shots/en/collect-forms-gallery.png';
+import creator from '@shots/en/manage-form-creator-edit.png';
+import manager from '@shots/en/manage-form-manager.png';
+
+Custom forms are the questions your organization writes for itself — a water survey, a vision exam, a follow-up visit. Someone builds them in Puente Manage, and they appear in Collect for everyone in the organization, beside the four Puente forms.
+
+This page covers the Collect side: finding the forms, keeping the list current, pinning, and filling them in. To build one, see [Form Creator](/docs/manage/form-creator/).
+
+## Where custom forms come from
+
+{/* claim: collect-custom-source */}
+A custom form starts in Manage's Form Creator, with <UI>Type of form</UI> set to <UI>Custom</UI>, and reaches phones when someone presses <UI>Publish</UI>. Collect then lists every custom form for your organization, including forms tagged with any other spelling your organization goes by.
+
+<Shot src={creator} alt="Manage's Form Creator with Type of form set to Custom, the form name Water access — Example Community, a description, the Allow research export checkbox, and a Single select question about water source." caption="A custom form being built in Manage. Publish, at the top right, sends it to phones." />
+
+{/* claim: collect-publish-silent */}
+<Aside type="caution" title="Check the phone after publishing">
+Manage does not tell you when a publish fails. After you publish, refresh Custom Forms on a phone and make sure the form is there before anyone goes into the field.
+</Aside>
+
+## Find your organization's forms
+
+{/* claim: collect-forms-tab */}
+Tap the folder. Your organization's forms are under <UI>Custom Forms</UI>, below <UI>Puente Forms</UI> and <UI>Pinned Forms</UI>. Swipe the row sideways if there are more than fit on the screen.
+
+<div class="shots">
+<Shot phone src={gallery} alt="The Collect Data screen: Puente Forms with Resident ID and Environmental Health, an empty Pinned Forms card, and a Custom Forms heading with a circular refresh arrow above a card reading No custom forms — try refreshing." caption="No custom forms on this phone yet. The arrow beside Custom Forms fetches them." />
+</div>
+
+## Refresh the list
+
+{/* claim: collect-custom-refresh */}
+The phone keeps a saved copy of your organization's custom forms, so they keep working with no signal. To fetch new ones, tap the round arrow beside <UI>Custom Forms</UI> while you have a connection. Do it on a new phone, after signing in, and whenever someone publishes a form. (<UI>Download records for offline use</UI>, under the gear in <UI>Offline Records</UI>, fetches them too.)
+
+If the list is empty, the card reads <UI>No custom forms — try refreshing</UI>. Refreshing without a connection keeps the list the phone already has.
+
+<Aside type="tip" title="Refresh before you leave">
+Make refreshing part of packing up for a field day. A form published after you left signal cannot reach your phone until you are back.
+</Aside>
+
+## Fill in a custom form
+
+{/* claim: collect-custom-attach */}
+Tap the form. Like every form opened from the folder, it opens on the consent screen; see [Consent](/docs/collect/consent/). Then it works like Vitals: a <UI>Search by name or ID</UI> box sits above the questions, and the button at the bottom reads <UI>Attach a Community Resident</UI> until you choose the person the answers are about. Once someone is attached, it reads <UI>Save Record</UI>.
+
+{/* claim: collect-supp-saved */}
+Saving shows the same two messages as the Puente forms: <UI>Form successfully submitted</UI>, or <UI>Saved offline — will sync when you reconnect</UI>. A custom form waiting in Offline Sync is listed by its own title and the person's name.
+
+## Pin the forms you use most
+
+{/* claim: collect-pin */}
+Press and hold any form — a custom form or one of the Puente forms — to pin it. It appears under <UI>Pinned Forms</UI>, at the top of the screen. To unpin, press and hold it under <UI>Pinned Forms</UI>.
+
+With nothing pinned, the section reads <UI>No pinned forms yet — long-press any form to pin it</UI>. Pins are kept on this phone only.
+
+{/* claim: collect-suggested-next */}
+Pinned forms do a second job. After you save a Resident ID, the <UI>Suggested next forms</UI> screen lists them; tapping one opens it for the person you just registered. Pin the forms you fill in after every registration and you skip the search each time.
+
+<Aside type="caution" title="Suggested next forms do not ask again">
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+</Aside>
+
+## Workflows
+
+{/* claim: collect-workflows */}
+Below <UI>Custom Forms</UI>, the <UI>Workflows</UI> section lists the same custom forms grouped by workflow, with its own refresh arrow. Forms published from today's Form Creator carry no workflow, so they all appear in one group, <UI>No Workflow Assigned</UI>.
+
+## Records and exports
+
+{/* claim: collect-custom-manage */}
+Everything collected with a custom form shows up in Manage under that form's row in <UI>Form Manager</UI>, where it can be exported.
+
+<Shot src={manager} alt="Manage's Form Manager: a Puente Forms table listing SurveyData, HistoryEnvironmentalHealth, Vitals and EvaluationMedical, and a Custom Forms table listing Water access — Example Community and Vision exam with Edit, Duplicate, Delete and Export buttons." caption="Custom forms in Manage, each with its own Export." />
+
+## FAQ
+
+{/* claim: collect-custom-refresh */}
+**A colleague can see a new form and I can't. Why?**
+Your phone has the list from the last time it fetched forms. Tap the arrow beside Custom Forms with a connection.
+
+{/* claim: collect-custom-attach */}
+**Why can't I save the form?**
+No resident is attached. Search for the person at the top of the form and tap their card.
+
+{/* claim: collect-pin-cleared */}
+**My pinned forms disappeared.**
+Pins live on the phone. Tapping <UI>Delete Credentials</UI> on the sign-in screen clears them, and so does a new phone. Pin them again.

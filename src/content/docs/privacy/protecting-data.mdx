@@ -1,0 +1,100 @@
+---
+title: Protecting people's data
+description: What Collect stores, who can see and download it, how consent works, and the everyday habits that keep the people you survey safe.
+related:
+  - collect/consent
+  - data/exporting-data
+  - organizations/members-and-administrators
+  - privacy/delete-your-account
+---
+import { Aside } from '@astrojs/starlight/components';
+import Shot from '@components/Shot.astro';
+import UI from '@components/UI.astro';
+import consent from '@shots/en/collect-consent.png';
+import orgs from '@shots/en/manage-organizations.png';
+import expanded from '@shots/en/research-04-forms-collected.png';
+
+The people you survey trust you with their names, their homes and their health. Puente's apps record that information so your organization can serve them; how carefully it is handled depends on the people using the apps every day.
+
+This page says what the apps store and who can reach it, then lists the habits that matter most. It is not a description of security features. For the legal terms, read the [Puente Privacy Policy](https://www.puente-dr.org/privacy-policy/).
+
+## What Collect stores
+
+{/* claim: privacy-what-stored */}
+Every form opened from Collect's folder opens on a consent screen with a short privacy summary. It says Collect stores information submitted by authorized users, including:
+
+- contact details and demographics
+- household and location information, including precise GPS coordinates
+- photographs
+- health information and form responses
+- account identifiers
+
+The same summary says Puente does not use this data for advertising, product personalization or tracking. <UI>View Full Policy</UI> opens the complete policy.
+
+<div class="shots">
+<Shot phone src={consent} alt="The Consent Form screen in Collect: a privacy summary paragraph, a View Full Policy button, an empty checkbox reading Community member agrees to data policy, and a Continue to Form button." caption="The privacy summary every person hears before a form opens. Read it to them in their own words if needed." />
+</div>
+
+## Who can see and download records
+
+{/* claim: privacy-who-sees */}
+Your organization decides which records you see: the apps show each organization its own records. The privacy summary puts it this way: records <UI>may be available to authorized users of the organization collecting them.</UI>
+
+In practice that means:
+
+- **Every member of your organization** can use Manage and download full exports, with names, ID numbers, phone numbers, birth dates and locations. Not only administrators.
+- **Puente staff** can reach every organization's records, to support you and fix problems.
+
+So the question "who can see this?" is answered mostly by **who has an account in your organization**. Keep that list short and current.
+
+## Consent before the form
+
+{/* claim: privacy-consent */}
+A form will not open until the surveyor ticks <UI>Community member agrees to data policy</UI> and taps <UI>Continue to Form</UI>. Without the tick, Collect stops and says the community member must consent first.
+
+The tick records that the person agreed; it does not explain the policy for you. Tell the person, in plain words, what you are collecting and why, and let them say no. A no means you do not fill in the form. See [Consent](/docs/collect/consent/).
+
+## Collect less
+
+Every question you add to a form is something that can leak. Before you publish a form in Manage, ask of each question: will anyone use this answer? If not, leave it out. Do not ask for a cédula, a phone number or a precise location unless the program needs it.
+
+## One person, one account
+
+{/* claim: privacy-one-account */}
+Every record carries the account that collected it. When two people share one login, nobody can tell later who collected what, and you cannot remove one person's access without locking out the other. Give every surveyor their own account, and never share passwords.
+
+## Remove people who leave
+
+{/* claim: privacy-deactivate */}
+When someone leaves the team, an administrator opens the Organizations screen in Manage and presses <UI>Deactivate</UI> next to their name. That ends their sessions, so they are signed out of Collect and Manage. Today it does not stop them signing in again with their password — neither app checks for a deactivated account at sign-in yet — so also tell Puente at info@puente-dr.org. See [Members and administrators](/docs/organizations/members-and-administrators/).
+
+<Shot src={orgs} alt="The Organizations screen for Example Health Trust, listing four people. Three have Make administrator and Deactivate buttons; one is marked Deactivated and has a Reactivate button." caption="Deactivate leavers on the day they go. Reactivate brings an account back if needed." />
+
+## Lock the phone
+
+A phone holds forms that have not been sent yet, and the residents saved for offline search. Set a passcode or fingerprint lock on every phone used for Collect, and send waiting forms from Offline Sync every day so less sits on the phone.
+
+## Treat exports as patient files
+
+{/* claim: privacy-research-only */}
+A full export is a list of patients. Keep it in a shared folder with named people, not in email attachments or chat groups, and delete copies you no longer need. Only the [research file](/docs/data/research-exports/) is meant to leave Puente; Manage says so beside the buttons.
+
+<Shot src={expanded} alt="An expanded Form Manager row with notes reading that the research file has no names, ID numbers, phone numbers, birth dates or locations and is the only file to send to a research partner, and that full records should stay inside Puente." caption="Manage's own notes: the research file goes out; full records stay in." />
+
+<Aside type="caution" title="Never paste patient data into a support email">
+When you write to Puente about a problem, describe it without names, cédulas or attached exports. See [Contact support](/docs/help/contact-support/).
+</Aside>
+
+## Further reading
+
+- [The Responsible Data Handbook](https://responsibledata.io/resources/handbook/) by The Engine Room — practical guidance on handling data about people responsibly.
+- [ICRC Handbook on Data Protection in Humanitarian Action](https://www.icrc.org/en/data-protection-humanitarian-action-handbook) — detailed guidance for health and humanitarian programs.
+- [Puente Privacy Policy](https://www.puente-dr.org/privacy-policy/)
+
+## FAQ
+
+**Can members of other organizations see our records?**
+The apps show each organization its own records. Puente staff can see every organization's records.
+
+**Does a surveyor's deleted account delete their records?**
+No. Records belong to the organization. See [Delete your account](/docs/privacy/delete-your-account/).
