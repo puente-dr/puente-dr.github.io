@@ -13,10 +13,10 @@ import market from '@shots/en/manage-marketplace.png';
 import sidebar from '@shots/en/manage-sidebar.png';
 import loaded from '@shots/en/manage-form-creator-edit.png';
 
-The Form Marketplace is a shelf of ready-made forms that Puente has put up for every organization to use. Instead of building a household water survey from nothing, you copy one from the Marketplace, change what you need, and publish it as your own custom form.
+The Form Marketplace is a shelf of ready-made forms that every organization can see. Instead of building a household water survey from nothing, you copy one from the Marketplace, change what you need, and publish it as your own custom form.
 
 {/* claim: manage-mp-duplicate */}
-Nothing you do in the Marketplace affects the original or any other organization. You always work on your own copy.
+Duplicating never changes the Marketplace original: you always work on your own copy. Before you publish that copy, set its type (see [Duplicate a form](#duplicate-a-form)), or other organizations will see it.
 
 ## Open the Marketplace
 
@@ -44,12 +44,18 @@ If there is nothing on the shelf, the page reads <UI>No forms available yet.</UI
 {/* claim: manage-mp-duplicate */}
 1. Press <UI>Duplicate</UI> on the card.
 2. The [Form Creator](/docs/manage/form-creator/) opens with the form's name, description and questions already filled in.
-3. Change what you need: rename the form for your project, reword questions, add or remove blocks.
-4. Press <UI>Publish</UI>. The form is saved as a new custom form belonging to your organization.
+3. Change what you need: rename the form for your project, reword questions, add or remove blocks. To add a question, paste its full wording into the new block in one go (see [Form Creator](/docs/manage/form-creator/)).
+4. Set <UI>Type of form</UI> to <UI>Assets</UI>, then back to <UI>Custom</UI>.
+5. Press <UI>Publish</UI>. The form is saved as a new form belonging to your organization.
 
 <Shot src={loaded} alt="The Form Creator with a form loaded: its name and description filled in, the Allow research export checkbox, and a Single select question about water source in the Form builder." caption="A duplicated form opens like this, ready to change before you publish." />
 
-The Marketplace form itself is not changed, and other organizations never see your copy.
+The Marketplace form itself is not changed.
+
+{/* claim: manage-mp-copy-type */}
+<Aside type="danger" title="Step 4 keeps your copy private">
+A copy keeps the Marketplace form's type, even though <UI>Type of form</UI> already shows <UI>Custom</UI>. Published without step 4, the copy appears on the Marketplace for every organization, and it may not reach your own phones.
+</Aside>
 
 {/* claim: manage-fc-publish-silent */}
 <Aside type="caution" title="Check the copy before your team uses it">
@@ -58,18 +64,18 @@ A duplicated form is only on phones once it is published. As with any form, a fa
 
 ## Adapt it well
 
-{/* claim: manage-fc-research */}
+{/* claim: manage-mp-research-copy */}
 A ready-made form is a starting point, not a finished survey. Before you publish:
 
 - **Rename it.** Give the copy a name your surveyors will recognise, such as the project and community. It is also the name of the export file.
 - **Cut what you will not use.** Every question costs time at a doorstep.
 - **Use the number block for numbers.** It gives surveyors a number keypad.
-- **Decide on research export.** <UI>Allow research export</UI> starts unticked. Tick it only if a research partner with ethics approval will receive the de-identified file.
+- **Decide on research export.** The copy keeps the original's <UI>Allow research export</UI> setting. Leave it ticked only if a research partner with ethics approval will receive the de-identified file.
 
 ## Where Marketplace forms come from
 
 {/* claim: manage-mp-source */}
-The Marketplace shows forms Puente has marked for the Marketplace. Every organization sees the same shelf; it is not filtered by organization. You cannot add one yourself: the Form Creator's <UI>Type of form</UI> offers only <UI>Custom</UI> and <UI>Assets</UI>. If your organization built a form others could use, email info@puente-dr.org.
+The Marketplace lists every form whose type is Marketplace, whichever organization saved it. Every organization sees the same shelf. The Form Creator's <UI>Type of form</UI> offers only <UI>Custom</UI> and <UI>Assets</UI>, but a copy published without changing its type lands on the shelf too. If your organization built a form others could use, email info@puente-dr.org.
 
 ## FAQ
 
@@ -80,12 +86,13 @@ Only if it is in the Marketplace. Other organizations' custom forms are not show
 **Does duplicating send the form to our phones?**
 No. It opens a copy in the Form Creator. Phones get it only after you publish.
 
+{/* claim: manage-fc-stale */}
 **Can I see the questions before duplicating?**
-Not on the card. Duplicating opens the copy in the Form Creator, and nothing is saved until you publish, so looking costs nothing.
+Not on the card. Duplicating opens the copy in the Form Creator, and nothing is saved until you publish. When you are done looking, reload the page: until you do, the copy comes back every time you open <UI>Create</UI>.
 
-{/* claim: manage-mp-duplicate */}
+{/* claim: manage-fc-fix-type */}
 **Can other organizations see the form we publish?**
-No. The published copy belongs to your organization and appears only in your Form Manager and on your team's phones. Other organizations keep using the Marketplace original.
+Not if you did step 4: then it appears only in your Form Manager and on your team's phones. If you published without it, open the form with <UI>Edit</UI> in the Form Manager, set <UI>Type of form</UI> to <UI>Assets</UI> and back to <UI>Custom</UI>, and publish again.
 
 **I changed my mind after duplicating. Do I need to delete something?**
-No. Leave the Form Creator without publishing, or press Reset form.
+No. Nothing is saved until you publish. Reload the page so the copy does not come back the next time you open Create.

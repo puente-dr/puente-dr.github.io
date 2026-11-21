@@ -35,7 +35,7 @@ Expand the row with the arrow and Manage repeats this in plain words under <UI>F
 ## Turn on the research file
 
 {/* claim: data-research-allow */}
-The research file is a setting on each custom form. In <UI>Create</UI>, open the form and tick <UI>Allow research export</UI> under the description, then <UI>Publish</UI>. It is off until someone ticks it, and it is not available for the four Puente forms.
+The research file is a setting on each custom form. In <UI>Create</UI>, open the form and tick <UI>Allow research export</UI> under the description, then <UI>Publish</UI>. A new form starts with it off, a duplicated form keeps the original's setting, and it is not available for the four Puente forms.
 
 <Shot src={allow} alt="The Form Creator's settings card with Type of form, Form name and Description fields and a ticked Allow research export checkbox with an explanation below it." caption="One tick per form. The note below says location questions in this form are left out of the research file." />
 
@@ -48,9 +48,9 @@ One row for each time the form was filled in. These columns come first, then one
 
 | Column | Means |
 |---|---|
-| `study_id` | A code for the patient. The same person has the same code in every row and every download. |
+| `study_id` | A code for the patient. The same person record has the same code in every row and every download. |
 | `submission_id` | A code for this one visit. |
-| `visit_date` | The day the form reached Puente. |
+| `visit_date` | The date the form reached Puente, in UTC. |
 | `age_at_visit` | Age in whole years on the visit date, from the birth date. |
 | `age_as_reported` | An age typed into the person's record, for example when the birth date was unknown. |
 | `age_reported_date` | The day the person's record was created — the date that typed age refers to. |
@@ -85,7 +85,7 @@ Every question in the form becomes a column, except location questions. If the f
 {/* claim: data-research-study-id */}
 A study ID looks like `P-3fa9c01b2e`. It is made from the person's record with a secret key that only Puente holds, so:
 
-- **It is stable.** A patient seen at two clinics has the same code both times, and researchers can follow them.
+- **It is stable.** A patient's record has the same code at every visit, so researchers can follow them. Someone registered twice has two records, and so two codes.
 - **Only Puente can reverse it.** If a researcher asks about `P-3fa9c01b2e`, send the code to info@puente-dr.org and Puente can find that patient. The researcher cannot.
 
 {/* claim: data-research-audit */}

@@ -201,7 +201,7 @@
    ]
   },
   "manage-review-menu": {
-   "claim": "Review in the menu opens the Dashboard.",
+   "claim": "Review in the menu opens the dashboard, whose breadcrumb reads Dashboard.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -217,11 +217,16 @@
      "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
      "quote": "{ id: 'dashboard', labelKey: 'nav_dashboard', icon: '◧', href: '/quick-start' },",
      "line": 22
+    },
+    {
+     "file": "puente-react-nextjs-platform/pages/quick-start/index.tsx",
+     "quote": "<AppShell breadcrumb={[t('breadcrumb_dashboard')]}>",
+     "line": 156
     }
    ]
   },
   "manage-sync-ribbon": {
-   "claim": "Sync ribbon: synced time and 24h count; synced means received; aging/stale/never/unknown statuses.",
+   "claim": "Sync ribbon: synced time and 24h count from resident (SurveyData) records only; synced means received; status thresholds.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -247,6 +252,16 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"sync_ribbon_status_unknown\": \"Last sync time unavailable\",",
      "line": 74
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "const lastSyncQ = scoped('SurveyData');",
+     "line": 50
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "const recent24hQ = scoped('SurveyData');",
+     "line": 56
     }
    ]
   },
@@ -271,7 +286,7 @@
    ]
   },
   "manage-needs-attention": {
-   "claim": "Four checks, ordered by severity, only non-zero rows shown.",
+   "claim": "Four checks, ordered by severity, only non-zero rows shown; duplicates = same householdId and day among resident records; marking unique is not stored.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/triageQueue.js",
@@ -322,6 +337,21 @@
      "file": "puente-react-nextjs-platform/app/modules/data-quality/index.js",
      "quote": "Same household, same day.",
      "line": 56
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "const sampleQ = scoped('SurveyData');",
+     "line": 71
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/data-quality/index.js",
+     "quote": "const hid = r.get('householdId');",
+     "line": 69
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/DuplicateResolver/index.js",
+     "quote": "<Button text={t('data_curation_dup_both_unique')} isDisabled={busy} onClick={() => onResolved()} />",
+     "line": 95
     }
    ]
   },
@@ -346,7 +376,7 @@
    ]
   },
   "manage-estimated": {
-   "claim": "Counts against the org total; estimated marks sampled counts.",
+   "claim": "Only missing-key-fields and unresolved rows quote the resident-record total; duplicates and form drift are estimated from 1,000 recent records and up to 20 forms.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/triageQueue.js",
@@ -357,11 +387,26 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"triage_estimated\": \"estimated\",",
      "line": 85
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/NeedsAttention.js",
+     "quote": "if (row.denominator !== 'org-records') return t('number_value', { value: row.count });",
+     "line": 47
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "export const SAMPLE_SIZE = 1000;",
+     "line": 32
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "const FORM_SPEC_LIMIT = 20;",
+     "line": 35
     }
    ]
   },
   "manage-needs-attention-links": {
-   "claim": "Rows link to Data Curation (filtered) or Form Manager; filtered notice.",
+   "claim": "Two rows link to filtered Data Curation, duplicates to unfiltered Data Curation (pairs detected per page of 50), form drift to Form Manager; filtered notice.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/triageQueue.js",
@@ -377,6 +422,21 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "Showing only records missing key fields. The counts below describe this filtered set, not every record.",
      "line": 110
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/triageQueue.js",
+     "quote": "href: '/data/data-curation',",
+     "line": 88
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "setDups(detectDuplicates(results));",
+     "line": 203
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "const PAGE_SIZE = 50;",
+     "line": 48
     }
    ]
   },
@@ -401,7 +461,7 @@
    ]
   },
   "manage-coverage": {
-   "claim": "Coverage: quietest first; quiet after 14 days; denominator heading.",
+   "claim": "Coverage from the latest 1,000 resident records: quietest first, six rows, quiet after 14 days; denominator heading.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/coverage.js",
@@ -422,11 +482,21 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"coverage_denominator\": \"of the {{count, number}} most recently synced records\",",
      "line": 410
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "sampleQ.limit(SAMPLE_SIZE);",
+     "line": 74
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/CoverageRail.js",
+     "quote": "export const MAX_ROWS = 6;",
+     "line": 27
     }
    ]
   },
   "manage-context-totals": {
-   "claim": "Footer totals.",
+   "claim": "Footer totals count resident records; accounts are sampled.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -437,11 +507,16 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "not people who collected",
      "line": 412
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DashboardTriage/loadTriage.js",
+     "quote": "const totalQ = scoped('SurveyData');",
+     "line": 92
     }
    ]
   },
   "manage-fm-open": {
-   "claim": "Manage in the menu opens Form Manager with Puente Forms and Custom forms.",
+   "claim": "Manage in the menu opens Form Manager with Puente Forms and custom forms grouped by workflow.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/impacto-design-system/AppShell/Sidebar.js",
@@ -462,11 +537,16 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"form_manager_custom_forms\": \"Custom forms\",",
      "line": 355
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
+     "quote": "<Panel key={key} title={key} noPadding>",
+     "line": 228
     }
    ]
   },
   "manage-fm-search-create": {
-   "claim": "Create form opens the Form Creator; search filters by name.",
+   "claim": "Create form opens the Form Creator; search filters custom forms by name; the Puente list is not filtered.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
@@ -477,6 +557,11 @@
      "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
      "quote": ".map(([wf, forms]) => [wf, forms.filter((f) => f.name.toLowerCase().includes(term))])",
      "line": 60
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
+     "quote": "data={puenteConfig}",
+     "line": 195
     }
    ]
   },
@@ -637,6 +722,11 @@
      "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/CSVButton/index.js",
      "quote": "`${name}-${new Date()}.csv`",
      "line": 107
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result = result.map(lambda x: replace_spanish_characters(x) if isinstance(x, str) else x)",
+     "line": 108
     }
    ]
   },
@@ -666,7 +756,7 @@
    ]
   },
   "manage-fm-delete": {
-   "claim": "Delete confirms, marks the form inactive; Collect hides inactive forms.",
+   "claim": "Delete confirms and marks the form inactive without refreshing the list; Collect, the Form Manager and Data Curation hide inactive forms.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -692,6 +782,21 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"form_manager_custom_forms_error\": \"Your custom forms did not load.\",",
      "line": 394
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/Table/index.js",
+     "quote": "retrieveCustomData(organization);",
+     "line": 58
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
+     "quote": "if (record.active !== 'false') {",
+     "line": 92
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/SourceSelector/index.js",
+     "quote": "q.notEqualTo('active', 'false');",
+     "line": 79
     }
    ]
   },
@@ -771,7 +876,7 @@
    ]
   },
   "manage-fc-research": {
-   "claim": "Allow research export starts off; hint text.",
+   "claim": "Allow research export starts off on a new form; a loaded form keeps its setting; hint text.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
@@ -787,6 +892,11 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "Location questions in this form are left out of it.",
      "line": 420
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setAllowResearchExport(allowed === true);",
+     "line": 105
     }
    ]
   },
@@ -936,7 +1046,7 @@
    ]
   },
   "manage-fc-reaches-phone": {
-   "claim": "Custom forms reach the phone when Custom Forms is refreshed in Collect, not at sign-in.",
+   "claim": "Custom forms reach the phone when Custom Forms is refreshed (customFormsQuery); sign-in does not query custom forms.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
@@ -947,6 +1057,16 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"noCustomForms\": \"No custom forms — try refreshing\",",
      "line": 107
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "customFormsQuery(surveyingOrganization).then((forms) => {",
+     "line": 94
+    },
+    {
+     "file": "puente-reactnative-collect/context/auth.context.js",
+     "quote": "storeData(usr, \"currentUser\");",
+     "line": 24
     }
    ]
   },
@@ -962,11 +1082,16 @@
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
      "quote": "const clearForm = () => {",
      "line": 124
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames([]);",
+     "line": 129
     }
    ]
   },
   "manage-fc-edit": {
-   "claim": "Edit loads the form and publish updates the same form.",
+   "claim": "Edit loads the form and publish updates the same form, resetting its organizations to the editor's and its workflows to none.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
@@ -977,6 +1102,16 @@
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
      "quote": "postParams.parseClassID = formId;",
      "line": 161
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "formObject.organizations = [user.organization];",
+     "line": 136
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "formObject.workflows = newWorkflowsToAdd;",
+     "line": 144
     }
    ]
   },
@@ -1016,7 +1151,7 @@
    ]
   },
   "manage-fc-accents": {
-   "claim": "Export strips Spanish accents and opening ¿ ¡ from headings.",
+   "claim": "Custom-form export strips Spanish accents, ñ and opening ¿ ¡ from headings and every text cell.",
    "evidence": [
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
@@ -1032,6 +1167,11 @@
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
      "quote": "result.columns = [replace_spanish_characters(col) for col in result.columns]",
      "line": 106
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/flatten_custom_fields.py",
+     "quote": "result = result.map(lambda x: replace_spanish_characters(x) if isinstance(x, str) else x)",
+     "line": 108
     }
    ]
   },
@@ -1086,7 +1226,7 @@
    ]
   },
   "manage-dc-sources": {
-   "claim": "Data sources; changing source resets filters.",
+   "claim": "Data sources; changing source resets the applied filters but FilterBar keeps and later resends its own selections.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -1107,6 +1247,16 @@
      "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
      "quote": "setFilters(EMPTY_FILTERS);",
      "line": 217
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/FilterBar/index.js",
+     "quote": "const [surveyor, setSurveyor] = useState('');",
+     "line": 29
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/FilterBar/index.js",
+     "quote": "onFilterChange({ search, surveyor, community, status, completeness, ...patch });",
+     "line": 45
     }
    ]
   },
@@ -1206,7 +1356,7 @@
    ]
   },
   "manage-dc-edit-everyone": {
-   "claim": "Saving writes the record itself; discard prompt; save failure message.",
+   "claim": "Saving writes the record itself (no history); ✕/overlay ask to discard, Cancel does not; save failure message.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
@@ -1222,11 +1372,31 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"data_curation_inspector_save_failed\": \"Save failed — try again\",",
      "line": 262
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "<Button text={t('data_curation_cancel')} onClick={onClose} />",
+     "line": 241
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "onClick={dirty ? () => setDiscardOpen(true) : onClose}",
+     "line": 180
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"data_curation_cancel\": \"Cancel\",",
+     "line": 259
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/DuplicateResolver/index.js",
+     "quote": "await pendingDiscard.destroy();",
+     "line": 53
     }
    ]
   },
   "manage-dc-duplicates": {
-   "claim": "Duplicate resolver: compare A/B, keep one deletes other permanently, or both unique.",
+   "claim": "Dup = same householdId and same createdAt day on the page, no name check; keep one destroys the other only (visits point to it via client); both-unique is not stored.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/DuplicateResolver/index.js",
@@ -1247,11 +1417,36 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"data_curation_dup_delete_confirm\": \"Permanently delete this record? This cannot be undone.\",",
      "line": 286
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/data-quality/index.js",
+     "quote": "const day = r.createdAt ? r.createdAt.toISOString().slice(0, 10) : 'unknown';",
+     "line": 71
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/data-quality/index.js",
+     "quote": "const key = `${hid}__${day}`;",
+     "line": 72
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/data-quality/index.js",
+     "quote": "through a `client` pointer.",
+     "line": 102
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/index.js",
+     "quote": "setDups(detectDuplicates(results));",
+     "line": 203
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/DuplicateResolver/index.js",
+     "quote": "<Button text={t('data_curation_dup_both_unique')} isDisabled={busy} onClick={() => onResolved()} />",
+     "line": 95
     }
    ]
   },
   "manage-dc-audit": {
-   "claim": "Community Audit groups names within two edits and renames across four classes irreversibly.",
+   "claim": "Community Audit groups names within two edits from a 1,000-record sample per class; renames irreversibly; failed queries end silently; empty message shows before load.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
@@ -1277,6 +1472,21 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"data_curation_audit_empty\": \"No similar community names detected.\",",
      "line": 224
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
+     "quote": "q.limit(1000);",
+     "line": 79
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
+     "quote": "const recs = await q.find().catch(() => []);",
+     "line": 80
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/CommunityAudit/index.js",
+     "quote": "const [groups, setGroups] = useState([]);",
+     "line": 62
     }
    ]
   },
@@ -1321,7 +1531,7 @@
    ]
   },
   "manage-mp-duplicate": {
-   "claim": "Duplicate opens the Form Creator; Publish saves a new form for your organization.",
+   "claim": "Duplicate opens a copy in the Form Creator (the original is untouched); Publish saves a new form for your organization.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/FormMarketplace/index.js",
@@ -1341,7 +1551,7 @@
    ]
   },
   "manage-mp-source": {
-   "claim": "Marketplace lists forms typed Marketplace; Form Creator offers only Custom and Assets.",
+   "claim": "Marketplace lists every form typed Marketplace with no organization filter; the Form Creator offers only Custom and Assets, and a copy keeps its type when published.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/app/epics/FormMarketplace/index.js",
@@ -1357,6 +1567,16 @@
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
      "quote": "<option value=\"Assets\">{t('form_creator_form_type_assets')}</option>",
      "line": 285
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/cloud-code/crud/custom-queries/index.js",
+     "quote": "Object.entries(parseParams).forEach((e) => query.equalTo(e[0], e[1]));",
+     "line": 33
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "formObject.typeOfForm = formTypeNames;",
+     "line": 137
     }
    ]
   },
@@ -1386,7 +1606,7 @@
    ]
   },
   "manage-as-fields": {
-   "claim": "Editable fields; required; blank password kept; Update user re-signs in and returns to dashboard.",
+   "claim": "Editable fields; name and email required; a blank password is not sent, so the current one is kept; Update user saves the details.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
@@ -1405,13 +1625,8 @@
     },
     {
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
-     "quote": "await retrieveSignInFunction(username, password)",
-     "line": 56
-    },
-    {
-     "file": "puente-react-nextjs-platform/pages/account/management/index.js",
-     "quote": "const returnUrl = '/quick-start'",
-     "line": 57
+     "quote": "await updateUser(userId, updatedUser)",
+     "line": 54
     },
     {
      "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
@@ -1461,7 +1676,7 @@
    ]
   },
   "manage-as-delete": {
-   "claim": "Delete user sets the account inactive, with no confirmation, and returns to sign-in.",
+   "claim": "Delete user sets the account inactive, with no confirmation, and returns to sign-in. Deactivate (an administrator's control) destroys the person's existing sessions.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
@@ -1477,6 +1692,11 @@
      "file": "puente-react-nextjs-platform/pages/account/management/index.js",
      "quote": "router.push('/account/login')",
      "line": 76
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
+     "line": 338
     }
    ]
   },
@@ -1502,6 +1722,226 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "\"nav_logout\": \"Log out\",",
      "line": 28
+    }
+   ]
+  },
+  "manage-mp-copy-type": {
+   "claim": "A Marketplace copy keeps the Marketplace type (the dropdown shows Custom since Marketplace is not an option); published as is it is listed on the Marketplace and Collect lists only Custom forms; changing the dropdown sets the type.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormMarketplace/index.js",
+     "quote": "typeOfForm: 'Marketplace',",
+     "line": 12
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormMarketplace/index.js",
+     "quote": "action: () => passDataToFormCreator('duplicate', form),",
+     "line": 57
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames(typeOfForm || []);",
+     "line": 106
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "<option value=\"Custom\">{t('form_creator_form_type_custom')}</option>",
+     "line": 284
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames([event.target.value]);",
+     "line": 113
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "formObject.typeOfForm = formTypeNames;",
+     "line": 137
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "typeOfForm: \"Custom\",",
+     "line": 109
+    }
+   ]
+  },
+  "manage-mp-research-copy": {
+   "claim": "A duplicated form keeps the original allowResearchExport setting.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setAllowResearchExport(allowed === true);",
+     "line": 105
+    },
+    {
+     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
+     "quote": "\"form_creator_allow_research_export\": \"Allow research export\",",
+     "line": 419
+    }
+   ]
+  },
+  "manage-fc-fix-type": {
+   "claim": "Edit loads the saved type; choosing a type in the dropdown sets it; Collect lists only Custom forms.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames(typeOfForm || []);",
+     "line": 106
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames([event.target.value]);",
+     "line": 113
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "typeOfForm: \"Custom\",",
+     "line": 109
+    }
+   ]
+  },
+  "manage-fc-stale": {
+   "claim": "After publish/Reset the builder clears the type to empty but keeps the submission mode (edit updates by the cleared id); the edit/duplicate payload stays in the app store and is reloaded whenever the Form Creator opens.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormTypeNames([]);",
+     "line": 129
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "if (submissionType === 'edit') {",
+     "line": 160
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "postParams.parseClassID = formId;",
+     "line": 161
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setFormId('');",
+     "line": 125
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "if (context.store['/forms/form-creator']) {",
+     "line": 87
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormManager/index.js",
+     "quote": "context.addPropToStore(href, storedData); // contextManagement.removeFromGlobalStoreData(key);",
+     "line": 132
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "typeOfForm: \"Custom\",",
+     "line": 109
+    }
+   ]
+  },
+  "manage-fc-new-question-key": {
+   "claim": "On a form loaded by Edit/Duplicate keys are frozen; a new block takes its key from the first keystroke and keeps it; pasting sets it from the whole text; the trash can removes a block.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "keyFrozen={Boolean(formId)}",
+     "line": 341
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/_utils/index.js",
+     "quote": "if (keyFrozen) {",
+     "line": 27
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/_utils/index.js",
+     "quote": "return existingKey || toFormikKey(newLabel);",
+     "line": 28
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/FormTemplate/InputPicker/Input/index.js",
+     "quote": "formikKey: nextFormikKey(current.formikKey, current.label, value, keyFrozen),",
+     "line": 39
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "const removeValue = (id) => {",
+     "line": 214
+    }
+   ]
+  },
+  "manage-fc-switches-ignored": {
+   "claim": "Required/Allow other/Multi-select switches and the Answer is required box are not read by Collect; custom forms get no validation; only selectMulti allows several options.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/Inspector/index.js",
+     "quote": "onChange={(v) => update({ required: v })}",
+     "line": 112
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/Inspector/index.js",
+     "quote": "onChange={(v) => update({ multiSelect: v })}",
+     "line": 124
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/FormTemplate/InputPicker/Utils/ActiveInput/index.js",
+     "quote": "label={t('form_creator_answer_required')}",
+     "line": 28
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/YupValidation/index.js",
+     "quote": "const { label, formikKey, fieldType, validation, options } = result;",
+     "line": 5
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "setValidationSchema(yupValidationPicker(medConfig.fields));",
+     "line": 76
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/index.js",
+     "quote": "{fieldType === \"selectMulti\" && (",
+     "line": 377
+    }
+   ]
+  },
+  "manage-fm-list-scope": {
+   "claim": "Form Manager queries custom forms by the account organization string only; Collect uses every alias of the organization.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/modules/cloud-code/custom-data-retrieval/index.js",
+     "quote": "customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', organization);",
+     "line": 8
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "const organizationValues = await loadOrganizationScope(surveyingOrganization);",
+     "line": 107
+    }
+   ]
+  },
+  "manage-dc-inspector-scope": {
+   "claim": "Non-survey sources show the People field layout read from the visit record; custom-form save only merges existing answers, and the surveyor edit is not saved.",
+   "evidence": [
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "SURVEY_SECTIONS.map((sec) => (",
+     "line": 218
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "const merged = existing.map((f) => (",
+     "line": 145
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "edits[f.title] !== undefined ? { title: f.title, answer: edits[f.title] } : f",
+     "line": 146
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "<FieldRow field={{ key: 'surveyingUser', labelKey: 'field_surveyor' }}",
+     "line": 199
     }
    ]
   }

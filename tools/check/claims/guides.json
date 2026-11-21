@@ -161,7 +161,7 @@
    ]
   },
   "guide-org-deactivate": {
-   "claim": "Deactivate ends the person's sessions, signing them out of both apps.",
+   "claim": "Deactivate destroys the person's existing sessions.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -221,7 +221,7 @@
    ]
   },
   "guide-test-on-copy": {
-   "claim": "Form Manager has Duplicate; a form's exports include every submission sent to it.",
+   "claim": "Form Manager has Duplicate; a form's exports include every submission sent to it. Resident IDs registered while testing are ordinary SurveyData records of the organization.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -232,6 +232,11 @@
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
      "quote": "\"\"\"The research frame for one form's submissions. Pure: no network.\"\"\"",
      "line": 90
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "const surveyee = await postIdentificationForm(postParams);",
+     "line": 242
     }
    ]
   },
@@ -246,7 +251,7 @@
    ]
   },
   "guide-signin-internet": {
-   "claim": "Signing in to Collect needs a connection.",
+   "claim": "Signing in to Collect needs a connection and uses the registered email.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/context/auth.context.js",
@@ -257,6 +262,16 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "Logging in requires an internet connection, so offline login isn't available.",
      "line": 83
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('username', String(email));",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
     }
    ]
   },
@@ -286,7 +301,7 @@
    ]
   },
   "guide-search-offline": {
-   "claim": "Opening Find Records online stores residents for offline search.",
+   "claim": "Opening Find Records online (first time after the app starts) stores the organization's residents, up to the storage limit, for offline search.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
@@ -297,11 +312,21 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
      "quote": "storeData(records, \"residentData\").catch(() => {});",
      "line": 101
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "if (!organization) return;",
+     "line": 66
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "query.containedIn(\"surveyingOrganization\", organizationValues);",
+     "line": 97
     }
    ]
   },
   "guide-search-one-field": {
-   "claim": "Search matches the start of one field: names, nickname, cédula.",
+   "claim": "Online, search matches the start of one field (names, nickname, cédula, household ID); offline it matches names and nickname by substring, including the full name.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
@@ -312,6 +337,11 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
      "quote": "\"cedulaNumber\",",
      "line": 50
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "`${fname} ${lname}`.toLowerCase().includes(query.toLowerCase()) ||",
+     "line": 155
     }
    ]
   },
@@ -401,7 +431,7 @@
    ]
   },
   "guide-save-messages": {
-   "claim": "Offline banner; submitted vs saved offline messages.",
+   "claim": "Offline banner; saved-offline message; submitted message can also follow an offline save for a synced resident; ERROR! means not saved.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
@@ -410,13 +440,18 @@
     },
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
-     "quote": "\"successfullySubmitted\": \"Form successfully submitted\",",
-     "line": 380
-    },
-    {
-     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"savedOffline\": \"Saved offline — will sync when you reconnect\",",
      "line": 381
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "if (result?.isOfflineLocal === true || surveyee?.isOfflineLocal === true) {",
+     "line": 235
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "alert(I18n.t(\"submissionError.error\"));",
+     "line": 247
     }
    ]
   },
@@ -466,7 +501,7 @@
    ]
   },
   "guide-households-not-listed": {
-   "claim": "Offline households are not in the discardable queue list but are posted on sync.",
+   "claim": "Offline households are not listed or discardable in Offline Sync; they are posted only together with other queued forms (no Retry when nothing else is queued).",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/offline/queue/index.js",
@@ -475,8 +510,18 @@
     },
     {
      "file": "puente-reactnative-collect/modules/offline/post/index.js",
-     "quote": "households: \"offlineHouseholds\",",
-     "line": 30
+     "quote": "getData(\"offlineHouseholds\"),",
+     "line": 128
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{offlineFormCount > 0 ? (",
+     "line": 236
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "if (count === 0) return;",
+     "line": 11
     }
    ]
   },
@@ -526,7 +571,7 @@
    ]
   },
   "guide-storage-limit": {
-   "claim": "Record storage limit defaults to 2000.",
+   "claim": "Record storage limit defaults to 2000 and caps the organization-wide resident store.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/settings/index.js",
@@ -537,6 +582,11 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"recordStorageLimit\": \"Record storage limit\",",
      "line": 571
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "query.limit(limit);",
+     "line": 88
     }
    ]
   },
@@ -676,7 +726,7 @@
    ]
   },
   "guide-manage-signin": {
-   "claim": "Manage at puente-manage.vercel.app; same account; email or phone number.",
+   "claim": "Manage at puente-manage.vercel.app; same account; signed in with the registered email.",
    "evidence": [
     {
      "file": "puente-node-cloudcode/cloud/src/services/messaging/text-email.js",
@@ -685,13 +735,18 @@
     },
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
-     "quote": "\"login_field_email\": \"Email or phone number\"",
-     "line": 41
-    },
-    {
-     "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "Collecting in the field? Open Puente Collect on your phone instead.",
      "line": 43
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('username', String(email));",
+     "line": 49
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/modules/user/index.js",
+     "quote": "Parse.User.logIn(String(username), String(password)).then((user) => {",
+     "line": 30
     }
    ]
   },
@@ -776,7 +831,7 @@
    ]
   },
   "guide-curation-permanent": {
-   "claim": "Duplicate delete and community rename cannot be undone.",
+   "claim": "Saved edits overwrite the record in place (no history); duplicate delete and community rename cannot be undone.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -787,6 +842,11 @@
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
      "quote": "This updates every matching record and cannot be undone.",
      "line": 225
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/DataCurationManager/RecordInspector/index.js",
+     "quote": "await record.save();",
+     "line": 154
     }
    ]
   },
@@ -951,7 +1011,7 @@
    ]
   },
   "guide-research-opt-in": {
-   "claim": "Allow research export is a per-form checkbox, off unless ticked.",
+   "claim": "Allow research export is a per-form checkbox; a new form starts unticked, a duplicate inherits the original's setting.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -962,6 +1022,16 @@
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
      "quote": "and spec.get('allowResearchExport') is True",
      "line": 135
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "const [allowResearchExport, setAllowResearchExport] = useState(false);",
+     "line": 70
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setAllowResearchExport(allowed === true);",
+     "line": 105
     }
    ]
   },

@@ -13,9 +13,10 @@ import records from '@shots/en/manage-data-curation.png';
 import inspector from '@shots/en/manage-record-inspector.png';
 import audit from '@shots/en/manage-community-audit.png';
 
-Data Curation is where you clean what the field collected before you export it: spot records with blanks, fix a misspelled name, decide which of two duplicate records to keep, and bring "El Río" and "El Rio" together under one spelling. Most rows on the [Review dashboard](/docs/manage/review/) lead here.
+Data Curation is where you clean what the field collected before you export it: spot records with blanks, fix a misspelled name, check whether two flagged records are really the same person, and bring "El Río" and "El Rio" together under one spelling. Most rows on the [Review dashboard](/docs/manage/review/) lead here.
 
-Changes here are made to the records themselves, for everyone in your organization. Some cannot be undone.
+{/* claim: manage-dc-edit-everyone */}
+Changes here are made to the records themselves, for everyone in your organization. None of them can be undone.
 
 ## Open Data Curation
 
@@ -27,7 +28,7 @@ Press <UI>Clean</UI> in the left menu. The page is titled <UI>Data Curation</UI>
 ## Choose a data source
 
 {/* claim: manage-dc-sources */}
-<UI>Data source</UI> picks which records the table shows. Under <UI>System Records</UI>: <UI>People Records</UI> (the residents), <UI>Environmental Health</UI>, <UI>Medical Evaluation</UI> and <UI>Vitals</UI>. Under <UI>Custom Forms</UI>: each form your organization built. Changing the source clears the filters.
+<UI>Data source</UI> picks which records the table shows. Under <UI>System Records</UI>: <UI>People Records</UI> (the residents), <UI>Environmental Health</UI>, <UI>Medical Evaluation</UI> and <UI>Vitals</UI>. Under <UI>Custom Forms</UI>: each form your organization built. Changing the source shows all of that source's records, but the filter controls can keep showing your earlier choices, and those come back the next time you change a filter. Check every filter after you switch.
 
 ## Read the four figures
 
@@ -61,37 +62,40 @@ If you arrived from the dashboard, a line above the figures, such as <UI>Showing
 {/* claim: manage-dc-inspector */}
 Click a row. A panel opens on the right with the record's fields, grouped under <UI>Identity</UI>, <UI>Contact</UI>, <UI>Location</UI> and more. Correct what is wrong and press <UI>Save</UI>.
 
+{/* claim: manage-dc-inspector-scope */}
+Edit only People Records and custom forms here. For <UI>Environmental Health</UI>, <UI>Medical Evaluation</UI> and <UI>Vitals</UI>, the panel shows the person's fields empty instead of the visit's readings. On a custom form you can change answers that were given; an answer typed into a blank question, or a changed surveyor, is not saved.
+
 <Shot src={inspector} alt="A record open in a side panel titled Ana Ejemplo, with Identity fields (first name, last name, nickname, date of birth, age, sex), Contact fields (phone, Cédula / ID) and Location (community), and Save and Cancel buttons at the bottom." caption="The record inspector. What you save here replaces the record for everyone." />
 
 {/* claim: manage-dc-edit-everyone */}
-Saving changes the record itself, so everyone in your organization — and every later export — sees the corrected version. If you close the panel with changes unsaved, Manage asks <UI>Discard unsaved changes?</UI> If saving fails, it says <UI>Save failed — try again</UI>.
+Saving changes the record itself, so everyone in your organization — and every later export — sees the corrected version. If you close the panel with ✕ or by clicking outside it with changes unsaved, Manage asks <UI>Discard unsaved changes?</UI> <UI>Cancel</UI> closes it without asking and drops the changes. If saving fails, it says <UI>Save failed — try again</UI>.
 
 ## Resolve duplicates
 
 {/* claim: manage-dc-duplicates */}
-A record flagged <UI>Dup</UI> shares a household and a day with another record. Press the flag to compare the two side by side, as <UI>Record A</UI> and <UI>Record B</UI>; fields that differ are marked.
+A record flagged <UI>Dup</UI> has the same household ID as another record on this page, and both reached Puente on the same day. Names are not compared, so the flag is not proof of a duplicate. Press the flag to compare the two side by side, as <UI>Record A</UI> and <UI>Record B</UI>; fields that differ are marked.
 
 - <UI>Keep A, dismiss B</UI> (or the reverse) deletes the other record.
-- <UI>Both are unique — dismiss</UI> keeps both and closes the comparison.
+- <UI>Both are unique — dismiss</UI> keeps both and closes the comparison. It is not remembered: the flag comes back.
 
 <Aside type="caution" title="Deleting a duplicate is permanent">
-Manage asks <UI>Permanently delete this record? This cannot be undone.</UI> Pressing <UI>Delete record</UI> removes it for good. Open both records and check the names, dates and household first.
+Manage asks <UI>Permanently delete this record? This cannot be undone.</UI> Pressing <UI>Delete record</UI> removes it for good. On People Records, the deleted person's visits and custom-form answers are not moved to the record you kept; they stay linked to a person who no longer exists. Open both records and check the names, dates of birth and household first.
 </Aside>
 
 ## Merge community spellings
 
 {/* claim: manage-dc-audit */}
-The <UI>Community Audit</UI> tab groups community names that differ by no more than two letters, such as "El Río" and "El Rio". For each group:
+The <UI>Community Audit</UI> tab groups community names that differ by no more than two letters, such as "El Río" and "El Rio". It looks at a sample of up to 1,000 records of each kind. For each group:
 
 1. Select the spelling you want to keep.
 2. Press <UI>Apply</UI>.
 3. Confirm <UI>Rename records</UI>.
 
-Every People, Environmental Health, Medical Evaluation and Vitals record under the other spellings is renamed. Manage warns that this <UI>cannot be undone</UI>: there is no way to tell afterwards which record had which spelling.
+The records under the other spellings are renamed. Manage warns that this <UI>cannot be undone</UI>: there is no way to tell afterwards which record had which spelling. If the connection drops part-way, some records can keep the old spelling and no error appears: reopen the tab and check that the group is gone.
 
 <Shot src={audit} alt="The Community Audit tab showing one group with two choices, El Río selected and El Rio, and an Apply button." caption="Two spellings of one place. Pick the one to keep, then Apply." />
 
-If there is nothing to merge, the tab reads <UI>No similar community names detected.</UI>
+If there is nothing to merge, the tab reads <UI>No similar community names detected.</UI> It also reads that while it is still loading.
 
 ## FAQ
 
@@ -101,5 +105,6 @@ The figures describe the current page of up to 50 records.
 **Two different villages are grouped together. What do I do?**
 Leave them. Nothing changes until you press Apply.
 
-**Can I undo a rename or a deleted duplicate?**
-No. Both are permanent.
+{/* claim: manage-dc-edit-everyone */}
+**Can I undo a change?**
+No. Saved edits, deleted duplicates and renames are all permanent.

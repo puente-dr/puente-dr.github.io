@@ -13,9 +13,10 @@ import records from '@shots/es/manage-data-curation.png';
 import inspector from '@shots/es/manage-record-inspector.png';
 import audit from '@shots/es/manage-community-audit.png';
 
-Curación de datos es donde limpias lo que recolectó el campo antes de exportarlo: encuentras registros con espacios vacíos, corriges un nombre mal escrito, decides cuál de dos registros duplicados conservar, y juntas «El Río» y «El Rio» bajo una sola forma de escribirlo. Casi todas las filas del [panel de Revisar](/docs/es/manage/review/) llevan aquí.
+Curación de datos es donde limpias lo que recolectó el campo antes de exportarlo: encuentras registros con espacios vacíos, corriges un nombre mal escrito, revisas si dos registros marcados son de verdad la misma persona, y juntas «El Río» y «El Rio» bajo una sola forma de escribirlo. Casi todas las filas del [panel de Revisar](/docs/es/manage/review/) llevan aquí.
 
-Los cambios que haces aquí se hacen en los registros mismos, para todas las personas de tu organización. Algunos no se pueden deshacer.
+{/* claim: manage-dc-edit-everyone */}
+Los cambios que haces aquí se hacen en los registros mismos, para todas las personas de tu organización. Ninguno se puede deshacer.
 
 ## Abrir Curación de datos
 
@@ -27,7 +28,7 @@ Pulsa <UI>Limpiar</UI> en el menú de la izquierda. La página se llama <UI>Cura
 ## Elegir una fuente de datos
 
 {/* claim: manage-dc-sources */}
-<UI>Fuente de datos</UI> elige qué registros muestra la tabla. En <UI>Registros del sistema</UI>: <UI>Registros de personas</UI> (los residentes), <UI>Salud ambiental</UI>, <UI>Evaluación médica</UI> y <UI>Signos vitales</UI>. En <UI>Formularios personalizados</UI>: cada formulario que creó tu organización. Al cambiar de fuente se borran los filtros.
+<UI>Fuente de datos</UI> elige qué registros muestra la tabla. En <UI>Registros del sistema</UI>: <UI>Registros de personas</UI> (los residentes), <UI>Salud ambiental</UI>, <UI>Evaluación médica</UI> y <UI>Signos vitales</UI>. En <UI>Formularios personalizados</UI>: cada formulario que creó tu organización. Al cambiar de fuente ves todos los registros de esa fuente, pero los controles de filtro pueden seguir mostrando lo que habías elegido, y eso vuelve a aplicarse la próxima vez que cambias un filtro. Revisa cada filtro después de cambiar de fuente.
 
 ## Leer las cuatro cifras
 
@@ -61,37 +62,40 @@ Si llegaste desde el panel, una línea encima de las cifras, como <UI>Mostrando 
 {/* claim: manage-dc-inspector */}
 Haz clic en una fila. A la derecha se abre un panel con los campos del registro, agrupados en <UI>Identidad</UI>, <UI>Contacto</UI>, <UI>Ubicación</UI> y otros. Corrige lo que esté mal y pulsa <UI>Guardar</UI>.
 
+{/* claim: manage-dc-inspector-scope */}
+Edita aquí solo Registros de personas y formularios personalizados. En <UI>Salud ambiental</UI>, <UI>Evaluación médica</UI> y <UI>Signos vitales</UI>, el panel muestra vacíos los campos de la persona en vez de las mediciones de la visita. En un formulario personalizado puedes cambiar las respuestas que se dieron; una respuesta que escribas en una pregunta vacía, o un cambio de encuestador, no se guarda.
+
 <Shot src={inspector} alt="Un registro abierto en un panel lateral con el nombre de la persona arriba, campos de Identidad (nombre, apellido, apodo, fecha de nacimiento, edad, sexo), de Contacto (teléfono, Cédula / ID) y de Ubicación (comunidad), y los botones Guardar y Cancelar abajo." caption="El inspector de registros. Lo que guardas aquí reemplaza el registro para todo el mundo." />
 
 {/* claim: manage-dc-edit-everyone */}
-Guardar cambia el registro mismo, así que todas las personas de tu organización, y cada exportación posterior, ven la versión corregida. Si cierras el panel con cambios sin guardar, Manage pregunta <UI>¿Descartar los cambios sin guardar?</UI> Si no se puede guardar, dice <UI>No se pudo guardar. Inténtalo de nuevo.</UI>
+Guardar cambia el registro mismo, así que todas las personas de tu organización, y cada exportación posterior, ven la versión corregida. Si cierras el panel con ✕ o haciendo clic fuera de él con cambios sin guardar, Manage pregunta <UI>¿Descartar los cambios sin guardar?</UI> <UI>Cancelar</UI> lo cierra sin preguntar y pierde los cambios. Si no se puede guardar, dice <UI>No se pudo guardar. Inténtalo de nuevo.</UI>
 
 ## Resolver duplicados
 
 {/* claim: manage-dc-duplicates */}
-Un registro marcado <UI>Dup</UI> comparte hogar y día con otro registro. Pulsa la señal para comparar los dos lado a lado, como <UI>Registro A</UI> y <UI>Registro B</UI>; los campos que difieren se marcan.
+Un registro marcado <UI>Dup</UI> tiene el mismo ID del hogar que otro registro de esta página, y los dos llegaron a Puente el mismo día. No se comparan los nombres, así que la señal no prueba que sea un duplicado. Pulsa la señal para comparar los dos lado a lado, como <UI>Registro A</UI> y <UI>Registro B</UI>; los campos que difieren se marcan.
 
 - <UI>Conservar A, descartar B</UI> (o al revés) elimina el otro registro.
-- <UI>Ambos son únicos: descartar</UI> conserva los dos y cierra la comparación.
+- <UI>Ambos son únicos: descartar</UI> conserva los dos y cierra la comparación. No se recuerda: la señal vuelve a aparecer.
 
 <Aside type="caution" title="Eliminar un duplicado es permanente">
-Manage pregunta <UI>¿Eliminar este registro de forma permanente? No se puede deshacer.</UI> Al pulsar <UI>Eliminar registro</UI> se borra para siempre. Antes, abre los dos registros y revisa nombres, fechas y hogar.
+Manage pregunta <UI>¿Eliminar este registro de forma permanente? No se puede deshacer.</UI> Al pulsar <UI>Eliminar registro</UI> se borra para siempre. En Registros de personas, las visitas y respuestas de formularios personalizados de la persona eliminada no pasan al registro que conservaste: quedan vinculadas a una persona que ya no existe. Antes, abre los dos registros y revisa nombres, fechas de nacimiento y hogar.
 </Aside>
 
 ## Unir las formas de escribir una comunidad
 
 {/* claim: manage-dc-audit */}
-La pestaña <UI>Auditoría de comunidades</UI> agrupa los nombres de comunidad que se diferencian en dos letras o menos, como «El Río» y «El Rio». En cada grupo:
+La pestaña <UI>Auditoría de comunidades</UI> agrupa los nombres de comunidad que se diferencian en dos letras o menos, como «El Río» y «El Rio». Revisa una muestra de hasta 1.000 registros de cada tipo. En cada grupo:
 
 1. Elige la forma de escribirlo que quieres conservar.
 2. Pulsa <UI>Aplicar</UI>.
 3. Confirma con <UI>Cambiar nombre</UI>.
 
-Cada registro de personas, Salud ambiental, Evaluación médica y Signos vitales que tenga las otras formas recibe el nombre elegido. Manage avisa que esto <UI>No se puede deshacer</UI>: después no hay forma de saber qué registro tenía qué nombre.
+Los registros con las otras formas reciben el nombre elegido. Manage avisa que esto <UI>No se puede deshacer</UI>: después no hay forma de saber qué registro tenía qué nombre. Si la conexión se cae a mitad de camino, algunos registros pueden quedarse con el nombre viejo sin que aparezca ningún error: vuelve a abrir la pestaña y revisa que el grupo ya no esté.
 
 <Shot src={audit} alt="La pestaña Auditoría de comunidades con un grupo de dos opciones, El Río seleccionado y El Rio, y un botón Aplicar." caption="Dos formas de escribir un mismo lugar. Elige la que se queda y pulsa Aplicar." />
 
-Si no hay nada que unir, la pestaña dice <UI>No se detectaron nombres de comunidad similares.</UI>
+Si no hay nada que unir, la pestaña dice <UI>No se detectaron nombres de comunidad similares.</UI> También lo dice mientras todavía está cargando.
 
 ## Preguntas frecuentes
 
@@ -101,5 +105,6 @@ Las cifras describen la página actual, de hasta 50 registros.
 **Agrupó dos comunidades que son distintas. ¿Qué hago?**
 Déjalas así. Nada cambia hasta que pulsas Aplicar.
 
-**¿Puedo deshacer un cambio de nombre o un duplicado eliminado?**
-No. Los dos son permanentes.
+{/* claim: manage-dc-edit-everyone */}
+**¿Puedo deshacer un cambio?**
+No. Las ediciones guardadas, los duplicados eliminados y los cambios de nombre son todos permanentes.

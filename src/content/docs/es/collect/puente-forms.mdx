@@ -65,7 +65,7 @@ Ningún campo es obligatorio.
 ## Partes vitales
 
 {/* claim: collect-vitals-fields */}
-Medidas, cada una con su unidad al lado del cuadro: estatura (pulgadas), peso (libras), índice de masa corporal, temperatura (°Celsius), pulso, frecuencia respiratoria, presión arterial (sistólica sobre diastólica), <UI>Saturacion de oxígeno en la sangre</UI>, <UI>Nivel de azucar</UI>, <UI>Niveles de hemoglobina</UI>, <UI>Hemoglobina de A1c</UI> y <UI>Nivel de dolor</UI>. Ningún campo es obligatorio: anota lo que mediste y deja el resto en blanco.
+Medidas: estatura (pulgadas), peso (libras), índice de masa corporal, temperatura (°Celsius), pulso, frecuencia respiratoria, presión arterial (sistólica sobre diastólica), <UI>Saturacion de oxígeno en la sangre</UI>, <UI>Nivel de azucar</UI>, <UI>Niveles de hemoglobina</UI>, <UI>Hemoglobina de A1c</UI> y <UI>Nivel de dolor</UI>. Ningún campo es obligatorio: anota lo que mediste y deja el resto en blanco.
 
 <div class="shots">
 <Shot phone src={vitals} alt="El formulario de Partes vitales: el cuadro Buscar por nombre o ID arriba, y luego estatura en pulgadas, peso en libras, índice de masa corporal, temperatura en grados Celsius, pulso y frecuencia respiratoria." caption="Partes vitales abre con el cuadro para buscar al residente encima de la primera pregunta." />
@@ -78,7 +78,7 @@ La estatura va en pulgadas y el peso en libras. Si mediste en centímetros o kil
 ## Agregar el formulario a un residente
 
 {/* claim: collect-attach-resident */}
-Salud Ambiental, Evaluación Médica y Partes vitales pertenecen a una persona. Cada uno abre con un cuadro <UI>Buscar por nombre o ID</UI> encima de las preguntas. Busca a la persona, toca su tarjeta y llena el formulario.
+Salud Ambiental, Evaluación Médica y Partes vitales pertenecen a una persona. Cada uno abre con un cuadro <UI>Buscar por nombre o ID</UI> encima de las preguntas. Busca a la persona, toca su nombre en la lista y llena el formulario.
 
 Hasta que eliges a alguien, el botón de abajo dice <UI>Adjuntar una residente de la comunidad</UI> y no hace nada. Cuando hay un residente agregado, cambia a <UI>Guardar Registro</UI>.
 
@@ -89,23 +89,23 @@ Hasta que eliges a alguien, el botón de abajo dice <UI>Adjuntar una residente d
 Hay caminos más rápidos que se saltan la búsqueda:
 
 {/* claim: collect-suggested-next */}
-- **Justo después de una identificación.** La pantalla <UI>Formularios siguientes sugeridos</UI> muestra tus favoritos; toca uno y se abre para la persona que acabas de registrar.
+- **Justo después de una identificación.** La pantalla <UI>Formularios siguientes sugeridos</UI> muestra tus favoritos; toca uno y se abre para la persona que acabas de registrar. Una identificación fijada empieza una persona nueva.
 
 <Aside type="caution" title="Los formularios siguientes sugeridos no vuelven a preguntar">
-Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: usa el consentimiento que acabas de registrar para esa persona. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
+Un formulario que abres desde <UI>Formularios siguientes sugeridos</UI>, justo después de una identificación, no muestra la pantalla de consentimiento: la persona que acabas de registrar ya lo dio hace un momento, al empezar la identificación. Si cambias a otra persona en ese formulario, vuelve a la carpeta y abre el formulario desde ahí, para que la nueva persona tenga su propia pantalla de consentimiento.
 </Aside>
 - **Desde el registro de la persona.** Ábrela con la lupa y empieza el formulario desde ahí. Mira [Buscar registros](/docs/es/collect/find-records/).
 
 ## Al guardar
 
 {/* claim: collect-supp-saved */}
-El mensaje te dice adónde fue el formulario: <UI>Formulario entregado satisfactoriamente</UI> quiere decir que llegó a Puente; <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> quiere decir que espera en el teléfono. Envía los que esperan desde la nube; mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
+<UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> quiere decir que el formulario espera en el teléfono. <UI>Formulario entregado satisfactoriamente</UI> casi siempre quiere decir que llegó a Puente, pero un formulario guardado sin señal para alguien que ya está en Puente también lo muestra, así que mira en la nube si hay algo esperando. <UI>¡ERROR!</UI> quiere decir que el formulario no se guardó. Envía los que esperan desde la nube; mira [Sin conexión y sincronización](/docs/es/collect/offline-sync/).
 
 ## Preguntas frecuentes
 
 {/* claim: collect-attach-resident */}
 **¿Por qué no puedo guardar Partes vitales?**
-No hay residente agregado. Busca a la persona arriba del formulario y toca su tarjeta.
+No hay residente agregado. Busca a la persona arriba del formulario y toca su nombre en la lista.
 
 {/* claim: collect-builtin-fixed */}
 **¿Puedo cambiar las preguntas de estos formularios?**

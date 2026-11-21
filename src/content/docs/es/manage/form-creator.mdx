@@ -35,7 +35,7 @@ Pulsa <UI>Crear</UI> en el menú de la izquierda, o <UI>+ Crear formulario</UI> 
 Collect solo muestra en Formularios personalizados los formularios de tipo <UI>Personalizado</UI>. Los de tipo <UI>Bienes</UI> van a las pantallas de bienes de Collect.
 
 {/* claim: manage-fc-research */}
-<UI>Permitir exportación para investigación</UI> empieza sin marcar. Márcala solo si las respuestas de este formulario pueden salir de Puente como un archivo sin datos que identifiquen a las personas, para un socio de investigación con aprobación ética. Agrega al formulario el botón <UI>Exportar archivo de investigación</UI>, y las preguntas de ubicación quedan fuera de ese archivo. Mira [Exportaciones para investigación](/docs/es/data/research-exports/).
+En un formulario nuevo, <UI>Permitir exportación para investigación</UI> empieza sin marcar; un formulario que abres con Editar o Duplicar conserva su propio ajuste. Márcala solo si las respuestas de este formulario pueden salir de Puente como un archivo sin datos que identifiquen a las personas, para un socio de investigación con aprobación ética. Agrega al formulario el botón <UI>Exportar archivo de investigación</UI>, y las preguntas de ubicación quedan fuera de ese archivo. Mira [Exportaciones para investigación](/docs/es/data/research-exports/).
 
 ## Los siete bloques
 
@@ -72,13 +72,21 @@ Usa el bloque numérico para todo lo que vayas a contar o sumar. En el teléfono
 {/* claim: manage-fc-inspector */}
 Haz clic en un bloque para abrirlo en el <UI>Inspector</UI>: su <UI>Etiqueta</UI>, su <UI>Clave Formik</UI> (el nombre interno, que no se puede editar) y los interruptores <UI>Obligatorio</UI>, <UI>Permitir otro</UI> y <UI>Selección múltiple</UI>.
 
+{/* claim: manage-fc-switches-ignored */}
+Collect no toma en cuenta esos tres interruptores ni la casilla <UI>La respuesta es obligatoria</UI> de cada bloque. En el teléfono ninguna pregunta de un formulario personalizado es obligatoria, y solo el bloque <UI>Pregunta: selección múltiple</UI> deja elegir varias opciones.
+
 ## Vista previa y publicación
 
 {/* claim: manage-fc-preview */}
 <UI>Vista previa del formulario</UI> abre un panel que muestra el formulario como lo dibuja el teléfono. <UI>Cerrar</UI> vuelve al constructor.
 
 {/* claim: manage-fc-publish */}
-Pulsa <UI>Publicar</UI>. Si sale bien, aparece <UI>¡Listo!</UI> por unos segundos y el constructor se vacía para el siguiente formulario.
+Pulsa <UI>Publicar</UI>. Si sale bien, aparece <UI>¡Listo!</UI> por unos segundos y el constructor se vacía.
+
+{/* claim: manage-fc-stale */}
+<Aside type="caution" title="Recarga antes del siguiente formulario">
+Aunque se vacía, el constructor sigue recordando el último formulario. Recarga la página antes de armar otro: si no, el siguiente formulario se guarda sin tipo y los teléfonos nunca lo muestran, y después de Editar ni siquiera se guarda. Hasta que recargues, <UI>Crear</UI> también vuelve a abrir el último formulario que editaste o duplicaste.
+</Aside>
 
 {/* claim: manage-fc-reaches-phone */}
 Los teléfonos reciben el formulario cuando la persona actualiza Formularios personalizados en Collect, con conexión — iniciar sesión no basta para traerlo.
@@ -89,17 +97,22 @@ Si la publicación falla, Manage no muestra ningún error: el constructor simple
 </Aside>
 
 {/* claim: manage-fc-reset */}
-<UI>Restablecer el formulario</UI> vacía todo el constructor de una vez, sin preguntar. Lo que no publicaste se pierde.
+<UI>Restablecer el formulario</UI> vacía todo el constructor de una vez, sin preguntar. Lo que no publicaste se pierde. Igual que después de publicar, recarga la página antes de armar el siguiente formulario.
 
 ## Cambiar un formulario publicado
 
 {/* claim: manage-fc-edit */}
-En el Gestor de formularios, pulsa <UI>Editar</UI> en el formulario. Se abre aquí con sus ajustes y bloques; <UI>Publicar</UI> guarda los cambios en el mismo formulario.
+En el Gestor de formularios, pulsa <UI>Editar</UI> en el formulario. Se abre aquí con sus ajustes y bloques; <UI>Publicar</UI> guarda los cambios en el mismo formulario. Desde ese momento el formulario pertenece solo a tu organización y sale de cualquier grupo en el que aparecía en el Gestor de formularios.
 
 <Shot src={edit} alt="El Creador de formularios con Water access — Example Community cargado: nombre y descripción llenos, la exportación para investigación sin marcar y un bloque de selección única sobre la fuente de agua con las opciones tap y well." caption="Un formulario existente abierto para editar." />
 
 {/* claim: manage-fc-rename */}
 Puedes cambiar la redacción de una pregunta que ya tiene respuestas. Su nombre interno quedó fijo cuando se guardó el formulario por primera vez, así que las respuestas viejas y nuevas siguen juntas, y la exportación las pone en una sola columna con la redacción nueva. Cambiar la redacción no cambia las respuestas ya dadas: si cambias lo que la pregunta pregunta, agrega una pregunta nueva.
+
+{/* claim: manage-fc-new-question-key */}
+<Aside type="caution" title="Agregar una pregunta a un formulario guardado o copiado">
+En un formulario que abriste con Editar o Duplicar, el nombre interno de una pregunta nueva queda fijo con el primer carácter que escribes. Dos preguntas nuevas que empiezan con la misma letra terminan con el mismo nombre interno, y sus respuestas se pisan. Escribe la pregunta en otro lugar y pega el texto completo en el bloque nuevo de una sola vez. Si ya la escribiste letra por letra, borra el bloque con el zafacón, arrastra uno nuevo y pega el texto.
+</Aside>
 
 ## Tu pregunta es el encabezado de la columna
 
@@ -107,7 +120,7 @@ Puedes cambiar la redacción de una pregunta que ya tiene respuestas. Su nombre 
 En la exportación, cada pregunta es una columna, con el texto de la pregunta como encabezado. Escribe preguntas lo bastante cortas para leerse como encabezado, y nunca le pongas el mismo texto a dos preguntas.
 
 {/* claim: manage-fc-accents */}
-Los encabezados pierden los acentos y los signos de apertura ¿ y ¡: `¿Cuántos niños?` llega como `Cuantos ninos?`. Escribe en buen español de todos modos: los encuestadores leen la pregunta en el teléfono, con sus acentos.
+La exportación de un formulario personalizado pierde los acentos, la ñ y los signos de apertura ¿ y ¡, en los encabezados y en cada respuesta, nombres incluidos: `¿Cuántos niños?` llega como `Cuantos ninos?`. Escribe en buen español de todos modos: los encuestadores leen la pregunta en el teléfono, con sus acentos.
 
 ## Lo que el constructor no ofrece
 
@@ -118,6 +131,9 @@ Collect puede mostrar más tipos de pregunta que estos siete: fotos, vínculos a
 
 **Publiqué y el formulario no está en el teléfono.**
 Actualiza Formularios personalizados en Collect. Si sigue sin aparecer, revisa el Gestor de formularios: si no está en la lista, la publicación falló.
+
+{/* claim: manage-fc-fix-type */}
+Si está en la lista pero no en el teléfono, su tipo no es Personalizado. Ábrelo con <UI>Editar</UI>, cambia <UI>Tipo de formulario</UI> a <UI>Bienes</UI> y otra vez a <UI>Personalizado</UI>, y publícalo de nuevo.
 
 **¿Puedo editar los formularios de Puente?**
 No. En el Gestor de formularios, solo los formularios personalizados tienen Editar.

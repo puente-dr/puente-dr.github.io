@@ -21,7 +21,7 @@
    ]
   },
   "search-fields": {
-   "claim": "Search reads first name, last name, nickname, cédula and household ID.",
+   "claim": "Online search reads first name, last name, nickname, cédula and household ID.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
@@ -36,7 +36,7 @@
    ]
   },
   "search-prefix": {
-   "claim": "Each field is matched from its start, case-insensitively.",
+   "claim": "Online, each field is matched from its start, case-insensitively.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
@@ -51,17 +51,27 @@
    ]
   },
   "record-history": {
-   "claim": "A resident page has View Record History.",
+   "claim": "A resident page has View Record History; it queries the server, and offline shows only the identification record.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"viewRecordHistory\": \"View Record History\"",
      "line": 474
+    },
+    {
+     "file": "puente-reactnative-collect/domains/FindRecords/ResidentRecordHistoryScreen.js",
+     "quote": "records: [resident],",
+     "line": 105
+    },
+    {
+     "file": "puente-reactnative-collect/domains/FindRecords/ResidentRecordHistoryScreen.js",
+     "quote": "if (!connected) {",
+     "line": 109
     }
    ]
   },
   "search-offline": {
-   "claim": "Offline, search uses the stored residents; opening Find Records online refreshes the store; queued residents are searched too.",
+   "claim": "Offline, search uses the stored residents plus queued ones, reads only first name, last name, nickname and full name, by substring. The store is filled by the empty-query fetch when Find Records first gets the organization (once per app start) with a connection.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
@@ -77,11 +87,26 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
      "quote": "await getData(\"offlineIDForms\").then((offlineResidentData) => {",
      "line": 106
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "const filterOfflineList = () =>",
+     "line": 147
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "`${fname} ${lname}`.toLowerCase().includes(query.toLowerCase()) ||",
+     "line": 155
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "if (!organization) return;",
+     "line": 66
     }
    ]
   },
   "storage-limit": {
-   "claim": "Settings > Find Records has Record storage limit, default 2000.",
+   "claim": "Settings > Find Records has Record storage limit, default 2000; the query is org-wide (all aliases), newest updated first; saving the limit does not refetch; Offline Records has Download records for offline use.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/settings/index.js",
@@ -92,6 +117,86 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"recordStorageLimit\": \"Record storage limit\",",
      "line": 571
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "query.descending(\"updatedAt\");",
+     "line": 95
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "query.containedIn(\"surveyingOrganization\", organizationValues);",
+     "line": 97
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Settings/SettingsHome/AccountSettings/FindRecords/index.js",
+     "quote": "await setFindRecordsLimit(newLimit);",
+     "line": 98
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"populateIdForms\": \"Download records for offline use\",",
+     "line": 546
+    }
+   ]
+  },
+  "find-cedula": {
+   "claim": "Cédula is searched online only; Collect's Resident ID form has no cédula field (the only form fields are in IdentificationForm config, none is cedulaNumber).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "\"cedulaNumber\",",
+     "line": 50
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "nickname.toLowerCase().includes(query.toLowerCase())",
+     "line": 156
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/config/config.js",
+     "quote": "formikKey: \"age\",",
+     "line": 52
+    }
+   ]
+  },
+  "find-resident-forms": {
+   "claim": "The resident page offers the Puente forms with the resident passed through; Resident ID opens a blank new registration (IdentificationForm takes no surveyee).",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/Resident/ResidentPage/index.js",
+     "quote": "surveyee={selectPerson}",
+     "line": 98
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/formsConfig.js",
+     "quote": "name: \"puenteForms.ResidentID\",",
+     "line": 2
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{consent === true && selectedForm === \"id\" && (",
+     "line": 82
+    }
+   ]
+  },
+  "find-dedupe": {
+   "claim": "Search results drop residents that repeat fname, lname, sex, marriageStatus and educationLevel.",
+   "evidence": [
+    {
+     "file": "puente-reactnative-collect/modules/resident-fields/index.js",
+     "quote": "const RESIDENT_DEDUPE_FIELDS = Object.freeze([",
+     "line": 88
+    },
+    {
+     "file": "puente-reactnative-collect/modules/resident-fields/index.js",
+     "quote": "\"marriageStatus\",",
+     "line": 68
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
+     "quote": "const deDuplicatedRecords = dedupeResidents(records);",
+     "line": 101
     }
    ]
   }

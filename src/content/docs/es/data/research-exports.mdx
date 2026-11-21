@@ -35,7 +35,7 @@ Abre la fila con la flecha y Manage repite esto en palabras sencillas debajo de 
 ## Activar el archivo de investigación
 
 {/* claim: data-research-allow */}
-El archivo de investigación es un ajuste de cada formulario personalizado. En <UI>Crear</UI>, abre el formulario, marca <UI>Permitir exportación para investigación</UI> debajo de la descripción y luego pulsa <UI>Publicar</UI>. Está apagado hasta que alguien lo marca, y no está disponible para los cuatro formularios de Puente.
+El archivo de investigación es un ajuste de cada formulario personalizado. En <UI>Crear</UI>, abre el formulario, marca <UI>Permitir exportación para investigación</UI> debajo de la descripción y luego pulsa <UI>Publicar</UI>. Un formulario nuevo empieza con el ajuste apagado, uno duplicado conserva el ajuste del original, y no está disponible para los cuatro formularios de Puente.
 
 <Shot src={allow} alt="La tarjeta de ajustes del Creador de formularios con los campos de tipo, nombre y descripción del formulario, y la casilla Permitir exportación para investigación marcada con una explicación debajo." caption="Una casilla por formulario. La nota de abajo dice que las preguntas de ubicación del formulario no entran en el archivo de investigación." />
 
@@ -48,9 +48,9 @@ Una fila por cada vez que se llenó el formulario. Primero vienen estas columnas
 
 | Columna | Significa |
 |---|---|
-| `study_id` | Un código para el paciente. La misma persona tiene el mismo código en cada fila y en cada descarga. |
+| `study_id` | Un código para el paciente. El mismo registro de persona tiene el mismo código en cada fila y en cada descarga. |
 | `submission_id` | Un código para esta visita. |
-| `visit_date` | El día en que el formulario llegó a Puente. |
+| `visit_date` | La fecha en que el formulario llegó a Puente, en hora UTC. |
 | `age_at_visit` | La edad en años cumplidos en la fecha de la visita, calculada desde la fecha de nacimiento. |
 | `age_as_reported` | Una edad escrita en el registro de la persona, por ejemplo cuando no se sabía la fecha de nacimiento. |
 | `age_reported_date` | El día en que se creó el registro de la persona — la fecha a la que se refiere esa edad escrita. |
@@ -85,7 +85,7 @@ Cada pregunta del formulario se vuelve una columna, menos las de ubicación. Si 
 {/* claim: data-research-study-id */}
 Un ID de estudio se ve así: `P-3fa9c01b2e`. Se hace a partir del registro de la persona con una clave secreta que solo tiene Puente, así que:
 
-- **Es estable.** Un paciente atendido en dos clínicas tiene el mismo código las dos veces, y los investigadores pueden seguirlo.
+- **Es estable.** El registro de un paciente tiene el mismo código en cada visita, así que los investigadores pueden seguirlo. Alguien registrado dos veces tiene dos registros, y por eso dos códigos.
 - **Solo Puente puede revertirlo.** Si un investigador pregunta por `P-3fa9c01b2e`, envía el código a info@puente-dr.org y Puente puede encontrar a ese paciente. El investigador no.
 
 {/* claim: data-research-audit */}

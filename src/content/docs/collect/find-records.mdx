@@ -23,13 +23,13 @@ Most people you visit are already in Puente, surveyed on an earlier round by you
 Tap the magnifying glass, the first icon in the bar at the bottom of the screen. The screen is headed <UI>Search Individual</UI>, with a search box that reads <UI>Search by name or ID</UI>.
 
 <div class="shots">
-<Shot phone src={byName} alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it." caption="A surname finds everyone who shares it. Each card shows the nickname in quotes, plus city, community, sex and education." />
+<Shot phone src={byName} alt="The Search Individual screen with Ejemplo typed in the box and two matching resident cards listed below it." caption="A surname finds the people who share it. Each card shows the nickname in quotes, plus city, community, sex and education." />
 </div>
 
 ## What the search reads
 
 {/* claim: search-fields */}
-The box looks at five things about each resident:
+With a connection, the box looks at five things about each resident:
 
 - First name
 - Last name
@@ -42,7 +42,7 @@ Capital letters do not matter: `paciente`, `Paciente` and `PACIENTE` find the sa
 ## Search one name at a time
 
 {/* claim: search-prefix */}
-The search matches **the beginning of one field**. It finds a first name, or a last name, or a nickname — it does not search across two fields at once, and it does not look inside a word. For a resident recorded as **Paciente Ejemplo**:
+With a connection, the search matches **the beginning of one field**. It finds a first name, or a last name, or a nickname — it does not search across two fields at once, and it does not look inside a word. For a resident recorded as **Paciente Ejemplo**:
 
 | You type | Result |
 |---|---|
@@ -57,7 +57,8 @@ It is far more often a full name typed into a box that reads one field at a time
 
 ## Search by cédula
 
-If the person has their cédula with them, it is the surest way to find them: names get spelled several ways, an ID does not. Type just the first few digits.
+{/* claim: find-cedula */}
+A cédula search finds only people whose record already holds a cédula number — the Resident ID form in Collect does not ask for one — and it needs a connection. Type just the first few digits.
 
 <div class="shots">
 <Shot phone src={byId} alt="The search box containing 00167 and a single resident card below it for Paciente Ejemplo, nickname Fulano, in Constanza." caption="The first five digits of a cédula are usually enough to land on one person." />
@@ -65,10 +66,11 @@ If the person has their cédula with them, it is the surest way to find them: na
 
 ## Open a resident and their history
 
-Tap a card to open the person. A form you start from here attaches to the record they already have.
+{/* claim: find-resident-forms */}
+Tap a card to open the person. Environmental Health, Medical Evaluation or Vitals started from here attaches to the record they already have. Resident ID started from here registers a new person, so do not use it for someone you found.
 
 {/* claim: record-history */}
-<UI>View Record History</UI> lists everything already collected about them, and when. Check it before you add anything: it is how you know you have the right person and not a namesake.
+<UI>View Record History</UI> lists what has reached Puente about them, and when. With no signal it shows only their Resident ID. Check it before you add anything: it is how you know you have the right person and not a namesake.
 
 <div class="shots">
 <Shot phone src={resident} alt="A resident's page showing their name, demographic details and a View Record History button." caption="The resident's page. Check the details against the person in front of you." />
@@ -78,9 +80,9 @@ Tap a card to open the person. A form you start from here attaches to the record
 ## Search with no signal
 
 {/* claim: search-offline */}
-Search works without a connection, but only over the residents already saved on the phone. When you are offline the screen says <UI>You're offline. Showing saved records.</UI>
+Search works without a connection, but only over the residents already saved on the phone, and it reads only first name, last name and nickname — not cédula or household ID. Offline it also matches part of a name, or a full name. When you are offline the screen says <UI>You're offline. Showing saved records.</UI>
 
-The phone fills that store when you open Find Records with a connection — so **open Find Records once while you still have signal**, before you head out. Offline, the search also finds people still waiting in your sync queue, so someone you surveyed an hour ago still turns up.
+The phone fills that store the first time you open Find Records with a connection after starting the app — so **start the app and open Find Records while you still have signal**, before you head out. Offline, the search also finds people still waiting in your sync queue, so someone you surveyed an hour ago still turns up.
 
 ## Set how many residents the phone keeps
 
@@ -91,7 +93,7 @@ Under the gear, open <UI>Find Records</UI>. <UI>Record storage limit</UI> is the
 <Shot phone src={storage} alt="A settings screen headed Find Records, showing Current records stored 210 and Record storage limit 2000 with an Edit link." caption="Current records stored is how many people you can search offline right now." />
 </div>
 
-If a community has more residents than the limit, raise it before you travel. A bigger store takes longer to download and uses more space, so raise it to fit the community rather than as high as it will go.
+The limit counts residents across your whole organization, most recently updated first — not one community. If your organization has more residents than the limit, raise it before you travel, then fill the store again with a connection: under the gear, <UI>Offline Records</UI> → <UI>Download records for offline use</UI>. A bigger store takes longer to download and uses more space, so do not raise it higher than you need.
 
 ## If you register someone twice
 
@@ -100,10 +102,11 @@ Nothing breaks, and the app does not warn you — which is why it matters. The p
 ## FAQ
 
 **I typed the full name and nothing came up. Is the person new?**
-Probably not. Search the surname alone, then the first name, then the nickname, then the start of the cédula.
+Probably not. Search the surname alone, then the first name, then the nickname.
 
 **Can I search while offline?**
-Yes, over the residents saved on this phone. Open Find Records once with a connection before you go.
+Yes, over the residents saved on this phone. Start the app and open Find Records with a connection before you go.
 
+{/* claim: find-dedupe */}
 **Search found two people with the same name. Which is it?**
-Compare the nickname, community and sex on the cards, then open each one's record history.
+Compare the nickname, community and sex on the cards, then open each one's record history. Records with the same first and last name, sex, marital status and education show as a single card, so one card can hide a second record.

@@ -46,9 +46,9 @@ Un formulario cuyo registro de persona falta también se exporta. Llega con las 
 ## Las personas idénticas se juntan en una fila
 
 {/* claim: data-dedupe */}
-La exportación de `SurveyData` quita las filas idénticas entre sí. Si dos Identificaciones de residente coinciden en todos los datos — nombre, apodo, sexo, fecha de nacimiento, teléfono, educación, ocupación, comunidad, ciudad, provincia, cédula, encuestador, organización, coordenadas y foto — salen como **una sola** fila.
+La exportación de `SurveyData` quita las filas idénticas entre sí. Si dos Identificaciones de residente coinciden en los datos que se comparan — nombre, apodo, sexo, fecha de nacimiento, teléfono, educación, ocupación, comunidad, ciudad, provincia, cédula, encuestador, organización, coordenadas, foto y edad, entre otros — salen como **una sola** fila. Los datos del seguro no se comparan, así que dos registros que solo difieren en el seguro también salen como una sola fila.
 
-Eso esconde los duplicados exactos, como un formulario enviado dos veces. También significa que el número de filas del archivo de personas no siempre es el número de registros en Puente: los dos duplicados siguen siendo dos personas en la app, cada una con su historial. Las personas que difieren en cualquier dato quedan como dos filas.
+Eso esconde los duplicados exactos, como un formulario enviado dos veces. También significa que el número de filas del archivo de personas no siempre es el número de registros en Puente: los dos duplicados siguen siendo dos personas en la app, cada una con su historial. Las personas que difieren en cualquiera de los datos comparados quedan como dos filas.
 
 {/* claim: data-clean-duplicates */}
 Para corregir duplicados en el origen, usa <UI>Limpiar</UI> en Manage, que muestra cuántos duplicados encontró. Mira [Curación de datos](/docs/es/manage/data-curation/).
@@ -58,9 +58,9 @@ Para corregir duplicados en el origen, usa <UI>Limpiar</UI> en Manage, que muest
 ## La edad es una resta
 
 {/* claim: data-age-subtraction */}
-La columna `age` del archivo de personas es **este año menos el año de nacimiento**, nada más. Quien cumple años más adelante en el año aparece con un año de más. Para contar una comunidad por rangos de edad suele estar bien. Cuando un solo año importa — un corte pediátrico, una regla de elegibilidad — calcula la edad tú desde `dob`.
+Cuando no se escribió una edad en el registro, la columna `age` del archivo de personas es **este año menos el año de nacimiento**, nada más. Quien cumple años más adelante en el año aparece con un año de más. Para contar una comunidad por rangos de edad suele estar bien. Cuando un solo año importa — un corte pediátrico, una regla de elegibilidad — calcula la edad tú desde `dob`.
 
-Si el encuestador escribió una edad porque no se sabía la fecha de nacimiento, se conserva ese número. Si una fecha de nacimiento no se puede leer, `age` queda en blanco en vez de adivinarse.
+Si el encuestador escribió una edad, ese número se conserva tal como se escribió —aunque haya fecha de nacimiento— y no aumenta con los años. Si una fecha de nacimiento no se puede leer, `age` queda en blanco en vez de adivinarse.
 
 ## Acentos en los archivos de formularios personalizados
 

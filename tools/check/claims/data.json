@@ -186,7 +186,7 @@
    ]
   },
   "data-dedupe": {
-   "claim": "The people export drops rows identical in every human field.",
+   "claim": "The people export drops rows that match on the DEDUPE_COLUMNS list (which includes age and leaves out insurance number and provider).",
    "evidence": [
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
@@ -195,13 +195,23 @@
     },
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
-     "quote": "'cedulaNumber', 'surveyingUser', 'surveyingOrganization', 'latitude',",
-     "line": 16
+     "quote": "DEDUPE_COLUMNS = [",
+     "line": 20
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
+     "quote": "'subcounty', 'city', 'province', 'region', 'country', 'clinicProvider',",
+     "line": 23
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/mainV3.py",
+     "quote": "'longitude', 'picture.url', 'age',",
+     "line": 25
     }
    ]
   },
   "data-age-subtraction": {
-   "claim": "People-export age is this year minus birth year; a typed age is kept; unreadable dates give blank.",
+   "claim": "People-export age: a typed age is returned as typed (checked before the birth date); otherwise this year minus birth year; unreadable dates give blank.",
    "evidence": [
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/_utils/script.py",
@@ -321,7 +331,7 @@
    ]
   },
   "data-research-allow": {
-   "claim": "Allow research export is a per-form setting on custom forms in the Form Creator.",
+   "claim": "Allow research export is a per-form setting on custom forms in the Form Creator. A new form starts unticked; a duplicated form inherits the original's setting.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -337,6 +347,16 @@
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/resources.py",
      "quote": "return {'message': 'Research export is not turned on for this form.'}, 403",
      "line": 168
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "const [allowResearchExport, setAllowResearchExport] = useState(false);",
+     "line": 70
+    },
+    {
+     "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
+     "quote": "setAllowResearchExport(allowed === true);",
+     "line": 105
     }
    ]
   },
@@ -351,7 +371,7 @@
    ]
   },
   "data-research-columns": {
-   "claim": "Research file columns: allow-listed columns, then the question columns; location questions excluded.",
+   "claim": "Research file columns: allow-listed columns, then the question columns; location questions excluded. visit_date is the UTC date of the submission's createdAt.",
    "evidence": [
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
@@ -377,6 +397,11 @@
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
      "quote": "visit = flat['createdAt_x'].map(_visit_date)",
      "line": 107
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
+     "quote": "return datetime.strptime(str(created_at)[:10], '%Y-%m-%d').date()",
+     "line": 66
     }
    ]
   },
@@ -416,7 +441,7 @@
    ]
   },
   "data-research-study-id": {
-   "claim": "Study IDs are keyed hashes Puente can recompute; researchers cannot reverse them.",
+   "claim": "Study IDs are keyed hashes of the person record's objectId: stable per record (two records for one person give two codes); Puente can recompute them; researchers cannot reverse them.",
    "evidence": [
     {
      "file": "puente-flask-rest-aggregator/api/data_aggregation_v2/dicts/research.py",
