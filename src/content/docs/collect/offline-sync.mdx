@@ -36,14 +36,15 @@ Despite what the banner says, Collect does not send waiting forms by itself when
 ## Save a form with no signal
 
 {/* claim: collect-save-messages */}
-Fill in and save the form exactly as you would online. The message after saving tells you where it went:
+Fill in and save the form exactly as you would online. Then read the message after saving:
 
 | Message | Meaning |
 |---|---|
-| <UI>Form successfully submitted</UI> | It reached Puente. Done. |
 | <UI>Saved offline — will sync when you reconnect</UI> | It is on the phone only, waiting for you to send it. |
+| <UI>Form successfully submitted</UI> | Usually it reached Puente — but a form saved with no signal for someone already in Puente shows this too. |
+| <UI>ERROR!</UI> | The form was not saved. Fill it in and save it again. |
 
-The two look alike when you are in a hurry. Only the first one is finished.
+So do not rely on the message alone: open the cloud and check whether anything is waiting there.
 
 ## See what is waiting
 
@@ -67,7 +68,7 @@ Send from a connection you trust and stay on it until the count reaches zero.
 ## When only some forms go
 
 {/* claim: collect-partial-sync */}
-If some forms reach Puente and others do not, Collect removes the ones that arrived and keeps the rest waiting. The count goes **down but not to zero**. Tapping <UI>Retry</UI> again sends only what is still waiting, so nothing that arrived is sent twice. If the count stops above zero, find a better connection and tap <UI>Retry</UI> again.
+If some forms reach Puente and others do not, Collect removes the ones that arrived and keeps the rest waiting. The screen may not update straight away: leave it and come back to see what is still listed. Tapping <UI>Retry</UI> again sends only what is still waiting. If forms are still listed, find a better connection and tap <UI>Retry</UI> again.
 
 ## When nothing goes
 
@@ -95,7 +96,7 @@ The form exists nowhere else. No one — not Puente, not support — can bring i
 ## Households saved offline
 
 {/* claim: collect-households-not-listed */}
-A household you create offline (with <UI>Create a new household</UI> or by linking a person) is not listed in Offline Sync and cannot be discarded there. It is still sent when you tap <UI>Retry</UI>. So the screen can say <UI>No forms queued. You are all caught up!</UI> while a household is still waiting: after creating households offline, tap <UI>Retry</UI> once you have a connection anyway.
+A household you create offline (with <UI>Create a new household</UI> or by linking a person) is not listed in Offline Sync and cannot be discarded there. It is sent only together with other waiting forms, when you tap <UI>Retry</UI>. If nothing else is waiting, the screen says <UI>No forms queued. You are all caught up!</UI> and has no <UI>Retry</UI> button, while the household is still on the phone. If you created households offline, keep the phone as it is — do not clear the app's data or uninstall it — and tell your coordinator.
 
 ## Before you log out or hand over the phone
 

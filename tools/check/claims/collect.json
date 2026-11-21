@@ -111,7 +111,7 @@
    ]
   },
   "collect-signup-org": {
-   "claim": "Organization field suggests existing organizations; a clearly new name creates it with you as admin; too-close names are refused but the account is created.",
+   "claim": "Organization field suggests existing organizations; a clearly new name creates it with you as admin; too-close names are refused but the account is created, storing the typed name.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/Auth/SignUp/index.js",
@@ -132,6 +132,11 @@
      "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
      "quote": "Refused. The ACCOUNT is still created",
      "line": 119
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
+     "quote": "user.set('organization', String(organization));",
+     "line": 126
     }
    ]
   },
@@ -321,7 +326,7 @@
    ]
   },
   "collect-forms-tab": {
-   "claim": "The folder opens Collect Data with Puente Forms, Pinned Forms, Custom Forms, Workflows.",
+   "claim": "The folder opens Collect Data with Puente Forms, Pinned Forms, Custom Forms, Workflows. Pinned Forms sits just below Puente Forms.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionGalleryScreen.js",
@@ -347,6 +352,16 @@
      "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
      "quote": "<Text style={styles.header}>{I18n.t(\"formsGallery.workflows\")}</Text>",
      "line": 209
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<View key=\"puenteForms\" style={layout.screenRow}>",
+     "line": 133
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<View key=\"pinnedForms\" style={layout.screenRow}>",
+     "line": 142
     }
    ]
   },
@@ -476,7 +491,7 @@
    ]
   },
   "collect-rid-save": {
-   "claim": "Button reads Empty Form / Save Record; missing required fields listed; saved-offline vs submitted messages.",
+   "claim": "Button reads Empty Form / Save Record; missing required fields listed; the alert says saved offline, name + submitted, or ERROR!; the page behind it always shows Form successfully submitted.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
@@ -502,11 +517,26 @@
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
      "quote": "alert(`${fname} ${lname} ${I18n.t(\"forms.successfullySubmitted\")}`.trim());",
      "line": 226
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
+     "quote": "alert(I18n.t(\"submissionError.error\"));",
+     "line": 260
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{selectedForm === \"\" && (",
+     "line": 125
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{I18n.t(\"forms.successfullySubmitted\")}",
+     "line": 135
     }
    ]
   },
   "collect-suggested-next": {
-   "claim": "After Resident ID, Suggested next forms lists pinned forms; tapping keeps the same resident; forms can also start from a resident record.",
+   "claim": "After Resident ID, Suggested next forms lists pinned forms; tapping keeps the same resident; forms can also start from a resident record. A pinned Resident ID opens a new, blank registration (IdentificationForm takes no surveyee).",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
@@ -527,11 +557,16 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"suggestedForms\": \"Suggested Forms\"",
      "line": 465
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
+     "quote": "{consent === true && selectedForm === \"id\" && (",
+     "line": 82
     }
    ]
   },
   "collect-rid-location": {
-   "claim": "Location is a tapped button; 20 s timeout saves 0,0 and shows an error.",
+   "claim": "Location is a tapped button; a 20 s timeout or error sets the saved value to 0,0 (the on-screen coordinates from an earlier tap are not reset) and shows an error.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
@@ -552,6 +587,16 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
      "quote": "errorMessage=\"submissionError.geolocation\"",
      "line": 85
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "setFieldValue(\"location\", { latitude: 0, longitude: 0, altitude: 0 });",
+     "line": 35
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/Geolocation/index.js",
+     "quote": "setLocation({ latitude, longitude, altitude });",
+     "line": 41
     }
    ]
   },
@@ -606,7 +651,7 @@
    ]
   },
   "collect-household-create": {
-   "claim": "Create: tap the Household button; success message.",
+   "claim": "Create: tap the Household button; the success message shows immediately (set outside the save's promise); a failed save shows the ERROR! alert.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
@@ -617,11 +662,21 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
      "quote": "<Text>{I18n.t(\"householdManager.successCreateHousehold\")}</Text>",
      "line": 158
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "setHouseholdSet(true);",
+     "line": 119
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "alert(I18n.t(\"submissionError.error\")); //eslint-disable-line",
+     "line": 96
     }
    ]
   },
   "collect-household-link": {
-   "claim": "Link: search a person in the household, choose a relationship, submit; shows Linked.",
+   "claim": "Link: search a person, choose a relationship, submit; Linked shows before the save resolves and a failure alerts ERROR!. The link posts a new Household row whose id replaces this person's householdId; the server ignores the chosen person's household id (postObject reads only localObject).",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
@@ -642,11 +697,36 @@
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
      "quote": "label={I18n.t(\"householdManager.linked\")}",
      "line": 264
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "setModalView(\"third\");",
+     "line": 58
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "parseParentClassID: selectPerson.householdId,",
+     "line": 78
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FormikFields/PaperInputPicker/HouseholdManager/index.js",
+     "quote": "setFieldValue(formikKey, objectId);",
+     "line": 93
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/definer/crud.definer.js",
+     "quote": "Parse.Cloud.define('postObjectsToClass', async (request) => {",
+     "line": 87
+    },
+    {
+     "file": "puente-node-cloudcode/cloud/src/services/post/post.js",
+     "quote": "Object.keys(localObject).forEach((key) => surveyPoint.set(key, localObject[key]));",
+     "line": 32
     }
    ]
   },
   "collect-households-not-listed": {
-   "claim": "Offline households are not in the Offline Sync list but are posted on Retry.",
+   "claim": "Offline households are not in the Offline Sync list or count. They are posted only with the rest of the queue; with no other form waiting there is no Retry button and the upload returns early.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/offline/queue/index.js",
@@ -655,13 +735,23 @@
     },
     {
      "file": "puente-reactnative-collect/modules/offline/post/index.js",
-     "quote": "households: \"offlineHouseholds\",",
-     "line": 30
-    },
-    {
-     "file": "puente-reactnative-collect/modules/offline/post/index.js",
      "quote": "getData(\"offlineHouseholds\"),",
      "line": 128
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{offlineFormCount > 0 ? (",
+     "line": 236
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/index.js",
+     "quote": "{offlineFormCount > 0 && (",
+     "line": 137
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "if (count === 0) return;",
+     "line": 11
     }
    ]
   },
@@ -796,7 +886,7 @@
    ]
   },
   "collect-attach-resident": {
-   "claim": "Supplementary forms need an attached resident; search box above; button reads Attach a Community Resident.",
+   "claim": "Supplementary forms need an attached resident; search box above; button reads Attach a Community Resident. Search results are a list of names; tapping one selects the person.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",
@@ -812,21 +902,41 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"attachResident\": \"Attach a Community Resident\"",
      "line": 373
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/ResidentIdSearchbar/index.js",
+     "quote": "onPress={() => onSelectSurveyee(item)}",
+     "line": 145
     }
    ]
   },
   "collect-supp-saved": {
-   "claim": "Supplementary and custom forms show submitted or saved-offline messages; queued custom forms listed by title.",
+   "claim": "Supplementary and custom forms show Saved offline only when the resident is still local; a form queued offline for a synced resident shows Form successfully submitted; a failed save shows ERROR!; queued custom forms are listed by title (their saved answers carry no person name).",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
-     "quote": "alert(I18n.t(\"forms.savedOffline\"));",
-     "line": 236
+     "quote": "if (result?.isOfflineLocal === true || surveyee?.isOfflineLocal === true) {",
+     "line": 235
     },
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
-     "quote": "alert(I18n.t(\"forms.successfullySubmitted\"));",
-     "line": 205
+     "quote": "isOfflineLocal: surveyee?.isOfflineLocal || false,",
+     "line": 218
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "alert(I18n.t(\"submissionError.error\"));",
+     "line": 247
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "formSpecificationsId: customForm.objectId,",
+     "line": 226
+    },
+    {
+     "file": "puente-reactnative-collect/modules/offline/queue/index.js",
+     "quote": "`${localObject?.fname ?? \"\"} ${localObject?.lname ?? \"\"}`.trim();",
+     "line": 24
     },
     {
      "file": "puente-reactnative-collect/domains/Offline/index.js",
@@ -836,7 +946,7 @@
    ]
   },
   "collect-custom-source": {
-   "claim": "Custom forms are built in Form Creator (type Custom), published, and Collect lists the organization's Custom forms under every spelling.",
+   "claim": "Custom forms are built in Form Creator (type Custom), published, and Collect lists the organization's Custom forms under every spelling. Only active forms (active !== 'false') are kept.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",
@@ -857,6 +967,11 @@
      "file": "puente-reactnative-collect/modules/cached-resources/read.js",
      "quote": "const organizationValues = await loadOrganizationScope(surveyingOrganization);",
      "line": 107
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/read.js",
+     "quote": "if (form.active !== \"false\") {",
+     "line": 122
     }
    ]
   },
@@ -911,7 +1026,7 @@
    ]
   },
   "collect-custom-attach": {
-   "claim": "Custom forms open on consent, then the resident search; need an attached resident.",
+   "claim": "Custom forms open on consent, then the resident search; need an attached resident. Search results are a list of names; tapping one selects the person.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/screens/DataCollectionFormsScreen.js",
@@ -927,11 +1042,16 @@
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
      "quote": "disabled={!surveyee.objectId}",
      "line": 280
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/ResidentIdSearchbar/index.js",
+     "quote": "onPress={() => onSelectSurveyee(item)}",
+     "line": 145
     }
    ]
   },
   "collect-pin": {
-   "claim": "Long-press pins a form; long-press a pinned one unpins; stored on the phone.",
+   "claim": "Long-press pins a form; long-press a pinned one unpins; stored on the phone. Pinned Forms sits just below Puente Forms.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/FormsHorizontalView/index.js",
@@ -952,6 +1072,16 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"noPinnedForms\": \"No pinned forms yet — long-press any form to pin it\"",
      "line": 108
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<View key=\"puenteForms\" style={layout.screenRow}>",
+     "line": 133
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "<View key=\"pinnedForms\" style={layout.screenRow}>",
+     "line": 142
     }
    ]
   },
@@ -971,7 +1101,7 @@
    ]
   },
   "collect-workflows": {
-   "claim": "Workflows groups custom forms; Form Creator publishes no workflow, so they appear under No Workflow Assigned.",
+   "claim": "Workflows groups custom forms; Form Creator publishes no workflow, so they appear under No Workflow Assigned. Workflow groups are built when the gallery mounts; the refresh arrow re-fetches forms without regrouping.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
@@ -992,6 +1122,16 @@
      "file": "puente-react-nextjs-platform/app/epics/FormCreator/index.js",
      "quote": "formObject.workflows = newWorkflowsToAdd;",
      "line": 144
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "filterWorkflows(forms || []);",
+     "line": 59
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/FormGallery/index.js",
+     "quote": "customFormsQuery(surveyingOrganization).then((forms) => {",
+     "line": 94
     }
    ]
   },
@@ -1041,7 +1181,7 @@
    ]
   },
   "collect-consent-summary": {
-   "claim": "The summary lists what Collect stores, who may see it, no advertising use, policy date.",
+   "claim": "The summary lists what Collect stores, who may see it, no advertising use, policy date. Puente staff can also reach every organization's records.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/GdprCompliance/index.js",
@@ -1062,6 +1202,11 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "Puente does not use this app data for advertising, product personalization, or tracking.",
      "line": 391
+    },
+    {
+     "file": "puente-flask-rest-aggregator/api/auth.py",
+     "quote": "if who['isStaff']:",
+     "line": 155
     }
    ]
   },
@@ -1151,7 +1296,7 @@
    ]
   },
   "collect-save-messages": {
-   "claim": "Saved offline vs successfully submitted messages.",
+   "claim": "Resident ID shows Saved offline when queued, otherwise Form successfully submitted. Supplementary and custom forms show Saved offline only when the resident is still local, so a form queued offline for a synced resident shows Form successfully submitted. A failed save shows ERROR! and queues nothing.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
@@ -1167,6 +1312,31 @@
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/IdentificationForm/index.js",
      "quote": "if (surveyee?.isOfflineLocal === true) {",
      "line": 247
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "isOfflineLocal: surveyee?.isOfflineLocal || false,",
+     "line": 218
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "if (result?.isOfflineLocal === true || surveyee?.isOfflineLocal === true) {",
+     "line": 235
+    },
+    {
+     "file": "puente-reactnative-collect/modules/cached-resources/Post/post.js",
+     "quote": "await storeData([...existing, queued], offlineKey);",
+     "line": 100
+    },
+    {
+     "file": "puente-reactnative-collect/domains/DataCollection/Forms/SupplementaryForm/index.js",
+     "quote": "alert(I18n.t(\"submissionError.error\"));",
+     "line": 247
+    },
+    {
+     "file": "puente-reactnative-collect/modules/i18n/english/en.json",
+     "quote": "\"error\": \"ERROR!\\n\\nYour form has not been submitted.",
+     "line": 673
     }
    ]
   },
@@ -1216,7 +1386,7 @@
    ]
   },
   "collect-partial-sync": {
-   "claim": "Partial failure keeps unsent forms queued and does not resend the saved ones.",
+   "claim": "Partial failure keeps unsent forms queued and prunes the saved ones; the Offline Sync screen resets its count from the pre-upload value and does not reload the list until it is refocused.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
@@ -1225,13 +1395,18 @@
     },
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
-     "quote": "re-sending it whole duplicates the ones that did. So prune by the server's",
-     "line": 42
-    },
-    {
-     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
      "quote": "`saved` map and leave the rest queued for a retry.",
      "line": 43
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "getQueuedFormCount: async () => offlineFormCount,",
+     "line": 77
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "// Refresh count every time the tab comes into focus",
+     "line": 46
     }
    ]
   },
@@ -1496,7 +1671,7 @@
    ]
   },
   "collect-consent-suggested": {
-   "claim": "Forms opened from Suggested next forms after a Resident ID skip the consent screen: consent is screen state set once and not reset when the suggested form opens (bug C16).",
+   "claim": "Forms opened from Suggested next forms after a Resident ID skip the consent screen, because consent is screen state set once at the start of the Resident ID and not reset; it is not saved with the record.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/domains/DataCollection/Forms/index.js",

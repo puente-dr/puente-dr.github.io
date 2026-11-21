@@ -14,17 +14,17 @@ import manager from '@shots/en/manage-form-manager.png';
 import expanded from '@shots/en/manage-form-manager-expanded.png';
 import noRecords from '@shots/en/export-03-no-records-yet.png';
 
-The Form Manager lists every form your organization collects with. It is where you start an export, open a form to edit it, copy one as the start of a new form, or retire one you no longer use.
+The Form Manager lists Puente's four forms and your organization's custom forms. It is where you start an export, open a form to edit it, copy one as the start of a new form, or retire one you no longer use.
 
 ## Open the Form Manager
 
 {/* claim: manage-fm-open */}
-In the left menu, press <UI>Manage</UI>. The page is titled <UI>Form Manager</UI>. It has two lists: <UI>Puente Forms</UI> at the top and your <UI>Custom forms</UI> below.
+In the left menu, press <UI>Manage</UI>. The page is titled <UI>Form Manager</UI>. <UI>Puente Forms</UI> is at the top; your custom forms are below, in one list or in several grouped by workflow.
 
 <Shot src={manager} alt="The Form Manager: a Create form button and a Search forms box, a Puente Forms table listing SurveyData, HistoryEnvironmentalHealth, Vitals and EvaluationMedical with an Export button each, and a Custom Forms table whose rows have Edit, Duplicate, Delete and Export." caption="Puente's forms have only Export. Your own forms can also be edited, copied and deleted." />
 
 {/* claim: manage-fm-search-create */}
-<UI>+ Create form</UI> opens an empty [Form Creator](/docs/manage/form-creator/). <UI>Search forms…</UI> narrows both lists to forms whose name contains what you type.
+<UI>+ Create form</UI> opens the [Form Creator](/docs/manage/form-creator/). <UI>Search forms…</UI> narrows your custom forms to those whose name contains what you type; Puente's four forms stay listed.
 
 ## Puente's forms and their names in Collect
 
@@ -53,6 +53,9 @@ Custom forms are the ones your organization built. Each row has four buttons:
 - <UI>Delete</UI> retires the form (see below).
 - <UI>Export</UI> downloads its answers as a spreadsheet.
 
+{/* claim: manage-fc-new-question-key */}
+Before you add questions to a form opened with Edit or Duplicate, read [Change a published form](/docs/manage/form-creator/): new questions need their wording pasted in whole.
+
 {/* claim: manage-fm-records-view */}
 Press a form's name to see its records in a table. <UI>← Back</UI> returns to the list.
 
@@ -80,7 +83,7 @@ The expanded row repeats both descriptions. Puente's four built-in forms never h
 ## Export a form
 
 {/* claim: manage-fm-export-csv */}
-Press <UI>Export</UI>. Your browser downloads a CSV file named after the form. A research file has "research" and the date in its name, so the two files are hard to mix up. The file opens with accents intact in Excel.
+Press <UI>Export</UI>. Your browser downloads a CSV file named after the form. A research file has "research" and the date in its name, so the two files are hard to mix up. The file opens in Excel with its characters intact, but a custom form's export has already had Spanish accents, ñ, ¿ and ¡ removed by Puente.
 
 {/* claim: org-member-exports */}
 Any member of your organization can download the full, identified records — not only administrators. Treat every export as private. [Exporting data](/docs/data/exporting-data/) explains what each file contains.
@@ -99,12 +102,15 @@ If nothing downloads, a message in the top corner says why:
 ## Delete a form
 
 {/* claim: manage-fm-delete */}
-Press <UI>Delete</UI>, then confirm <UI>Delete form</UI> when asked <UI>Do you want to remove this form?</UI> The form leaves the Form Manager, and phones stop listing it the next time they refresh their custom forms. Its answers are not erased — delete marks the form retired.
+Press <UI>Delete</UI>, then confirm <UI>Delete form</UI> when asked <UI>Do you want to remove this form?</UI> Reload the page afterwards: the row stays on screen until you do. Phones stop listing the form the next time they refresh their custom forms. The answers are kept, but Manage no longer offers the form for export or in Data Curation, and there is no button to bring it back. Export the form before you delete it.
 
 ## FAQ
 
 **Why does a form I built not appear?**
 If the list could not load, the page says <UI>Your custom forms did not load.</UI> with a <UI>Try again</UI> button. Otherwise, check that the Form Creator really published it.
+
+{/* claim: manage-fm-list-scope */}
+The list shows custom forms saved under your account's exact organization name. A form saved under another spelling of the name can reach phones without appearing here; email info@puente-dr.org.
 
 **Why can't I edit SurveyData?**
 Puente's four built-in forms have only an Export button. Edit, Duplicate and Delete belong to custom forms.

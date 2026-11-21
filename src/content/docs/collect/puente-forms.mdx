@@ -65,7 +65,7 @@ No field is required.
 ## Vitals
 
 {/* claim: collect-vitals-fields */}
-Measurements, each with its unit beside the box: <UI>Height</UI> (inches), <UI>Weight</UI> (pounds), <UI>Body Mass Index</UI>, <UI>Body Temperature</UI> (°Celsius), <UI>Pulse</UI>, <UI>Respiratory Rate</UI>, <UI>Blood Pressure</UI> (systolic over diastolic), <UI>Blood Oxygen</UI>, fasting blood glucose, hemoglobin, hemoglobin A1c, and <UI>Pain</UI>. No field is required, so record what you measured and leave the rest blank.
+Measurements: <UI>Height</UI> (inches), <UI>Weight</UI> (pounds), <UI>Body Mass Index</UI>, <UI>Body Temperature</UI> (°Celsius), <UI>Pulse</UI>, <UI>Respiratory Rate</UI>, <UI>Blood Pressure</UI> (systolic over diastolic), <UI>Blood Oxygen</UI>, fasting blood glucose, hemoglobin, hemoglobin A1c, and <UI>Pain</UI>. No field is required, so record what you measured and leave the rest blank.
 
 <div class="shots">
 <Shot phone src={vitals} alt="The Vitals form: a Search by name or ID box at the top, then Height in inches, Weight in pounds, Body Mass Index, Body Temperature in degrees Celsius, Pulse in beats per minute and Respiratory Rate in breaths per minute." caption="Vitals opens with the resident search box above the first question." />
@@ -78,7 +78,7 @@ Height is in inches and weight in pounds. If you measured in centimeters or kilo
 ## Attach the form to a resident
 
 {/* claim: collect-attach-resident */}
-Environmental Health, Medical Evaluation and Vitals all belong to a person. Each opens with a <UI>Search by name or ID</UI> box above the questions. Search for the person, tap their card, then fill in the form.
+Environmental Health, Medical Evaluation and Vitals all belong to a person. Each opens with a <UI>Search by name or ID</UI> box above the questions. Search for the person, tap their name in the list, then fill in the form.
 
 Until you choose someone, the button at the bottom reads <UI>Attach a Community Resident</UI> and does nothing. Once a resident is attached it changes to <UI>Save Record</UI>.
 
@@ -89,23 +89,23 @@ Until you choose someone, the button at the bottom reads <UI>Attach a Community 
 There are quicker ways in that skip the search:
 
 {/* claim: collect-suggested-next */}
-- **Right after a Resident ID.** The <UI>Suggested next forms</UI> screen shows your pinned forms; tap one and it opens for the person you just registered.
+- **Right after a Resident ID.** The <UI>Suggested next forms</UI> screen shows your pinned forms; tap one and it opens for the person you just registered. A pinned Resident ID starts a new person instead.
 
 <Aside type="caution" title="Suggested next forms do not ask again">
-A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: the person you just registered gave consent a moment ago, at the start of the Resident ID. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
 </Aside>
 - **From the person's record.** Open them under the magnifying glass and start a form from there. See [Find records](/docs/collect/find-records/).
 
 ## When you save
 
 {/* claim: collect-supp-saved */}
-The message tells you where the form went: <UI>Form successfully submitted</UI> means it reached Puente; <UI>Saved offline — will sync when you reconnect</UI> means it is waiting on the phone. Send waiting forms from the cloud; see [Offline and sync](/docs/collect/offline-sync/).
+<UI>Saved offline — will sync when you reconnect</UI> means the form is waiting on the phone. <UI>Form successfully submitted</UI> usually means it reached Puente, but a form saved with no signal for someone already in Puente shows it too, so check the cloud for anything waiting. <UI>ERROR!</UI> means the form was not saved. Send waiting forms from the cloud; see [Offline and sync](/docs/collect/offline-sync/).
 
 ## FAQ
 
 {/* claim: collect-attach-resident */}
 **Why can't I save Vitals?**
-No resident is attached. Search for the person at the top of the form and tap their card.
+No resident is attached. Search for the person at the top of the form and tap their name in the list.
 
 {/* claim: collect-builtin-fixed */}
 **Can I change the questions on these forms?**

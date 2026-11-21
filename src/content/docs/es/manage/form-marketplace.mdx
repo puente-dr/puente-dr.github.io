@@ -13,10 +13,10 @@ import market from '@shots/es/manage-marketplace.png';
 import sidebar from '@shots/es/manage-sidebar.png';
 import loaded from '@shots/es/manage-form-creator-edit.png';
 
-El Mercado de formularios es un estante de formularios ya hechos que Puente puso para que los use cualquier organización. En vez de armar una encuesta de agua del hogar desde cero, copias una del Mercado, cambias lo que necesites y la publicas como tu propio formulario personalizado.
+El Mercado de formularios es un estante de formularios ya hechos que cualquier organización puede ver. En vez de armar una encuesta de agua del hogar desde cero, copias una del Mercado, cambias lo que necesites y la publicas como tu propio formulario personalizado.
 
 {/* claim: manage-mp-duplicate */}
-Nada de lo que haces en el Mercado cambia el original ni afecta a otra organización. Siempre trabajas sobre tu propia copia.
+Duplicar nunca cambia el original del Mercado: siempre trabajas sobre tu propia copia. Antes de publicar esa copia, cámbiale el tipo (mira [Duplicar un formulario](#duplicar-un-formulario)), o las demás organizaciones la van a ver.
 
 ## Abrir el Mercado
 
@@ -44,12 +44,18 @@ Si el estante está vacío, la página dice <UI>Todavía no hay formularios disp
 {/* claim: manage-mp-duplicate */}
 1. Pulsa <UI>Duplicate</UI> en la tarjeta.
 2. Se abre el [Creador de formularios](/docs/es/manage/form-creator/) con el nombre, la descripción y las preguntas ya puestas.
-3. Cambia lo que necesites: ponle el nombre de tu proyecto, ajusta la redacción de las preguntas, agrega o quita bloques.
-4. Pulsa <UI>Publicar</UI>. El formulario se guarda como un formulario personalizado nuevo de tu organización.
+3. Cambia lo que necesites: ponle el nombre de tu proyecto, ajusta la redacción de las preguntas, agrega o quita bloques. Para agregar una pregunta, pega su texto completo en el bloque nuevo de una sola vez (mira [Creador de formularios](/docs/es/manage/form-creator/)).
+4. Cambia <UI>Tipo de formulario</UI> a <UI>Bienes</UI> y luego otra vez a <UI>Personalizado</UI>.
+5. Pulsa <UI>Publicar</UI>. El formulario se guarda como un formulario nuevo de tu organización.
 
 <Shot src={loaded} alt="El Creador de formularios con un formulario cargado: nombre y descripción llenos, la casilla de exportación para investigación y una pregunta de selección única sobre la fuente de agua en el constructor." caption="Así se abre un formulario duplicado, listo para cambiarlo antes de publicar." />
 
-El formulario del Mercado no cambia, y las demás organizaciones nunca ven tu copia.
+El formulario del Mercado no cambia.
+
+{/* claim: manage-mp-copy-type */}
+<Aside type="danger" title="El paso 4 mantiene tu copia privada">
+La copia conserva el tipo del formulario del Mercado, aunque <UI>Tipo de formulario</UI> ya muestre <UI>Personalizado</UI>. Si la publicas sin el paso 4, la copia aparece en el Mercado de todas las organizaciones y puede que no llegue a tus propios teléfonos.
+</Aside>
 
 {/* claim: manage-fc-publish-silent */}
 <Aside type="caution" title="Revisa la copia antes de que tu equipo la use">
@@ -58,18 +64,18 @@ Un formulario duplicado solo llega a los teléfonos cuando se publica. Como con 
 
 ## Adaptarlo bien
 
-{/* claim: manage-fc-research */}
+{/* claim: manage-mp-research-copy */}
 Un formulario hecho es un punto de partida, no una encuesta terminada. Antes de publicar:
 
 - **Cámbiale el nombre.** Dale a la copia un nombre que tus encuestadores reconozcan, como el proyecto y la comunidad. También es el nombre del archivo exportado.
 - **Quita lo que no vas a usar.** Cada pregunta cuesta tiempo en la puerta de una casa.
 - **Usa el bloque numérico para los números.** Le da al encuestador un teclado de números.
-- **Decide sobre la exportación para investigación.** <UI>Permitir exportación para investigación</UI> empieza sin marcar. Márcala solo si un socio de investigación con aprobación ética va a recibir el archivo sin datos que identifiquen a las personas.
+- **Decide sobre la exportación para investigación.** La copia conserva cómo estaba <UI>Permitir exportación para investigación</UI> en el original. Déjala marcada solo si un socio de investigación con aprobación ética va a recibir el archivo sin datos que identifiquen a las personas.
 
 ## De dónde vienen los formularios del Mercado
 
 {/* claim: manage-mp-source */}
-El Mercado muestra los formularios que Puente marcó para el Mercado. Todas las organizaciones ven el mismo estante; no se filtra por organización. No puedes agregar uno por tu cuenta: el <UI>Tipo de formulario</UI> del Creador solo ofrece <UI>Personalizado</UI> y <UI>Bienes</UI>. Si tu organización creó un formulario que le serviría a otras, escribe a info@puente-dr.org.
+El Mercado muestra todos los formularios de tipo Mercado, sin importar qué organización los guardó. Todas las organizaciones ven el mismo estante. El <UI>Tipo de formulario</UI> del Creador solo ofrece <UI>Personalizado</UI> y <UI>Bienes</UI>, pero una copia publicada sin cambiarle el tipo también termina en el estante. Si tu organización creó un formulario que le serviría a otras, escribe a info@puente-dr.org.
 
 ## Preguntas frecuentes
 
@@ -80,12 +86,13 @@ Solo si está en el Mercado. Los formularios personalizados de otras organizacio
 **¿Duplicar envía el formulario a nuestros teléfonos?**
 No. Abre una copia en el Creador de formularios. Los teléfonos la reciben solo después de que la publicas.
 
+{/* claim: manage-fc-stale */}
 **¿Puedo ver las preguntas antes de duplicar?**
-En la tarjeta no. Duplicar abre la copia en el Creador, y nada se guarda hasta que publicas, así que mirar no cuesta nada.
+En la tarjeta no. Duplicar abre la copia en el Creador, y nada se guarda hasta que publicas. Cuando termines de mirar, recarga la página: si no, la copia vuelve a aparecer cada vez que abres <UI>Crear</UI>.
 
-{/* claim: manage-mp-duplicate */}
+{/* claim: manage-fc-fix-type */}
 **¿Otras organizaciones ven el formulario que publicamos?**
-No. La copia publicada pertenece a tu organización y solo aparece en tu Gestor de formularios y en los teléfonos de tu equipo. Las demás organizaciones siguen usando el original del Mercado.
+No, si hiciste el paso 4: así solo aparece en tu Gestor de formularios y en los teléfonos de tu equipo. Si lo publicaste sin ese paso, ábrelo con <UI>Editar</UI> en el Gestor de formularios, cambia <UI>Tipo de formulario</UI> a <UI>Bienes</UI> y otra vez a <UI>Personalizado</UI>, y publícalo de nuevo.
 
 **Cambié de idea después de duplicar. ¿Tengo que eliminar algo?**
-No. Sal del Creador sin publicar, o pulsa Restablecer el formulario.
+No. Nada se guarda hasta que publicas. Recarga la página para que la copia no vuelva a aparecer la próxima vez que abras Crear.

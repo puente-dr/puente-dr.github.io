@@ -86,7 +86,7 @@
    ]
   },
   "privacy-deactivate": {
-   "claim": "Administrators can deactivate a member, which ends their sessions.",
+   "claim": "Administrators can deactivate a member, which destroys their existing sessions.",
    "evidence": [
     {
      "file": "puente-react-nextjs-platform/public/locales/eng/common.json",

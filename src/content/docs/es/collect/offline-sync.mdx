@@ -36,14 +36,15 @@ Aunque el aviso diga otra cosa, Collect no envía solo los formularios pendiente
 ## Guardar un formulario sin señal
 
 {/* claim: collect-save-messages */}
-Llena y guarda el formulario igual que con conexión. El mensaje después de guardar te dice adónde fue:
+Llena y guarda el formulario igual que con conexión. Después lee el mensaje que sale al guardar:
 
 | Mensaje | Qué quiere decir |
 |---|---|
-| <UI>Formulario entregado satisfactoriamente</UI> | Llegó a Puente. Listo. |
 | <UI>Guardado sin conexión — se sincronizará cuando te reconectes</UI> | Está solo en el teléfono, esperando a que lo envíes. |
+| <UI>Formulario entregado satisfactoriamente</UI> | Casi siempre llegó a Puente, pero un formulario guardado sin señal para alguien que ya está en Puente también muestra este mensaje. |
+| <UI>¡ERROR!</UI> | El formulario no se guardó. Llénalo y guárdalo otra vez. |
 
-Los dos se parecen cuando vas con prisa. Solo el primero está terminado.
+Así que no te fíes solo del mensaje: abre la nube y mira si hay algo esperando.
 
 ## Ver lo que espera
 
@@ -67,7 +68,7 @@ Envía desde una conexión confiable y quédate en ella hasta que el conteo lleg
 ## Cuando solo salen algunos
 
 {/* claim: collect-partial-sync */}
-Si algunos formularios llegan a Puente y otros no, Collect quita los que llegaron y deja los demás esperando. El conteo **baja pero no llega a cero**. Volver a tocar <UI>Reintentar</UI> envía solo lo que sigue esperando, así que nada de lo que llegó se envía dos veces. Si el conteo se queda arriba de cero, busca mejor conexión y toca <UI>Reintentar</UI> otra vez.
+Si algunos formularios llegan a Puente y otros no, Collect quita los que llegaron y deja los demás esperando. Puede que la pantalla no se actualice enseguida: sal de ella y vuelve para ver lo que sigue en la lista. Volver a tocar <UI>Reintentar</UI> envía solo lo que sigue esperando. Si todavía hay formularios en la lista, busca mejor conexión y toca <UI>Reintentar</UI> otra vez.
 
 ## Cuando no sale ninguno
 
@@ -95,7 +96,7 @@ El formulario no existe en ningún otro lado. Nadie — ni Puente, ni soporte �
 ## Hogares guardados sin conexión
 
 {/* claim: collect-households-not-listed */}
-Un hogar que creas sin conexión (con <UI>Crear un nuevo hogar</UI> o al vincular a una persona) no aparece en la Sincronización sin conexión y no se puede descartar ahí. Igual se envía cuando tocas <UI>Reintentar</UI>. Por eso la pantalla puede decir <UI>No hay formularios en cola. ¡Estás al día!</UI> mientras un hogar sigue esperando: después de crear hogares sin conexión, toca <UI>Reintentar</UI> de todos modos cuando tengas conexión.
+Un hogar que creas sin conexión (con <UI>Crear un nuevo hogar</UI> o al vincular a una persona) no aparece en la Sincronización sin conexión y no se puede descartar ahí. Solo se envía junto con otros formularios pendientes, cuando tocas <UI>Reintentar</UI>. Si no hay nada más esperando, la pantalla dice <UI>No hay formularios en cola. ¡Estás al día!</UI> y no tiene botón <UI>Reintentar</UI>, aunque el hogar siga en el teléfono. Si creaste hogares sin conexión, deja el teléfono como está —no borres los datos de la app ni la desinstales— y avísale a tu coordinador.
 
 ## Antes de cerrar sesión o entregar el teléfono
 

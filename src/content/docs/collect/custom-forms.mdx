@@ -21,7 +21,7 @@ This page covers the Collect side: finding the forms, keeping the list current, 
 ## Where custom forms come from
 
 {/* claim: collect-custom-source */}
-A custom form starts in Manage's Form Creator, with <UI>Type of form</UI> set to <UI>Custom</UI>, and reaches phones when someone presses <UI>Publish</UI>. Collect then lists every custom form for your organization, including forms tagged with any other spelling your organization goes by.
+A custom form starts in Manage's Form Creator, with <UI>Type of form</UI> set to <UI>Custom</UI>, and reaches phones when someone presses <UI>Publish</UI>. Collect then lists every active custom form for your organization, including forms tagged with any other spelling your organization goes by.
 
 <Shot src={creator} alt="Manage's Form Creator with Type of form set to Custom, the form name Water access — Example Community, a description, the Allow research export checkbox, and a Single select question about water source." caption="A custom form being built in Manage. Publish, at the top right, sends it to phones." />
 
@@ -56,12 +56,12 @@ Make refreshing part of packing up for a field day. A form published after you l
 Tap the form. Like every form opened from the folder, it opens on the consent screen; see [Consent](/docs/collect/consent/). Then it works like Vitals: a <UI>Search by name or ID</UI> box sits above the questions, and the button at the bottom reads <UI>Attach a Community Resident</UI> until you choose the person the answers are about. Once someone is attached, it reads <UI>Save Record</UI>.
 
 {/* claim: collect-supp-saved */}
-Saving shows the same two messages as the Puente forms: <UI>Form successfully submitted</UI>, or <UI>Saved offline — will sync when you reconnect</UI>. A custom form waiting in Offline Sync is listed by its own title and the person's name.
+Saving shows the same messages as the Puente forms. <UI>Saved offline — will sync when you reconnect</UI> means it is waiting on the phone. <UI>Form successfully submitted</UI> usually means it reached Puente, but a form saved with no signal for someone already in Puente shows it too, so check the cloud for anything waiting. <UI>ERROR!</UI> means it was not saved. A custom form waiting in Offline Sync is listed by its own title.
 
 ## Pin the forms you use most
 
 {/* claim: collect-pin */}
-Press and hold any form — a custom form or one of the Puente forms — to pin it. It appears under <UI>Pinned Forms</UI>, at the top of the screen. To unpin, press and hold it under <UI>Pinned Forms</UI>.
+Press and hold any form — a custom form or one of the Puente forms — to pin it. It appears under <UI>Pinned Forms</UI>, just below Puente Forms. To unpin, press and hold it under <UI>Pinned Forms</UI>.
 
 With nothing pinned, the section reads <UI>No pinned forms yet — long-press any form to pin it</UI>. Pins are kept on this phone only.
 
@@ -69,13 +69,13 @@ With nothing pinned, the section reads <UI>No pinned forms yet — long-press an
 Pinned forms do a second job. After you save a Resident ID, the <UI>Suggested next forms</UI> screen lists them; tapping one opens it for the person you just registered. Pin the forms you fill in after every registration and you skip the search each time.
 
 <Aside type="caution" title="Suggested next forms do not ask again">
-A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: the person you just registered gave consent a moment ago, at the start of the Resident ID. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
 </Aside>
 
 ## Workflows
 
 {/* claim: collect-workflows */}
-Below <UI>Custom Forms</UI>, the <UI>Workflows</UI> section lists the same custom forms grouped by workflow, with its own refresh arrow. Forms published from today's Form Creator carry no workflow, so they all appear in one group, <UI>No Workflow Assigned</UI>.
+Below <UI>Custom Forms</UI>, the <UI>Workflows</UI> section lists the same custom forms grouped by workflow. Its refresh arrow fetches the custom forms; the groups catch up the next time you open the folder. Forms published from today's Form Creator carry no workflow, so they all appear in one group, <UI>No Workflow Assigned</UI>.
 
 ## Records and exports
 
@@ -92,7 +92,7 @@ Your phone has the list from the last time it fetched forms. Tap the arrow besid
 
 {/* claim: collect-custom-attach */}
 **Why can't I save the form?**
-No resident is attached. Search for the person at the top of the form and tap their card.
+No resident is attached. Search for the person at the top of the form and tap their name in the list.
 
 {/* claim: collect-pin-cleared */}
 **My pinned forms disappeared.**

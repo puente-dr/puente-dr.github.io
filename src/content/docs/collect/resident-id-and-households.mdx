@@ -59,16 +59,19 @@ The form has three parts.
 {/* claim: collect-rid-save */}
 The button at the bottom reads <UI>Empty Form</UI> until you type something, then <UI>Save Record</UI>. If a required field is empty, the form tells you which one and does not save.
 
-When it saves, the message tells you where the record is:
+When you save, the short message that pops up tells you where the record is:
 
 - <UI>Form successfully submitted</UI>, after the person's name — it reached Puente.
 - <UI>Saved offline — will sync when you reconnect</UI> — it is on the phone only, waiting for you to send it from the cloud. See [Offline and sync](/docs/collect/offline-sync/).
+- <UI>ERROR!</UI> — the record was not saved. Save it again.
+
+Read that short message: the page behind it says <UI>Form successfully submitted</UI> either way.
 
 {/* claim: collect-suggested-next */}
-After a Resident ID saves, the screen shows <UI>Suggested next forms</UI>: your pinned forms. Tap one and it opens for the person you just registered, so you do not have to search for them.
+After a Resident ID saves, the screen shows <UI>Suggested next forms</UI>: your pinned forms. Tap one and it opens for the person you just registered, so you do not have to search for them. A pinned Resident ID starts a new person instead.
 
 <Aside type="caution" title="Suggested next forms do not ask again">
-A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: it reuses the consent you just recorded for that person. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
+A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, does not show the consent screen: the person you just registered gave consent a moment ago, at the start of the Resident ID. If you switch to a different person in that form, go back to the folder and open the form from there instead, so the new person gets their own consent screen.
 </Aside>
 
 ## Record the location
@@ -76,10 +79,10 @@ A form opened from <UI>Suggested next forms</UI>, right after a Resident ID, doe
 {/* claim: collect-rid-location */}
 Location is **not** recorded automatically. Stand at the home and tap <UI>Get Location Again</UI>; the coordinates appear under the button. Until you tap it, the form shows (0.00, 0.00).
 
-If the phone cannot find its position within 20 seconds, the app shows a timeout message and the form keeps 0, 0 — a point off the coast of Africa. Step outside, wait a moment, and tap the button again until real numbers appear.
+If the phone cannot find its position within 20 seconds, the app shows a timeout message and the form will save 0, 0 — a point off the coast of Africa — even if numbers from an earlier tap are still on screen. Step outside, wait a moment, and tap the button again until it works with no timeout message.
 
 <Aside type="caution" title="0.00, 0.00 is not a location">
-A record saved with (0.00, 0.00) has no usable map point. Check the numbers under the button before you save.
+A record saved with (0.00, 0.00) has no usable map point. If your last tap ended in a timeout message, tap again before you save.
 </Aside>
 
 ## Add a photo
@@ -100,12 +103,12 @@ At the end of the form, under <UI>Household</UI>, choose one of three options:
 - <UI>Do Nothing</UI> — no household. The form says <UI>You have chosen not to link a household.</UI> and offers <UI>Add or Create a Household</UI> if you change your mind.
 
 {/* claim: collect-household-create */}
-- <UI>Create a new household</UI> — for the first person you register in a home. Tap the <UI>Household</UI> button that appears; the form confirms <UI>You have successfully created a new household.</UI>
+- <UI>Create a new household</UI> — for the first person you register in a home. Tap the <UI>Household</UI> button that appears; the form shows <UI>You have successfully created a new household.</UI> straight away. If an <UI>ERROR!</UI> message also appears, the household was not created: tap the button again.
 
 {/* claim: collect-household-link */}
-- <UI>Link this individual to an existing house</UI> — for everyone else in that home. A search opens: find someone already linked to that household, then choose this person's role (parent, sibling, grandparent, cousin or other) and submit. The form shows <UI>Linked</UI>.
+- <UI>Link this individual to an existing house</UI> — for everyone else in that home. A search opens: find someone already linked to that household, then choose this person's role (parent, sibling, grandparent, cousin or other) and submit. The form shows <UI>Linked</UI>; if an <UI>ERROR!</UI> message also appears, the link was not saved.
 
-Register the head of the household first and create the household with them. Everyone after links to that person.
+Linking saves this person's role, but in this version it does not give them the same household ID as the person you chose. If your program needs to know who lives together, agree with your coordinator how to record it.
 
 ## FAQ
 
@@ -115,7 +118,7 @@ First name, last name, sex, marriage status and education level. Everything else
 
 {/* claim: collect-households-not-listed */}
 **I created a household offline. Why is it not in Offline Sync?**
-Households saved offline are not listed there, but they are sent when you tap <UI>Retry</UI>. See [Offline and sync](/docs/collect/offline-sync/).
+Households saved offline are not listed there. They are sent only together with other waiting forms, so if a household is the only thing you saved offline, keep the phone as it is and tell your coordinator. See [Offline and sync](/docs/collect/offline-sync/).
 
 {/* claim: collect-duplicates */}
 **I registered someone twice. What now?**

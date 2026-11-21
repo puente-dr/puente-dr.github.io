@@ -26,7 +26,7 @@ This is a walk through one ordinary field day with Puente Collect, in the order 
 ## Sign in before you leave
 
 {/* claim: guide-signin-internet */}
-Signing in needs an internet connection, so do it at home or at the office, never in the community. Enter your email or phone number and your password, and tap <UI>Log-In</UI>.
+Signing in needs an internet connection, so do it at home or at the office, never in the community. Enter the email you registered with and your password, and tap <UI>Log-In</UI>.
 
 <div class="shots">
 <Shot phone src={signIn} alt="The Collect sign-in screen with Email or Phone Number and Password fields, a Forgot Password? link and a blue Log-In button." caption="Sign in while you have signal. You stay signed in for the day." />
@@ -37,14 +37,14 @@ Signing in needs an internet connection, so do it at home or at the office, neve
 The bar at the bottom has five icons: the magnifying glass (find people), the folder (forms), the house (Home), the cloud (sending saved work) and the gear (settings). Collect opens on the house.
 
 {/* claim: guide-search-offline */}
-While you still have signal, open the magnifying glass once. That saves the community's residents on the phone so you can search for them later with no signal.
+While you still have signal, open the magnifying glass once. That saves your organization's residents on the phone, up to the storage limit, so you can search for them later with no signal.
 
 ## Find the person first
 
 Most people you visit are already in Puente. Before you register anyone, search for them under the magnifying glass.
 
 {/* claim: guide-search-one-field */}
-The search reads one field at a time, from the start: a first name, a last name, a nickname, or the first digits of a cédula. A full name typed together finds nobody. Try the surname alone, then the first name, then the nickname.
+With a connection, the search reads one field at a time, from the start: a first name, a last name or a nickname. A full name typed together finds nobody. Try the surname alone, then the first name, then the nickname.
 
 If they really are new, register them with the <UI>Resident ID</UI> form under the folder.
 
@@ -75,7 +75,7 @@ The Resident ID form ends with a household section: <UI>Do Nothing</UI>, <UI>Cre
 ## Work with no signal
 
 {/* claim: guide-save-messages */}
-When there is no signal, a banner reads <UI>You're offline. Records will save and sync automatically.</UI> Keep working. When you submit, the message tells you what happened: <UI>Form successfully submitted</UI> means it reached Puente; <UI>Saved offline — will sync when you reconnect</UI> means it is waiting on this phone.
+When there is no signal, a banner reads <UI>You're offline. Records will save and sync automatically.</UI> Keep working. When you submit, <UI>Saved offline — will sync when you reconnect</UI> means the form is waiting on this phone. <UI>Form successfully submitted</UI> can appear for a form saved with no signal too, so check the cloud for anything waiting. <UI>ERROR!</UI> means the form was not saved: fill it in and save it again.
 
 <div class="shots">
 <Shot phone src={banner} alt="A form on a phone with an amber banner across the top reading: You're offline. Records will save and sync automatically." caption="Being offline is normal. Nothing is lost." />
@@ -99,7 +99,7 @@ Stay on the network until the screen reads <UI>No forms queued. You are all caug
 </div>
 
 {/* claim: guide-households-not-listed */}
-Households you created with no signal are not listed on this screen, but they are sent when you tap <UI>Retry</UI>. Always tap it, even if the screen says nothing is queued.
+Households you created with no signal are not listed on this screen. They are sent only together with other waiting forms. If you created a household offline and the screen says nothing is queued, keep the phone as it is and tell your coordinator.
 
 ## FAQ
 

@@ -32,9 +32,8 @@ Most problems in Puente have a short list of causes. Find what you see in the ta
 
 {/* claim: help-signin-online */}
 {/* claim: help-wrong-password */}
-{/* claim: help-deactivated */}
 - **No signal.** Collect needs an internet connection to sign in; there is no offline sign-in. Connect, then try again.
-- **Wrong email, phone or password.** Collect says <UI>Your username or password may be incorrect, please try again.</UI> Check for a stray space, then use <UI>Forgot Password?</UI>: enter your email and Collect sends you a reset link.
+- **Wrong email or password.** Collect says <UI>Your username or password may be incorrect, please try again.</UI> Sign in with the email you registered with, not a phone number. Check for a stray space, then use <UI>Forgot Password?</UI>: enter your email and Collect sends you a reset link.
 
 <div class="shots">
 <Shot phone src={signIn} alt="The Collect sign-in screen with Email or Phone Number and Password fields, a Forgot Password? link, a Log-In button and a Delete Credentials link." caption="Sign in while you still have signal, before you leave for the field." />
@@ -61,9 +60,9 @@ Still missing? Check that the form was published for **your** organization, and 
 ## Search finds nobody
 
 {/* claim: help-search */}
-The search box matches the **start of one field** — first name, last name, nickname, cédula or household ID. A full name such as `Paciente Ejemplo` finds nothing. Search the surname alone, then the first name, then the nickname.
+With a connection, the search box matches the **start of one field** — first name, last name, nickname, cédula or household ID. A full name such as `Paciente Ejemplo` finds nothing. Search the surname alone, then the first name, then the nickname.
 
-With no signal, search reads only the residents already saved on the phone. Open Find Records once with a connection before you go out. See [Find records](/docs/collect/find-records/).
+With no signal, search reads only the names of the residents already saved on the phone. Start the app and open Find Records with a connection before you go out. See [Find records](/docs/collect/find-records/).
 
 ## Forms stuck in Offline Sync
 
@@ -83,7 +82,7 @@ Either way, <UI>Your forms are still saved on this device. Nothing has been lost
 </div>
 
 {/* claim: help-household-queue */}
-A household created offline is not listed here, so the screen can say <UI>No forms queued. You are all caught up!</UI> while a household still waits. It is sent on the next Retry, so press Retry once more after you reconnect.
+A household created offline is not listed here, so the screen can say <UI>No forms queued. You are all caught up!</UI> while a household still waits. It is sent only together with other waiting forms; with nothing else waiting there is no Retry button. Keep the phone as it is and tell your coordinator.
 
 <Aside type="caution" title="Do not discard a form to make the list go away">
 <UI>Discard</UI> deletes the form from the phone permanently and it cannot be recovered. Ask your coordinator first.

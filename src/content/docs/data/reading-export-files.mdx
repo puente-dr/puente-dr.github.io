@@ -46,9 +46,9 @@ A form whose person record is missing still exports. It arrives with the person 
 ## Identical people collapse into one row
 
 {/* claim: data-dedupe */}
-The `SurveyData` export removes rows that are identical to each other. If two Resident IDs agree on every detail — name, nickname, sex, date of birth, phone, education, occupation, community, city, province, cédula, surveyor, organization, coordinates and photo — they leave as **one** row.
+The `SurveyData` export removes rows that are identical to each other. If two Resident IDs agree on the details it compares — name, nickname, sex, date of birth, phone, education, occupation, community, city, province, cédula, surveyor, organization, coordinates, photo and age, among others — they leave as **one** row. Insurance details are not compared, so two records that differ only in insurance also leave as one row.
 
-That hides exact duplicates, such as a form sent twice. It also means the row count of the people file is not always the number of records in Puente: the two duplicates are still two separate people in the app, each with their own history. People who differ in any detail stay as two rows.
+That hides exact duplicates, such as a form sent twice. It also means the row count of the people file is not always the number of records in Puente: the two duplicates are still two separate people in the app, each with their own history. People who differ in any compared detail stay as two rows.
 
 {/* claim: data-clean-duplicates */}
 To fix duplicates at the source, use <UI>Clean</UI> in Manage, which shows how many duplicates it found. See [Data Curation](/docs/manage/data-curation/).
@@ -58,9 +58,9 @@ To fix duplicates at the source, use <UI>Clean</UI> in Manage, which shows how m
 ## Age is a subtraction
 
 {/* claim: data-age-subtraction */}
-The `age` column in the people file is **this year minus the birth year**, nothing more. Anyone whose birthday falls later in the year reads one year too old. For counting a community into age bands this is usually fine. When a single year matters — a pediatric cut-off, an eligibility rule — calculate the age yourself from `dob`.
+When no age was typed on the record, the `age` column in the people file is **this year minus the birth year**, nothing more. Anyone whose birthday falls later in the year reads one year too old. For counting a community into age bands this is usually fine. When a single year matters — a pediatric cut-off, an eligibility rule — calculate the age yourself from `dob`.
 
-If the surveyor typed an age because the birth date was unknown, that typed number is kept. If a birth date cannot be read at all, `age` is left blank rather than guessed.
+If the surveyor typed an age, that number is kept exactly as typed — even when there is a birth date — and it does not go up as the years pass. If a birth date cannot be read at all, `age` is left blank rather than guessed.
 
 ## Accents in custom-form files
 

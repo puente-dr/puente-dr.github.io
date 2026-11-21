@@ -16,7 +16,7 @@
    ]
   },
   "help-wrong-password": {
-   "claim": "Wrong credentials message; reset by email in Collect.",
+   "claim": "Wrong credentials message; sign-in uses the registered email (the username); reset by email in Collect.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
@@ -32,16 +32,16 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"label\": \"Forgot Password?\",",
      "line": 66
-    }
-   ]
-  },
-  "help-deactivated": {
-   "claim": "Collect sign-in fails offline or with a wrong email or password.",
-   "evidence": [
+    },
     {
      "file": "puente-node-cloudcode/cloud/src/definer/auth.definer.js",
-     "quote": "const destroyed = active === false ? await destroySessionsFor(target) : 0;",
-     "line": 338
+     "quote": "user.set('username', String(email));",
+     "line": 49
+    },
+    {
+     "file": "puente-reactnative-collect/services/parse/auth/index.js",
+     "quote": "const u = await Parse.User.logIn(String(usrn), String(pswd));",
+     "line": 50
     }
    ]
   },
@@ -81,7 +81,7 @@
    ]
   },
   "help-search": {
-   "claim": "Search matches the start of one field; offline it reads only saved records.",
+   "claim": "Online, search matches the start of one field; offline it reads only saved records, by name and nickname.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/_utils/index.js",
@@ -92,6 +92,11 @@
      "file": "puente-reactnative-collect/modules/i18n/english/en.json",
      "quote": "\"offlineNotice\": \"You're offline. Showing saved records.\",",
      "line": 480
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/FindResidents/index.js",
+     "quote": "`${fname} ${lname}`.toLowerCase().includes(query.toLowerCase()) ||",
+     "line": 155
     }
    ]
   },
@@ -146,7 +151,7 @@
    ]
   },
   "help-household-queue": {
-   "claim": "Offline households are not listed in Offline Sync but are sent on Retry.",
+   "claim": "Offline households are not listed in Offline Sync; they are sent only with other queued forms, and with nothing else queued there is no Retry button.",
    "evidence": [
     {
      "file": "puente-reactnative-collect/modules/offline/queue/index.js",
@@ -155,8 +160,18 @@
     },
     {
      "file": "puente-reactnative-collect/modules/offline/post/index.js",
-     "quote": "households: \"offlineHouseholds\",",
-     "line": 30
+     "quote": "getData(\"offlineHouseholds\"),",
+     "line": 128
+    },
+    {
+     "file": "puente-reactnative-collect/domains/Offline/index.js",
+     "quote": "{offlineFormCount > 0 ? (",
+     "line": 236
+    },
+    {
+     "file": "puente-reactnative-collect/impacto-design-system/Extensions/Header/upload.js",
+     "quote": "if (count === 0) return;",
+     "line": 11
     }
    ]
   },

@@ -35,7 +35,7 @@ Press <UI>Create</UI> in the left menu, or <UI>+ Create form</UI> in the [Form M
 Collect lists only forms of type <UI>Custom</UI> under Custom Forms. <UI>Assets</UI> forms belong to Collect's asset screens instead.
 
 {/* claim: manage-fc-research */}
-<UI>Allow research export</UI> starts unticked. Tick it only if this form's answers may leave Puente as a de-identified file for a research partner with ethics approval. It adds an <UI>Export research file</UI> button to the form, and location questions are left out of that file. See [Research exports](/docs/data/research-exports/).
+On a new form, <UI>Allow research export</UI> starts unticked; a form opened with Edit or Duplicate keeps its own setting. Tick it only if this form's answers may leave Puente as a de-identified file for a research partner with ethics approval. It adds an <UI>Export research file</UI> button to the form, and location questions are left out of that file. See [Research exports](/docs/data/research-exports/).
 
 ## The seven blocks
 
@@ -72,13 +72,21 @@ Use the number block for anything you will count or add up. On the phone it open
 {/* claim: manage-fc-inspector */}
 Click a block to open it in the <UI>Inspector</UI>: its <UI>Label</UI>, its <UI>Formik key</UI> (the internal name, read-only), and switches for <UI>Required</UI>, <UI>Allow other</UI> and <UI>Multi-select</UI>.
 
+{/* claim: manage-fc-switches-ignored */}
+Collect ignores those three switches and each block's <UI>Answer is required</UI> box. On the phone no custom-form question is required, and only the <UI>Question - Multi-select</UI> block lets the surveyor pick several options.
+
 ## Preview and publish
 
 {/* claim: manage-fc-preview */}
 <UI>Preview form</UI> opens a panel showing the form as the phone draws it. <UI>Close</UI> returns to the builder.
 
 {/* claim: manage-fc-publish */}
-Press <UI>Publish</UI>. On success a <UI>Success!</UI> message appears for a few seconds and the builder clears, ready for the next form.
+Press <UI>Publish</UI>. On success a <UI>Success!</UI> message appears for a few seconds and the builder clears.
+
+{/* claim: manage-fc-stale */}
+<Aside type="caution" title="Reload before the next form">
+The cleared builder still remembers the last form. Reload the page before you build another one: without a reload, the next form is saved with no type, so phones never list it, and after an Edit it is not saved at all. Until you reload, <UI>Create</UI> also reopens the last form you edited or duplicated.
+</Aside>
 
 {/* claim: manage-fc-reaches-phone */}
 Phones pick the form up when the surveyor refreshes Custom Forms in Collect, with a connection — signing in alone does not fetch it.
@@ -89,17 +97,22 @@ If publishing fails, Manage shows no error — the builder simply does not clear
 </Aside>
 
 {/* claim: manage-fc-reset */}
-<UI>Reset form</UI> clears the whole builder at once, without asking. Unpublished work is lost.
+<UI>Reset form</UI> clears the whole builder at once, without asking. Unpublished work is lost. As after a publish, reload the page before you build the next form.
 
 ## Change a published form
 
 {/* claim: manage-fc-edit */}
-In the Form Manager, press <UI>Edit</UI> on the form. It opens here with its settings and blocks; <UI>Publish</UI> saves the changes to the same form.
+In the Form Manager, press <UI>Edit</UI> on the form. It opens here with its settings and blocks; <UI>Publish</UI> saves the changes to the same form. The saved form then belongs to your organization only, and it leaves any group it was listed under in the Form Manager.
 
 <Shot src={edit} alt="The Form Creator with Water access — Example Community loaded: its name and description filled in, Allow research export unticked, and a Single select block asking Water source with options tap and well." caption="An existing form open for editing." />
 
 {/* claim: manage-fc-rename */}
 You can reword a question that already has answers. Its internal name was fixed when the form was first saved, so old and new answers stay together, and the export puts them in one column under the new wording. Rewording does not change answers already given: if you change what the question asks, add a new question instead.
+
+{/* claim: manage-fc-new-question-key */}
+<Aside type="caution" title="Adding a question to a saved or copied form">
+On a form opened with Edit or Duplicate, a new question's internal name is fixed from the first character you type. Two new questions that start with the same letter then share one internal name, and their answers overwrite each other. Write the question somewhere else and paste the full wording into the new block in one go. If you already typed it letter by letter, delete the block with the trash can, drag in a new one and paste.
+</Aside>
 
 ## Your question is the column heading
 
@@ -107,7 +120,7 @@ You can reword a question that already has answers. Its internal name was fixed 
 In the export, each question becomes one column, headed with the question text. Keep questions short enough to read as headings, and never give two questions the same text.
 
 {/* claim: manage-fc-accents */}
-Column headings lose their Spanish accents and the opening ¿ and ¡: `¿Cuántos niños?` arrives as `Cuantos ninos?`. Write correct Spanish anyway — surveyors read the question on the phone, accents intact.
+A custom form's export loses Spanish accents, ñ and the opening ¿ and ¡, in the column headings and in every answer, names included: `¿Cuántos niños?` arrives as `Cuantos ninos?`. Write correct Spanish anyway — surveyors read the question on the phone, accents intact.
 
 ## What the builder does not offer
 
@@ -118,6 +131,9 @@ Collect can show more kinds of question than these seven: photos, household link
 
 **I published and the form is not on the phone.**
 Refresh Custom Forms in Collect. If it is still missing, check the Form Manager: if the form is not listed there, the publish failed.
+
+{/* claim: manage-fc-fix-type */}
+If it is listed but still not on the phone, its type is not Custom. Open it with <UI>Edit</UI>, set <UI>Type of form</UI> to <UI>Assets</UI> and back to <UI>Custom</UI>, and publish again.
 
 **Can I edit Puente's built-in forms?**
 No. In the Form Manager only custom forms have Edit.

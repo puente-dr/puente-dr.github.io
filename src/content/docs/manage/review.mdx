@@ -18,7 +18,7 @@ The dashboard is the first screen Manage shows after you sign in. It answers thr
 ## Open the dashboard
 
 {/* claim: manage-review-menu */}
-In the menu on the left, press <UI>Review</UI>. The page is titled <UI>Dashboard</UI> at the top.
+In the menu on the left, press <UI>Review</UI>. The breadcrumb at the top reads <UI>Dashboard</UI>.
 
 <div class="shots">
 <Shot phone src={sidebar} alt="The Manage left menu: Manage, Create, Clean and Market at the top, Review highlighted and Settings below, and Account and Log out at the bottom." caption="Review sits under the organization's section of the menu." />
@@ -29,7 +29,7 @@ In the menu on the left, press <UI>Review</UI>. The page is titled <UI>Dashboard
 ## Check that today's data arrived
 
 {/* claim: manage-sync-ribbon */}
-The line across the top reads like <UI>Synced</UI> **2h ago** · **48** <UI>records in the last 24h</UI>. "Synced" means the moment Puente received a record from a phone — not when the survey was done. A form filled in offline last week shows up as synced today.
+The line across the top reads like <UI>Synced</UI> **2h ago** · **48** <UI>records in the last 24h</UI>. "Synced" means the moment Puente received a record from a phone — not when the survey was done. A form filled in offline last week shows up as synced today. The line counts resident records (Resident ID forms) only: vitals, evaluations and custom forms are not counted.
 
 If nothing has arrived in a while, the line says so instead:
 
@@ -37,7 +37,7 @@ If nothing has arrived in a while, the line says so instead:
 |---|---|
 | <UI>No sync in over a day</UI> | Nothing received in more than 24 hours |
 | <UI>No sync in over three days</UI> | Nothing received in more than 72 hours |
-| <UI>Nothing has synced yet</UI> | Your organization has no records at all |
+| <UI>Nothing has synced yet</UI> | Your organization has no resident records at all |
 | <UI>Last sync time unavailable</UI> | Manage could not check |
 
 {/* claim: manage-sync-manual */}
@@ -46,20 +46,20 @@ Sending is not automatic on the phone: a surveyor has to open Offline Sync (the 
 ## Needs attention
 
 {/* claim: manage-needs-attention */}
-This list runs four quality checks over your organization's records and shows only the ones that found something. The most damaging comes first, whatever its count.
+This list runs four quality checks and shows only the ones that found something. The most damaging comes first, whatever its count.
 
 | Row | Label | What it means |
 |---|---|---|
 | <UI>form renamed since its answers were collected</UI> | <UI>Blocks exports</UI> | A custom form has answers saved under a question it no longer has, so a column can export empty |
 | <UI>records with an unresolved household link</UI> | <UI>Needs repair</UI> | A record saved offline with a household that never got linked on the server |
-| <UI>possible duplicate households</UI> | <UI>Fixable</UI> | The same household recorded twice on the same day |
+| <UI>possible duplicate households</UI> | <UI>Fixable</UI> | Resident records with the same household ID that reached Puente on the same day. Names are not compared |
 | <UI>records missing key fields</UI> | <UI>Fixable</UI> | At least one key field is blank |
 
 {/* claim: manage-key-fields */}
 The key fields are first name, last name, date of birth, sex, household ID, community, surveyor and phone number.
 
 {/* claim: manage-estimated */}
-A count such as **5 of 48** is measured against all your organization's records. A count marked <UI>estimated</UI> comes from a sample of recent records, so treat it as a rough size.
+On the missing-key-fields and unresolved-household rows, a count such as **5 of 48** is measured against all your organization's resident records. The other two rows are marked <UI>estimated</UI>: they look only at recent records (the latest 1,000, and up to 20 custom forms), so treat them as a rough size.
 
 ## Fix what the list shows
 
@@ -67,7 +67,7 @@ A count such as **5 of 48** is measured against all your organization's records.
 Press a row to go where you fix it:
 
 - **Missing key fields** and **unresolved household link** open [Data Curation](/docs/manage/data-curation/) showing only those records. A note above the counts says the view is filtered.
-- **Possible duplicates** opens Data Curation, where you compare the pair side by side.
+- **Possible duplicates** opens Data Curation unfiltered. There a pair is flagged only when both records are on the same page of 50, so choose <UI>Duplicates</UI> and page through with <UI>Next →</UI>.
 - **Form renamed** opens the [Form Manager](/docs/manage/form-manager/). Export the form and check its columns before you send the file anywhere.
 
 <Shot src={curation} alt="The Data Curation screen showing People Records, a summary of 48 records, 92% average completeness, 0 duplicates and 0 anomalies, filters, and a table of names." caption="Where most rows lead: Data Curation, filtered to the records the row counted." />
@@ -80,7 +80,7 @@ When every check passes, the list reads <UI>Nothing needs attention</UI>. If a c
 {/* claim: manage-coverage */}
 The right-hand list counts recent records by community and shows when each one last synced. The communities nobody has heard from in longest come first. After two weeks of silence a community reads <UI>quiet</UI> with the number of days, months or years.
 
-Use it to decide where to send a team next. Remember it measures syncing: a community can look quiet because a phone that visited it has not sent its forms yet.
+Use it to decide where to send a team next. Remember it measures syncing: a community can look quiet because a phone that visited it has not sent its forms yet. It also only sees the latest 1,000 resident records and shows six communities, so a place that has been silent the longest may not be listed at all.
 
 <Aside type="tip">
 The heading under <UI>Community coverage</UI> says how many records the counts come from, for example "of the 48 most recently synced records". Read the numbers against that, not against all time.
@@ -89,16 +89,17 @@ The heading under <UI>Community coverage</UI> says how many records the counts c
 ## Totals
 
 {/* claim: manage-context-totals */}
-Along the bottom: <UI>records synced in total</UI> for your organization, and the number of accounts seen in the most recent records. The second figure counts accounts that synced, not people who collected — one shared phone can carry a whole team's work.
+Along the bottom: <UI>records synced in total</UI> for your organization (resident records only), and the number of accounts seen in the most recent records. The second figure counts accounts that synced, not people who collected — one shared phone can carry a whole team's work.
 
 ## FAQ
 
+{/* claim: manage-sync-ribbon */}
 **The dashboard says nothing synced, but my team worked all week. Why?**
-The forms are probably still on the phones. Someone has to open Offline Sync and tap Retry with a connection.
+The forms are probably still on the phones. Someone has to open Offline Sync and tap Retry with a connection. It can also mean the team only filled in visits or custom forms, which the dashboard does not count.
 
 **Why does a community I visited yesterday look quiet?**
 Coverage counts when records reached Puente, not when they were collected.
 
 {/* claim: manage-needs-attention */}
 **Can I dismiss a row?**
-No. A row disappears when the records behind it are fixed.
+No. A row disappears when the records behind it are fixed. For possible duplicates, marking a pair as unique in Data Curation is not remembered: the row stays while both records exist.
